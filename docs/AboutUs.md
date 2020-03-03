@@ -2,6 +2,7 @@
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
+![](https://via.placeholder.com/100.png?text=Photo) | Wang Jingtan | [Github](https://github.com/JTWang2000) | [Portfolio](docs/team/jingtan.md)
 ![](https://www.wework.com/ideas/wp-content/uploads/sites/4/2015/11/cookie-monster1-1120x630.jpg) | Daniel Ho | [Github](https://github.com/Bencotti) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)

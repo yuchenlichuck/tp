@@ -1,5 +1,7 @@
 package seedu.ui;
 
+import java.util.Scanner;
+
 public class Ui {
 
     /** A platform independent line separator. */
@@ -20,7 +22,7 @@ public class Ui {
      * @param rawInputLine full raw user input line.
      * @return true if the entire user input line should be ignored.
      */
-    private boolean shouldIgnore(String rawInputLine) {
+    private boolean shouldIgnoreInput(String rawInputLine) {
         return rawInputLine.trim().isEmpty();
     }
 
@@ -33,5 +35,21 @@ public class Ui {
     public void showUserMessage(String... messages) {
         for (String message : messages)
         System.out.println(message);
+    }
+
+    public void showWelcome() {
+        showUserMessage(LOGO, NEW_LINE);
+    }
+
+    /**
+     * Prompts user for input
+     *
+     * @return String containing user command for parsing
+     */
+    public static String readCommand() {
+        System.out.print("> ");
+        Scanner input = new Scanner(System.in);
+        String userCommand = input.nextLine();
+        return userCommand;
     }
 }

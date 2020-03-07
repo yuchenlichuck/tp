@@ -1,4 +1,4 @@
 package seedu.tasklist;
 
-public class Tasklist {
+public class TaskList {
 }

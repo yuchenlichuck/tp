@@ -1,6 +1,7 @@
 package seedu.cafs;
 
 import seedu.command.Command;
+import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
@@ -41,9 +42,9 @@ public class Main {
         Command command;
         do {
             String userCommandText = ui.readCommand();
-            // command = new Parser().parseCommand(userCommandText);
+             command = new Parser().parseCommand(userCommandText);
            // CommandResult result = executeCommand(command);
-        } while (!command.isExit());
+        } while (!command.isExit()); // will be solved when do is enabled
     }
 
 

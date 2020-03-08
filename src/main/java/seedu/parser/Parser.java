@@ -1,6 +1,7 @@
 package seedu.parser;
 
 import seedu.command.Command;
+import seedu.command.ExitCommand;
 import seedu.command.HelpCommand;
 
 public class Parser {
@@ -33,7 +34,7 @@ public class Parser {
         case "find":
             // return new FindCommand(commandSections[1]);
         case "bye":
-            // return new ExitCommand();
+            return new ExitCommand();
 
         default:
             System.out.println("Command not recognised\n");

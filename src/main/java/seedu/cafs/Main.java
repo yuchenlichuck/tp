@@ -37,18 +37,21 @@ public class Main {
         runCommandLoopUntilExitCommand();
     }
 
-    /** Reads the user command and executes it, until the user issues the exit command.  */
+    /**
+     * Reads the user command and executes it, until the user issues the exit command.
+     */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
             String userCommandText = ui.readCommand();
-             command = new Parser().parseCommand(userCommandText);
-           // CommandResult result = executeCommand(command);
+            command = new Parser().parseCommand(userCommandText);
+            command.setCommandVariables(tasks, storage, ui);
+            command.execute();
         } while (!command.isExit()); // will be solved when do is enabled
     }
 
 
     public static void main(String[] args) {
-
+        new Main().run();
     }
 }

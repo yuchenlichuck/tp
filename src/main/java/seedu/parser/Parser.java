@@ -1,6 +1,7 @@
 package seedu.parser;
 
 import seedu.command.Command;
+import seedu.command.HelpCommand;
 
 public class Parser {
 
@@ -12,17 +13,17 @@ public class Parser {
      */
     public static Command parseCommand(String userCommand) {
         //parsing based on first word of command string
-        String[] words = userCommand.split(" ");
-        int wordLength = words.length;
-        switch (words[0]) {
+        String[] commandSections = userCommand.split(" ");
+        int wordLength = commandSections.length;
+        switch (commandSections[0]) {
         case "list":
             // return new ListCommand();
         case "done":
-            // return prepareDoneCommand(words[1], wordLength);
+            // return prepareDoneCommand(commandSections[1], wordLength);
         case "help":
             // return new HelpCommand();
         case "delete":
-            // return prepareDeleteCommand(words[1], wordLength);
+            // return prepareDeleteCommand(commandSections[1], wordLength);
         case "todo":
             // return new AddCommand(userCommand, wordLength, TASK_TODO);
         case "event":
@@ -30,7 +31,7 @@ public class Parser {
         case "deadline":
             // return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
         case "find":
-            // return new FindCommand(words[1]);
+            // return new FindCommand(commandSections[1]);
         case "bye":
             // return new ExitCommand();
 

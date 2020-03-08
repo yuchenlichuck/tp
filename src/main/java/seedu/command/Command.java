@@ -1,12 +1,14 @@
 package seedu.command;
 
+import seedu.common.Messages;
 import seedu.storage.Storage;
+import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
 /**
  * Represents an executable command
  */
-public abstract class Command<TaskList> {
+public abstract class Command {
 
     protected TaskList tasks;
     protected Storage storage;

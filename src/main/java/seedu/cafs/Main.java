@@ -1,6 +1,7 @@
 package seedu.cafs;
 
 import seedu.command.Command;
+import seedu.exception.ProjException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
@@ -46,7 +47,11 @@ public class Main {
             String userCommandText = ui.readCommand();
             command = new Parser().parseCommand(userCommandText);
             command.setCommandVariables(tasks, storage, ui);
-            command.execute();
+            try {
+                command.execute();
+            } catch (ProjException e) {
+                System.out.println(e.getMessage());
+            }
         } while (!command.isExit()); // will be solved when do is enabled
     }
 

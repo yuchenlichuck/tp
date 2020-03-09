@@ -4,13 +4,13 @@ public class Deadline extends Task {
 
     private String date;
 
-    public Deadline (String title, String description, String date) {
+    public Deadline(String title, String description, String date) {
         super(title, description);
         setDate(date);
     }
 
 
-    private void setDate (String date) {
+    private void setDate(String date) {
 
         try {
 
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         String formattedDeadline = String.format("Title: %s | Date: %s | Description: %s", title, date, description);
 
         return formattedDeadline;

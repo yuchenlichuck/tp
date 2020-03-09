@@ -18,7 +18,7 @@ public class Main {
 
 
     /**
-     * Main Duke constructor to set up required classes and check for data file
+     * Main Duke constructor to set up required classes and check for data file.
      */
     public Main() {
 

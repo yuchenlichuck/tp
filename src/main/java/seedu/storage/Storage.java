@@ -10,8 +10,8 @@ public class Storage {
     private static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
 
     /**
-     * Locate folder location and check availability
-     * If missing create folder
+     * Locate folder location and check availability.
+     * If missing create folder.
      */
     public static void checkFolderPath() {
 
@@ -29,7 +29,7 @@ public class Storage {
     }
 
     /**
-     * Check whether data file has is present in directory
+     * Check whether data file has is present in directory.
      *
      * @return status of file availability
      */

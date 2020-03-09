@@ -7,7 +7,7 @@ import seedu.command.HelpCommand;
 public class Parser {
 
     /**
-     * Parses user input into command for execution
+     * Parses user input into command for execution.
      *
      * @param userCommand user input including command word and parameters
      * @return  command based on user input

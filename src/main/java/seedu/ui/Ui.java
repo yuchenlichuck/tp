@@ -29,8 +29,8 @@ public class Ui {
 
 
     /**
-     * Method used to print all messages back to user
-     * Meant to improve performance by reducing number of system calls used
+     * Method used to print all messages back to user.
+     * Meant to improve performance by reducing number of system calls used.
      *
      * @param messages  Variable length argument to display to users
      */
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Prompts user for input
+     * Prompts user for input.
      *
      * @return String containing user command for parsing
      */

@@ -6,7 +6,7 @@ import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
 /**
- * Represents an executable command
+ * Represents an executable command.
  */
 public abstract class Command {
 
@@ -15,7 +15,8 @@ public abstract class Command {
     protected Ui ui;
 
     /**
-     * Called to check if exit command is given
+     * Called to check if exit command is given.
+     *
      * @return condition whether program should continue looping or exit
      */
     public boolean isExit() {
@@ -23,7 +24,7 @@ public abstract class Command {
     }
 
     /**
-     * Supplies the objects other commands will call upon
+     * Supplies the objects other commands will call upon.
      *
      * @param tasks  current instance of tasks and corresponding tasklist methods
      * @param storage instance of storage object
@@ -36,7 +37,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes user command processed by parser
+     * Executes user command processed by parser.
      */
     public abstract void execute();
 

@@ -5,20 +5,20 @@ public abstract class Task {
     protected String title;
     protected String description;
 
-    public Task (String title, String description) {
+    public Task(String title, String description) {
         setTitle(title);
         setDescription(description);
     }
 
-    public String getTitle () {
+    public String getTitle() {
         return title;
     }
 
-    public String getDescription () {
+    public String getDescription() {
         return description;
     }
 
-    public void setTitle (String title) {
+    public void setTitle(String title) {
         if (title.length() == 0) {
             this.title = "(No Title)";
         } else {
@@ -35,7 +35,7 @@ public abstract class Task {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         String formattedTask = String.format("Title: %s | Description: %s", title, description);
 
         return formattedTask;

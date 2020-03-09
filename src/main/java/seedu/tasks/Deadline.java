@@ -14,7 +14,7 @@ public class Deadline extends Task {
 
         try {
 
-            String[] dateInfo = date.split("/");
+            String[] dateInfo = date.split("-");
 
             int day = Integer.parseInt(dateInfo[0]);
             int month = Integer.parseInt(dateInfo[1]);

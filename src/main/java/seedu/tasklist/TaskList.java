@@ -44,6 +44,11 @@ public class TaskList {
         return foundTasks;
     }
 
+    // TODO Fix so that method returns a deep copy of the list
+    public ArrayList<Task> getList() {
+        return taskList;
+    }
+
     /**
      * Checks if the given task contains the given pattern.
      *

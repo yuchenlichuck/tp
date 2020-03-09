@@ -1,5 +1,8 @@
 package seedu.ui;
 
+import seedu.command.CommandResult;
+import seedu.tasklist.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -37,7 +40,7 @@ public class Ui {
     public void showUserMessage(String... messages) {
 
         for (String message : messages) {
-            System.out.println(message);
+            System.out.print(message + NEW_LINE);
         }
 
     }
@@ -58,4 +61,19 @@ public class Ui {
         String userCommand = input.nextLine();
         return userCommand;
     }
+
+    /**
+     * Prints prompt message that a task is successfully added
+     * @param userInput can be replaced with Task addedTask if there is task type implemented later
+     */
+    public static void showAddTask(String userInput, int taskCount) {
+        System.out.print("Successfully add tasks: ");
+        System.out.println(userInput);
+        System.out.println("There are " + taskCount + " in your list.");
+    }
+
+    public void showResultToUser(CommandResult result) {
+        showUserMessage(result.getFeedback());
+    }
+
 }

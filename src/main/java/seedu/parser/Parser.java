@@ -1,8 +1,10 @@
 package seedu.parser;
 
-import seedu.command.Command;
-import seedu.command.ExitCommand;
-import seedu.command.HelpCommand;
+import seedu.command.*;
+import seedu.tasks.Todo;
+
+import static seedu.common.Constants.*;
+
 
 public class Parser {
 
@@ -19,25 +21,24 @@ public class Parser {
         int wordLength = commandSections.length;
 
         switch (commandSections[0]) {
-        case "list":
-            // return new ListCommand();
-        case "done":
+        case LIST:
+            return new ListCommand();
+        case DONE:
             // return prepareDoneCommand(commandSections[1], wordLength);
-        case "help":
-            // return new HelpCommand();
-        case "delete":
-            // return prepareDeleteCommand(commandSections[1], wordLength);
-        case "todo":
-            // return new AddCommand(userCommand, wordLength, TASK_TODO);
-        case "event":
-            // return new AddCommand(userCommand, wordLength, TASK_EVENT);
-        case "deadline":
-            // return new AddCommand(userCommand, wordLength, TASK_DEADLINE);
-        case "find":
-            // return new FindCommand(commandSections[1]);
-        case "bye":
+        case HELP:
+            return new HelpCommand();
+        case DELETE:
+            return new DeleteCommand(userCommand);
+        case TODO:
+            return new TodoCommand(userCommand);
+        case EVENT:
+            return new EventCommand(userCommand);
+        case DEADLINE:
+            return new DeadlineCommand(userCommand);
+        case FIND:
+            return new FindCommand(userCommand);
+        case EXIT:
             return new ExitCommand();
-
         default:
             System.out.println("Command not recognised\n");
             return new HelpCommand();

@@ -18,8 +18,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        ui.showUserMessage(BYE_MESSAGE);
+    public CommandResult execute() {
+        return new CommandResult(BYE_MESSAGE);
     }
 }
 

@@ -10,7 +10,15 @@ public abstract class Task {
         setDescription(description);
     }
 
-    private void setTitle (String title) {
+    public String getTitle () {
+        return title;
+    }
+
+    public String getDescription () {
+        return description;
+    }
+
+    public void setTitle (String title) {
         if (title.length() == 0) {
             this.title = "(No Title)";
         } else {
@@ -18,7 +26,7 @@ public abstract class Task {
         }
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         if (description.length() == 0) {
             this.description = "(No Description)";
         } else {

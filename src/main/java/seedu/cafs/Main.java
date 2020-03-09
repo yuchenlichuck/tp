@@ -1,4 +1,4 @@
-package seedu;
+package seedu.cafs;
 
 import seedu.command.Command;
 import seedu.parser.Parser;

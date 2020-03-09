@@ -64,4 +64,12 @@ public class Ui {
         System.out.println(userInput);
         System.out.println("There are " + taskCount + " in your list.");
     }
+
+    public static void showTaskList(TaskList tasks) {
+        System.out.println("There are " + tasks.size() + " tasks in your list now.");
+        for(int i = 0; i < tasks.size(); i++) {
+            System.out.print((i + 1) + ". ");
+            System.out.println(tasks.getTask(i));
+        }
+    }
 }

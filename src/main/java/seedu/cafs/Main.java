@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.cafs;
 
 import seedu.command.Command;
 import seedu.exception.ProjException;
@@ -11,7 +11,7 @@ import seedu.ui.Ui;
  * Entry point of the Address Book application.
  * Initializes the application and starts the interaction with the user.
  */
-public class Duke {
+public class Main {
 
     private Storage storage;
     private TaskList tasks;
@@ -21,7 +21,7 @@ public class Duke {
     /**
      * Main Duke constructor to set up required classes and check for data file
      */
-    public Duke() {
+    public Main() {
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList();
@@ -57,6 +57,6 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Main().run();
     }
 }

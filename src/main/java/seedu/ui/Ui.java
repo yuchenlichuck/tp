@@ -26,6 +26,7 @@ public class Ui {
         return rawInputLine.trim().isEmpty();
     }
 
+
     /**
      * Method used to print all messages back to user
      * Meant to improve performance by reducing number of system calls used
@@ -33,8 +34,11 @@ public class Ui {
      * @param messages  Variable length argument to display to users
      */
     public void showUserMessage(String... messages) {
-        for (String message : messages)
-        System.out.println(message);
+
+        for (String message : messages) {
+            System.out.println(message);
+        }
+
     }
 
     public void showWelcome() {

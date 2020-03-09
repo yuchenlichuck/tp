@@ -1,4 +1,4 @@
-package seedu.cafs;
+package seedu;
 
 import seedu.command.Command;
 import seedu.parser.Parser;
@@ -21,11 +21,14 @@ public class Main {
      * Main Duke constructor to set up required classes and check for data file
      */
     public Main() {
+
         ui = new Ui();
         storage = new Storage();
         tasks = new TaskList();
+
         // search for folder, create if not found
         storage.checkFolderPath();
+
         // populate if data file is found
         if (storage.checkFileExists()) {
            // storage.populateList(tasks);
@@ -41,6 +44,7 @@ public class Main {
      * Reads the user command and executes it, until the user issues the exit command.
      */
     private void runCommandLoopUntilExitCommand() {
+
         Command command;
         do {
             String userCommandText = ui.readCommand();
@@ -48,6 +52,7 @@ public class Main {
             command.setCommandVariables(tasks, storage, ui);
             command.execute();
         } while (!command.isExit()); // will be solved when do is enabled
+
     }
 
 

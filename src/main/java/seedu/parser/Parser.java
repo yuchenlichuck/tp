@@ -13,9 +13,11 @@ public class Parser {
      * @return  command based on user input
      */
     public static Command parseCommand(String userCommand) {
-        //parsing based on first word of command string
+
+        // parsing based on first word of command string
         String[] commandSections = userCommand.split(" ");
         int wordLength = commandSections.length;
+
         switch (commandSections[0]) {
         case "list":
             // return new ListCommand();

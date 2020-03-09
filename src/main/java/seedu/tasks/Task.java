@@ -18,6 +18,11 @@ public abstract class Task {
         return description;
     }
 
+    /**
+     * Sets the task title.
+     *
+     * @param title new title
+     */
     public void setTitle(String title) {
         if (title.length() == 0) {
             this.title = "(No Title)";
@@ -26,6 +31,11 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Sets the task description.
+     *
+     * @param description new description
+     */
     public void setDescription(String description) {
         if (description.length() == 0) {
             this.description = "(No Description)";

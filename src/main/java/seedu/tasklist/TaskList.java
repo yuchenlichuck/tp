@@ -35,8 +35,8 @@ public class TaskList {
 
         ArrayList<Task> foundTasks = new ArrayList<>();
 
-        for(Task task : taskList) {
-            if(hasPattern(task, pattern)) {
+        for (Task task : taskList) {
+            if (hasPattern(task, pattern)) {
                 foundTasks.add(task);
             }
         }

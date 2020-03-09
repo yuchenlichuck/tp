@@ -5,7 +5,7 @@ package seedu.command;
  */
 public class ExitCommand extends Command {
 
-    final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!";
+    static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!";
 
     /**
      * Check if exit command is given.

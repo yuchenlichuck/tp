@@ -68,4 +68,7 @@ public class TaskList {
         taskList.get(taskIndex).setDescription(newDescription);
     }
 
+    public Task getTask(int index) {
+        return taskList.get(index);
+    }
 }

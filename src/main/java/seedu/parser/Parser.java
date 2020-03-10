@@ -1,9 +1,24 @@
 package seedu.parser;
 
-import seedu.command.*;
-import seedu.tasks.Todo;
+import seedu.command.FindCommand;
+import seedu.command.EventCommand;
+import seedu.command.DeadlineCommand;
+import seedu.command.TodoCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.ExitCommand;
+import seedu.command.HelpCommand;
+import seedu.command.ListCommand;
+import seedu.command.Command;
 
-import static seedu.common.Constants.*;
+import static seedu.common.Constants.FIND;
+import static seedu.common.Constants.EVENT;
+import static seedu.common.Constants.DEADLINE;
+import static seedu.common.Constants.TODO;
+import static seedu.common.Constants.DELETE;
+import static seedu.common.Constants.EXIT;
+import static seedu.common.Constants.HELP;
+import static seedu.common.Constants.LIST;
+import static seedu.common.Constants.DONE;
 
 
 public class Parser {

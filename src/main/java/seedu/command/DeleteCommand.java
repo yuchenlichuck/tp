@@ -8,6 +8,7 @@ public class DeleteCommand extends Command {
         this.userInput = userInput;
     }
 
+    @Override
     public CommandResult execute() {
         String[] commandSections = userInput.split(" ");
 

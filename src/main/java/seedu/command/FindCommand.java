@@ -12,12 +12,13 @@ public class FindCommand extends Command {
         this.pattern = pattern.trim().substring(4);
     }
 
-    public CommandResult execute () {
+    @Override
+    public CommandResult execute() {
         ArrayList<Task> tasks = taskList.findTasks(pattern);
         String feedback = "";
 
         for (int i = 0; i < tasks.size(); i++) {
-            feedback += (i+1) + ". " + tasks.get(i) + "\n";
+            feedback += (i + 1) + ". " + tasks.get(i) + "\n";
         }
 
         return new CommandResult(feedback);

@@ -16,9 +16,9 @@ public class Deadline extends Task {
 
             String[] dateInfo = date.split("-");
 
-            int day = Integer.parseInt(dateInfo[0]);
-            int month = Integer.parseInt(dateInfo[1]);
-            int year = Integer.parseInt(dateInfo[2]);
+            int day = Integer.parseInt(dateInfo[0].trim());
+            int month = Integer.parseInt(dateInfo[1].trim());
+            int year = Integer.parseInt(dateInfo[2].trim());
 
             if (!(day >= 1 && day <= 30)) {
                 throw new NumberFormatException();

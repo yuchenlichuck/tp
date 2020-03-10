@@ -43,19 +43,19 @@ public class Storage {
         return fileExists;
     }
 
-//    public static void writeToFile(TaskList tasks) {
-//
-//        try {
-//            File file = new File(String.valueOf(FILE_PATH));
-//            FileWriter myWriter = new FileWriter(file, true);
-//            for(int i = 0; i < tasks.size(); i++) {
-//                myWriter.write(tasks.getTask(i));
-//            }
-//            myWriter.close();
-//            System.out.println("Successfully updated data file!\n");
-//        } catch (IOException e) {
-//
-//        }
-//    }
+    //    public static void writeToFile(TaskList tasks) {
+    //
+    //        try {
+    //            File file = new File(String.valueOf(FILE_PATH));
+    //            FileWriter myWriter = new FileWriter(file, true);
+    //            for(int i = 0; i < tasks.size(); i++) {
+    //                myWriter.write(tasks.getTask(i));
+    //            }
+    //            myWriter.close();
+    //            System.out.println("Successfully updated data file!\n");
+    //        } catch (IOException e) {
+    //
+    //        }
+    //    }
 
 }

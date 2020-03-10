@@ -63,7 +63,8 @@ public class Ui {
     }
 
     /**
-     * Prints prompt message that a task is successfully added
+     * Prints prompt message that a task is successfully added.
+     *
      * @param userInput can be replaced with Task addedTask if there is task type implemented later
      */
     public static void showAddTask(String userInput, int taskCount) {

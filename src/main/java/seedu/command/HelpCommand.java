@@ -2,12 +2,13 @@ package seedu.command;
 
 import seedu.common.Messages;
 
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
 
     @Override
-    public void execute() {
+    public CommandResult execute() {
         String legend = Messages.getLegend();
         String commands = Messages.getCommands();
-        ui.showUserMessage(commands, legend);
+
+        return new CommandResult(legend + commands);
     }
 }

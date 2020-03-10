@@ -10,7 +10,7 @@ import seedu.ui.Ui;
 
 
 /**
- * Entry point of the Address Book application.
+ * Entry point of the CAFS
  * Initializes the application and starts the interaction with the user.
  */
 public class Main {
@@ -21,7 +21,7 @@ public class Main {
 
 
     /**
-     * Main Duke constructor to set up required classes and check for data file.
+     * Main constructor to set up required classes and check for data file.
      */
     public Main() {
 

@@ -1,5 +1,9 @@
 package seedu.storage;
 
+import seedu.tasklist.TaskList;
+
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -10,8 +14,8 @@ public class Storage {
     private static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Duke", "data.txt");
 
     /**
-     * Locate folder location and check availability
-     * If missing create folder
+     * Locate folder location and check availability.
+     * If missing create folder.
      */
     public static void checkFolderPath() {
 
@@ -19,6 +23,7 @@ public class Storage {
         try {
             if (!directoryExists) {
                 Files.createDirectory(FOLDER_PATH);
+
                 System.out.println("Directory created\n");
             } else {
                 System.out.println("Directory found\n");
@@ -29,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * Check whether data file has is present in directory
+     * Check whether data file has is present in directory.
      *
      * @return status of file availability
      */
@@ -37,4 +42,20 @@ public class Storage {
         boolean fileExists = java.nio.file.Files.exists(FILE_PATH);
         return fileExists;
     }
+
+    //    public static void writeToFile(TaskList tasks) {
+    //
+    //        try {
+    //            File file = new File(String.valueOf(FILE_PATH));
+    //            FileWriter myWriter = new FileWriter(file, true);
+    //            for(int i = 0; i < tasks.size(); i++) {
+    //                myWriter.write(tasks.getTask(i));
+    //            }
+    //            myWriter.close();
+    //            System.out.println("Successfully updated data file!\n");
+    //        } catch (IOException e) {
+    //
+    //        }
+    //    }
+
 }

@@ -8,6 +8,8 @@ import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
+import java.util.Scanner;
+
 
 /**
  * Entry point of the CAFS
@@ -35,19 +37,18 @@ public class Main {
         // populate if data file is found
         if (storage.checkFileExists()) {
            // storage.populateList(tasks);
-        }
-    }
 
-    public void run() {
-        ui.showWelcome();
-        runCommandLoopUntilExitCommand();
-    }
+           }
+     }
 
+     public void run() {
+     ui.showWelcome();
+     runCommandLoopUntilExitCommand();
+     }
     /**
      * Reads the user command and executes it, until the user issues the exit command.
      */
     private void runCommandLoopUntilExitCommand() {
-
         Command command;
         do {
             String userCommandText = ui.readCommand();
@@ -61,7 +62,6 @@ public class Main {
             }
 
         } while (!command.isExit()); // will be solved when do is enabled
-
     }
 
 

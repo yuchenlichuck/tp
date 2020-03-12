@@ -3,6 +3,9 @@ package seedu.ui;
 import seedu.command.CommandResult;
 import seedu.tasklist.TaskList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Ui {
@@ -10,7 +13,7 @@ public class Ui {
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
     private static final String DIVIDER = "________________________________________";
-    private static final String PROMPT = "> ";
+    private static final String PROMPT = "Please enter your command:";
 
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
@@ -38,11 +41,9 @@ public class Ui {
      * @param messages  Variable length argument to display to users
      */
     public void showUserMessage(String... messages) {
-
         for (String message : messages) {
             System.out.print(message + NEW_LINE);
         }
-
     }
 
     public void showWelcome() {
@@ -54,10 +55,9 @@ public class Ui {
      *
      * @return String containing user command for parsing
      */
-    public static String readCommand() {
-
+    public String readCommand() {
+        showUserMessage(PROMPT);
         Scanner input = new Scanner(System.in);
-        System.out.printf("%s ", PROMPT);
         String userCommand = input.nextLine();
         return userCommand;
     }

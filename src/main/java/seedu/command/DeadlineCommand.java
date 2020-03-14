@@ -16,8 +16,11 @@ public class DeadlineCommand extends AddCommand {
         String title = getTitle(userInput);
         String date = getDate(userInput);
         String description = getDescription(userInput);
+        String reminder = getReminder(userInput);
+        String time = getTime(userInput);
+        String location = getLocation(userInput);
 
-        taskList.addTask(new Deadline(title, description, date));
+        taskList.addTask(new Deadline(title, description, date, time, location, reminder));
 
         return new CommandResult("Added deadline");
     }

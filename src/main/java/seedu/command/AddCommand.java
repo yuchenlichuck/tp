@@ -159,6 +159,12 @@ public abstract class AddCommand extends Command {
         return date;
     }
 
+    /**
+     * Gets the reminder, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return reminder.
+     */
     public String getReminder(String userInput) {
         String reminder = "";
         if (userInput.contains(REMINDER)) {
@@ -169,6 +175,12 @@ public abstract class AddCommand extends Command {
         return reminder;
     }
 
+    /**
+     * Gets the time in format hh:mm, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return time.
+     */
     public String getTime(String userInput) {
         String time = "";
         if (userInput.contains(TIME)) {
@@ -179,6 +191,12 @@ public abstract class AddCommand extends Command {
         return time;
     }
 
+    /**
+     * Gets the location, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return location.
+     */
     public String getLocation(String userInput) {
         String location = "";
         if (userInput.contains(LOCATION)) {

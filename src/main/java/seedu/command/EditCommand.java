@@ -6,11 +6,17 @@ public class EditCommand extends AddCommand {
     private String taskEdited;
     private String userInput;
 
-    public EditCommand(String taskEdited,String userInput){
+    public EditCommand(String taskEdited,String userInput) {
         this.taskEdited = taskEdited;
         this.userInput = userInput;
     }
 
+    /**
+     * Checks if a string can be casted to a number.
+     *
+     * @param str input string.
+     * @return true if it can be casted.
+     */
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
@@ -20,15 +26,28 @@ public class EditCommand extends AddCommand {
         }
     }
 
+    /**
+     * Checks if the user has input that field.
+     *
+     * @param input a field.
+     * @return true if user has input that field.
+     */
     private Boolean hasInput(String input) {
-        if(input.length() == 0) {
+        if (input.length() == 0) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Edit a task by the task index number.
+     * Currently can only edit name and description.
+     *
+     * @return result of command.
+     * @throws ProjException if input invalid task index.
+     */
     public CommandResult execute() throws ProjException {
-        if(!isNumeric(taskEdited.trim())) {
+        if (!isNumeric(taskEdited.trim())) {
             throw new ProjException("Please input a task index.");
         }
         Integer taskEdited = Integer.parseInt(this.taskEdited.trim()) - 1;
@@ -43,7 +62,7 @@ public class EditCommand extends AddCommand {
         if (hasInput(title)) {
             taskList.changeTitle(taskEdited, title);
         }
-        if(hasInput(description)) {
+        if (hasInput(description)) {
             taskList.changeDescription(taskEdited,description);
         }
 

@@ -13,14 +13,24 @@ public class Deadline extends Task {
     private String location;
     private String reminder;
 
+    /**
+     * Initializes Deadline task.
+     *
+     * @param title title of deadline if any.
+     * @param description description of deadline if any.
+     * @param date date in format:yyyy-mm-dd of deadline if any.
+     * @param time time in format: hh:mm of deadline if any.
+     * @param location location of deadline if any.
+     * @param reminder reminder of deadline if any.
+     */
     public Deadline(String title, String description, String date,String time, String location, String reminder) {
         super(title, description);
-        if (ifHasInput(date)) {
+        if (hasInput(date)) {
             setDate(date);
         } else {
             this.date = date;
         }
-        if(ifHasInput(time)) {
+        if (hasInput(time)) {
             setTime(time);
         } else {
             this.time = time;
@@ -29,8 +39,14 @@ public class Deadline extends Task {
         this.reminder = reminder;
     }
 
-    private Boolean ifHasInput(String input) {
-        if(input.length() == 0) {
+    /**
+     * Check if a field is empty of not.
+     *
+     * @param input a field.
+     * @return true if it is not empty.
+     */
+    private Boolean hasInput(String input) {
+        if (input.length() == 0) {
             return false;
         }
         return true;
@@ -81,16 +97,16 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedDeadline = String.format("Title: %s | Description: %s", title, description);
-        if(ifHasInput(date)) {
+        if (hasInput(date)) {
             formattedDeadline = formattedDeadline + String.format(" | Date: %s", date);
         }
-        if(ifHasInput(time)) {
+        if (hasInput(time)) {
             formattedDeadline = formattedDeadline + String.format(" | Time: %s", time);
         }
-        if(ifHasInput(location)) {
+        if (hasInput(location)) {
             formattedDeadline = formattedDeadline + String.format(" | Location: %s",location);
         }
-        if(ifHasInput(reminder)) {
+        if (hasInput(reminder)) {
             formattedDeadline = formattedDeadline + String.format(" | Reminder: %s",reminder);
         }
 

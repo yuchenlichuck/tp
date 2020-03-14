@@ -19,6 +19,23 @@ class MainTest {
     Storage storage = new Storage();
 
     @Test
+    public void deadlineTest() {
+        String input = "deadline t/20:18";
+        String expected = "Title: (No Title) | Description: (No Description) | Time: 08.18 PM";
+
+        DeadlineCommand command = new DeadlineCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+        command.execute();
+
+        String output = tasks.getTask(0).toString();
+
+        boolean isEqual = output.equals(expected);
+
+        assertTrue(isEqual);
+    }
+    
+
+    @Test
     public void sampleTest() {
         String input = "deadline n/research paper d/02-04-2020 i/essay for writing 101";
         String expected = "Title: research paper  | Date: 02-04-2020  | Description: essay for writing 101";

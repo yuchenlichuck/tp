@@ -37,14 +37,14 @@ public class Main {
         // populate if data file is found
         if (storage.checkFileExists()) {
            // storage.populateList(tasks);
-
-           }
-     }
+        }
+    }
 
      public void run() {
-     ui.showWelcome();
-     runCommandLoopUntilExitCommand();
+        ui.showWelcome();
+        runCommandLoopUntilExitCommand();
      }
+
     /**
      * Reads the user command and executes it, until the user issues the exit command.
      */
@@ -60,7 +60,6 @@ public class Main {
             } catch (ProjException e) {
                 System.out.println(e.getMessage());
             }
-
         } while (!command.isExit()); // will be solved when do is enabled
     }
 

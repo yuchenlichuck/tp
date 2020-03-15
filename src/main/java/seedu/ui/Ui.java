@@ -77,4 +77,7 @@ public class Ui {
         showUserMessage(result.getFeedback());
     }
 
+    public void showError(String error) {
+        System.out.println(error);
+    }
 }

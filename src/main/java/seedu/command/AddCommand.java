@@ -7,12 +7,16 @@ import seedu.ui.Ui;
 
 public abstract class AddCommand extends Command {
 
+    //add  n/<NAME> t/<Time> d/<DATE> i/<INFORMATION> l/<LOCATION> r/<REMINDER>
     private String userInput;
     private char taskType;
 
     protected static final String TITLE = "n/";
+    protected static final String TIME = "t/";
     protected static final String DATE = "d/";
     protected static final String DESCRIPTION = "i/";
+    protected static final String LOCATION = "l/";
+    protected static final String REMINDER = "r/";
 
     //    public AddCommand(String userCommand, int wordArrayLength, char taskType) {
     //        this.userInput = userCommand;
@@ -156,6 +160,54 @@ public abstract class AddCommand extends Command {
     }
 
     /**
+     * Gets the reminder, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return reminder.
+     */
+    public String getReminder(String userInput) {
+        String reminder = "";
+        if (userInput.contains(REMINDER)) {
+            int index = userInput.indexOf(REMINDER);
+            reminder = findField(userInput, index);
+            return reminder;
+        }
+        return reminder;
+    }
+
+    /**
+     * Gets the time in format hh:mm, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return time.
+     */
+    public String getTime(String userInput) {
+        String time = "";
+        if (userInput.contains(TIME)) {
+            int index = userInput.indexOf(TIME);
+            time = findField(userInput, index);
+            return time;
+        }
+        return time;
+    }
+
+    /**
+     * Gets the location, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return location.
+     */
+    public String getLocation(String userInput) {
+        String location = "";
+        if (userInput.contains(LOCATION)) {
+            int index = userInput.indexOf(LOCATION);
+            location = findField(userInput, index);
+            return location;
+        }
+        return location;
+    }
+
+    /**
      * Scans the raw user input to search for the input.
      * for a field (e.g. "essay" in event n/essay i/world religions)
      *
@@ -181,5 +233,6 @@ public abstract class AddCommand extends Command {
 
         return field;
     }
+
 
 }

@@ -19,6 +19,7 @@ public final class Constants {
     public static final String DONE = "done";
     public static final String FIND = "find";
     public static final String DELETE = "delete";
+    public static final String EDIT = "edit";
 
     public static final String DEADLINE_USAGE = "deadline n/[title] d/[date] i/[description]";
     public static final String EVENT_USAGE = "event n/[title] d/[date] i/[description]";

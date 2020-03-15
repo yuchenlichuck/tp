@@ -23,7 +23,7 @@ public class Ui {
                 + "  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/";
 
     private Scanner input = new Scanner(System.in);
-    
+
     /**
      * Returns true if the user input line should be ignored.
      * Input should be ignored if it is only whitespace, or is empty. (add more conditions if needed)

@@ -40,10 +40,10 @@ public class Main {
         }
     }
 
-     public void run() {
+    public void run() {
         ui.showWelcome();
         runCommandLoopUntilExitCommand();
-     }
+    }
 
     /**
      * Reads the user command and executes it, until the user issues the exit command.

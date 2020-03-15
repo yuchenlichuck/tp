@@ -1,5 +1,3 @@
-Directory created
-
  ______     ______     ______   ______
 /\  ___\   /\  __ \   /\  ___\ /\  ___\
 \ \ \____  \ \  __ \  \ \  __\ \ \___  \
@@ -7,4 +5,5 @@ Directory created
   \/_____/   \/_/\/_/   \/_/     \/_____/
 
 
->  CAFS: Bye, hope to see you again!
+Please enter your command:
+CAFS: Bye, hope to see you again!

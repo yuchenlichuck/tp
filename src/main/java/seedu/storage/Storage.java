@@ -23,11 +23,14 @@ public class Storage {
         try {
             if (!directoryExists) {
                 Files.createDirectory(FOLDER_PATH);
-
+            }
+                /*
                 System.out.println("Directory created\n");
             } else {
                 System.out.println("Directory found\n");
             }
+
+                 */
         } catch (IOException e) {
             System.out.println("Error creating folder!\n");
         }

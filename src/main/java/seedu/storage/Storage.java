@@ -18,21 +18,13 @@ public class Storage {
      * If missing create folder.
      */
     public static void checkFolderPath() {
-
         boolean directoryExists = java.nio.file.Files.exists(FOLDER_PATH);
-        try {
-            if (!directoryExists) {
+        if (!directoryExists) {
+            try {
                 Files.createDirectory(FOLDER_PATH);
+            } catch (IOException e) {
+                System.out.println("Error creating folder!\n");
             }
-                /*
-                System.out.println("Directory created\n");
-            } else {
-                System.out.println("Directory found\n");
-            }
-
-                 */
-        } catch (IOException e) {
-            System.out.println("Error creating folder!\n");
         }
     }
 

@@ -22,6 +22,7 @@ public class Ui {
                 + " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
                 + "  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/";
 
+    private Scanner input = new Scanner(System.in);
     /**
      * Returns true if the user input line should be ignored.
      * Input should be ignored if it is only whitespace, or is empty. (add more conditions if needed)
@@ -57,8 +58,8 @@ public class Ui {
      */
     public String readCommand() {
         showUserMessage(PROMPT);
-        Scanner input = new Scanner(System.in);
-        String userCommand = input.nextLine();
+        String userCommand = input.next();
+        assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
     }
 

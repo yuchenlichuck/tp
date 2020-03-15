@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import seedu.command.Command;
 import seedu.command.DeadlineCommand;
 import seedu.command.HelpCommand;
+import seedu.exception.ProjException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
@@ -25,7 +26,11 @@ class MainTest {
 
         DeadlineCommand command = new DeadlineCommand(input);
         command.setCommandVariables(tasks, storage, ui);
-        command.execute();
+        try {
+            command.execute();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
 
         String output = tasks.getTask(0).toString();
 
@@ -42,7 +47,11 @@ class MainTest {
 
         DeadlineCommand command = new DeadlineCommand(input);
         command.setCommandVariables(tasks, storage, ui);
-        command.execute();
+        try {
+            command.execute();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
 
         String output = tasks.getTask(0).toString();
 

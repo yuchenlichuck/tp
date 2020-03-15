@@ -53,32 +53,31 @@ public class EditCommand extends AddCommand {
         Integer taskEdited = Integer.parseInt(this.taskEdited.trim()) - 1;
 
         String title = getTitle(userInput);
-        String description = getDescription(userInput);
-        String date = getDate(userInput);
-        String reminder = getReminder(userInput);
-        String time = getTime(userInput);
-        String location = getLocation(userInput);
-
         if (hasInput(title)) {
             throw new ProjException("Not allowed to change title.");
         }
 
+        String description = getDescription(userInput);
         if (hasInput(description)) {
             taskList.changeDescription(taskEdited,description);
         }
 
+        String reminder = getReminder(userInput);
         if (hasInput(reminder)) {
             taskList.changeReminder(taskEdited,reminder);
         }
 
+        String date = getDate(userInput);
         if (hasInput(date)) {
             taskList.changeDate(taskEdited,date);
         }
 
+        String time = getTime(userInput);
         if (hasInput(time)) {
             taskList.changeTime(taskEdited,time);
         }
 
+        String location = getLocation(userInput);
         if (hasInput(location)) {
             taskList.changeLocation(taskEdited,location);
         }

@@ -75,9 +75,9 @@ public abstract class Task {
     }
 
     /**
-     * Set Date to format:yyyy-mm-dd
+     * Set Date to format:yyyy-mm-dd and check if date is correct.
      *
-     * @param date
+     * @param date input date
      */
     public void setDate(String date) {
 
@@ -149,6 +149,11 @@ public abstract class Task {
         return this.reminder;
     }
 
+    /**
+     * Output correct string format when listing tasks.
+     *
+     * @return correct format in string.
+     */
     public String toString() {
         String formattedDeadline = String.format("Title: %s", title);
         if (hasInput(description)) {

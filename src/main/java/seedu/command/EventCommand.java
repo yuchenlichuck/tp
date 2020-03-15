@@ -13,7 +13,7 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public CommandResult execute() throws ProjException{
+    public CommandResult execute() throws ProjException {
 
         String title = getTitle(userInput);
 

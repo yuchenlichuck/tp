@@ -21,10 +21,7 @@ public class EditCommandTest {
         Storage storage = new Storage();
 
         String firstInput = "todo n/Sleep early";
-        String secondInput = "edit 1 i/for your health";
         String firstExpected = "Title: Sleep early";
-        String secondExpected = "Title: Sleep early | Description: for your health";
-
         TodoCommand firstCommand = new TodoCommand(firstInput);
         firstCommand.setCommandVariables(tasks, storage, ui);
         try {
@@ -32,10 +29,11 @@ public class EditCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-
         String firstOutput = tasks.getTask(0).toString();
         assertTrue(firstOutput.equals(firstExpected));
 
+        String secondInput = "edit 1 i/for your health";
+        String secondExpected = "Title: Sleep early | Description: for your health";
         EditCommand secondCommand = new EditCommand("1",secondInput);
         secondCommand.setCommandVariables(tasks, storage, ui);
         try {

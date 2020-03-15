@@ -1,27 +1,17 @@
 package seedu.tasks;
 
 public class Event extends Task {
-
-    private String eventDetails;
-
-    public Event(String title, String description, String eventDetails) {
-        super(title, description);
-        setEventDetails(eventDetails);
-    }
-
-
-    private void setEventDetails(String eventDetails) {
-        if (description.length() == 0) {
-            this.eventDetails = "(No Event Details)";
-        } else {
-            this.eventDetails = eventDetails;
-        }
-    }
-
-    @Override
-    public String toString() {
-        String formattedEvent = String.format(super.toString() + " | Event Details: %s", eventDetails);
-
-        return formattedEvent;
+    /**
+     * Initializes Event task.
+     *
+     * @param title title of deadline if any.
+     * @param description description of deadline if any.
+     * @param date date in format:yyyy-mm-dd of deadline if any.
+     * @param time time in format: hh:mm of deadline if any.
+     * @param location location of deadline if any.
+     * @param reminder reminder of deadline if any.
+     */
+    public Event(String title, String description, String date,String time, String location, String reminder) {
+        super(title, description,date,time,location,reminder);
     }
 }

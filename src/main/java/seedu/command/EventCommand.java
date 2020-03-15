@@ -1,5 +1,6 @@
 package seedu.command;
 
+import seedu.exception.ProjException;
 import seedu.tasks.Deadline;
 import seedu.tasks.Event;
 
@@ -12,13 +13,21 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws ProjException{
 
         String title = getTitle(userInput);
-        String eventDetails = getDate(userInput);
-        String description = getDescription(userInput);
 
-        taskList.addTask(new Event(title, description, eventDetails));
+        if (title.length() == 0) {
+            throw new ProjException("Please input a title for the event.");
+        }
+
+        String date = getDate(userInput);
+        String description = getDescription(userInput);
+        String reminder = getReminder(userInput);
+        String time = getTime(userInput);
+        String location = getLocation(userInput);
+
+        taskList.addTask(new Deadline(title, description, date, time, location, reminder));
 
         return new CommandResult("Added event");
     }

@@ -41,7 +41,7 @@ public class EditCommand extends AddCommand {
 
     /**
      * Edit a task by the task index number.
-     * Currently can only edit name and description.
+     * Cannot edit title of a class.
      *
      * @return result of command.
      * @throws ProjException if input invalid task index.
@@ -60,10 +60,27 @@ public class EditCommand extends AddCommand {
         String location = getLocation(userInput);
 
         if (hasInput(title)) {
-            taskList.changeTitle(taskEdited, title);
+            throw new ProjException("Not allowed to change title.");
         }
+
         if (hasInput(description)) {
             taskList.changeDescription(taskEdited,description);
+        }
+
+        if (hasInput(reminder)) {
+            taskList.changeReminder(taskEdited,reminder);
+        }
+
+        if (hasInput(date)) {
+            taskList.changeDate(taskEdited,date);
+        }
+
+        if (hasInput(time)) {
+            taskList.changeTime(taskEdited,time);
+        }
+
+        if (hasInput(location)) {
+            taskList.changeLocation(taskEdited,location);
         }
 
         String feedback = "Task " + (taskEdited + 1) + " edited\n";

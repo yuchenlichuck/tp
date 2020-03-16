@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private static ArrayList<Task> taskList;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -20,7 +20,9 @@ public class TaskList {
         taskList.add(task);
     }
 
-
+    public static void updateTaskList(ArrayList<Task> tasks) {
+        taskList = tasks;
+    }
     /**
      * Removes a task and return a reference to that object.
      *

@@ -1,13 +1,19 @@
 package seedu.storage;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import seedu.tasklist.TaskList;
 import seedu.tasks.Task;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Storage {
 
@@ -28,6 +34,7 @@ public class Storage {
                 System.out.println("Error creating folder!\n");
             }
         }
+        loadFromFile();
     }
 
     /**
@@ -49,6 +56,13 @@ public class Storage {
         Gson gsonTaskList = new Gson();
         return gsonTaskList.toJson(task);
     }
+
+    public static ArrayList<Task> convertFromGson(String gsonTaskList) {
+        Type userListType = new TypeToken<ArrayList<Task>>(){}.getType();
+        Gson gson = new Gson();
+        return gson.fromJson(gsonTaskList, userListType);
+    }
+
 
 
     public static void overwriteFile(ArrayList<Task> taskList) {
@@ -74,6 +88,16 @@ public class Storage {
             System.out.println("Successfully updated data file!\n");
         } catch (IOException e) {
             System.out.println("[Error] File cannot be written!\n");
+        }
+    }
+
+    public static void loadFromFile() {
+        try {
+            String gsonTaskList = new String(Files.readAllBytes(Paths.get(String.valueOf(FILE_PATH))));
+            ArrayList<Task> tasks  = convertFromGson(gsonTaskList);
+            TaskList.updateTaskList(tasks);
+        } catch (IOException e) {
+            System.out.println("Error reading data file! \n");
         }
     }
 }

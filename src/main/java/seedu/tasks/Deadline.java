@@ -1,46 +1,24 @@
 package seedu.tasks;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Deadline extends Task {
-
-    private String date;
-
-    public Deadline(String title, String description, String date) {
-        super(title, description);
-        setDate(date);
+    /**
+     * Initializes Deadline task.
+     *
+     * @param title title of deadline if any.
+     * @param description description of deadline if any.
+     * @param date date in format:yyyy-mm-dd of deadline if any.
+     * @param time time in format: hh:mm of deadline if any.
+     * @param location location of deadline if any.
+     * @param reminder reminder of deadline if any.
+     */
+    public Deadline(String title, String description, String date,String time, String location, String reminder) {
+        super(title, description,date,time,location,reminder);
     }
 
-
-    private void setDate(String date) {
-
-        try {
-
-            String[] dateInfo = date.split("-");
-
-            int day = Integer.parseInt(dateInfo[0].trim());
-            int month = Integer.parseInt(dateInfo[1].trim());
-            int year = Integer.parseInt(dateInfo[2].trim());
-
-            if (!(day >= 1 && day <= 30)) {
-                throw new NumberFormatException();
-            }
-
-            if (!(month >= 1 && month <= 12)) {
-                throw new NumberFormatException();
-            }
-
-            this.date = date;
-
-        } catch (NumberFormatException e) {
-            this.date = "(No Date)";
-        } catch (IndexOutOfBoundsException e) {
-            this.date = "(No Date)";
-        }
-    }
-
-    @Override
-    public String toString() {
-        String formattedDeadline = String.format("Title: %s | Date: %s | Description: %s", title, date, description);
-
-        return formattedDeadline;
-    }
 }

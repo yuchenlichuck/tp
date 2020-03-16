@@ -1,7 +1,6 @@
 package seedu.ui;
 
 import seedu.command.CommandResult;
-import seedu.tasklist.TaskList;
 
 import java.util.Scanner;
 
@@ -9,15 +8,18 @@ public class Ui {
 
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
-    private static final String DIVIDER = "________________________________________";
+    private static final String DIVIDER = "_____________________________________________________________________";
     private static final String PROMPT = "> ";
+    private static final String TAB = "\t";
 
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
-                + "/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"
-                + "\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
-                + " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
-                + "  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/";
+                + "\t/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"
+                + "\t\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
+                + "\t \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
+                + "\t  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/\n";
+
+    private Scanner input = new Scanner(System.in);
 
     /**
      * Returns true if the user input line should be ignored.
@@ -38,15 +40,17 @@ public class Ui {
      * @param messages  Variable length argument to display to users
      */
     public void showUserMessage(String... messages) {
+        System.out.println(DIVIDER);
 
         for (String message : messages) {
-            System.out.print(message + NEW_LINE);
+            System.out.print(TAB + message);
         }
 
+        System.out.println(DIVIDER);
     }
 
     public void showWelcome() {
-        showUserMessage(LOGO, NEW_LINE);
+        showUserMessage(LOGO);
     }
 
     /**
@@ -54,11 +58,11 @@ public class Ui {
      *
      * @return String containing user command for parsing
      */
-    public static String readCommand() {
-
-        Scanner input = new Scanner(System.in);
-        System.out.printf("%s ", PROMPT);
+    public String readCommand() {
+        System.out.print(PROMPT);
         String userCommand = input.nextLine();
+
+        assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
     }
 
@@ -77,4 +81,7 @@ public class Ui {
         showUserMessage(result.getFeedback());
     }
 
+    public void showError(String error) {
+        System.out.println(error);
+    }
 }

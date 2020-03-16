@@ -20,8 +20,18 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public void deleteTask(int index) {
+
+    /**
+     * Removes a task and return a reference to that object.
+     *
+     * @param index Index of task to remove
+     * @return Removed task
+     */
+    public Task deleteTask(int index) {
+        Task toRemove = taskList.get(index);
         taskList.remove(index);
+
+        return toRemove;
     }
 
     /**
@@ -60,12 +70,25 @@ public class TaskList {
         return task.getTitle().contains(pattern) || task.getDescription().contains(pattern);
     }
 
-    public void changeTitle(int taskIndex, String newTitle) {
-        taskList.get(taskIndex).setTitle(newTitle);
-    }
-
+    //Mutator methods:
     public void changeDescription(int taskIndex, String newDescription) {
         taskList.get(taskIndex).setDescription(newDescription);
+    }
+
+    public void changeDate(int taskIndex, String newDate) {
+        taskList.get(taskIndex).setDate(newDate);
+    }
+
+    public void changeTime(int taskIndex, String newTime) {
+        taskList.get(taskIndex).setTime(newTime);
+    }
+
+    public void changeLocation(int taskIndex, String newLocation) {
+        taskList.get(taskIndex).setLocation(newLocation);
+    }
+
+    public void changeReminder(int taskIndex, String newReminder) {
+        taskList.get(taskIndex).setReminder(newReminder);
     }
 
     public Task getTask(int index) {

@@ -14,7 +14,6 @@ public class Storage {
     private static final String WORKING_DIRECTORY = System.getProperty("user.dir");
     private static final java.nio.file.Path FOLDER_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Save");
     private static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(WORKING_DIRECTORY, "Save", "data.txt");
-    private static Gson gsonTaskList = new Gson();
 
     /**
      * Locate folder location and check availability.
@@ -42,15 +41,35 @@ public class Storage {
     }
 
     public static String convertToGson(ArrayList<Task> taskList) {
+        Gson gsonTaskList = new Gson();
         return gsonTaskList.toJson(taskList);
     }
+
+    public static String convertToGson(Task task) {
+        Gson gsonTaskList = new Gson();
+        return gsonTaskList.toJson(task);
+    }
+
 
     public static void overwriteFile(ArrayList<Task> taskList) {
         String formattedTaskList = convertToGson(taskList);
         try {
             File file = new File(String.valueOf(FILE_PATH));
-            FileWriter myWriter = new FileWriter(file, true);
+            FileWriter myWriter = new FileWriter(file, false);
             myWriter.write(formattedTaskList);
+            myWriter.close();
+            System.out.println("Successfully updated data file!\n");
+        } catch (IOException e) {
+            System.out.println("[Error] File cannot be written!\n");
+        }
+    }
+
+    public static void saveTaskToFile(Task task) {
+        String formattedTask = convertToGson(task);
+        try {
+            File file = new File(String.valueOf(FILE_PATH));
+            FileWriter myWriter = new FileWriter(file, true);
+            myWriter.write(formattedTask);
             myWriter.close();
             System.out.println("Successfully updated data file!\n");
         } catch (IOException e) {

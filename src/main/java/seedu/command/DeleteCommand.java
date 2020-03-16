@@ -8,11 +8,11 @@ public class DeleteCommand extends Command {
 
     private String userInput;
 
-    private static final String MESSAGE_SUCCESS = "The following task has been removed: %s";
+    private static final String MESSAGE_SUCCESS = "The following task has been removed:\n %s";
     private static final String MESSAGE_INVALID_INDEX = "The entered index %s is invalid. + "
             + "Please enter a valid task number\n";
     private static final String MESSAGE_MISSING_NUMBER = "Missing task number to delete\n";
-    private static final String MESSAGE_REMAINING_TASKS = "Now you have %d in your calendar\n";
+    private static final String MESSAGE_REMAINING_TASKS = "Now you have %d task/tasks in your calendar\n";
 
     public DeleteCommand(String userInput) {
         this.userInput = userInput;
@@ -44,10 +44,13 @@ public class DeleteCommand extends Command {
 
     private String formatFeedback(Task removed) {
 
-        String feedback = MESSAGE_SUCCESS + System.lineSeparator();
-        feedback += TAB + removed.toString() + System.lineSeparator();
-        feedback += String.format(TAB + MESSAGE_REMAINING_TASKS, taskList.getListSize());
-        feedback += System.lineSeparator();
+        String feedback = "";
+
+        String description = TAB + removed.toString() + System.lineSeparator();
+        description += String.format(TAB + MESSAGE_REMAINING_TASKS, taskList.getListSize());
+        description += System.lineSeparator();
+
+        feedback = String.format(MESSAGE_SUCCESS, description);
 
         return feedback;
     }

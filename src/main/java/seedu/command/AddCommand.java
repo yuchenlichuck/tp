@@ -17,7 +17,7 @@ public class AddCommand extends Command {
         String title = getTitle(userInput);
 
         if (title.length() == 0) {
-            throw new ProjException("Please input a title for the deadline.");
+            throw new ProjException("Please input a title for the task.");
         }
 
         String date = getDate(userInput);

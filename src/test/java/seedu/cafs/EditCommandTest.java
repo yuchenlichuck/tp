@@ -20,8 +20,8 @@ public class EditCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        String firstInput = "todo n/Sleep early";
-        String firstExpected = "Title: Sleep early";
+        String firstInput = "add n/Sleep early";
+        String firstExpected = "[TODO] Title: Sleep early";
         AddCommand firstCommand = new AddCommand(firstInput);
         firstCommand.setCommandVariables(tasks, storage, ui);
         try {
@@ -33,7 +33,7 @@ public class EditCommandTest {
         assertTrue(firstOutput.equals(firstExpected));
 
         String secondInput = "edit 1 i/for your health";
-        String secondExpected = "Title: Sleep early | Description: for your health";
+        String secondExpected = "[TODO] Title: Sleep early | Description: for your health";
         EditCommand secondCommand = new EditCommand("1",secondInput);
         secondCommand.setCommandVariables(tasks, storage, ui);
         try {
@@ -54,7 +54,7 @@ public class EditCommandTest {
         Storage storage = new Storage();
 
         try {
-            String firstInput = "todo n/Sleep early";
+            String firstInput = "add n/Sleep early";
             AddCommand firstCommand = new AddCommand(firstInput);
             firstCommand.setCommandVariables(tasks, storage, ui);
             firstCommand.execute();

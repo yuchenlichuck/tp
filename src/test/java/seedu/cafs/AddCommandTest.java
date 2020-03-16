@@ -18,8 +18,8 @@ public class AddCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        String input = "deadline n/task t/20:18 d/2020-04-10";
-        String expected = "Title: task  | Date: 2020-04-10 | Time: 08.18 PM";
+        String input = "add n/task t/20:18 d/2020-04-10";
+        String expected = "[TODO] Title: task | Date: 2020-04-10 | Time: 08.18 PM";
 
         AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
@@ -42,13 +42,13 @@ public class AddCommandTest {
         Storage storage = new Storage();
 
         try {
-            String firstInput = "deadline";
+            String firstInput = "add";
             AddCommand firstCommand = new AddCommand(firstInput);
             firstCommand.setCommandVariables(tasks, storage, ui);
             firstCommand.execute();
 
         } catch (ProjException e) {
-            assertEquals("Please input a title for the deadline.", e.getMessage());
+            assertEquals("Please input a title for the task.", e.getMessage());
         }
     }
 }

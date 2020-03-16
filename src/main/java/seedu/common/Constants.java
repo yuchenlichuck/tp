@@ -18,4 +18,7 @@ public final class Constants {
     public static final String DELETE_USAGE = "delete [task number]";
     public static final String FIND_USAGE = "find [pattern]";
 
+
+    public static final String TAB = "  ";
+
 }

@@ -1,6 +1,5 @@
 package seedu.command;
 
-import seedu.common.Messages;
 import seedu.exception.ProjException;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;

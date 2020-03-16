@@ -21,8 +21,8 @@ class MainTest {
 
     @Test
     public void sampleTest() {
-        String input = "deadline n/research paper d/02-04-2020 i/essay for writing 101";
-        String expected = "Title: research paper  | Description: essay for writing 101 | Date: (Unknown Date)";
+        String input = "add n/research paper d/02-04-2020 i/essay for writing 101";
+        String expected = "[TODO] Title: research paper | Description: essay for writing 101 | Date: (Unknown Date)";
 
         AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);

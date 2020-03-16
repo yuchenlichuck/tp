@@ -15,13 +15,14 @@ public abstract class Command {
     protected Storage storage;
     protected Ui ui;
 
-    // add  n/<NAME> t/<Time> d/<DATE> i/<INFORMATION> l/<LOCATION> r/<REMINDER>
+    // add  n/<NAME> t/<Time> d/<DATE> i/<INFORMATION> l/<LOCATION> r/<REMINDER> c/<CATEGORY>
     protected static final String TITLE = "n/";
     protected static final String TIME = "t/";
     protected static final String DATE = "d/";
     protected static final String DESCRIPTION = "i/";
     protected static final String LOCATION = "l/";
     protected static final String REMINDER = "r/";
+    protected static final String CATEGORY = "c/";
 
     /**
      * Called to check if exit command is given.
@@ -153,6 +154,20 @@ public abstract class Command {
             return location;
         }
         return location;
+    }
+
+    public String getCategory(String userInput) {
+
+        String category = "";
+
+        if (userInput.contains(CATEGORY)) {
+            int index = userInput.indexOf(CATEGORY);
+
+            category = findField(userInput, index);
+            return category;
+        }
+
+        return category;
     }
 
     /**

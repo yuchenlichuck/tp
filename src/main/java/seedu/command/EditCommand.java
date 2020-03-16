@@ -47,6 +47,7 @@ public class EditCommand extends Command {
      * @throws ProjException if input invalid task index.
      */
     public CommandResult execute() throws ProjException {
+        Boolean isEdit = false;
         if (!isNumeric(taskEdited.trim())) {
             throw new ProjException("Please input a task index.");
         }
@@ -60,30 +61,45 @@ public class EditCommand extends Command {
         String description = getDescription(userInput);
         if (hasInput(description)) {
             taskList.changeDescription(taskEdited,description);
+            isEdit = true;
         }
 
         String reminder = getReminder(userInput);
         if (hasInput(reminder)) {
             taskList.changeReminder(taskEdited,reminder);
+            isEdit = true;
         }
 
         String date = getDate(userInput);
         if (hasInput(date)) {
             taskList.changeDate(taskEdited,date);
+            isEdit = true;
         }
 
         String time = getTime(userInput);
         if (hasInput(time)) {
             taskList.changeTime(taskEdited,time);
+            isEdit = true;
         }
 
         String location = getLocation(userInput);
         if (hasInput(location)) {
             taskList.changeLocation(taskEdited,location);
+            isEdit = true;
         }
 
-        String feedback = "Task " + (taskEdited + 1) + " edited\n";
-        feedback  = feedback + taskList.getTask(taskEdited).toString();
-        return new CommandResult(feedback);
+        String category = getCategory(userInput);
+        if (hasInput(category)) {
+            taskList.changeCategory(taskEdited,category);
+            isEdit = true;
+        }
+
+        if(isEdit) {
+            String feedback = "Task " + (taskEdited + 1) + " edited\n";
+            feedback = feedback + taskList.getTask(taskEdited).toString() + "\n";
+            return new CommandResult(feedback);
+        } else {
+            throw new ProjException("You have not modified any task as no valid field input. ");
+        }
     }
 }

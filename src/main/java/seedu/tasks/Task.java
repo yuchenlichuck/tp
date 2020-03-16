@@ -14,6 +14,7 @@ public class Task {
     protected String time;
     protected String location;
     protected String reminder;
+    protected String category;
 
     /**
      * Initializes Task.
@@ -25,7 +26,7 @@ public class Task {
      * @param location location of deadline if any.
      * @param reminder reminder of deadline if any.
      */
-    public Task(String title, String description, String date,String time, String location, String reminder) {
+    public Task(String title, String description, String date,String time, String location, String reminder,String category) {
         if (hasInput(date)) {
             setDate(date);
         } else {
@@ -35,6 +36,11 @@ public class Task {
             setTime(time);
         } else {
             this.time = time;
+        }
+        if (hasInput(category)) {
+            this.category = category;
+        } else {
+            this.category = "TODO";
         }
         this.title = title;
         this.description = description;
@@ -123,6 +129,10 @@ public class Task {
         this.reminder = reminder;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     //Accessors:
 
     public String getTitle() {
@@ -149,13 +159,18 @@ public class Task {
         return this.reminder;
     }
 
+    public String getCategory() {
+        return this.category;
+    }
+
     /**
      * Output correct string format when listing tasks.
      *
      * @return correct format in string.
      */
     public String toString() {
-        String formattedDeadline = String.format("Title: %s", title);
+
+        String formattedDeadline = String.format("[%s] Title: %s", category.toUpperCase().trim(),title.trim());
         if (hasInput(description)) {
             formattedDeadline = formattedDeadline + String.format(" | Description: %s", description);
         }

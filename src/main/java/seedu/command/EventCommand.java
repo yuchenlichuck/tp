@@ -29,7 +29,7 @@ public class EventCommand extends AddCommand {
 
         taskList.addTask(new Deadline(title, description, date, time, location, reminder));
 
-        return new CommandResult("Added event");
+        return new CommandResult("Added event\n");
     }
 
 }

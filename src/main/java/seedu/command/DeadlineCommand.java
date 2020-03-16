@@ -28,7 +28,7 @@ public class DeadlineCommand extends AddCommand {
 
         taskList.addTask(new Deadline(title, description, date, time, location, reminder));
 
-        return new CommandResult("Added deadline");
+        return new CommandResult("Added deadline\n");
     }
 
 }

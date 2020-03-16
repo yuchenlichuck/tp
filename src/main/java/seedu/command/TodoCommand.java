@@ -2,7 +2,6 @@ package seedu.command;
 
 import seedu.exception.ProjException;
 import seedu.tasks.Deadline;
-import seedu.tasks.Todo;
 
 public class TodoCommand extends AddCommand {
 
@@ -29,7 +28,7 @@ public class TodoCommand extends AddCommand {
 
         taskList.addTask(new Deadline(title, description, date, time, location, reminder));
 
-        return new CommandResult("Added todo");
+        return new CommandResult("Added todo\n");
     }
 
 }

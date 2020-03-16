@@ -26,7 +26,8 @@ public class Task {
      * @param location location of deadline if any.
      * @param reminder reminder of deadline if any.
      */
-    public Task(String title, String description, String date,String time, String location, String reminder,String category) {
+    public Task(String title, String description, String date,String time, String location,
+                String reminder,String category) {
         if (hasInput(date)) {
             setDate(date);
         } else {

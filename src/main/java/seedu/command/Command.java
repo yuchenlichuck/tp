@@ -156,6 +156,12 @@ public abstract class Command {
         return location;
     }
 
+    /**
+     * Gets the category.Default one is TODO.
+     *
+     * @param userInput raw user input.
+     * @return category.
+     */
     public String getCategory(String userInput) {
 
         String category = "";

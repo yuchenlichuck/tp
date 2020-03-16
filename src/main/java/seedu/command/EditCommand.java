@@ -94,7 +94,7 @@ public class EditCommand extends Command {
             isEdit = true;
         }
 
-        if(isEdit) {
+        if (isEdit) {
             String feedback = "Task " + (taskEdited + 1) + " edited\n";
             feedback = feedback + taskList.getTask(taskEdited).toString() + "\n";
             return new CommandResult(feedback);

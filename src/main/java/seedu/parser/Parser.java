@@ -1,7 +1,15 @@
 package seedu.parser;
 
-import seedu.command.*;
-
+import seedu.command.Command;
+import seedu.command.AddCommand;
+import seedu.command.HelpCommand;
+import seedu.command.FindCommand;
+import seedu.command.ExitCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.CommandResult;
+import seedu.command.ListCommand;
+import seedu.command.EditCommand;
+import seedu.command.ClearCommand;
 import static seedu.common.Constants.ADD;
 import static seedu.common.Constants.CLEAR;
 import static seedu.common.Constants.FIND;

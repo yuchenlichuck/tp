@@ -13,7 +13,8 @@ public final class Constants {
     public static final String CLEAR = "clc";
 
     // TODO Include each usage in corresponding Command class
-    public static final String ADD_USAGE = "add n/[title] i/[description] t/[hh:mm] d/[yyyy-mm-dd] l/[LOCATION] r/[REMINDER] c/[CATEGORY]";
+    public static final String ADD_USAGE = "add n/[title] i/[description] t/[hh:mm] "
+            + "d/[yyyy-mm-dd] l/[LOCATION] r/[REMINDER] c/[CATEGORY]";
     public static final String DELETE_USAGE = "delete [task number]";
     public static final String FIND_USAGE = "find [pattern]";
 

@@ -94,6 +94,7 @@ public class TaskList {
     public void changeCategory(int taskIndex, String newCategory) {
         taskList.get(taskIndex).setCategory(newCategory);
     }
+
     public Task getTask(int index) {
         return taskList.get(index);
     }

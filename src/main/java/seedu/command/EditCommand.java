@@ -2,7 +2,7 @@ package seedu.command;
 
 import seedu.exception.ProjException;
 
-public class EditCommand extends AddCommand {
+public class EditCommand extends Command {
     private String taskEdited;
     private String userInput;
 

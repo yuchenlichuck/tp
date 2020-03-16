@@ -1,7 +1,7 @@
 package seedu.cafs;
 
 import org.junit.jupiter.api.Test;
-import seedu.command.TodoCommand;
+import seedu.command.AddCommand;
 import seedu.command.EditCommand;
 import seedu.exception.ProjException;
 import seedu.storage.Storage;
@@ -22,7 +22,7 @@ public class EditCommandTest {
 
         String firstInput = "todo n/Sleep early";
         String firstExpected = "Title: Sleep early";
-        TodoCommand firstCommand = new TodoCommand(firstInput);
+        AddCommand firstCommand = new AddCommand(firstInput);
         firstCommand.setCommandVariables(tasks, storage, ui);
         try {
             firstCommand.execute();
@@ -55,7 +55,7 @@ public class EditCommandTest {
 
         try {
             String firstInput = "todo n/Sleep early";
-            TodoCommand firstCommand = new TodoCommand(firstInput);
+            AddCommand firstCommand = new AddCommand(firstInput);
             firstCommand.setCommandVariables(tasks, storage, ui);
             firstCommand.execute();
 

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public abstract class Task {
+public class Task {
 
     protected String title;
     protected String description;

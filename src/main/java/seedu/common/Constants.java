@@ -6,6 +6,7 @@ public final class Constants {
     public static final String DEADLINE = "deadline";
     public static final String EVENT = "event";
     public static final String TODO = "todo";
+    public static final String ADD = "add";
     public static final String LIST = "list";
     public static final String HELP = "help";
     public static final String EXIT = "bye";

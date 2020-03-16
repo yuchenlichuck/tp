@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import seedu.command.AddCommand;
 import seedu.command.Command;
-import seedu.command.DeadlineCommand;
 import seedu.command.HelpCommand;
 import seedu.exception.ProjException;
 import seedu.parser.Parser;
@@ -24,7 +24,7 @@ class MainTest {
         String input = "deadline n/research paper d/02-04-2020 i/essay for writing 101";
         String expected = "Title: research paper  | Description: essay for writing 101 | Date: (Unknown Date)";
 
-        DeadlineCommand command = new DeadlineCommand(input);
+        AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
         try {
             command.execute();

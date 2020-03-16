@@ -1,9 +1,7 @@
 package seedu.cafs;
 
 import org.junit.jupiter.api.Test;
-import seedu.command.DeadlineCommand;
-import seedu.command.EditCommand;
-import seedu.command.TodoCommand;
+import seedu.command.AddCommand;
 import seedu.exception.ProjException;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
@@ -23,7 +21,7 @@ public class AddCommandTest {
         String input = "deadline n/task t/20:18 d/2020-04-10";
         String expected = "Title: task  | Date: 2020-04-10 | Time: 08.18 PM";
 
-        DeadlineCommand command = new DeadlineCommand(input);
+        AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
         try {
             command.execute();
@@ -45,7 +43,7 @@ public class AddCommandTest {
 
         try {
             String firstInput = "deadline";
-            DeadlineCommand firstCommand = new DeadlineCommand(firstInput);
+            AddCommand firstCommand = new AddCommand(firstInput);
             firstCommand.setCommandVariables(tasks, storage, ui);
             firstCommand.execute();
 

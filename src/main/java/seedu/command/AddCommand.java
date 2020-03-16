@@ -18,7 +18,6 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws ProjException {
 
-        String feedback;
         String title = getTitle(userInput);
 
         if (title.length() == 0) {
@@ -35,14 +34,16 @@ public class AddCommand extends Command {
         Task task = new Task(title, description, date, time, location, reminder,category);
         taskList.addTask(task);
 
-        feedback = formatFeedback(task);
+        storage.overwriteFile(taskList.getList());
+
+        String feedback = formatFeedback(task);
         return new CommandResult(feedback);
     }
 
     private String formatFeedback(Task task) {
-        String feedback = MESSAGE_SUCCESS;
-        feedback += TAB + TAB + task.toString() + System.lineSeparator();
-        feedback += TAB + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
+
+        String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()
+                + TAB + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
                 + System.lineSeparator();
 
         return feedback;

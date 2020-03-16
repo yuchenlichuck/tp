@@ -13,7 +13,7 @@ public class Ui {
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
     private static final String DIVIDER = "________________________________________";
-    private static final String PROMPT = "Please enter your command:";
+    private static final String PROMPT = "> ";
 
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
@@ -43,9 +43,11 @@ public class Ui {
      * @param messages  Variable length argument to display to users
      */
     public void showUserMessage(String... messages) {
+        System.out.println();
         for (String message : messages) {
-            System.out.print(message + NEW_LINE);
+            System.out.print(message);
         }
+
     }
 
     public void showWelcome() {
@@ -59,7 +61,8 @@ public class Ui {
      */
     public String readCommand() {
         showUserMessage(PROMPT);
-        String userCommand = input.next();
+        String userCommand = input.nextLine();
+
         assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
     }

@@ -8,8 +8,6 @@ import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
-import java.util.Scanner;
-
 
 /**
  * Entry point of the CAFS

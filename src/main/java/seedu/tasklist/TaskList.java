@@ -93,6 +93,10 @@ public class TaskList {
         taskList.get(taskIndex).setReminder(newReminder);
     }
 
+    public void changeCategory(int taskIndex, String newCategory) {
+        taskList.get(taskIndex).setCategory(newCategory);
+    }
+
     public Task getTask(int index) {
         return taskList.get(index);
     }

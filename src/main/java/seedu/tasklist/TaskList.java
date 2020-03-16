@@ -20,8 +20,18 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public void deleteTask(int index) {
+
+    /**
+     * Removes a task and return a reference to that object.
+     *
+     * @param index Index of task to remove
+     * @return Removed task
+     */
+    public Task deleteTask(int index) {
+        Task toRemove = taskList.get(index);
         taskList.remove(index);
+
+        return toRemove;
     }
 
     /**

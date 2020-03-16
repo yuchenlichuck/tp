@@ -9,7 +9,7 @@ public class TaskList {
     private static ArrayList<Task> taskList;
 
     public TaskList() {
-        taskList = new ArrayList<>();
+        taskList = new ArrayList<Task>();
     }
 
     public int getListSize() {
@@ -20,7 +20,7 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public static void updateTaskList(ArrayList<Task> tasks) {
+    public void updateTaskList(ArrayList<Task> tasks) {
         taskList = tasks;
     }
     /**

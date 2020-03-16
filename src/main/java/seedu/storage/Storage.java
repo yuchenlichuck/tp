@@ -34,7 +34,6 @@ public class Storage {
                 System.out.println("Error creating folder!\n");
             }
         }
-        loadFromFile();
     }
 
     /**
@@ -72,7 +71,7 @@ public class Storage {
             FileWriter myWriter = new FileWriter(file, false);
             myWriter.write(formattedTaskList);
             myWriter.close();
-            System.out.println("Successfully updated data file!\n");
+            //System.out.println("Successfully updated data file!\n");
         } catch (IOException e) {
             System.out.println("[Error] File cannot be written!\n");
         }
@@ -85,17 +84,21 @@ public class Storage {
             FileWriter myWriter = new FileWriter(file, true);
             myWriter.write(formattedTask);
             myWriter.close();
-            System.out.println("Successfully updated data file!\n");
+            //System.out.println("Successfully updated data file!\n");
         } catch (IOException e) {
             System.out.println("[Error] File cannot be written!\n");
         }
     }
 
-    public static void loadFromFile() {
+    public void loadFromFile(TaskList taskList) {
         try {
             String gsonTaskList = new String(Files.readAllBytes(Paths.get(String.valueOf(FILE_PATH))));
-            ArrayList<Task> tasks  = convertFromGson(gsonTaskList);
-            TaskList.updateTaskList(tasks);
+            if (!gsonTaskList.isBlank()) {
+                System.out.println(gsonTaskList);
+
+                ArrayList<Task> tasks = convertFromGson(gsonTaskList);
+                taskList.updateTaskList(tasks);
+            }
         } catch (IOException e) {
             System.out.println("Error reading data file! \n");
         }

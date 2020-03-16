@@ -26,9 +26,10 @@ public class AddCommand extends Command {
         String time = getTime(userInput);
         String location = getLocation(userInput);
         String category = getCategory(userInput);
-
-        taskList.addTask(new Task(title, description, date, time, location, reminder,category));
-
+        Task task = new Task(title, description, date, time, location, reminder,category);
+        taskList.addTask(task);
+        storage.overwriteFile(taskList.getList());
+        // storage.loadFromFile(taskList);
         return new CommandResult("Added a task.\n");
     }
 

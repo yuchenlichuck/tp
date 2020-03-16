@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import seedu.command.Command;
 import seedu.command.DeadlineCommand;
 import seedu.command.HelpCommand;
+import seedu.exception.ProjException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
@@ -21,11 +22,15 @@ class MainTest {
     @Test
     public void sampleTest() {
         String input = "deadline n/research paper d/02-04-2020 i/essay for writing 101";
-        String expected = "Title: research paper  | Date: 02-04-2020  | Description: essay for writing 101";
+        String expected = "Title: research paper  | Description: essay for writing 101 | Date: (Unknown Date)";
 
         DeadlineCommand command = new DeadlineCommand(input);
         command.setCommandVariables(tasks, storage, ui);
-        command.execute();
+        try {
+            command.execute();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
 
         String output = tasks.getTask(0).toString();
 

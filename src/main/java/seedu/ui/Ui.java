@@ -3,6 +3,9 @@ package seedu.ui;
 import seedu.command.CommandResult;
 import seedu.tasklist.TaskList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Ui {
@@ -10,7 +13,7 @@ public class Ui {
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
     private static final String DIVIDER = "________________________________________";
-    private static final String PROMPT = "> ";
+    private static final String PROMPT = "Please enter your command:";
 
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
@@ -18,6 +21,8 @@ public class Ui {
                 + "\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
                 + " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
                 + "  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/";
+
+    private Scanner input = new Scanner(System.in);
 
     /**
      * Returns true if the user input line should be ignored.
@@ -38,11 +43,9 @@ public class Ui {
      * @param messages  Variable length argument to display to users
      */
     public void showUserMessage(String... messages) {
-
         for (String message : messages) {
             System.out.print(message + NEW_LINE);
         }
-
     }
 
     public void showWelcome() {
@@ -54,11 +57,10 @@ public class Ui {
      *
      * @return String containing user command for parsing
      */
-    public static String readCommand() {
-
-        Scanner input = new Scanner(System.in);
-        System.out.printf("%s ", PROMPT);
-        String userCommand = input.nextLine();
+    public String readCommand() {
+        showUserMessage(PROMPT);
+        String userCommand = input.next();
+        assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
     }
 
@@ -77,4 +79,7 @@ public class Ui {
         showUserMessage(result.getFeedback());
     }
 
+    public void showError(String error) {
+        System.out.println(error);
+    }
 }

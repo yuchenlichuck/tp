@@ -1,25 +1,25 @@
 package seedu.ui;
 
 import seedu.command.CommandResult;
-
 import java.util.Scanner;
+import static seedu.common.Constants.TAB;
 
 public class Ui {
 
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
-    private static final String DIVIDER = "_____________________________________________________________________";
-    private static final String PROMPT = "> ";
-    private static final String TAB = "\t";
+    private static final String DIVIDER = "__________________________________________________________________________";
+    private static final String PROMPT = "What is your command?" + NEW_LINE;
 
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
-                + "\t/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"
-                + "\t\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
-                + "\t \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
-                + "\t  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/\n";
+                + TAB + "/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"
+                + TAB + "\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
+                + TAB + " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
+                + TAB + "  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/\n";
 
     private Scanner input = new Scanner(System.in);
+
 
     /**
      * Returns true if the user input line should be ignored.
@@ -40,7 +40,8 @@ public class Ui {
      * @param messages  Variable length argument to display to users
      */
     public void showUserMessage(String... messages) {
-        System.out.println(DIVIDER);
+
+        System.out.println();;
 
         for (String message : messages) {
             System.out.print(TAB + message);
@@ -64,17 +65,6 @@ public class Ui {
 
         assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
-    }
-
-    /**
-     * Prints prompt message that a task is successfully added.
-     *
-     * @param userInput can be replaced with Task addedTask if there is task type implemented later
-     */
-    public static void showAddTask(String userInput, int taskCount) {
-        System.out.print("Successfully add tasks: ");
-        System.out.println(userInput);
-        System.out.println("There are " + taskCount + " in your list.");
     }
 
     public void showResultToUser(CommandResult result) {

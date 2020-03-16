@@ -1,22 +1,18 @@
 package seedu.parser;
 
 import seedu.command.Command;
-import seedu.command.EditCommand;
-import seedu.command.ListCommand;
-import seedu.command.DeadlineCommand;
-import seedu.command.DeleteCommand;
-import seedu.command.EventCommand;
-import seedu.command.ExitCommand;
-import seedu.command.FindCommand;
+import seedu.command.AddCommand;
 import seedu.command.HelpCommand;
-import seedu.command.TodoCommand;
+import seedu.command.FindCommand;
+import seedu.command.ExitCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.CommandResult;
+import seedu.command.ListCommand;
+import seedu.command.EditCommand;
 import seedu.command.ClearCommand;
-
+import static seedu.common.Constants.ADD;
 import static seedu.common.Constants.CLEAR;
 import static seedu.common.Constants.FIND;
-import static seedu.common.Constants.EVENT;
-import static seedu.common.Constants.DEADLINE;
-import static seedu.common.Constants.TODO;
 import static seedu.common.Constants.DELETE;
 import static seedu.common.Constants.EXIT;
 import static seedu.common.Constants.HELP;
@@ -40,18 +36,12 @@ public class Parser {
         switch (commandSections[0]) {
         case LIST:
             return new ListCommand();
-        //case DONE:
-            // return prepareDoneCommand(commandSections[1], wordLength);
-        case HELP:
-            return new HelpCommand();
         case DELETE:
             return new DeleteCommand(userCommand);
-        case TODO:
-            return new TodoCommand(userCommand);
-        case EVENT:
-            return new EventCommand(userCommand);
-        case DEADLINE:
-            return new DeadlineCommand(userCommand);
+        case HELP:
+            return new HelpCommand();
+        case ADD:
+            return new AddCommand(userCommand);
         case FIND:
             return new FindCommand(userCommand);
         case EDIT:

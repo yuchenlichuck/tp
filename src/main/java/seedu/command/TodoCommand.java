@@ -28,7 +28,6 @@ public class TodoCommand extends AddCommand {
         String location = getLocation(userInput);
 
         taskList.addTask(new Deadline(title, description, date, time, location, reminder));
-
         return new CommandResult("Added todo");
     }
 

@@ -48,7 +48,6 @@ public abstract class AddCommand extends Command {
 
         if (userInput.contains(DESCRIPTION)) {
             int index = userInput.indexOf(DESCRIPTION);
-
             description = findField(userInput, index);
             return description;
         }

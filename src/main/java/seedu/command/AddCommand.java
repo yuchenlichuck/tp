@@ -3,9 +3,13 @@ package seedu.command;
 import seedu.exception.ProjException;
 import seedu.tasks.Task;
 
+import static seedu.common.Constants.TAB;
+
 public class AddCommand extends Command {
 
     private String userInput;
+    private static final String MESSAGE_SUCCESS = "Nice! Added the following task to the calendar:\n";
+    private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task/tasks in your list";
 
     public AddCommand(String userInput) {
         this.userInput = userInput.trim();
@@ -26,11 +30,23 @@ public class AddCommand extends Command {
         String time = getTime(userInput);
         String location = getLocation(userInput);
         String category = getCategory(userInput);
+
         Task task = new Task(title, description, date, time, location, reminder,category);
         taskList.addTask(task);
+
         storage.overwriteFile(taskList.getList());
-        // storage.loadFromFile(taskList);
-        return new CommandResult("Added a task.\n");
+
+        String feedback = formatFeedback(task);
+        return new CommandResult(feedback);
+    }
+
+    private String formatFeedback(Task task) {
+
+        String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()
+                + TAB + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
+                + System.lineSeparator();
+
+        return feedback;
     }
 
 }

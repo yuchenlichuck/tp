@@ -56,6 +56,12 @@ public class Storage {
         return gsonTaskList.toJson(task);
     }
 
+    /**
+     * Converting data file input string to Task objects within array list.
+     * will change to read string by string instead, to prevent buffer overflow.
+     * @param gsonTaskList data file contents saved within a string
+     * @return arraylist of task objects
+     */
     public static ArrayList<Task> convertFromGson(String gsonTaskList) {
         Type userListType = new TypeToken<ArrayList<Task>>(){}.getType();
         Gson gson = new Gson();
@@ -63,7 +69,11 @@ public class Storage {
     }
 
 
-
+    /**
+     * Over writes saved data file with latest task list.
+     *
+     * @param taskList current task list for saving
+     */
     public static void overwriteFile(ArrayList<Task> taskList) {
         String formattedTaskList = convertToGson(taskList);
         try {
@@ -77,6 +87,7 @@ public class Storage {
         }
     }
 
+    /*
     public static void saveTaskToFile(Task task) {
         String formattedTask = convertToGson(task);
         try {
@@ -89,13 +100,17 @@ public class Storage {
             System.out.println("[Error] File cannot be written!\n");
         }
     }
+     */
 
+    /**
+     * Reading in data file and storing into tasklist.
+     * @param taskList tasklist object created in main
+     */
     public void loadFromFile(TaskList taskList) {
         try {
             String gsonTaskList = new String(Files.readAllBytes(Paths.get(String.valueOf(FILE_PATH))));
             if (!gsonTaskList.isBlank()) {
-                System.out.println(gsonTaskList);
-
+                //System.out.println(gsonTaskList);
                 ArrayList<Task> tasks = convertFromGson(gsonTaskList);
                 taskList.updateTaskList(tasks);
             }

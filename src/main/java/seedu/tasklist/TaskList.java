@@ -23,6 +23,7 @@ public class TaskList {
     public void updateTaskList(ArrayList<Task> tasks) {
         taskList = tasks;
     }
+
     /**
      * Removes a task and return a reference to that object.
      *

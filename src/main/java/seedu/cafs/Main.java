@@ -8,6 +8,8 @@ import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
+import java.util.Scanner;
+
 
 /**
  * Entry point of the CAFS
@@ -47,7 +49,6 @@ public class Main {
      * Reads the user command and executes it, until the user issues the exit command.
      */
     private void runCommandLoopUntilExitCommand() {
-
         Command command;
         do {
             String userCommandText = ui.readCommand();
@@ -59,9 +60,7 @@ public class Main {
             } catch (ProjException e) {
                 ui.showError(e.getMessage());
             }
-
         } while (!command.isExit()); // will be solved when do is enabled
-
     }
 
 

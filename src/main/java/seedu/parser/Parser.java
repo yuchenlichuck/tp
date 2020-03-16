@@ -38,7 +38,6 @@ public class Parser {
         // parsing based on first word of command string
         String[] commandSections = userCommand.split(" ");
         int wordLength = commandSections.length;
-
         switch (commandSections[0]) {
         case LIST:
             return new ListCommand();

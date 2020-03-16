@@ -34,7 +34,7 @@ public class Main {
 
         // populate if data file is found
         if (storage.checkFileExists()) {
-           // storage.populateList(tasks);
+            storage.loadFromFile(tasks);
         }
     }
 

@@ -66,17 +66,6 @@ public class Ui {
         return userCommand;
     }
 
-    /**
-     * Prints prompt message that a task is successfully added.
-     *
-     * @param userInput can be replaced with Task addedTask if there is task type implemented later
-     */
-    public static void showAddTask(String userInput, int taskCount) {
-        System.out.print("Successfully add tasks: ");
-        System.out.println(userInput);
-        System.out.println("There are " + taskCount + " in your list.");
-    }
-
     public void showResultToUser(CommandResult result) {
         showUserMessage(result.getFeedback());
     }

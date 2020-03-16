@@ -28,8 +28,8 @@ public class Parser {
         switch (commandSections[0]) {
         case LIST:
             return new ListCommand();
-        //case DONE:
-            // return prepareDoneCommand(commandSections[1], wordLength);
+        case DELETE:
+            return new DeleteCommand(userCommand);
         case HELP:
             return new HelpCommand();
         case ADD:

@@ -2,7 +2,6 @@ package seedu.ui;
 
 import seedu.command.CommandResult;
 import java.util.Scanner;
-import java.util.logging.*;
 import static seedu.common.Constants.TAB;
 
 public class Ui {

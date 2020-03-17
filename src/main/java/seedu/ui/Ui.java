@@ -10,7 +10,6 @@ public class Ui {
     private static final String NEW_LINE = System.lineSeparator();
     private static final String DIVIDER = "__________________________________________________________________________";
     private static final String PROMPT = "What is your command?" + NEW_LINE;
-
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
                 + TAB + "/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"
@@ -41,7 +40,7 @@ public class Ui {
      */
     public void showUserMessage(String... messages) {
 
-        System.out.println();;
+        System.out.println();
 
         for (String message : messages) {
             System.out.print(TAB + message);
@@ -62,7 +61,6 @@ public class Ui {
     public String readCommand() {
         System.out.print(PROMPT);
         String userCommand = input.nextLine();
-
         assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
     }

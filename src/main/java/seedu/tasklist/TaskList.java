@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private static ArrayList<Task> taskList;
 
     public TaskList() {
-        taskList = new ArrayList<>();
+        taskList = new ArrayList<Task>();
     }
 
     public int getListSize() {
@@ -20,6 +20,9 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public void updateTaskList(ArrayList<Task> tasks) {
+        taskList = tasks;
+    }
 
     /**
      * Removes a task and return a reference to that object.
@@ -89,6 +92,10 @@ public class TaskList {
 
     public void changeReminder(int taskIndex, String newReminder) {
         taskList.get(taskIndex).setReminder(newReminder);
+    }
+
+    public void changeCategory(int taskIndex, String newCategory) {
+        taskList.get(taskIndex).setCategory(newCategory);
     }
 
     public Task getTask(int index) {

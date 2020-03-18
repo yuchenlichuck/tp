@@ -94,6 +94,9 @@ public class EditCommand extends Command {
             isEdit = true;
         }
 
+        //post condition for checking no title input.
+        assert (!hasInput(title));
+
         if (isEdit) {
             String feedback = "Task " + (taskEdited + 1) + " edited\n";
             feedback = feedback + taskList.getTask(taskEdited).toString() + "\n";

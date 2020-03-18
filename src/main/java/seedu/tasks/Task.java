@@ -173,7 +173,7 @@ public class Task {
      */
     public String toString() {
 
-        //Post condition check that there should always be a category.
+        // Post condition check that there should always be a category.
         assert (category.length() != 0);
         String formattedDeadline = String.format("[%s] Title: %s", category.toUpperCase().trim(),title.trim());
         if (hasInput(description)) {

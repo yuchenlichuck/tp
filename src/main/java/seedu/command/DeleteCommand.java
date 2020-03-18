@@ -29,6 +29,8 @@ public class DeleteCommand extends Command {
             int index = Integer.parseInt(strIndex) - 1;
             Task removedTask = taskList.deleteTask(index);
             storage.overwriteFile(taskList.getList());
+
+            assert removedTask != null : "removed task is null";
             return new CommandResult(formatFeedback(removedTask));
 
         } catch (IndexOutOfBoundsException e) {

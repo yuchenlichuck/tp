@@ -37,6 +37,9 @@ public class AddCommand extends Command {
         storage.overwriteFile(taskList.getList());
 
         String feedback = formatFeedback(task);
+
+
+        assert !title.isEmpty() : "Task title should contain at least one char";
         return new CommandResult(feedback);
     }
 

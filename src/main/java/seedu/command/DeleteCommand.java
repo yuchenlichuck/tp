@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
         try {
             String strIndex = commandSections[1].trim();
             int index = Integer.parseInt(strIndex) - 1;
-            //assert index < taskList.getListSize() : "index > the size of taskList";
+            assert index < taskList.getListSize() : "index > the size of taskList";
             Task removedTask = taskList.deleteTask(index);
 
             storage.overwriteFile(taskList.getList());

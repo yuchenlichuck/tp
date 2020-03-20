@@ -31,7 +31,7 @@ public class TaskList {
      * @return Removed task
      */
     public Task deleteTask(int index) {
-        assert index>=taskList.size() : "index > the size of taskList";
+        assert index<taskList.size() : "index > the size of taskList";
         Task toRemove = taskList.get(index);
         taskList.remove(index);
 

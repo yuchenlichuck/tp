@@ -43,6 +43,8 @@ public class Task {
         } else {
             this.category = "TODO";
         }
+        // post condition check for existence of title
+        assert (title.length() != 0) : title;
         this.title = title;
         this.description = description;
         this.location = location;
@@ -171,6 +173,8 @@ public class Task {
      */
     public String toString() {
 
+        // Post condition check that there should always be a category.
+        assert (category.length() != 0);
         String formattedDeadline = String.format("[%s] Title: %s", category.toUpperCase().trim(),title.trim());
         if (hasInput(description)) {
             formattedDeadline = formattedDeadline + String.format(" | Description: %s", description);

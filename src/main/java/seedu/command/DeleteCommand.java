@@ -1,7 +1,9 @@
 package seedu.command;
 
 import seedu.tasks.Task;
+
 import java.util.IllegalFormatException;
+
 import static seedu.common.Constants.TAB;
 
 public class DeleteCommand extends Command {
@@ -21,14 +23,17 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
 
-        String[] commandSections = userInput.split(" ");;
+        String[] commandSections = userInput.split(" ");
+        ;
 
         try {
-
             String strIndex = commandSections[1].trim();
             int index = Integer.parseInt(strIndex) - 1;
+            assert index < taskList.getListSize() : "index > the size of taskList";
             Task removedTask = taskList.deleteTask(index);
+
             storage.overwriteFile(taskList.getList());
+            assert removedTask != null : "Removed-task is null";
             return new CommandResult(formatFeedback(removedTask));
 
         } catch (IndexOutOfBoundsException e) {

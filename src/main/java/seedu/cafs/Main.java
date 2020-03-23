@@ -8,6 +8,9 @@ import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * Entry point of the CAFS
@@ -18,7 +21,7 @@ public class Main {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
+    private static Logger logger = Logger.getLogger("Foo");
 
     /**
      * Main constructor to set up required classes and check for data file.
@@ -34,6 +37,8 @@ public class Main {
 
         // populate if data file is found
         if (storage.checkFileExists()) {
+            // log a message at INFO level
+            logger.log(Level.INFO, "Attempting to read from data file");
             storage.loadFromFile(tasks);
         }
     }
@@ -59,6 +64,7 @@ public class Main {
                 ui.showError(e.getMessage());
             }
         } while (!command.isExit()); // will be solved when do is enabled
+        logger.log(Level.INFO, "end of processing");
     }
 
 

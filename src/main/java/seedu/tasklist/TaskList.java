@@ -31,6 +31,7 @@ public class TaskList {
      * @return Removed task
      */
     public Task deleteTask(int index) {
+
         Task toRemove = taskList.get(index);
         taskList.remove(index);
 

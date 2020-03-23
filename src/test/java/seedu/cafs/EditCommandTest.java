@@ -19,7 +19,6 @@ public class EditCommandTest {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
-
         String firstInput = "add n/Sleep early";
         String firstExpected = "[TODO] Title: Sleep early";
         AddCommand firstCommand = new AddCommand(firstInput);
@@ -45,6 +44,9 @@ public class EditCommandTest {
         String secondOutput = tasks.getTask(0).toString();
         assertTrue(secondOutput.equals(secondExpected));
     }
+
+
+
 
     @Test
     public void editCommand_editTitle_exceptionThrown() {

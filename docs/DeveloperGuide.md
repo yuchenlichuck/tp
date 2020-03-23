@@ -35,6 +35,10 @@
 
 ## Non-Functional Requirements
 
+1. Should work in an environment without internet access.
+1. Should offer easy / experienced user input modes to accommodate to different proficiencies
+1. Data should be persistent across different start-ups
+1. Not too restrictive on user to avoid frustrations (user friendly)
 
 ## Glossary
 

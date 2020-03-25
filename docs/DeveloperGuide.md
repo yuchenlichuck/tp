@@ -30,9 +30,9 @@
 |v2.0| No 9. is a university student | export my calendar as a text file | I can print it to have a physical copy |
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
-|v2.0| No. 20 is a student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
+|v2.0| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 |v2.0| No. 23 is a university student | view events by category | I can easily find exactly the events I need to see |
-
+|v2.0| No. 24 is a university student | view events by date | I can easily find exactly the events I need to see |
 ## Non-Functional Requirements
 
 1. Should work in an environment without internet access.

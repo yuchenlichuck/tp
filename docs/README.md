@@ -10,8 +10,7 @@
   * [Find a task](#36---find)
   * [View tasks in calender](#37---view)
   * [Save tasks](#38---save)
-  * [Add class](#39---class)
-  * [Exit the program](#310---exit)
+  * [Exit the program](#39---exit)
 * [Sample Usage](#4-sample-usage)
 * [FAQ](#5-faq)
 * [Command Summary](#6-command-summary)
@@ -39,11 +38,17 @@ Displays the set of commands supported
 ### 3.2 - Add
 Users add tasks using this command
 * **Usage**: `add  n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
-     * Examples:
+     * To add class, just need to specify the category is `CLASS`.
+     * When adding normal tasks:
         * add t/12:00pm n/UG d/02/18/2020 i/UG deadline r/NUS r/1d
         * add t/15:00 n/Project Meeting  d/01/01/2020   i/Work on awesome features
         * add t/11:00 n/Response Paper  d/2/2/2020 i/Finish essay c/TODO
-
+     * When adding class, the time becomes the range of the class, and the date becomes which weekday.
+       Since a class normally has mutiple times in a week, student can just add list of time zone.
+       However, the number of time range should match with the number of weekday and the number of location. 
+        * add t/11:00-12:00 1:00-3:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
+        * add n/3245 t/17:00-19:00 d/5 c/CLASS
+    
 ### 3.3 - List
 #### 3.3.1 - List 
 Lists all tasks
@@ -108,26 +113,7 @@ Displays a calender based on day/week/month
 Exports my calendar as a text file	
 * **Usage**: `save`
 
-### 3.9 - Class
-Add my student schedule which will be repetitive added for a specific range of time
-* **Usage**: `class n/<NAME> d/<DATE> r/<REPEAT WEEKS> i/<INFORMATION>`
-    * The `DATE` should be MON/TUE/WED/THU/FRI. User can input more than one DATE
-    * The `REPEAT WEEKS` should be an integer: how long do you have this class in the following weeks
-    * After you input this command, the system will generate prompt to ask specific time 
-        and location of each class
-    * Then you input: `s/<START TIME> e/<END TIME> l/<LOCATION>`
-    * Examples:
-        * class n/2113 d/TUE WED r/13 l/NUS COM2 i/Attendance compulsory
-          
-          _Then system will generate:`Time and Location for TUE:`_
-          
-          s/14:00 e/15:00 l/COM2 01-07
-          
-          _Then system will generate:`Time and Location for WED:`_
-          
-          s/10:00 e/12:00
-
-### 3.10 - Exit
+### 3.9 - Exit
 Exits the program
 * **Usage**: `bye`
 
@@ -157,8 +143,5 @@ Exits the program
  * **Find**: `find <keyword>` 
  * **View**: `view <WEEK/DAY/MONTH>`
  * **Save**: `save`
- * **Class**: 
-    * `class n/<NAME> d/<DATE> r/<REPEAT WEEKS> i/<INFORMATION>`
-    * `s/<START TIME> e/<END TIME> l/<LOCATION>`
  * **Help**: `help`
  * **Exit**: `bye`

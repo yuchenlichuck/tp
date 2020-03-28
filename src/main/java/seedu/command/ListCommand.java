@@ -1,8 +1,6 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
-import seedu.tasks.Task;
-import seedu.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -13,10 +11,11 @@ public class ListCommand extends Command {
     public ListCommand(String userCommand) {
         this.userInput = userCommand;
     }
+
     @Override
     public CommandResult execute() throws ProjException {
 
-        String category = getCategory(userInput);
+        String category = getCategory(userInput).trim().toUpperCase();
         ArrayList<Integer> listTaskIndex = new ArrayList<>();
         if (category.length() != 0) {
             if (!taskList.containsCategory(category)) {

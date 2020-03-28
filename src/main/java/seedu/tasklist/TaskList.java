@@ -49,8 +49,17 @@ public class TaskList {
         taskList.get(taskIndex).setReminder(newReminder);
     }
 
+    /**
+     * Change category of a task and change the category mapping.
+     *
+     * @param taskIndex Index of task that needs to be changed.
+     * @param newCategory Newly category.
+     */
     public void changeCategory(int taskIndex, String newCategory) {
+        String oldCategory = taskList.get(taskIndex).getCategory();
+        this.categoryMap.get(oldCategory).remove(taskIndex);
         taskList.get(taskIndex).setCategory(newCategory);
+        updateCategoryMap(newCategory,taskIndex);
     }
 
     //Methods:
@@ -67,13 +76,14 @@ public class TaskList {
     }
 
     private void updateCategoryMap(String category, Integer index) {
-        if (category.length() !=0 ) {
+        if (category.length() != 0) {
             if (!categoryMap.containsKey(category)) {
                 this.categoryMap.put(category, new ArrayList<>());
             }
             this.categoryMap.get(category).add(index);
         }
     }
+
     /**
      * Add tasks and update the category mapping.
      *
@@ -84,6 +94,11 @@ public class TaskList {
         updateCategoryMap(task.getCategory(),taskList.size() - 1);
     }
 
+    /**
+     * When updating a task from the storage, also need to add category mapping.
+     *
+     * @param tasks tasks loaded.
+     */
     public void updateTaskList(ArrayList<Task> tasks) {
         taskList = tasks;
         Integer index = 0;

@@ -32,6 +32,7 @@ public class Main {
         storage = new Storage();
         tasks = new TaskList();
 
+        /*
         // search for folder, create if not found
         storage.checkFolderPath();
 
@@ -41,6 +42,7 @@ public class Main {
             logger.log(Level.INFO, "Attempting to read from data file");
             storage.loadFromFile(tasks);
         }
+        */
     }
 
     public void run() {

@@ -65,6 +65,11 @@ public class Ui {
         return userCommand;
     }
 
+    /**
+     * Displays all category.
+     *
+     * @param categories array of categories.
+     */
     public void showAllCategory(String[] categories) {
         System.out.println("Current categories: ");
         for (String category : categories) {

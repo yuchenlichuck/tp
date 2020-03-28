@@ -35,7 +35,7 @@ public class Parser {
         int wordLength = commandSections.length;
         switch (commandSections[0]) {
         case LIST:
-            return new ListCommand();
+            return new ListCommand(userCommand);
         case DELETE:
             return new DeleteCommand(userCommand);
         case HELP:

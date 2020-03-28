@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static seedu.common.Constants.DEFAULT_CATEGORY;
+
 public class Task {
 
     protected String title;
@@ -41,7 +43,7 @@ public class Task {
         if (hasInput(category)) {
             this.category = category;
         } else {
-            this.category = "TODO";
+            this.category = DEFAULT_CATEGORY;
         }
         // post condition check for existence of title
         assert (title.length() != 0) : title;

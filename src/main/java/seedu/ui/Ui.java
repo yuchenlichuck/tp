@@ -65,6 +65,13 @@ public class Ui {
         return userCommand;
     }
 
+    public void showAllCategory(String[] categories) {
+        System.out.println("Current categories: ");
+        for (String category : categories) {
+            System.out.println("\t>>>" + category);
+        }
+    }
+
     public void showResultToUser(CommandResult result) {
         showUserMessage(result.getFeedback());
     }

@@ -11,6 +11,7 @@ public final class Constants {
     public static final String DELETE = "delete";
     public static final String EDIT = "edit";
     public static final String CLEAR = "clc";
+    public static final String DEFAULT_CATEGORY = "TODO";
 
     // TODO Include each usage in corresponding Command class
     public static final String ADD_USAGE = "add n/[title] i/[description] t/[hh:mm] "

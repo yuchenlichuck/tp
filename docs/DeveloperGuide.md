@@ -20,10 +20,10 @@
 
 ## 3. Implementation
 ### 3.1 [Proposed] Undo Feature
-#### 3.1.1 View By Category
+#### 3.1.1 List By Category
 It extends the current view command.
-The user can use `view` to view all tasks.
-The user can also use `view CATEGORY` to view specific classes whose category is sth. 
+The user can use `list` to view all tasks.
+The user can also use `list CATEGORY` to view specific classes whose category is sth. 
 This is the UML design for view by category.
 ![UML for View](images/viewCategory.png)
 
@@ -36,11 +36,11 @@ the index for this task.
 
 
 Step2:  User view tasks by category.
-If user only type in `view`, then all tasks will be displayed according to the sequence of task
+If user only type in `list`, then all tasks will be displayed according to the sequence of task
 index. It simply calls the view function.
-If user type in in `view CATEGORY`, and the category is valid, then it will go for the
+If user type in in `list CATEGORY`, and the category is valid, then it will go for the
 returnCategory method.
-If user type in in `view CATEGORY`, and the category is invalid, then it will go for the
+If user type in in `list CATEGORY`, and the category is invalid, then it will go for the
 displayCategory method. 
 Whatever the path, the UI will finally be called either display tasks given the index or display
 category. 
@@ -85,8 +85,8 @@ It solves:
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
 |v2.0| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
-|v2.0| No. 23 is a university student | view events by category | I can easily find exactly the events I need to see |
-|v2.0| No. 24 is a university student | view events by date | I can easily find exactly the events I need to see |
+|v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
+|v2.0| No. 24 is a university student | list events by date | I can easily find exactly the events I need to see |
 
 ## 6.4 Appendix D:Non-Functional Requirements
 

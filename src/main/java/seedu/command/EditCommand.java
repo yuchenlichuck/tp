@@ -88,8 +88,14 @@ public class EditCommand extends Command {
             isEdit = true;
         }
 
-        String category = getCategory(userInput);
+        String category = getCategory(userInput).trim().toUpperCase();
         if (hasInput(category)) {
+            //If it is class, cannot change to task. If it is task, cannot change to class.
+            if (category.equals("CLASS")) {
+                throw new ProjException("Cannot cast a task to class.");
+            } else if (taskList.getTask(taskEdited).getCategory().equals("CLASS")) {
+                throw new ProjException("Cannot cast a class to task.");
+            }
             taskList.changeCategory(taskEdited,category);
             isEdit = true;
         }

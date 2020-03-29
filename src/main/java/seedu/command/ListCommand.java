@@ -1,23 +1,44 @@
 package seedu.command;
 
-import seedu.tasks.Task;
+import seedu.exception.ProjException;
+
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
 
+    private String userInput;
+
+    public ListCommand(String userCommand) {
+        this.userInput = userCommand;
+    }
+
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws ProjException {
 
-        ArrayList<Task> tasks = taskList.getList();
-
-        String feedback = "There are " + tasks.size() + " tasks in your list.\n";
-
-        for (int i = 0; i < tasks.size(); i++) {
-            feedback += "\t" + (i + 1) + ". ";
-            feedback += tasks.get(i);
-            feedback += "\n";
+        String category = getCategory(userInput).trim().toUpperCase();
+        ArrayList<Integer> listTaskIndex = new ArrayList<>();
+        if (category.length() != 0) {
+            if (!taskList.containsCategory(category)) {
+                ui.showAllCategory(taskList.getAllCategory());
+                throw new ProjException("There is no " + category + " in current category.");
+            }
+            for (Integer taskIndex : taskList.getCategoryTask(category)) {
+                listTaskIndex.add(taskIndex);
+            }
+        } else {
+            for (int i = 0; i < taskList.getListSize(); i++) {
+                listTaskIndex.add(i);
+            }
         }
 
+        String feedback = "There are " + listTaskIndex.size() + " tasks.\n";
+
+        for (int i = 0; i < listTaskIndex.size(); i++) {
+            Integer taskIndex = listTaskIndex.get(i);
+            feedback += (i + 1) + ". " + "[" + (taskIndex + 1) + "] ";
+            System.out.println(taskIndex);
+            feedback += taskList.getTask(taskIndex) + "\n";
+        }
         return new CommandResult(feedback);
     }
 

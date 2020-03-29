@@ -2,6 +2,8 @@ package seedu.command;
 
 import seedu.exception.ProjException;
 import seedu.tasks.Task;
+import seedu.tasks.TaskNonclass;
+import seedu.tasks.Class;
 
 import static seedu.common.Constants.TAB;
 
@@ -29,14 +31,21 @@ public class AddCommand extends Command {
         String reminder = getReminder(userInput);
         String time = getTime(userInput);
         String location = getLocation(userInput);
-        String category = getCategory(userInput);
+        String category = getCategory(userInput).trim().toUpperCase();
 
-        Task task = new Task(title, description, date, time, location, reminder,category);
-        taskList.addTask(task);
 
-        storage.overwriteFile(taskList.getList());
+        if (category.equals("CLASS")) {
+            Integer dateCount = date.split("\\s+").length;
+            Integer timeCount = time.split("\\s+").length;
+            if (dateCount != timeCount) {
+                throw new ProjException("The number of time range must match with the number of day in a week.");
+            }
+            taskList.addTask(new Class(title, description, date, time, location, reminder, "CLASS"));
+        } else {
+            taskList.addTask(new TaskNonclass(title, description, date, time, location, reminder, category));
+        }
 
-        String feedback = formatFeedback(task);
+        String feedback = formatFeedback(taskList.getTask(taskList.getListSize() - 1));
 
 
         assert !title.isEmpty() : "Task title should contain at least one char";

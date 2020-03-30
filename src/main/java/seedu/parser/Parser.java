@@ -59,6 +59,7 @@ public class Parser {
             if (commandSections.length == 1) {
                 return new CalendarCommand(null);
             }
+            return new HelpCommand();
 
         default:
             System.out.println("Command not recognised\n");
@@ -66,8 +67,14 @@ public class Parser {
         }
     }
 
-    public static boolean isInteger(String date) {
-        for (char c : date.toCharArray()) {
+
+    /**
+     * Check if String is a valid integer.
+     * @param value Input string for checking
+     * @return boolean if string is valid
+     */
+    public static boolean isInteger(String value) {
+        for (char c : value.toCharArray()) {
             if (!Character.isDigit(c)) {
                 return false;
             }

@@ -126,13 +126,13 @@ public class Task {
                 if (day < 1) {
                     throw new NumberFormatException();
                 } else {
-                    int Feb;
-                    if (isLeapYear(year)) {
-                        Feb = 29;
+                    int feb;
+                    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                        feb = 29;
                     } else {
-                        Feb = 28;
+                        feb = 28;
                     }
-                    int[] monthDays = {31, Feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                    int[] monthDays = {31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
                     if (monthDays[month - 1] < day) {
                         throw new NumberFormatException();
@@ -151,17 +151,7 @@ public class Task {
     }
 
     /**
-     * Determine if it is a leap year
-     *
-     * @param year input year with accepted format: yyyy
-     */
-    public boolean isLeapYear(int year) {
-
-        return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
-    }
-
-    /**
-     * Sets time to format: hh.mm aa
+     * Set time to format: hh.mm aa
      *
      * @param time input time with accepted format: hh:mm
      */

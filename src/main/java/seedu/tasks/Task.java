@@ -58,6 +58,21 @@ public class Task {
     }
 
     /**
+     * Initialize task with only date and time information.
+     * Used to compare dates and times.
+     *
+     * @param date Task date
+     * @param time Task time
+     */
+    public Task(String date, String time) {
+
+        this.category = "dummy";
+
+        setDate(date);
+        setTime(time);
+    }
+
+    /**
      * Check if a field is empty of not.
      *
      * @param input a field.

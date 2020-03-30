@@ -23,6 +23,10 @@ public abstract class Command {
     protected static final String REMINDER = "r/";
     protected static final String CATEGORY = "c/";
 
+    protected static final String START = "s/";
+    protected static final String END = "e/";
+
+
     /**
      * Called to check if exit command is given.
      *
@@ -121,6 +125,38 @@ public abstract class Command {
             return reminder;
         }
         return reminder;
+    }
+
+    /**
+     * Gets the start date, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return reminder.
+     */
+    public String getStartDate(String userInput) {
+        String startDate = "";
+        if (userInput.contains(START)) {
+            int index = userInput.indexOf(START);
+            startDate = findField(userInput, index);
+            return startDate;
+        }
+        return startDate;
+    }
+
+    /**
+     * Gets the reminder, if any, from the user input.
+     *
+     * @param userInput raw user input.
+     * @return reminder.
+     */
+    public String getEndDate(String userInput) {
+        String endDate = "";
+        if (userInput.contains(END)) {
+            int index = userInput.indexOf(END);
+            endDate = findField(userInput, index);
+            return endDate;
+        }
+        return endDate;
     }
 
     /**

@@ -2,14 +2,22 @@ package seedu.command;
 
 import seedu.exception.ProjException;
 import seedu.tasks.Task;
+import seedu.tasks.TaskNonclass;
+import seedu.tasks.Class;
 
 import static seedu.common.Constants.TAB;
 
 public class AddCommand extends Command {
 
     private String userInput;
+
+    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " n/[title] i/[description] t/[hh:mm] "
+           + "d/[yyyy-mm-dd] l/[LOCATION] r/[REMINDER] c/[CATEGORY]";
+
     private static final String MESSAGE_SUCCESS = "Nice! Added the following task to the calendar:\n";
     private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task/tasks in your list";
+
 
     public AddCommand(String userInput) {
         this.userInput = userInput.trim();
@@ -29,14 +37,21 @@ public class AddCommand extends Command {
         String reminder = getReminder(userInput);
         String time = getTime(userInput);
         String location = getLocation(userInput);
-        String category = getCategory(userInput);
+        String category = getCategory(userInput).trim().toUpperCase();
 
-        Task task = new Task(title, description, date, time, location, reminder,category);
-        taskList.addTask(task);
 
-        storage.overwriteFile(taskList.getList());
+        if (category.equals("CLASS")) {
+            Integer dateCount = date.split("\\s+").length;
+            Integer timeCount = time.split("\\s+").length;
+            if (dateCount != timeCount) {
+                throw new ProjException("The number of time range must match with the number of day in a week.");
+            }
+            taskList.addTask(new Class(title, description, date, time, location, reminder, "CLASS"));
+        } else {
+            taskList.addTask(new TaskNonclass(title, description, date, time, location, reminder, category));
+        }
 
-        String feedback = formatFeedback(task);
+        String feedback = formatFeedback(taskList.getTask(taskList.getListSize() - 1));
 
 
         assert !title.isEmpty() : "Task title should contain at least one char";

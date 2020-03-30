@@ -6,19 +6,9 @@ import seedu.command.HelpCommand;
 import seedu.command.FindCommand;
 import seedu.command.ExitCommand;
 import seedu.command.DeleteCommand;
-import seedu.command.CommandResult;
 import seedu.command.ListCommand;
 import seedu.command.EditCommand;
 import seedu.command.ClearCommand;
-import static seedu.common.Constants.ADD;
-import static seedu.common.Constants.CLEAR;
-import static seedu.common.Constants.FIND;
-import static seedu.common.Constants.DELETE;
-import static seedu.common.Constants.EXIT;
-import static seedu.common.Constants.HELP;
-import static seedu.common.Constants.LIST;
-import static seedu.common.Constants.EDIT;
-
 
 public class Parser {
 
@@ -30,26 +20,35 @@ public class Parser {
      */
     public static Command parseCommand(String userCommand) {
 
-        // parsing based on first word of command string
         String[] commandSections = userCommand.split(" ");
-        int wordLength = commandSections.length;
-        switch (commandSections[0]) {
-        case LIST:
-            return new ListCommand();
-        case DELETE:
+        String command = commandSections[0].toLowerCase().trim();
+
+        switch (command) {
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand(userCommand);
+
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteCommand(userCommand);
-        case HELP:
+
+        case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        case ADD:
+
+        case AddCommand.COMMAND_WORD:
             return new AddCommand(userCommand);
-        case FIND:
+
+        case FindCommand.COMMAND_WORD:
             return new FindCommand(userCommand);
-        case EDIT:
+
+        case EditCommand.COMMAND_WORD:
             return new EditCommand(commandSections[1], userCommand);
-        case EXIT:
+
+        case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-        case CLEAR:
+
+        case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
         default:
             System.out.println("Command not recognised\n");
             return new HelpCommand();

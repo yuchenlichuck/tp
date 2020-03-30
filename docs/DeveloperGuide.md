@@ -19,11 +19,11 @@
 {Describe the design of the product. Use **Architecture Diagram** which has not been covered yet.}
 
 ## 3. Implementation
-### 3.1 [Proposed] Undo Feature
-#### 3.1.1 View By Category
+### 3.1 [Proposed] Features
+#### 3.1.1 List By Category
 It extends the current view command.
-The user can use `view` to view all tasks.
-The user can also use `view CATEGORY` to view specific classes whose category is sth. 
+The user can use `list` to view all tasks.
+The user can also use `list CATEGORY` to view specific classes whose category is sth. 
 This is the UML design for view by category.
 ![UML for View](images/viewCategory.png)
 
@@ -36,16 +36,60 @@ the index for this task.
 
 
 Step2:  User view tasks by category.
-If user only type in `view`, then all tasks will be displayed according to the sequence of task
+If user only type in `list`, then all tasks will be displayed according to the sequence of task
 index. It simply calls the view function.
-If user type in in `view CATEGORY`, and the category is valid, then it will go for the
+If user type in in `list CATEGORY`, and the category is valid, then it will go for the
 returnCategory method.
-If user type in in `view CATEGORY`, and the category is invalid, then it will go for the
+If user type in in `list CATEGORY`, and the category is invalid, then it will go for the
 displayCategory method. 
 Whatever the path, the UI will finally be called either display tasks given the index or display
 category. 
 
+#### 3.1.2 [Proposed] View month
+##### 3.1.2.1 Proposed Implementation
+The view month mechanism is facilitated by CalendarCommand which extends Command.
 
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+1. The user inputs the command word `calendar`. Upon which, the instance of parser will return a CalendarCommand for execution
+1. CalendarCommand initialises with the following variables, with the help from a calendar class containing the necessary methods related to day/date.
+    * month - if user does not input month, it uses computer's current month
+    * startingDay - which day of the week the first day of the months begins on (0-6, where 0 is Monday)
+    * totalDays - how many days in that month
+    * totalWeeks - number of weeks of the month
+  
+1. The `calendar` command calls on TaskList#findTaskDate() for each day of the month to generate the task listing for a particular day. Only the task event and description is added to calendar view. 
+1. The calendar generated is then stored in a string and UI#showUserMesssage() is called to display the calendar. 
+
+The class diagram below shows the relationships between the different classes required by the `calendar` feature.
+![Sequence diagram for CalendarCommand](images/CalendarCommand_class.jpg)
+
+
+The following diagram summarises what happens when a user executes a new `calendar` command:
+![Sequence diagram for CalendarCommand](images/CalendarCommand_sequence.jpg)
+
+
+##### 3.1.2.2 Design Considerations
+1. Aspect: Obtaining information required for generating monthly view
+    
+    * Alternative 1: (current choice) Algorithm to deduce how many weeks in month, which day a date is, how many days in that month
+        * Pros: Will use less memory, requiring only one starting date we are able to derive any other dates. No need to worry about changing template for the new year
+        * Cons: New developers will take additional effort to understand how the algorithm works.
+   
+    * Alternative 2: Hardcoded information (constant variables to tell days in month/how many weeks)
+        * Pros: Easy maintenance, tedious but easily calculated with web applications.
+        * Cons: Tedious and not sustainable, constant updates have to be done to edit the fields for a new year
+
+1. Aspect: Which month to use
+   
+    * User might want to know schedule for other months, but might also want a quick view of current month
+    * Solution is to set a default month (taken from computer) and also allow input for preferred month.
+ 
+1. Aspect: generation of monthly details 
+    
+    * Calculation of details are shifted from the command to a separate class. 
+    This is to enable easier maintenance for methods relating to calendar features.
+    
 ## 4. Documentation
 
 ## 5. Testing
@@ -85,8 +129,8 @@ It solves:
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
 |v2.0| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
-|v2.0| No. 23 is a university student | view events by category | I can easily find exactly the events I need to see |
-|v2.0| No. 24 is a university student | view events by date | I can easily find exactly the events I need to see |
+|v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
+|v2.0| No. 24 is a university student | list events by date | I can easily find exactly the events I need to see |
 
 ## 6.4 Appendix D:Non-Functional Requirements
 

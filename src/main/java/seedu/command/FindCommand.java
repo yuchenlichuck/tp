@@ -10,6 +10,9 @@ public class FindCommand extends Command {
 
     private String pattern;
 
+    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [pattern]";
+
     private static final String MESSAGE_SUCCESS = "Found the followings tasks:\n%s";
     private static final String MESSAGE_EMPTY_PATTERN = "Please enter a pattern to look for \n";
     private static final String MESSAGE_NO_FOUND = "No tasks found with %s in their title or description\n";

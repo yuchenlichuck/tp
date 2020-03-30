@@ -63,8 +63,17 @@ public class TaskList {
         updateCategoryMap(newCategory, taskIndex);
     }
 
-    public void deleteCategory(String category) {
-        this.categoryMap.remove(category);
+    /**
+     * Change category of a task and change the category mapping.
+     *
+     * @param taskIndex   Index of task that needs to be changed.
+     * @param category delete category.
+     */
+    public void deleteCategory(int taskIndex, String category) {
+        this.categoryMap.get(category).remove(taskIndex);
+        if (this.categoryMap.get(category).size() == 0) {
+            this.categoryMap.remove(category);
+        }
     }
 
 

@@ -7,7 +7,8 @@ import seedu.parser.Parser;
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
-    private final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    private final String[] months = {"January", "February", "March", "April", "May",
+        "June", "July", "August", "September", "October", "November", "December"};
     private final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
     private int startingDay;

@@ -8,6 +8,9 @@ public class ListCommand extends Command {
 
     private String userInput;
 
+    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": lists the tasks in the calendar";
+
     public ListCommand(String userCommand) {
         this.userInput = userCommand;
     }
@@ -17,6 +20,7 @@ public class ListCommand extends Command {
 
         String category = getCategory(userInput).trim().toUpperCase();
         ArrayList<Integer> listTaskIndex = new ArrayList<>();
+
         if (category.length() != 0) {
             if (!taskList.containsCategory(category)) {
                 ui.showAllCategory(taskList.getAllCategory());
@@ -39,6 +43,7 @@ public class ListCommand extends Command {
             System.out.println(taskIndex);
             feedback += taskList.getTask(taskIndex) + "\n";
         }
+
         return new CommandResult(feedback);
     }
 

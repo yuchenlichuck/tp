@@ -3,7 +3,7 @@ package seedu.calendar;
 import java.util.Calendar;
 
 /**
- *  Class to support date and calendar relation methods
+ * Class to support date and calendar relation methods.
  */
 public class CalendarParser {
 
@@ -11,14 +11,14 @@ public class CalendarParser {
     Calendar calendar = Calendar.getInstance();
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public CalendarParser() {
 
     }
 
     /**
-     * Constructor to accept user input for month
+     * Constructor to accept user input for month.
      * @param month which month to check calendar
      */
     public CalendarParser(int month) {
@@ -30,7 +30,7 @@ public class CalendarParser {
     }
 
     /**
-     * Get the first day requested month
+     * Get the first day requested month.
      * @return 0 for Sunday, 6 for Saturday
      */
     public int getFirstDay() {
@@ -39,7 +39,7 @@ public class CalendarParser {
     }
 
     /**
-     *  Get total number of days for requested month
+     * Get total number of days for requested month.
      * @return max days in month
      */
     public int getTotalDays() {
@@ -47,7 +47,7 @@ public class CalendarParser {
     }
 
     /**
-     *  Total number of weeks in month
+     * Total number of weeks in month.
      * @return number of weeks
      */
     public int getTotalWeeks() {
@@ -56,7 +56,7 @@ public class CalendarParser {
     }
 
     /**
-     *  Check which month is selected
+     * Check which month is selected.
      * @return number of weeks
      */
     public int getMonth() {

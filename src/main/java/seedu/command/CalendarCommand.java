@@ -7,10 +7,8 @@ import seedu.parser.Parser;
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
-    private final String[] months = {"January", "February", "March",
-            "April", "May", "June",
-            "July", "August", "September",
-            "October", "November", "December"};
+    private final String[] months = {"January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"};
     private final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
     private int startingDay;
@@ -39,7 +37,7 @@ public class CalendarCommand extends Command {
         checkMonth = calendar.getMonth();
         startingDay = calendar.getFirstDay();
         totalDays = calendar.getTotalDays();
-        totalWeeks =calendar.getTotalWeeks();
+        totalWeeks = calendar.getTotalWeeks();
 
         feedback += String.format("Month selected: %s\n\n",months[checkMonth]);
         // printing days
@@ -50,13 +48,13 @@ public class CalendarCommand extends Command {
         feedback += String.format("\n");
         // print offsets
         String offset = "";
-        for (int i = 0; i < startingDay; i++){
+        for (int i = 0; i < startingDay; i++) {
             feedback += String.format("%8s ",offset);
         }
 
         // print dates
         int dayCounter = startingDay;
-        for (int i = 1; i <= totalDays; i++){
+        for (int i = 1; i <= totalDays; i++) {
             feedback += String.format( "%8d ", i);
             dayCounter = (dayCounter + 1) % 7;
             if (dayCounter == 0) {

@@ -1,6 +1,15 @@
 package seedu.parser;
 
-import seedu.command.*;
+import seedu.command.ListCommand;
+import seedu.command.CalendarCommand;
+import seedu.command.HelpCommand;
+import seedu.command.ClearCommand;
+import seedu.command.AddCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.EditCommand;
+import seedu.command.ExitCommand;
+import seedu.command.FindCommand;
+import seedu.command.Command;
 
 import java.util.Calendar;
 
@@ -47,7 +56,7 @@ public class Parser {
             if (commandSections.length == 2) {
                 return new CalendarCommand(commandSections[1]);
             }
-            else if (commandSections.length == 1) {
+            if (commandSections.length == 1) {
                 return new CalendarCommand(null);
             }
 

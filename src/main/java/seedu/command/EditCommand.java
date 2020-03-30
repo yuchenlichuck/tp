@@ -6,6 +6,9 @@ public class EditCommand extends Command {
     private String taskEdited;
     private String userInput;
 
+    public static final String COMMAND_WORD = "EDIT";
+    public static final String COMMAND_USAGE = "";
+
     public EditCommand(String taskEdited,String userInput) {
         this.taskEdited = taskEdited;
         this.userInput = userInput;

@@ -10,6 +10,10 @@ public class DeleteCommand extends Command {
 
     private String userInput;
 
+    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [task number]";
+
+
     private static final String MESSAGE_SUCCESS = "The following task has been removed:\n %s";
     private static final String MESSAGE_INVALID_INDEX = "The entered index %s is invalid. + "
             + "Please enter a valid task number\n";

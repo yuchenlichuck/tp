@@ -1,14 +1,8 @@
 package seedu.parser;
 
-import seedu.command.Command;
-import seedu.command.AddCommand;
-import seedu.command.HelpCommand;
-import seedu.command.FindCommand;
-import seedu.command.ExitCommand;
-import seedu.command.DeleteCommand;
-import seedu.command.ListCommand;
-import seedu.command.EditCommand;
-import seedu.command.ClearCommand;
+import seedu.command.*;
+
+import java.util.Calendar;
 
 public class Parser {
 
@@ -49,10 +43,27 @@ public class Parser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case CalendarCommand.COMMAND_WORD:
+            if (commandSections.length == 2) {
+                return new CalendarCommand(commandSections[1]);
+            }
+            else if (commandSections.length == 1) {
+                return new CalendarCommand(null);
+            }
+
         default:
             System.out.println("Command not recognised\n");
             return new HelpCommand();
         }
+    }
+
+    public static boolean isInteger(String date) {
+        for (char c : date.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

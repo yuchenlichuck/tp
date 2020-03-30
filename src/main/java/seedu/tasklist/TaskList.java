@@ -1,6 +1,7 @@
 package seedu.tasklist;
 
 import seedu.tasks.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,7 +9,7 @@ import java.util.HashMap;
 public class TaskList {
 
     private static ArrayList<Task> taskList;
-    private static HashMap<String,ArrayList<Integer>> categoryMap = new HashMap<>();
+    private static HashMap<String, ArrayList<Integer>> categoryMap = new HashMap<>();
 
     public TaskList() {
         taskList = new ArrayList<Task>();
@@ -52,22 +53,27 @@ public class TaskList {
     /**
      * Change category of a task and change the category mapping.
      *
-     * @param taskIndex Index of task that needs to be changed.
+     * @param taskIndex   Index of task that needs to be changed.
      * @param newCategory Newly category.
      */
     public void changeCategory(int taskIndex, String newCategory) {
         String oldCategory = taskList.get(taskIndex).getCategory();
         this.categoryMap.get(oldCategory).remove(taskIndex);
         taskList.get(taskIndex).setCategory(newCategory);
-        updateCategoryMap(newCategory,taskIndex);
+        updateCategoryMap(newCategory, taskIndex);
     }
+
+    public void deleteCategory(String category) {
+        this.categoryMap.remove(category);
+    }
+
 
     //Methods:
 
     /**
      * Checks if the given task contains the given pattern.
      *
-     * @param task task to inspect
+     * @param task    task to inspect
      * @param pattern pattern to look for in task
      * @return true if task contains pattern
      */
@@ -91,7 +97,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         taskList.add(task);
-        updateCategoryMap(task.getCategory(),taskList.size() - 1);
+        updateCategoryMap(task.getCategory(), taskList.size() - 1);
     }
 
     /**
@@ -104,7 +110,7 @@ public class TaskList {
         Integer index = 0;
         categoryMap.clear();
         for (Task task : tasks) {
-            updateCategoryMap(task.getCategory(),index);
+            updateCategoryMap(task.getCategory(), index);
             index++;
         }
     }

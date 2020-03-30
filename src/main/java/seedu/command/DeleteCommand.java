@@ -28,7 +28,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute() {
 
         String[] commandSections = userInput.split(" ");
-        ;
 
         try {
             String strIndex = commandSections[1].trim();

@@ -44,6 +44,7 @@ public class Task {
         this.title = title;
         this.description = description;
         this.reminder = reminder;
+
         if (hasInput(date)) {
             setDate(date);
         }
@@ -54,6 +55,21 @@ public class Task {
             setLocation(location);
 
         }
+    }
+
+    /**
+     * Initialize task with only date and time information.
+     * Used to compare dates and times.
+     *
+     * @param date Task date
+     * @param time Task time
+     */
+    public Task(String date, String time) {
+
+        this.category = "dummy";
+
+        setDate(date);
+        setTime(time);
     }
 
     /**

@@ -21,29 +21,34 @@
 ## 3. Implementation
 ### 3.1 [Proposed] Features
 #### 3.1.1 List By Category
-It extends the current view command.
-The user can use `list` to view all tasks.
-The user can also use `list CATEGORY` to view specific classes whose category is sth. 
-This is the UML design for view by category.
-![UML for View](images/viewCategory.png)
+##### 3.1.1.1 Proposed Implementation
+The list by category mechanism is facilitated by ListCommand which extends Command.
 
-<p>
-Step1: Users add task and add either a default category/new category.
-If user adds default category, then the categoryMap in taskList will not be modified.
-If the user adds a new category, the categoryMap wil add one more key whose value is the category and the value is
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+Step1: The user adds a task:  `add n/2113 c/DEADLINE d/2020-03-30 t/11:59` to add a task.
+Since the user adds a new category `DEADLINE`, the categoryMap wil add one more key whose value is the category and the value is
 the index for this task.
-</p>
 
+Step2: The users adds a task: `add n/3145 c/CLASS` to add a class. 
+Since the user adds a new category `CLASS`, the categoryMap wil add one more key whose value is the category and the value is
+the index for this task.
 
-Step2:  User view tasks by category.
-If user only type in `list`, then all tasks will be displayed according to the sequence of task
-index. It simply calls the view function.
-If user type in in `list CATEGORY`, and the category is valid, then it will go for the
-returnCategory method.
-If user type in in `list CATEGORY`, and the category is invalid, then it will go for the
-displayCategory method. 
-Whatever the path, the UI will finally be called either display tasks given the index or display
-category. 
+Step3: Users list the class he just added by category CLASS: `list c/CLASS`. The TaskList will
+return the index of the tasks based on the categoryMap. Then the task in the `CLASS` category
+will be displayed. 
+
+This is the Sequence Diagram for list by category. 
+![Sequence Diagram for View](images/listCategorySequence.png)
+This is the UML design for list by category.
+![UML for View](images/listCategory.png)
+##### 3.1.1.2 Design Considerations
+Aspect: How to find certain category. 
+
+Alternative 1 (current choice): store HashMap to map category with the key. 
+
+Alternative 2 (easy to do): linear search when searching tasks. 
+
 
 #### 3.1.2 [Proposed] View month
 ##### 3.1.2.1 Proposed Implementation
@@ -124,14 +129,13 @@ It solves:
 |v1.0|No 3. is a university student | can move events from one day to another | Will not need to  retype all the event details again |
 |v1.0|No 5. is a university student | add descriptions to events | to remind myself what the event was about | 
 |v2.0| No 4. is a university student | see multiple calendar views (day, week, month) | I can get different perspectives of what my schedule looks like |
-|v2.0| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
 |v2.0| No 9. is a university student | export my calendar as a text file | I can print it to have a physical copy |
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
-|v2.0| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 |v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
 |v2.0| No. 24 is a university student | list events by date | I can easily find exactly the events I need to see |
-
+|v2.1| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
+|v2.1| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 ## 6.4 Appendix D:Non-Functional Requirements
 
 1. Should work in an environment without internet access.

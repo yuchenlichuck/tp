@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AddCommandTest {
 
     @Test
-    public void testAddDeadline1() {
+    public void testAddDeadlineYeapYear() {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        String input = "add n/task t/11:15 d/2020-04-12";
-        String expected = "[TODO] Title: task | Date: 2020-04-12 | Time: 11.15 AM";
+        String input = "add n/task t/11:15 d/2024-02-29";
+        String expected = "[TODO] Title: task | Date: 2024-02-29 | Time: 11.15 AM";
 
         AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
@@ -28,6 +28,28 @@ public class AddCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
+        String output = tasks.getTask(0).toString();
+        boolean isEqual = output.equals(expected);
+        assertTrue(isEqual);
+    }
+
+    @Test
+    public void testAddDeadlineCheckTime() {
+        TaskList tasks = new TaskList();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+        String input = "add n/task t/12:15 d/2024-02-29";
+        String expected = "[TODO] Title: task | Date: 2024-02-29 | Time: 12.15 PM";
+
+        AddCommand command = new AddCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+        try {
+            command.execute();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
+
         String output = tasks.getTask(0).toString();
         boolean isEqual = output.equals(expected);
         assertTrue(isEqual);
@@ -50,6 +72,27 @@ public class AddCommandTest {
             assertTrue(false);
         }
 
+        String output = tasks.getTask(0).toString();
+        boolean isEqual = output.equals(expected);
+        assertTrue(isEqual);
+    }
+
+    @Test
+    public void testAddDeadlineUnknownDate() {
+        TaskList tasks = new TaskList();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+        String input = "add n/task t/05:15 d/2024-02-30";
+        String expected = "[TODO] Title: task | Date: (Unknown Date) | Time: 05.15 AM";
+
+        AddCommand command = new AddCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+        try {
+            command.execute();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
         String output = tasks.getTask(0).toString();
         boolean isEqual = output.equals(expected);
         assertTrue(isEqual);

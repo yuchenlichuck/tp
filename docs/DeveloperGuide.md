@@ -129,14 +129,13 @@ It solves:
 |v1.0|No 3. is a university student | can move events from one day to another | Will not need to  retype all the event details again |
 |v1.0|No 5. is a university student | add descriptions to events | to remind myself what the event was about | 
 |v2.0| No 4. is a university student | see multiple calendar views (day, week, month) | I can get different perspectives of what my schedule looks like |
-|v2.0| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
 |v2.0| No 9. is a university student | export my calendar as a text file | I can print it to have a physical copy |
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
-|v2.0| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 |v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
 |v2.0| No. 24 is a university student | list events by date | I can easily find exactly the events I need to see |
-
+|v2.1| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
+|v2.1| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 ## 6.4 Appendix D:Non-Functional Requirements
 
 1. Should work in an environment without internet access.

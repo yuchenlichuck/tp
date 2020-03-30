@@ -1,1 +1,1 @@
-[{"title":"dasd ","description":"","reminder":"","category":"CLASS","date":["TUESDAY","THURSDAY"],"time":["(Unknown time)"],"location":[]}]
+[{"title":"research paper ","description":"essay for writing 101","date":"(Unknown Date)","time":"","location":"","reminder":"","category":"TODO"}]

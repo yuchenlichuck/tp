@@ -1,14 +1,11 @@
 package seedu.tasks;
 
-import seedu.exception.ProjException;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 import static seedu.common.Constants.DEFAULT_CATEGORY;
 
@@ -24,13 +21,13 @@ public class Task {
     /**
      * Initialize task based on its category.
      *
-     * @param title title of class.
+     * @param title       title of class.
      * @param description description of class if any.
-     * @param reminder reminder of class if any.
-     * @param category category of class. Default is TODO.
-     * @param date date of class if any.
-     * @param time time of class if any.
-     * @param location location of class if any.
+     * @param reminder    reminder of class if any.
+     * @param category    category of class. Default is TODO.
+     * @param date        date of class if any.
+     * @param time        time of class if any.
+     * @param location    location of class if any.
      */
     public Task(String title, String description, String reminder, String category,
                 String date, String time, String location) {
@@ -118,17 +115,30 @@ public class Task {
             this.date.clear();
             try {
                 String[] dateInfo = date.split("-");
-
+                int year = Integer.parseInt(dateInfo[0].trim());
                 int month = Integer.parseInt(dateInfo[1].trim());
                 int day = Integer.parseInt(dateInfo[2].trim());
-
-                if (!(day >= 1 && day <= 30)) {
-                    throw new NumberFormatException();
-                }
 
                 if (!(month >= 1 && month <= 12)) {
                     throw new NumberFormatException();
                 }
+
+                if (day < 1) {
+                    throw new NumberFormatException();
+                } else {
+                    int Feb;
+                    if (isLeapYear(year)) {
+                        Feb = 29;
+                    } else {
+                        Feb = 28;
+                    }
+                    int[] monthDays = {31, Feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+                    if (monthDays[month - 1] < day) {
+                        throw new NumberFormatException();
+                    }
+                }
+
 
                 this.date.add(date);
 
@@ -138,6 +148,16 @@ public class Task {
                 this.date.add("(Unknown Date)");
             }
         }
+    }
+
+    /**
+     * Determine if it is a leap year
+     *
+     * @param year input year with accepted format: yyyy
+     */
+    public boolean isLeapYear(int year) {
+
+        return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
     }
 
     /**
@@ -154,10 +174,11 @@ public class Task {
         } else {
             this.time.clear();
             try {
-                DateFormat originalFormat = new SimpleDateFormat("hh:mm");
-                Date oringialTime = originalFormat.parse(time);
-                DateFormat newFormat = new SimpleDateFormat("hh.mm aa", Locale.US);
-                this.time.add(newFormat.format(oringialTime));
+                SimpleDateFormat originalFormat = new SimpleDateFormat("HH:mm");
+                //HH means 24 hours. However, hh means 12hours
+                Date originalTime = originalFormat.parse(time);
+                SimpleDateFormat newFormat = new SimpleDateFormat("hh.mm a");
+                this.time.add(newFormat.format(originalTime));
             } catch (ParseException e) {
                 this.time.add("(Unknown time)");
             }
@@ -220,12 +241,12 @@ public class Task {
     public String toString() {
         // Post condition check that there should always be a category.
         assert (category.length() != 0);
-        String formattedTask = String.format("[%s] Title: %s", category.toUpperCase().trim(),title.trim());
+        String formattedTask = String.format("[%s] Title: %s", category.toUpperCase().trim(), title.trim());
         if (hasInput(description)) {
             formattedTask = formattedTask + String.format(" | Description: %s", description);
         }
         if (hasInput(reminder)) {
-            formattedTask = formattedTask + String.format(" | Reminder: %s",reminder);
+            formattedTask = formattedTask + String.format(" | Reminder: %s", reminder);
         }
         return formattedTask;
     }

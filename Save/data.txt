@@ -1,1 +1,1 @@
-[{"title":"task ","description":"","date":"2020-04-12","time":"11.15 AM","location":"","reminder":"","category":"TODO"}]
+[{"title":"dasd ","description":"","reminder":"","category":"CLASS","date":["TUESDAY","THURSDAY"],"time":["(Unknown time)"],"location":[]}]

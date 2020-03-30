@@ -8,7 +8,7 @@ public class Ui {
 
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
-    private static final String DIVIDER = "__________________________________________________________________________";
+    public static final String DIVIDER = "__________________________________________________________________________";
     private static final String PROMPT = "What is your command?" + NEW_LINE;
     private  static final  String LOGO =
                 " ______     ______     ______   ______\n"
@@ -63,6 +63,18 @@ public class Ui {
         String userCommand = input.nextLine();
         assert userCommand.length() > 0 : "Command input should contain at least one word";
         return userCommand;
+    }
+
+    /**
+     * Displays all category.
+     *
+     * @param categories array of categories.
+     */
+    public void showAllCategory(String[] categories) {
+        System.out.println(NEW_LINE + TAB + "Current categories: ");
+        for (String category : categories) {
+            System.out.println(TAB + TAB + " >>>" + category);
+        }
     }
 
     public void showResultToUser(CommandResult result) {

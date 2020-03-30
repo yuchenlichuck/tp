@@ -39,6 +39,7 @@ return the index of the tasks based on the categoryMap. Then the task in the `CL
 will be displayed. 
 
 This is the Sequence Diagram for list by category. 
+![Sequence Diagram for View](images/listCategorySequence.png)
 This is the UML design for list by category.
 ![UML for View](images/listCategory.png)
 ##### 3.1.1.2 Design Considerations

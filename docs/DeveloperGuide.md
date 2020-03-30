@@ -21,29 +21,33 @@
 ## 3. Implementation
 ### 3.1 [Proposed] Features
 #### 3.1.1 List By Category
-It extends the current view command.
-The user can use `list` to view all tasks.
-The user can also use `list CATEGORY` to view specific classes whose category is sth. 
-This is the UML design for view by category.
-![UML for View](images/viewCategory.png)
+##### 3.1.1.1 Proposed Implementation
+The list by category mechanism is facilitated by ListCommand which extends Command.
 
-<p>
-Step1: Users add task and add either a default category/new category.
-If user adds default category, then the categoryMap in taskList will not be modified.
-If the user adds a new category, the categoryMap wil add one more key whose value is the category and the value is
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+Step1: The user adds a task:  `add n/2113 c/DEADLINE d/2020-03-30 t/11:59` to add a task.
+Since the user adds a new category `DEADLINE`, the categoryMap wil add one more key whose value is the category and the value is
 the index for this task.
-</p>
 
+Step2: The users adds a task: `add n/3145 c/CLASS` to add a class. 
+Since the user adds a new category `CLASS`, the categoryMap wil add one more key whose value is the category and the value is
+the index for this task.
 
-Step2:  User view tasks by category.
-If user only type in `list`, then all tasks will be displayed according to the sequence of task
-index. It simply calls the view function.
-If user type in in `list CATEGORY`, and the category is valid, then it will go for the
-returnCategory method.
-If user type in in `list CATEGORY`, and the category is invalid, then it will go for the
-displayCategory method. 
-Whatever the path, the UI will finally be called either display tasks given the index or display
-category. 
+Step3: Users list the class he just added by category CLASS: `list c/CLASS`. The TaskList will
+return the index of the tasks based on the categoryMap. Then the task in the `CLASS` category
+will be displayed. 
+
+This is the Sequence Diagram for list by category. 
+This is the UML design for list by category.
+![UML for View](images/listCategory.png)
+##### 3.1.1.2 Design Considerations
+Aspect: How to find certain category. 
+
+Alternative 1 (current choice): store HashMap to map category with the key. 
+
+Alternative 2 (easy to do): linear search when searching tasks. 
+
 
 #### 3.1.2 [Proposed] View month
 ##### 3.1.2.1 Proposed Implementation

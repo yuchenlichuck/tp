@@ -18,7 +18,7 @@ public class CalendarCommand extends Command {
     private int totalWeeks;
     private String userInput;
     private calendarParser calendar;
-
+    String feedback;
 
     public CalendarCommand(String userInput) {
         this.userInput = userInput;
@@ -38,34 +38,31 @@ public class CalendarCommand extends Command {
         startingDay = calendar.getFirstDay();
         totalDays = calendar.getTotalDays();
         totalWeeks  =calendar.getTotalWeeks();
-        System.out.println("num weeks:: "+ totalDays);
 
         // printing days
         for (String day : days) {
-            System.out.print(day + "\t");
+            feedback += String.format("%8s ",day);
         }
 
-        System.out.println("");
+        feedback += String.format("\n");
         // print offsets
+        String offset = "";
         for (int i = 0; i < startingDay; i++){
-            System.out.print("1 \t");
+            feedback += String.format("%8s ",offset);
         }
 
         // print dates
         int dayCounter = startingDay;
-        for (int i = startingDay; i < totalDays; i++){
-            System.out.print( i + "\t");
+        for (int i = 1; i <= totalDays; i++){
+            feedback += String.format( "%8d ", i);
             dayCounter = (dayCounter + 1) % 7;
             if (dayCounter == 0) {
-                System.out.println("");
+                feedback += String.format("\n");
             }
-
         }
 
-        String feedback = "Calendar Success!\n";
+        feedback += String.format("\n\n");
         return new CommandResult(feedback);
-
-
 
     }
 

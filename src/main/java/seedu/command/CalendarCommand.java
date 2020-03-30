@@ -1,13 +1,13 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
-import seedu.calendar.calendarParser;
+import seedu.calendar.CalendarParser;
 import seedu.parser.Parser;
 
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
-    private final String[] months= {"January", "February", "March",
+    private final String[] months = {"January", "February", "March",
             "April", "May", "June",
             "July", "August", "September",
             "October", "November", "December"};
@@ -17,8 +17,9 @@ public class CalendarCommand extends Command {
     private  int totalDays;
     private int totalWeeks;
     private String userInput;
-    private calendarParser calendar;
-    String feedback;
+    private CalendarParser calendar;
+    String feedback = "";
+    int checkMonth;
 
     public CalendarCommand(String userInput) {
         this.userInput = userInput;
@@ -28,17 +29,19 @@ public class CalendarCommand extends Command {
     public CommandResult execute() throws ProjException {
 
         // parsing user input, if not valid int, set as default month
-        if ( (userInput != null) && (Parser.isInteger(userInput)) ) {
-            int month = Integer.parseInt(userInput);
-           calendar = new calendarParser(month);
+        if ((userInput != null) && (Parser.isInteger(userInput))) {
+            checkMonth = Integer.parseInt(userInput);
+            calendar = new CalendarParser(checkMonth);
         } else {
-            calendar = new calendarParser();
+            calendar = new CalendarParser();
         }
 
+        checkMonth = calendar.getMonth();
         startingDay = calendar.getFirstDay();
         totalDays = calendar.getTotalDays();
-        totalWeeks  =calendar.getTotalWeeks();
+        totalWeeks =calendar.getTotalWeeks();
 
+        feedback += String.format("Month selected: %s\n\n",months[checkMonth]);
         // printing days
         for (String day : days) {
             feedback += String.format("%8s ",day);

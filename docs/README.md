@@ -8,9 +8,8 @@
   * [Delete tasks](#34---delete)
   * [Having done a task](#35---done)
   * [Find a task](#36---find)
-  * [View tasks in calender](#37---view)
-  * [Save tasks](#38---save)
-  * [Exit the program](#39---exit)
+  * [Save tasks](#37---save)
+  * [Exit the program](#38---exit)
 * [Sample Usage](#4-sample-usage)
 * [FAQ](#5-faq)
 * [Command Summary](#6-command-summary)
@@ -79,20 +78,11 @@ List tasks by category and date and time.
 
 
 ### 3.4 - Delete
-#### 3.4.1 - Delete A task
 Deletes a task from the list
 * **Usage**: `delete <task index>`
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
     * index has to be an _integer_
-    
-#### 3.4.2 - Delete Task within Range
-Delete tasks within time range
-* **Usage**: `delete s/<START DATE> e/<END DATE>`
-    * The `START DATE/END DATE` should be in correct date format: yyyy-mm-dd
-    * Example:
-        * delete s/2020-03-16 e/2020-04-15
-        
 
 ### 3.5 - Done
 Changes the status of a task to completed
@@ -107,15 +97,11 @@ Searches all task descriptions for supplied keyword
     * Keyword has to be a _**single word**_
     * Keyword is case _insensitive_
 
-### 3.7 - View
-Displays a calender based on day/week/month
-* **Usage**: `view <DAY/WEEK/MONTH>`
-
-### 3.8 - Save
+### 3.7 - Save
 Exports my calendar as a text file	
 * **Usage**: `save`
 
-### 3.9 - Exit
+### 3.8 - Exit
 Exits the program
 * **Usage**: `bye`
 
@@ -140,10 +126,8 @@ Exits the program
     * `list c/<category> d/<DATE> t/<TIME>`
  * **Delete**:
     * `delete <task index>` 
-    * `delete s/<START DATE> e/<END DATE>`
  * **Done**: `done <task index>` 
  * **Find**: `find <keyword>` 
- * **View**: `view <WEEK/DAY/MONTH>`
  * **Save**: `save`
  * **Help**: `help`
  * **Exit**: `bye`

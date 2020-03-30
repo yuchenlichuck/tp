@@ -60,9 +60,11 @@ Given below is an example usage scenario and how the mechanism behaves at each s
 1. The `calendar` command calls on TaskList#findTaskDate() for each day of the month to generate the task listing for a particular day. Only the task event and description is added to calendar view. 
 1. The calendar generated is then stored in a string and UI#showUserMesssage() is called to display the calendar. 
 
+The class diagram below shows the relationships between the different classes required by the `calendar` feature.
+![Sequence diagram for CalendarCommand](images/CalendarCommand_class.jpg)
+
 The following diagram summarises what happens when a user executes a new `calendar` command:
-
-
+![Sequence diagram for CalendarCommand](images/CalendarCommand_sequence.jpg)
 
 ##### 3.1.2.2 Design Considerations
 1. Aspect: How calendar executes

@@ -117,14 +117,13 @@ public class TaskList {
      */
     public Task deleteTask(int index) {
 
-        Task toRemove = taskList.get(index);
         String category = taskList.get(index).getCategory();
         categoryMap.get(category).remove(index);
         if (categoryMap.get(category).size() == 0) {
             categoryMap.remove(category);
         }
+        Task toRemove = taskList.get(index);
         taskList.remove(index);
-
         return toRemove;
     }
 

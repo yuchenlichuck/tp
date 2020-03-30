@@ -5,6 +5,9 @@ package seedu.command;
  */
 public class ExitCommand extends Command {
 
+    public static final String COMMAND_WORD = "bye";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": exits the program";
+
     static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!\n";
 
     /**

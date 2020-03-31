@@ -13,8 +13,8 @@
 * [Sample Usage](#4-sample-usage)
 * [FAQ](#5-faq)
 * [Command Summary](#6-command-summary)
-## 1. Introduction
 
+## 1. Introduction
 CAFS - va CLI calender-like task scheduler that supports task and 
 class schedule adding. It is simple to use, and comes with a save function to 
 remember your tasks.
@@ -28,7 +28,7 @@ remember your tasks.
 
 1. Run the jar file using `java - jar caf.jar`
 
-1. Link to Developer guide [here](/docs/DeveloperGuide.md)
+1. Link to Developer guide [here](https://github.com/AY1920S2-CS2113-T14-3/tp/blob/master/docs/DeveloperGuide.md)
 
 ## 3. Features
 

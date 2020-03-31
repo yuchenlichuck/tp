@@ -28,6 +28,8 @@ remember your tasks.
 
 1. Run the jar file using `java - jar caf.jar`
 
+1. Link to Developer guide [here](/docs/DeveloperGuide.md)
+
 ## 3. Features
 
 ### 3.1 - Help

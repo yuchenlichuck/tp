@@ -65,7 +65,7 @@ public class CalendarCommand extends Command {
 
         feedback += String.format("\n\n");
 
-        GenerateCalendar gc = new GenerateCalendar();
+        GenerateCalendar gc = new GenerateCalendar(startingDay, totalDays, totalWeeks);
         gc.print();
 
         return new CommandResult(feedback);

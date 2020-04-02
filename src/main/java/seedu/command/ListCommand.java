@@ -43,10 +43,11 @@ public class ListCommand extends Command {
         case LIST_BY_CATEGORY:
             getListByCategory(listTaskIndex, category);
             break;
-
+        /*
         case LIST_BY_DATE:
             getListByDate(listTaskIndex, date, time);
             break;
+         */
 
         default:
             // Should not reach here
@@ -58,6 +59,8 @@ public class ListCommand extends Command {
         return new CommandResult(feedback);
     }
 
+    // Shouldn't be called dummy
+    /*
     private void getListByDate(ArrayList<Integer> listTaskIndex, String date, String time) {
         Task dummy = new Task(date, time);
 
@@ -93,6 +96,7 @@ public class ListCommand extends Command {
         }
 
     }
+     */
 
     private void getWholeList(ArrayList<Integer> listTaskIndex) {
         for (int i = 0; i < taskList.getListSize(); i++) {

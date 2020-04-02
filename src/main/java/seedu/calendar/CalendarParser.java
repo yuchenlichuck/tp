@@ -1,6 +1,14 @@
 package seedu.calendar;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Class to support date and calendar relation methods.
@@ -8,6 +16,10 @@ import java.util.Calendar;
 public class CalendarParser {
 
     public static final int DAY_OFFSET = 1;
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     Calendar calendar = Calendar.getInstance();
 
     /**
@@ -62,4 +74,19 @@ public class CalendarParser {
     public int getMonth() {
         return calendar.get(Calendar.MONTH);
     }
+
+
+    public static LocalDate convertToDate(String userInput) throws DateTimeParseException {
+        LocalDate localDate = LocalDate.parse(userInput, dateFormatter);
+        return localDate;
+    }
+
+    public static LocalTime convertToTime(String userInput) throws DateTimeParseException {
+        LocalTime localTime = LocalTime.parse(userInput, timeFormatter);
+        return localTime;
+    }
+
+
+
+
 }

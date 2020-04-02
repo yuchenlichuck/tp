@@ -1,5 +1,6 @@
 package seedu.command;
 
+import seedu.calendar.GenerateCalendar;
 import seedu.exception.ProjException;
 import seedu.calendar.CalendarParser;
 import seedu.parser.Parser;
@@ -63,6 +64,10 @@ public class CalendarCommand extends Command {
         }
 
         feedback += String.format("\n\n");
+
+        GenerateCalendar gc = new GenerateCalendar();
+        gc.print();
+
         return new CommandResult(feedback);
 
     }

@@ -11,6 +11,16 @@ public class Class extends Task {
     protected ArrayList<String> time = new ArrayList<String>();
     protected ArrayList<String> location = new ArrayList<String>();
 
+    /**
+     * Constructor method for initialising new class object.
+     * @param title title of class
+     * @param description description of class
+     * @param date range of days the class will be on
+     * @param time range of time the class will be held
+     * @param location location of class
+     * @param reminder any additional reminder if any
+     * @param category categorise the class by grouping in needed
+     */
     public Class(String title, String description, String date, String time, String location,
                         String reminder, String category) {
         super(title,description,reminder,category);
@@ -70,6 +80,7 @@ public class Class extends Task {
     public ArrayList<String> getLocation() {
         return this.location;
     }
+
     /**
      * Return string of class in its specific format.
      *

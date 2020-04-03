@@ -40,7 +40,7 @@ public class CalendarCommand extends Command {
         startingDay = calendar.getFirstDay();
         totalDays = calendar.getTotalDays();
         totalWeeks = calendar.getTotalWeeks();
-        currentYear  =calendar.getYear();
+        currentYear = calendar.getYear();
 
         feedback += String.format("Month selected: %s\n\n",months[checkMonth]);
         // printing days

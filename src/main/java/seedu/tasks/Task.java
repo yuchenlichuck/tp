@@ -96,24 +96,24 @@ public abstract class Task {
 
     public abstract void setDate(String dateInput) throws DateTimeParseException, NumberFormatException;
 
-  /*  {
+    /*  {
 
-        if (this.category.equals("CLASS")) {
+            if (this.category.equals("CLASS")) {
 
-            String[] days = dateInput.split("\\s+");
-            for (String day : days) {
-                Integer dayOfWeekInt = Integer.parseInt(day);
-                if (dayOfWeekInt > 7 | dayOfWeekInt < 1) {
-                    throw new NumberFormatException();
+                String[] days = dateInput.split("\\s+");
+                for (String day : days) {
+                    Integer dayOfWeekInt = Integer.parseInt(day);
+                    if (dayOfWeekInt > 7 | dayOfWeekInt < 1) {
+                        throw new NumberFormatException();
+                    }
+                    DayOfWeek dayOfWeek = DayOfWeek.of(Integer.parseInt(day));
+                    this.date.add(dayOfWeek.name());
                 }
-                DayOfWeek dayOfWeek = DayOfWeek.of(Integer.parseInt(day));
-                this.date.add(dayOfWeek.name());
+            } else {
+                this.date.clear();
+                LocalDate Date = CalendarParser.convertToDate(dateInput);
             }
-        } else {
-            this.date.clear();
-            LocalDate Date = CalendarParser.convertToDate(dateInput);
-        }
-    }*/
+     }*/
 
     /**
      * Set time to format: hh.mm aa

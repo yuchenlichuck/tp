@@ -19,7 +19,8 @@ public class GenerateCalendar {
     
 
     
-    private static final String[] HEADING = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    private static final String[] HEADING = {"Sunday", "Monday", "Tuesday",
+        "Wednesday", "Thursday", "Friday", "Saturday"};
     private static final int COLUMN_SIZE = 7;
     private static final String HORIZONTAL_SEP = "-";
     private static final String TASK_IN_DAY = "Items due: ";

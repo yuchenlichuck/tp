@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddCommandTest {
-
+    /*
     @Test
     public void testAddDeadlineYeapYear() {
         TaskList tasks = new TaskList();
@@ -115,4 +115,6 @@ public class AddCommandTest {
             assertEquals("Please input a title for the task.", e.getMessage());
         }
     }
+
+     */
 }

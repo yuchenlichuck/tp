@@ -18,7 +18,8 @@ public class CalendarCommand extends Command {
     private String userInput;
     private CalendarParser calendar;
     String feedback = "";
-    int checkMonth;
+    private int checkMonth;
+    private int currentYear;
 
     public CalendarCommand(String userInput) {
         this.userInput = userInput;
@@ -39,6 +40,7 @@ public class CalendarCommand extends Command {
         startingDay = calendar.getFirstDay();
         totalDays = calendar.getTotalDays();
         totalWeeks = calendar.getTotalWeeks();
+        currentYear  =calendar.getYear();
 
         feedback += String.format("Month selected: %s\n\n",months[checkMonth]);
         // printing days
@@ -65,7 +67,7 @@ public class CalendarCommand extends Command {
 
         feedback += String.format("\n\n");
 
-        GenerateCalendar gc = new GenerateCalendar(startingDay, totalDays, totalWeeks);
+        GenerateCalendar gc = new GenerateCalendar(startingDay, totalDays, totalWeeks, checkMonth, currentYear);
         gc.print();
 
         return new CommandResult(feedback);

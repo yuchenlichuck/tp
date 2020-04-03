@@ -75,6 +75,15 @@ public class CalendarParser {
         return calendar.get(Calendar.MONTH);
     }
 
+    /**
+     * Check which month is selected.
+     * @return number of weeks
+     */
+    public int getYear() {
+        return calendar.get(Calendar.YEAR);
+    }
+
+
 
     public static LocalDate convertToDate(String userInput) throws DateTimeParseException {
         LocalDate localDate = LocalDate.parse(userInput, dateFormatter);

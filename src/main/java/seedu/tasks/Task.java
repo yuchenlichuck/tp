@@ -31,8 +31,6 @@ public abstract class Task {
      * @param description description of class if any.
      * @param reminder    reminder of class if any.
      * @param category    category of class. Default is TODO.
-     * @param time        time of class if any.
-     * @param location    location of class if any.
      */
     public Task(String title, String description, String reminder, String category) {
         if (!category.isEmpty()) {
@@ -49,6 +47,8 @@ public abstract class Task {
 
     }
 
+
+
     /**
      * Initialize task with only date and time information.
      * Used to compare dates and times.
@@ -56,6 +56,7 @@ public abstract class Task {
      * @param date Task date
      * @param time Task time
      */
+
     public Task(String date, String time) {
 
         this.category = "dummy";
@@ -63,6 +64,8 @@ public abstract class Task {
         setDate(date);
         setTime(time);
     }
+
+
 
     /**
      * Check if a field is empty of not.
@@ -174,7 +177,6 @@ public abstract class Task {
     public String getCategory() {
         return this.category;
     }
-
 
 
     /**

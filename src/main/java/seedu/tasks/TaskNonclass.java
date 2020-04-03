@@ -17,6 +17,10 @@ public class TaskNonclass extends Task {
     protected LocalDate date;
     protected LocalTime time;
     protected String location;
+
+    private boolean isDateSet = false; // let us set a default without printing if user didnt set
+    private boolean isTimeSet = false;
+
     /**
      * Initializes Task.
      *
@@ -31,9 +35,12 @@ public class TaskNonclass extends Task {
                         String reminder, String category) {
         super(title,description,reminder,category);
 
+        //set default date to date inserted
         if (!date.isEmpty()) {
-            System.out.println("Entered date!!!!!");
+            System.out.println("Have date");
             setDate(date);
+        } else {
+            this.date = LocalDate.now();
         }
         if (!time.isEmpty()) {
             setTime(time);
@@ -47,21 +54,37 @@ public class TaskNonclass extends Task {
     public void setDate(String dateInput) throws DateTimeParseException, NumberFormatException {
         if (dateInput.isEmpty()) {
             this.date = null;
+        } else {
+            this.date = CalendarParser.convertToDate(dateInput);
+            isDateSet = true;
         }
-        this.date = CalendarParser.convertToDate(dateInput);
     }
 
     @Override
     public void setTime(String timeInput) throws DateTimeParseException {
         if (timeInput.isEmpty()) {
             this.time = null;
+        } else {
+            this.time = CalendarParser.convertToTime(timeInput);
+            isTimeSet = true;
         }
-        this.time = CalendarParser.convertToTime(timeInput);
     }
 
     @Override
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     /**
@@ -75,10 +98,10 @@ public class TaskNonclass extends Task {
         assert (category.length() != 0);
 
         String formattedTask = super.toString();
-        if (date != null) {
+        if (isDateSet) {
             formattedTask = formattedTask + String.format(" | Date: %s", date.toString());
         }
-        if (time != null) {
+        if (isTimeSet) {
             formattedTask = formattedTask + String.format(" | Time: %s", time.toString());
         }
         if (location != null) {

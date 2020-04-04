@@ -4,7 +4,7 @@ import seedu.command.CalendarCommand;
 import seedu.tasklist.TaskList;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collections;
 
 public class GenerateCalendar {
     public static final String VERTICAL_MARK = "|";

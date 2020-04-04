@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class EditCommandTest {
-
+    /*
     @Test
     public void testCorrectOutput() {
 
@@ -70,4 +70,6 @@ public class EditCommandTest {
             assertEquals("Not allowed to change title.", e.getMessage());
         }
     }
+
+     */
 }

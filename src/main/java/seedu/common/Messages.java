@@ -29,6 +29,19 @@ public class Messages {
     static final String HELP_LEGEND = "Legend:\n" + TAB + TAB + "[Y]: Task is completed\n"
             + TAB + TAB +  "[N]: Task is not completed\n\n";
 
+    // Find Command
+    public static final String MESSAGE_SUCCESS = "Found the followings tasks:\n%s";
+    public static final String MESSAGE_EMPTY_PATTERN = "Please enter a pattern to look for \n";
+    public static final String MESSAGE_NO_FOUND = "No tasks found with %s in their title or description\n";
+    public static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!\n";
+
+    //Delete Command
+    public static final String MESSAGE_INVALID_INDEX = "The entered index %s is invalid. + "
+            + "Please enter a valid task number\n";
+    public static final String MESSAGE_MISSING_NUMBER = "Missing task number to delete\n";
+    public static final String MESSAGE_REMAINING_TASKS = "Now you have %d task/tasks in your calendar\n";
+    public static final String MESSAGE_DELETE_SUCCESS = "The following task has been removed:\n %s";
+
     /**
      * Formats the list of available commands.
      *

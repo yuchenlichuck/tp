@@ -5,6 +5,8 @@ import seedu.exception.ProjException;
 import seedu.calendar.CalendarParser;
 import seedu.parser.Parser;
 
+import java.util.Calendar;
+
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
@@ -40,8 +42,9 @@ public class CalendarCommand extends Command {
         totalDays = calendar.getTotalDays();
         totalWeeks = calendar.getTotalWeeks();
         currentYear = calendar.getYear();
+        System.out.println();
         GenerateCalendar gc = new GenerateCalendar(startingDay, totalDays, totalWeeks, checkMonth, currentYear);
-        gc.print();
+        feedback += gc.print();
         return new CommandResult(feedback);
     }
 

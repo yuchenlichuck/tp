@@ -4,10 +4,7 @@ import seedu.command.CalendarCommand;
 import seedu.tasklist.TaskList;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class GenerateCalendar {
     public static final String VERTICAL_MARK = "|";
@@ -16,9 +13,11 @@ public class GenerateCalendar {
     public static final int DAYS_IN_WEEK = 7;
     public static final String PADDING = " ";
 
-    
 
-    
+    private static final String[] monthName = {"January", "February",
+        "March", "April", "May", "June", "July",
+        "August", "September", "October", "November",
+        "December"};
     private static final String[] HEADING = {"Sunday", "Monday", "Tuesday",
         "Wednesday", "Thursday", "Friday", "Saturday"};
     private static final int COLUMN_SIZE = 7;
@@ -27,6 +26,7 @@ public class GenerateCalendar {
     private static final int DEFAULT_WIDTH = 15;
     private static final String NEW_LINE = System.lineSeparator();
     private static final String NO_ENTRY = String.format("%s%-" + DEFAULT_WIDTH + "s", VERTICAL_MARK, PADDING);
+    public static final int CALENDAR_OFFSET = 1;
 
     //private List<String[]> rows = new ArrayList<>();
 
@@ -52,35 +52,42 @@ public class GenerateCalendar {
         this.startingDay = startingDay;
         this.totalDays = totalDays;
         this.totalWeeks = totalWeeks;
-        this.currentMonth = currentMonth + 1;
+        this.currentMonth = currentMonth + CALENDAR_OFFSET;
         this.currentYear = currentYear;
     }
 
     /**
      * Method to print the calendar and format the frame.
+     * Returns a string containing the lines of the calendar
      */
-    public void print() {
+    public String print() {
         // printing header and box around it
-        printLine();
-        printHeader();
-        printLine();
+        String feedback = "";
+
+        feedback += String.format("Month is: " + monthName[currentMonth - CALENDAR_OFFSET] + NEW_LINE);
+        feedback += printLine();
+        feedback += printHeader();
+        feedback += printLine();
 
         // first week
-        printFirstRow();
-        printLine();
+        feedback += printFirstRow();
+        feedback += printLine();
 
         while (dateCounter <= totalDays) {
-            printRow();
-            printLine();
+            feedback += printRow();
+            feedback += printLine();
         }
+        return feedback;
     }
 
-    private void printLine() {
+    private String printLine() {
+        String currentLine = "";
         for (int i = 0; i < COLUMN_SIZE; i++) {
-            String line = String.join("", Collections.nCopies(DEFAULT_WIDTH, HORIZONTAL_SEP));
-            System.out.print(JOIN_MARK + line);
+            currentLine += JOIN_MARK;
+            currentLine += String.join("", Collections.nCopies(DEFAULT_WIDTH, HORIZONTAL_SEP));
         }
-        System.out.println(JOIN_MARK); //the last plus to end the table
+        currentLine += NEW_LINE;
+        return currentLine; //the last plus to end the table
     }
 
 
@@ -107,10 +114,9 @@ public class GenerateCalendar {
         }
         currentWeek += VERTICAL_MARK;
         currentWeek += NEW_LINE;
-
         currentWeek = getDailyTasks(currentWeek);
         currentWeek += VERTICAL_MARK;
-        System.out.println(currentWeek);
+        currentWeek += NEW_LINE;
         return currentWeek;
     }
 
@@ -136,7 +142,7 @@ public class GenerateCalendar {
         currentWeek += NEW_LINE;
         currentWeek = getDailyTasks(currentWeek);
         currentWeek += VERTICAL_MARK;
-        System.out.println(currentWeek);
+        currentWeek += NEW_LINE;
         return currentWeek;
     }
 
@@ -152,13 +158,15 @@ public class GenerateCalendar {
         return currentWeek;
     }
 
-    private void printHeader() {
+    private String printHeader() {
+        String currentLine = "";
         for (String day : HEADING) {
             int padding = DEFAULT_WIDTH + SYMBOL_SIZE - day.length();
-            System.out.printf("%s%-" + DEFAULT_WIDTH + "s", VERTICAL_MARK, day);
+            currentLine += String.format("%s%-" + DEFAULT_WIDTH + "s", VERTICAL_MARK, day);
         }
-        System.out.println(VERTICAL_MARK);
+        currentLine += VERTICAL_MARK;
+        currentLine += NEW_LINE;
+        return currentLine;
     }
 
-    
 }

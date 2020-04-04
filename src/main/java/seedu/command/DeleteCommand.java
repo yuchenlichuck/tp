@@ -1,5 +1,6 @@
 package seedu.command;
 
+import seedu.common.Messages;
 import seedu.tasks.Task;
 
 import java.util.IllegalFormatException;
@@ -13,12 +14,6 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_USAGE = COMMAND_WORD + " [task number]";
 
-
-    private static final String MESSAGE_SUCCESS = "The following task has been removed:\n %s";
-    private static final String MESSAGE_INVALID_INDEX = "The entered index %s is invalid. + "
-            + "Please enter a valid task number\n";
-    private static final String MESSAGE_MISSING_NUMBER = "Missing task number to delete\n";
-    private static final String MESSAGE_REMAINING_TASKS = "Now you have %d task/tasks in your calendar\n";
 
     public DeleteCommand(String userInput) {
         this.userInput = userInput;
@@ -40,10 +35,10 @@ public class DeleteCommand extends Command {
             return new CommandResult(formatFeedback(removedTask));
 
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(MESSAGE_MISSING_NUMBER);
+            return new CommandResult(Messages.MESSAGE_MISSING_NUMBER);
 
         } catch (IllegalFormatException e) {
-            String feedback = String.format(MESSAGE_INVALID_INDEX, commandSections[1]);
+            String feedback = String.format(Messages.MESSAGE_INVALID_INDEX, commandSections[1]);
             return new CommandResult(feedback);
 
         }
@@ -54,10 +49,10 @@ public class DeleteCommand extends Command {
         String feedback = "";
 
         String description = TAB + removed.toString() + System.lineSeparator();
-        description += String.format(TAB + MESSAGE_REMAINING_TASKS, taskList.getListSize());
+        description += String.format(TAB + Messages.MESSAGE_REMAINING_TASKS, taskList.getListSize());
         description += System.lineSeparator();
 
-        feedback = String.format(MESSAGE_SUCCESS, description);
+        feedback = String.format(Messages.MESSAGE_DELETE_SUCCESS, description);
 
         return feedback;
     }

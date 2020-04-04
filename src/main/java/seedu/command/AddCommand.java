@@ -9,6 +9,7 @@ import static seedu.common.Constants.TAB;
 
 public class AddCommand extends Command {
 
+    public static final String CLASS_CATEGORY = "CLASS";
     private String userInput;
 
     public static final String COMMAND_WORD = "add";
@@ -40,7 +41,7 @@ public class AddCommand extends Command {
         String category = getCategory(userInput).trim().toUpperCase();
 
 
-        if (category.equals("CLASS")) {
+        if (category.equals(CLASS_CATEGORY)) {
             Integer dateCount = date.split("\\s+").length;
             Integer timeCount = time.split("\\s+").length;
             if (dateCount != timeCount) {
@@ -61,7 +62,7 @@ public class AddCommand extends Command {
     private String formatFeedback(Task task) {
 
         String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()
-                + TAB + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
+                + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
                 + System.lineSeparator();
 
         return feedback;

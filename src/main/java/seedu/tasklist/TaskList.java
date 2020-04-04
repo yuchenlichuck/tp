@@ -1,7 +1,11 @@
 package seedu.tasklist;
 
 import seedu.tasks.Task;
+import seedu.tasks.TaskNonclass;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -147,6 +151,8 @@ public class TaskList {
         return foundTasks;
     }
 
+
+
     public Boolean containsCategory(String category) {
         return this.categoryMap.containsKey(category);
     }
@@ -159,4 +165,24 @@ public class TaskList {
         return this.categoryMap.keySet().toArray(new String[this.categoryMap.size()]);
     }
 
+    /**
+     * Checks list of tasks with supplied date to see how many tasks for that date.
+     *
+     * @param checkDate date used to check against list
+     * @return number of tasks for that day
+     */
+    public static int categoryCounter(LocalDate checkDate) {
+        int totalTasksDay = 0;
+        // searching every task to see if date matches
+        for (Task task : taskList) {
+            int matchedTask;
+            TaskNonclass taskNonClass = (TaskNonclass) task;
+            LocalDate taskDate = taskNonClass.getDate();
+            matchedTask = checkDate.compareTo(taskDate);
+            if (matchedTask == 0) {
+                totalTasksDay++;
+            }
+        }
+        return totalTasksDay;
+    }
 }

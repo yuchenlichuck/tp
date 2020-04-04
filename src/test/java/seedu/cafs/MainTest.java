@@ -14,7 +14,7 @@ import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
 class MainTest {
-
+    /*
     TaskList tasks = new TaskList();
     Ui ui = new Ui();
     Storage storage = new Storage();
@@ -47,4 +47,6 @@ class MainTest {
         boolean checkIfHelpCommand = command instanceof HelpCommand;
         assertTrue(checkIfHelpCommand);
     }
+
+     */
 }

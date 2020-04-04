@@ -1,22 +1,28 @@
 package seedu.tasks;
 
 
+import seedu.calendar.CalendarParser;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import static seedu.common.Constants.DEFAULT_CATEGORY;
 
-public class Task {
+public abstract class Task {
     protected String title;
     protected String description;
     protected String reminder;
     protected String category;
-    protected ArrayList<String> date = new ArrayList<String>();
-    protected ArrayList<String> time = new ArrayList<String>();
-    protected ArrayList<String> location = new ArrayList<String>();
+
+
 
     /**
      * Initialize task based on its category.
@@ -25,13 +31,9 @@ public class Task {
      * @param description description of class if any.
      * @param reminder    reminder of class if any.
      * @param category    category of class. Default is TODO.
-     * @param date        date of class if any.
-     * @param time        time of class if any.
-     * @param location    location of class if any.
      */
-    public Task(String title, String description, String reminder, String category,
-                String date, String time, String location) {
-        if (hasInput(category)) {
+    public Task(String title, String description, String reminder, String category) {
+        if (!category.isEmpty()) {
             this.category = category.trim().toUpperCase();
         } else {
             this.category = DEFAULT_CATEGORY;
@@ -42,17 +44,10 @@ public class Task {
         this.description = description;
         this.reminder = reminder;
 
-        if (hasInput(date)) {
-            setDate(date);
-        }
-        if (hasInput(time)) {
-            setTime(time);
-        }
-        if (hasInput(location)) {
-            setLocation(location);
 
-        }
     }
+
+
 
     /**
      * Initialize task with only date and time information.
@@ -61,6 +56,7 @@ public class Task {
      * @param date Task date
      * @param time Task time
      */
+
     public Task(String date, String time) {
 
         this.category = "dummy";
@@ -68,6 +64,8 @@ public class Task {
         setDate(date);
         setTime(time);
     }
+
+
 
     /**
      * Check if a field is empty of not.
@@ -95,67 +93,36 @@ public class Task {
         this.category = category;
     }
 
-    /**
-     * Set Date to format:yyyy-mm-dd and check if date is correct.
-     *
-     * @param date input date
-     */
-    public void setDate(String date) {
-        if (this.category.equals("CLASS")) {
-            String[] days = date.split("\\s+");
-            for (String day : days) {
-                Integer dayOfWeekInt = Integer.parseInt(day);
-                if (dayOfWeekInt > 7 | dayOfWeekInt < 1) {
-                    throw new NumberFormatException();
-                }
-                DayOfWeek dayOfWeek = DayOfWeek.of(Integer.parseInt(day));
-                this.date.add(dayOfWeek.name());
-            }
-        } else {
-            this.date.clear();
-            try {
-                String[] dateInfo = date.split("-");
-                int year = Integer.parseInt(dateInfo[0].trim());
-                int month = Integer.parseInt(dateInfo[1].trim());
-                int day = Integer.parseInt(dateInfo[2].trim());
 
-                if (!(month >= 1 && month <= 12)) {
-                    throw new NumberFormatException();
-                }
+    public abstract void setDate(String dateInput) throws DateTimeParseException, NumberFormatException;
 
-                if (day < 1) {
-                    throw new NumberFormatException();
-                } else {
-                    int feb;
-                    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-                        feb = 29;
-                    } else {
-                        feb = 28;
-                    }
-                    int[] monthDays = {31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    /*  {
 
-                    if (monthDays[month - 1] < day) {
+            if (this.category.equals("CLASS")) {
+
+                String[] days = dateInput.split("\\s+");
+                for (String day : days) {
+                    Integer dayOfWeekInt = Integer.parseInt(day);
+                    if (dayOfWeekInt > 7 | dayOfWeekInt < 1) {
                         throw new NumberFormatException();
                     }
+                    DayOfWeek dayOfWeek = DayOfWeek.of(Integer.parseInt(day));
+                    this.date.add(dayOfWeek.name());
                 }
-
-
-                this.date.add(date);
-
-            } catch (NumberFormatException e) {
-                this.date.add("(Unknown Date)");
-            } catch (IndexOutOfBoundsException e) {
-                this.date.add("(Unknown Date)");
+            } else {
+                this.date.clear();
+                LocalDate Date = CalendarParser.convertToDate(dateInput);
             }
-        }
-    }
+     }*/
 
     /**
      * Set time to format: hh.mm aa
      *
      * @param time input time with accepted format: hh:mm
      */
-    public void setTime(String time) {
+    public abstract void setTime(String time) throws DateTimeParseException;
+
+    /*{
         if (this.category.equals("CLASS")) {
             String[] timeInfo = time.split("\\s+");
             for (String atime : timeInfo) {
@@ -175,13 +142,16 @@ public class Task {
         }
     }
 
+     */
+
     /**
      * Set the input location to right format.
      * It it is a class, the location will be split to different part.
      *
      * @param location input location.
      */
-    public void setLocation(String location) {
+    public abstract void setLocation(String location);
+    /*{
         if (this.category.equals("CLASS")) {
             String[] locations = location.split("\\s+");
             for (String oneLocation : locations) {
@@ -192,6 +162,7 @@ public class Task {
             this.location.add(location);
         }
     }
+     */
 
 
     //Accessors:
@@ -203,25 +174,10 @@ public class Task {
         return description;
     }
 
-    public String getReminder() {
-        return this.reminder;
-    }
-
     public String getCategory() {
         return this.category;
     }
 
-    public ArrayList<String> getDate() {
-        return this.date;
-    }
-
-    public ArrayList<String> getTime() {
-        return this.time;
-    }
-
-    public ArrayList<String> getLocation() {
-        return this.location;
-    }
 
     /**
      * Output correct string format when listing tasks.

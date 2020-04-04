@@ -13,8 +13,8 @@
 * [Sample Usage](#4-sample-usage)
 * [FAQ](#5-faq)
 * [Command Summary](#6-command-summary)
-## 1. Introduction
 
+## 1. Introduction
 CAFS - va CLI calender-like task scheduler that supports task and 
 class schedule adding. It is simple to use, and comes with a save function to 
 remember your tasks.
@@ -28,6 +28,8 @@ remember your tasks.
 
 1. Run the jar file using `java - jar caf.jar`
 
+1. Link to Developer guide [here](https://github.com/AY1920S2-CS2113-T14-3/tp/blob/master/docs/DeveloperGuide.md)
+
 ## 3. Features
 
 ### 3.1 - Help
@@ -40,11 +42,11 @@ Users add tasks using this command
      * To add class, just need to specify the category is `CLASS`.
      * When adding normal tasks:
         * add t/12:00pm n/UG d/02/18/2020 i/UG deadline r/NUS r/1d
-        * add t/15:00 n/Project Meeting  d/01/01/2020   i/Work on awesome features
-        * add t/11:00 n/Response Paper  d/2/2/2020 i/Finish essay c/TODO
+        * add t/15:00 n/Project Meeting  d/01-01-2020   i/Work on awesome features
+        * add t/11:00 n/Response Paper  d/02-02-2020 i/Finish essay c/TODO
      * When adding class, the time `t/` becomes time zone of the class (e.g. `12:00-1:00`), and the date
        `d/` becomes which day in a week, represented by integer (e.g. `1 3` means Mon Wed).
-       Since a class normally has mutiple time zone in a week, student can just add list of time zone.
+       Since a class normally has multiple time zone in a week, student can just add list of time zone.
        However, the number of `t/`should match with the number of `d/` and the number of location. 
         * add t/11:00-12:00 1:00-3:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
         * add n/3245 t/17:00-19:00 d/5 c/CLASS
@@ -101,7 +103,18 @@ Searches all task descriptions for supplied keyword
 Exports my calendar as a text file	
 * **Usage**: `save`
 
-### 3.8 - Exit
+### 3.8 - Calendar
+Prints a monthy representation of a calendar. Shows the number of tasks a user has on a particular day.
+Users are able to specify which month to look up. Default is the current month. 
+
+Will still display tasks from past months as long as not marked as complete.
+* **Usage**: `calendar <optional month>` 
+    * Month is in integer representation
+    * Where 1 is January and 12 is December
+    * Default set to current month
+    * If number supplied is not within the month range, it will be set to current month
+
+### 3.9 - Exit
 Exits the program
 * **Usage**: `bye`
 
@@ -130,4 +143,5 @@ Exits the program
  * **Find**: `find <keyword>` 
  * **Save**: `save`
  * **Help**: `help`
+ * **Calendar**: `calendar` or `calendar <month>`
  * **Exit**: `bye`

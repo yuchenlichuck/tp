@@ -103,7 +103,6 @@ public abstract class Command {
             date = findField(userInput, index);
             return date;
         }
-
         return date;
     }
 

@@ -1,24 +1,23 @@
 package seedu.tasks;
 
 import seedu.calendar.CalendarParser;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class TaskNonclass extends Task {
 
-
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final char TICK = 'Y'; //Yes
     public static final char CROSS = 'N'; //No
-
-    protected LocalDate date;
-    protected LocalTime time;
-    protected String location;
-
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
     private boolean isDateSet = false; // let us set a default without printing if user didnt set
     private boolean isTimeSet = false;
     private boolean isDone = false;
@@ -36,19 +35,11 @@ public class TaskNonclass extends Task {
      */
     public TaskNonclass(String title, String description, String date, String time, String location,
                         String reminder, String category) {
-<<<<<<< HEAD
-        super(title,description,reminder,category);
-
-        this.isDone = false;
-
-=======
         super(title,description,time,location,reminder,category);
->>>>>>> 2720b913e176743a4e1c566cfdf2c978dd340996
         //set default date to date inserted
         if (!date.isEmpty()) {
             setDate(date);
         }
-
     }
 
     @Override
@@ -81,6 +72,7 @@ public class TaskNonclass extends Task {
         return formattedTask;
     }
 
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -93,6 +85,4 @@ public class TaskNonclass extends Task {
     public char getStatusIcon() {
         return (isDone ? TICK : CROSS); //return tick or X symbols
     }
-
-
 }

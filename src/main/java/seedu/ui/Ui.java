@@ -43,7 +43,7 @@ public class Ui {
         System.out.println();
 
         for (String message : messages) {
-            System.out.print(TAB + message);
+            System.out.print(message);
         }
 
         System.out.println(DIVIDER);

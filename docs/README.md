@@ -103,7 +103,18 @@ Searches all task descriptions for supplied keyword
 Exports my calendar as a text file	
 * **Usage**: `save`
 
-### 3.8 - Exit
+### 3.8 - Calendar
+Prints a monthy representation of a calendar. Shows the number of tasks a user has on a particular day.
+Users are able to specify which month to look up. Default is the current month. 
+
+Will still display tasks from past months as long as not marked as complete.
+* **Usage**: `calendar <optional month>` 
+    * Month is in integer representation
+    * Where 1 is January and 12 is December
+    * Default set to current month
+    * If number supplied is not within the month range, it will be set to current month
+
+### 3.9 - Exit
 Exits the program
 * **Usage**: `bye`
 
@@ -132,4 +143,5 @@ Exits the program
  * **Find**: `find <keyword>` 
  * **Save**: `save`
  * **Help**: `help`
+ * **Calendar**: `calendar` or `calendar <month>`
  * **Exit**: `bye`

@@ -5,6 +5,8 @@ import seedu.exception.ProjException;
 import seedu.calendar.CalendarParser;
 import seedu.parser.Parser;
 
+import java.util.Calendar;
+
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
@@ -35,44 +37,15 @@ public class CalendarCommand extends Command {
         } else {
             calendar = new CalendarParser();
         }
-
         checkMonth = calendar.getMonth();
         startingDay = calendar.getFirstDay();
         totalDays = calendar.getTotalDays();
         totalWeeks = calendar.getTotalWeeks();
         currentYear = calendar.getYear();
-
-        feedback += String.format("Month selected: %s\n\n",months[checkMonth]);
-        // printing days
-        for (String day : days) {
-            feedback += String.format("%8s ",day);
-        }
-
-        feedback += String.format("\n");
-        // print offsets
-        String offset = "";
-        for (int i = 0; i < startingDay; i++) {
-            feedback += String.format("%8s ",offset);
-        }
-
-        // print dates
-        int dayCounter = startingDay;
-        for (int i = 1; i <= totalDays; i++) {
-            feedback += String.format("%8d ", i);
-            dayCounter = (dayCounter + 1) % 7;
-            if (dayCounter == 0) {
-                feedback += String.format("\n");
-            }
-        }
-
-        feedback += String.format("\n\n");
-
+        System.out.println();
         GenerateCalendar gc = new GenerateCalendar(startingDay, totalDays, totalWeeks, checkMonth, currentYear);
-        gc.print();
-
+        feedback += gc.print();
         return new CommandResult(feedback);
-
     }
-
 
 }

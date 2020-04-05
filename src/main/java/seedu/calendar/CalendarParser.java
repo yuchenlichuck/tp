@@ -1,6 +1,5 @@
 package seedu.calendar;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
@@ -8,14 +7,13 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Class to support date and calendar relation methods.
  */
 public class CalendarParser {
 
-    public static final int DAY_OFFSET = 1;
+    public static final int CALENDAR_OFFSET = 1;
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -34,10 +32,11 @@ public class CalendarParser {
      * @param month which month to check calendar
      */
     public CalendarParser(int month) {
-        if (month < 0 || month > 11) {
+        if (month < 0 || month > 12) {
             calendar.get(Calendar.MONTH); //set default to current month if any error
         } else {
-            calendar.set(2020, month - 1, 1);
+            month -= CALENDAR_OFFSET;
+            calendar.set(2020, month, 1);
         }
     }
 
@@ -47,7 +46,7 @@ public class CalendarParser {
      */
     public int getFirstDay() {
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
-        return calendar.get(Calendar.DAY_OF_WEEK) - DAY_OFFSET; //Sunday is first day, 1
+        return calendar.get(Calendar.DAY_OF_WEEK) - CALENDAR_OFFSET; //Sunday is first day, 1
     }
 
     /**

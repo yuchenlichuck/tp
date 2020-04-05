@@ -1,8 +1,17 @@
 package seedu.parser;
 
-import seedu.command.*;
-
-import java.util.Calendar;
+import seedu.command.AddCommand;
+import seedu.command.CalendarCommand;
+import seedu.command.ClearCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.DoneCommand;
+import seedu.command.EditCommand;
+import seedu.command.ExitCommand;
+import seedu.command.FindCommand;
+import seedu.command.FailedCommand;
+import seedu.command.HelpCommand;
+import seedu.command.ListCommand;
+import seedu.command.Command;
 
 public class Parser {
 
@@ -15,55 +24,50 @@ public class Parser {
     public static Command parseCommand(String userCommand) {
         String[] commandSections = userCommand.split(" ");
         String command = commandSections[0].toLowerCase().trim();
-        try {
-            switch (command) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand(userCommand);
+        switch (command) {
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommand(userCommand);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand(userCommand);
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommand(userCommand);
 
-            case AddCommand.COMMAND_WORD:
-                return new AddCommand(userCommand);
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case FindCommand.COMMAND_WORD:
-                return new FindCommand(userCommand);
+        case AddCommand.COMMAND_WORD:
+            return new AddCommand(userCommand);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommand(commandSections[1], userCommand);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(userCommand);
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case EditCommand.COMMAND_WORD:
+            return new EditCommand(commandSections[1], userCommand);
 
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case DoneCommand.COMMAND_WORD:
-                if (commandSections.length != 2) {
-                    return new FailedCommand("[Error][Done]: Wrong number of arguments");
-                }
-                return new DoneCommand(commandSections[1]);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
-            case CalendarCommand.COMMAND_WORD:
-                if (commandSections.length == 2) {
-                    return new CalendarCommand(commandSections[1]);
-                }
-                if (commandSections.length == 1) {
-                    return new CalendarCommand(null);
-                }
-                if (commandSections.length > 2) {
-                    return new FailedCommand("[Error][Calendar]: Please input the right number of arguments");
-                }
-
-            default:
-                System.out.println("Command not recognised\n");
-                return new HelpCommand();
+        case DoneCommand.COMMAND_WORD:
+            if (commandSections.length != 2) {
+                return new FailedCommand("[Error][Done]: Wrong number of arguments");
             }
-        } catch(ArrayIndexOutOfBoundsException e) {
+            return new DoneCommand(commandSections[1]);
+
+        case CalendarCommand.COMMAND_WORD:
+            if (commandSections.length == 2) {
+                return new CalendarCommand(commandSections[1]);
+            }
+            if (commandSections.length == 1) {
+                return new CalendarCommand(null);
+            }
+            return new FailedCommand("[Error][Calendar]: Please input the right number of arguments");
+
+        default:
+            System.out.println("Command not recognised\n");
             return new HelpCommand();
         }
     }

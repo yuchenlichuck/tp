@@ -5,7 +5,7 @@ import seedu.exception.ProjException;
 public class FailedCommand extends Command {
     private String feedback;
 
-    public FailedCommand (String feedback) {
+    public FailedCommand(String feedback) {
         this.feedback = feedback;
     }
 

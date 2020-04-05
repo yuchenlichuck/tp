@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
                 return new CommandResult(feedback);
             }
 
-            Task task = taskList.getTask(Integer.parseInt(indexCompleteTask ) - TASKLIST_OFFSET);
+            Task task = taskList.getTask(Integer.parseInt(indexCompleteTask) - TASKLIST_OFFSET);
 
             if (task instanceof TaskNonclass) {
                 ((TaskNonclass) task).markAsDone();
@@ -47,7 +47,8 @@ public class DoneCommand extends Command {
             }
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("[Error][Done]: Please input a task within the range of: 1 - " + taskList.getList().size() + "\n");
+            System.out.println("[Error][Done]: Please input a task within the range of: 1 - "
+                    + taskList.getList().size() + "\n");
         } catch (NumberFormatException e) {
             System.out.println("[Error][Done]: Please input task number as a number, instead of spelling it out\n");
         }

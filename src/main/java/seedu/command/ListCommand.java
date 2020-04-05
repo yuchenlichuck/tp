@@ -20,7 +20,6 @@ public class ListCommand extends Command {
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;
     private static final int LIST_BY_DATE = 3;
-    private static final String CLASS_CATEGORY = "CLASS";
 
     public ListCommand(String userCommand) {
         this.userInput = userCommand;

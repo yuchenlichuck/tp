@@ -8,6 +8,7 @@ import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
+import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,6 +64,10 @@ public class Main {
                 CommandResult result = command.execute();
                 ui.showResultToUser(result);
             } catch (ProjException e) {
+                ui.showError(e.getMessage());
+            } catch (DateTimeParseException e) {
+                ui.showError("Please follow the format of date: dd-MM-yyyy; time: hh:mm");
+            } catch (NumberFormatException e) {
                 ui.showError(e.getMessage());
             }
         } while (!command.isExit()); // will be solved when do is enabled

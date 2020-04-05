@@ -2,6 +2,7 @@ package seedu.tasks;
 
 
 import seedu.calendar.CalendarParser;
+import seedu.exception.ProjException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +23,10 @@ public abstract class Task {
     protected String description;
     protected String reminder;
     protected String category;
-
+    protected ArrayList<LocalDate> date = new ArrayList<LocalDate>();
+    protected ArrayList<LocalTime> time = new ArrayList<LocalTime>();
+    protected ArrayList<String> location = new ArrayList<String>();
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
 
     /**
@@ -32,7 +37,8 @@ public abstract class Task {
      * @param reminder    reminder of class if any.
      * @param category    category of class. Default is TODO.
      */
-    public Task(String title, String description, String reminder, String category) {
+    public Task(String title, String description, String time, String location,
+                String reminder, String category) {
         if (!category.isEmpty()) {
             this.category = category.trim().toUpperCase();
         } else {
@@ -43,29 +49,14 @@ public abstract class Task {
         this.title = title;
         this.description = description;
         this.reminder = reminder;
-
+        if (!time.isEmpty()) {
+            setTime(time);
+        }
+        if (!location.isEmpty()) {
+            setLocation(location);
+        }
 
     }
-
-
-
-    /**
-     * Initialize task with only date and time information.
-     * Used to compare dates and times.
-     *
-     * @param date Task date
-     * @param time Task time
-     */
-
-    public Task(String date, String time) {
-
-        this.category = "dummy";
-
-        setDate(date);
-        setTime(time);
-    }
-
-
 
     /**
      * Check if a field is empty of not.
@@ -93,77 +84,39 @@ public abstract class Task {
         this.category = category;
     }
 
-
     public abstract void setDate(String dateInput) throws DateTimeParseException, NumberFormatException;
-
-    /*  {
-
-            if (this.category.equals("CLASS")) {
-
-                String[] days = dateInput.split("\\s+");
-                for (String day : days) {
-                    Integer dayOfWeekInt = Integer.parseInt(day);
-                    if (dayOfWeekInt > 7 | dayOfWeekInt < 1) {
-                        throw new NumberFormatException();
-                    }
-                    DayOfWeek dayOfWeek = DayOfWeek.of(Integer.parseInt(day));
-                    this.date.add(dayOfWeek.name());
-                }
-            } else {
-                this.date.clear();
-                LocalDate Date = CalendarParser.convertToDate(dateInput);
-            }
-     }*/
 
     /**
      * Set time to format: hh.mm aa
      *
      * @param time input time with accepted format: hh:mm
      */
-    public abstract void setTime(String time) throws DateTimeParseException;
-
-    /*{
-        if (this.category.equals("CLASS")) {
-            String[] timeInfo = time.split("\\s+");
-            for (String atime : timeInfo) {
-                this.time.add(atime);
-            }
-        } else {
-            this.time.clear();
-            try {
-                SimpleDateFormat originalFormat = new SimpleDateFormat("HH:mm");
-                //HH means 24 hours. However, hh means 12hours
-                Date originalTime = originalFormat.parse(time);
-                SimpleDateFormat newFormat = new SimpleDateFormat("hh.mm a");
-                this.time.add(newFormat.format(originalTime));
-            } catch (ParseException e) {
-                this.time.add("(Unknown time)");
-            }
+    public void setTime(String time) throws DateTimeParseException {
+        this.time.clear();
+        String[] timeInfo = time.split("\\s+");
+        for (String atime : timeInfo) {
+            String[] timeRange = atime.split("-");
+            LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
+            this.time.add(startTime);
+            LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
+            this.time.add(endTime);
         }
     }
-
-     */
 
     /**
      * Set the input location to right format.
-     * It it is a class, the location will be split to different part.
+     * It there are multiple time slots, the location will be split to different part.
      *
      * @param location input location.
      */
-    public abstract void setLocation(String location);
-    /*{
-        if (this.category.equals("CLASS")) {
-            String[] locations = location.split("\\s+");
-            for (String oneLocation : locations) {
-                this.location.add(oneLocation);
-            }
-        } else {
-            this.location.clear();
-            this.location.add(location);
+    public void setLocation(String location) {
+        //clear the previous stored locations
+        this.location.clear();
+        String[] locations = location.split("\\s+");
+        for (String oneLocation : locations) {
+            this.location.add(oneLocation);
         }
     }
-     */
-
 
     //Accessors:
     public String getTitle() {
@@ -178,6 +131,17 @@ public abstract class Task {
         return this.category;
     }
 
+    public ArrayList<LocalDate> getDate() {
+        return this.date;
+    }
+
+    public ArrayList<LocalTime> getTime() {
+        return this.time;
+    }
+
+    public ArrayList<String> getLocation() {
+        return this.location;
+    }
 
     /**
      * Output correct string format when listing tasks.

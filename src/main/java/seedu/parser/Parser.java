@@ -43,6 +43,9 @@ public class Parser {
                 return new ClearCommand();
 
             case DoneCommand.COMMAND_WORD:
+                if (commandSections.length != 2) {
+                    return new FailedCommand("[Error][Done]: Wrong number of arguments");
+                }
                 return new DoneCommand(commandSections[1]);
 
             case CalendarCommand.COMMAND_WORD:
@@ -52,7 +55,9 @@ public class Parser {
                 if (commandSections.length == 1) {
                     return new CalendarCommand(null);
                 }
-                return new HelpCommand();
+                if (commandSections.length > 2) {
+                    return new FailedCommand("[Error][Calendar]: Please input the right number of arguments");
+                }
 
             default:
                 System.out.println("Command not recognised\n");

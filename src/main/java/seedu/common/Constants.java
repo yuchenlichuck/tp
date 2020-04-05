@@ -4,5 +4,5 @@ public final class Constants {
 
     public static final String DEFAULT_CATEGORY = "TODO";
     public static final String TAB = "  ";
-
+    public static final String NEW_LINE = System.lineSeparator();
 }

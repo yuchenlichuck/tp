@@ -61,7 +61,7 @@ public class AddCommand extends Command {
      * @param time User input time.
      * @throws ProjException Prompt message to advice users how to input the correct format.
      */
-    private void checkDateTimeFormat(String date, String time) throws ProjException{
+    private void checkDateTimeFormat(String date, String time) throws ProjException {
         // First check: if number of time range match with the number of date
         Integer dateCount = date.split("\\s+").length;
         Integer timeCount = time.split("\\s+").length;
@@ -76,11 +76,12 @@ public class AddCommand extends Command {
                 throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
             }
             Integer timePointCount = timeRange.split("-").length;
-                if (timePointCount != 2) {
-                    throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
-                }
+            if (timePointCount != 2) {
+                throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+            }
         }
     }
+
     private String formatFeedback(Task task) {
 
         String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()

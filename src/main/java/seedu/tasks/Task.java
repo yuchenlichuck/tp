@@ -91,8 +91,7 @@ public abstract class Task {
      *
      * @param time input time with accepted format: hh:mm
      */
-    public void setTime(String time) throws DateTimeParseException
-    {
+    public void setTime(String time) throws DateTimeParseException {
         this.time.clear();
         String[] timeInfo = time.split("\\s+");
         for (String atime : timeInfo) {
@@ -110,8 +109,7 @@ public abstract class Task {
      *
      * @param location input location.
      */
-    public void setLocation(String location)
-    {
+    public void setLocation(String location) {
         //clear the previous stored locations
         this.location.clear();
         String[] locations = location.split("\\s+");

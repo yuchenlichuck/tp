@@ -3,11 +3,14 @@ package seedu.command;
 import seedu.exception.ProjException;
 import java.util.ArrayList;
 import static seedu.common.Constants.TAB;
+
+import seedu.tasks.TaskNonclass;
 import seedu.ui.Ui;
 import seedu.tasks.Task;
 
 public class ListCommand extends Command {
 
+    public static final int TASKLIST_OFFSET = 1;
     private String userInput;
 
 
@@ -51,6 +54,7 @@ public class ListCommand extends Command {
 
         default:
             // Should not reach here
+            feedback = "[Error][List] No such option to filter";
             break;
         }
 
@@ -107,10 +111,14 @@ public class ListCommand extends Command {
     private String getFormattedFeedback(ArrayList<Integer> listTaskIndex) {
         String feedback = "There are " + listTaskIndex.size() + " tasks.\n";
 
+
         for (int i = 0; i < listTaskIndex.size(); i++) {
             Integer taskIndex = listTaskIndex.get(i);
-            feedback += TAB + TAB + (i + 1) + ". ";
-            feedback += taskList.getTask(taskIndex) + "\n";
+            Task task = taskList.getTask(taskIndex);
+            if (task instanceof TaskNonclass) {
+                feedback += TAB + TAB + (i + TASKLIST_OFFSET) + ". ";
+                feedback += "[" + ((TaskNonclass) task).getStatusIcon() + "] " + task + "\n";
+            }
         }
 
         return feedback;

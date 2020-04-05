@@ -1,18 +1,15 @@
 package seedu.tasks;
 
 import seedu.calendar.CalendarParser;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class TaskNonclass extends Task {
+
+    public static final char TICK = 'Y'; //Yes
+    public static final char CROSS = 'N'; //No
 
     protected LocalDate date;
     protected LocalTime time;
@@ -20,6 +17,7 @@ public class TaskNonclass extends Task {
 
     private boolean isDateSet = false; // let us set a default without printing if user didnt set
     private boolean isTimeSet = false;
+    private boolean isDone = false;
 
     /**
      * Initializes Task.
@@ -34,6 +32,8 @@ public class TaskNonclass extends Task {
     public TaskNonclass(String title, String description, String date, String time, String location,
                         String reminder, String category) {
         super(title,description,reminder,category);
+
+        this.isDone = false;
 
         //set default date to date inserted
         if (!date.isEmpty()) {
@@ -109,5 +109,19 @@ public class TaskNonclass extends Task {
         }
         return formattedTask;
     }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    /**
+     * Returns symbol for status of task.
+     *
+     * @return tick for done, cross for not done
+     */
+    public char getStatusIcon() {
+        return (isDone ? TICK : CROSS); //return tick or X symbols
+    }
+
 
 }

@@ -2,16 +2,9 @@ package seedu.tasks;
 
 import seedu.calendar.CalendarParser;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class TaskNonclass extends Task {
 
@@ -55,7 +48,6 @@ public class TaskNonclass extends Task {
             }
         }
     }
-
 
     /**
      * Format the string to be correct output form.

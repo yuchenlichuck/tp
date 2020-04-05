@@ -27,9 +27,6 @@ public class Class extends Task {
         if (!time.isEmpty()) {
             setTime(time);
         }
-        if (!location.isEmpty()) {
-            setLocation(location);
-        }
     }
 
     @Override
@@ -59,8 +56,12 @@ public class Class extends Task {
     public String toString() {
         String formattedTask = super.toString();
         for (int i = 0; i < date.size(); i++) {
-            formattedTask = formattedTask + String.format(" | %s : %s - %s",
-                    date.get(i).getDayOfWeek().name(), time.get(i * 2),time.get(i * 2 + 1));
+            if (time.size() != 0) {
+                formattedTask = formattedTask + String.format(" | %s : %s - %s",
+                        date.get(i).getDayOfWeek().name(), time.get(i * 2),time.get(i * 2 + 1));
+            } else {
+                formattedTask = formattedTask + String.format(" | %s", date.get(i));
+            }
             if (location.size() > i) {
                 formattedTask = formattedTask + String.format(" ( %s )",location.get(i));
             }

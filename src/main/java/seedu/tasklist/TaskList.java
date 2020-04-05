@@ -189,9 +189,6 @@ public class TaskList {
         }
         return totalTasksDay;
     }
-<<<<<<< HEAD
-}
-=======
 
     /**
      * Retrieve the class tasks.
@@ -223,4 +220,3 @@ public class TaskList {
         return result;
     }
 }
->>>>>>> upstream/master

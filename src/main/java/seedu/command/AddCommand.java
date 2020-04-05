@@ -5,11 +5,11 @@ import seedu.tasks.Task;
 import seedu.tasks.TaskNonclass;
 import seedu.tasks.Class;
 
+import static seedu.common.Constants.CLASS_CATEGORY;
 import static seedu.common.Constants.TAB;
 
 public class AddCommand extends Command {
 
-    public static final String CLASS_CATEGORY = "CLASS";
     private String userInput;
 
     public static final String COMMAND_WORD = "add";
@@ -40,13 +40,9 @@ public class AddCommand extends Command {
         String location = getLocation(userInput);
         String category = getCategory(userInput).trim().toUpperCase();
 
+        checkDateTimeFormat(date,time);
 
         if (category.equals(CLASS_CATEGORY)) {
-            Integer dateCount = date.split("\\s+").length;
-            Integer timeCount = time.split("\\s+").length;
-            if (dateCount != timeCount) {
-                throw new ProjException("The number of time range must match with the number of day in a week.");
-            }
             taskList.addTask(new Class(title, description, date, time, location, reminder, "CLASS"));
         } else {
             taskList.addTask(new TaskNonclass(title, description, date, time, location, reminder, category));
@@ -54,11 +50,37 @@ public class AddCommand extends Command {
 
         String feedback = formatFeedback(taskList.getTask(taskList.getListSize() - 1));
 
-
         assert !title.isEmpty() : "Task title should contain at least one char";
         return new CommandResult(feedback);
     }
 
+    /**
+     * Check format for date and time.
+     *
+     * @param date User input date.
+     * @param time User input time.
+     * @throws ProjException Prompt message to advice users how to input the correct format.
+     */
+    private void checkDateTimeFormat(String date, String time) throws ProjException{
+        // First check: if number of time range match with the number of date
+        Integer dateCount = date.split("\\s+").length;
+        Integer timeCount = time.split("\\s+").length;
+        if (dateCount != timeCount) {
+            throw new ProjException("The number of time range must match with the number of date(day of a week).");
+        }
+
+        //Second check: if time follows the format: hh:mm-hh:mm
+        String[] timeRanges = time.split("\\s+");
+        for (String timeRange : timeRanges) {
+            if (!timeRange.contains("-")) {
+                throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+            }
+            Integer timePointCount = timeRange.split("-").length;
+                if (timePointCount != 2) {
+                    throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+                }
+        }
+    }
     private String formatFeedback(Task task) {
 
         String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()

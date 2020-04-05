@@ -7,6 +7,8 @@ import seedu.tasks.Task;
 import seedu.tasks.TaskNonclass;
 import static seedu.common.Constants.TAB;
 import static seedu.common.Constants.NEW_LINE;
+import static seedu.common.Constants.TASKLIST_OFFSET;
+
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
@@ -29,11 +31,11 @@ public class DoneCommand extends Command {
             }
 
             if (taskList.getListSize() == 0) {
-                feedback += "There are no tasks to mark completed!";
+                feedback += "[Alert][Done]: There are no tasks to mark completed!";
                 return new CommandResult(feedback);
             }
 
-            Task task = taskList.getTask(Integer.parseInt(indexCompleteTask));
+            Task task = taskList.getTask(Integer.parseInt(indexCompleteTask ) - TASKLIST_OFFSET);
 
             if (task instanceof TaskNonclass) {
                 ((TaskNonclass) task).markAsDone();

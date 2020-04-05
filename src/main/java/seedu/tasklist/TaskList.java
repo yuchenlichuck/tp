@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import static seedu.common.Constants.CLASS_CATEGORY;
+
 
 public class TaskList {
 
@@ -151,8 +153,6 @@ public class TaskList {
         return foundTasks;
     }
 
-
-
     public Boolean containsCategory(String category) {
         return this.categoryMap.containsKey(category);
     }
@@ -176,13 +176,51 @@ public class TaskList {
         // searching every task to see if date matches
         for (Task task : taskList) {
             int matchedTask;
-            TaskNonclass taskNonClass = (TaskNonclass) task;
-            LocalDate taskDate = taskNonClass.getDate();
-            matchedTask = checkDate.compareTo(taskDate);
-            if (matchedTask == 0) {
-                totalTasksDay++;
+            if (task.getCategory() == CLASS_CATEGORY) {
+                continue;
+            }
+            ArrayList<LocalDate> taskDates = task.getDate();
+            for (LocalDate taskDate: taskDates) {
+                matchedTask = checkDate.compareTo(taskDate);
+                if (matchedTask == 0) {
+                    totalTasksDay++;
+                }
             }
         }
         return totalTasksDay;
     }
+<<<<<<< HEAD
 }
+=======
+
+    /**
+     * Retrieve the class tasks.
+     *
+     * @return List of class.
+     */
+    public static ArrayList<Task> getClassTask() {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.getCategory() != CLASS_CATEGORY) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Retrieve the tasks that are not class.
+     *
+     * @return List of non class tasks.
+     */
+    public static ArrayList<Task> getNonClassTask() {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.getCategory() == CLASS_CATEGORY) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+}
+>>>>>>> upstream/master

@@ -47,27 +47,26 @@ public class ListCommand extends Command {
         String time = getTime(userInput).trim();
 
         int listCmdSubtype = getCmdSubtype(category, date, time);
-        System.out.println(listCmdSubtype);
         switch (listCmdSubtype) {
-            case LIST_ALL:
-                getWholeList(listTaskIndex);
-                break;
+        case LIST_ALL:
+            getWholeList(listTaskIndex);
+            break;
 
-            case LIST_BY_CATEGORY:
-                getListByCategory(listTaskIndex, category);
-                break;
+        case LIST_BY_CATEGORY:
+            getListByCategory(listTaskIndex, category);
+            break;
 
-            case LIST_BY_DATE:
-                getListByDate(listTaskIndex, date, time);
-                break;
+        case LIST_BY_DATE:
+            getListByDate(listTaskIndex, date, time);
+            break;
 
-            case LIST_BY_DATE_CATEGORY:
-                getListByDateCategory(listTaskIndex, date, time, category);
-                break;
-            default:
-                // Should not reach here
-                feedback = "[Error][List] No such option to filter";
-                break;
+        case LIST_BY_DATE_CATEGORY:
+            getListByDateCategory(listTaskIndex, date, time, category);
+            break;
+        default:
+            // Should not reach here
+            feedback = "[Error][List] No such option to filter";
+            break;
         }
 
         feedback = getFormattedFeedback(listTaskIndex);
@@ -96,16 +95,19 @@ public class ListCommand extends Command {
             int size = inputDates.size();
             for (Task task : taskList.getList()) {
                 index++;
-                if (!task.getCategory().equals((category)))
+                if (!task.getCategory().equals((category))) {
                     continue;
-                if (task.getCategory().equals("CLASS"))
+                }
+                if (task.getCategory().equals("CLASS")) {
                     continue;
+                }
                 ArrayList<LocalDate> localDates = task.getDate();
                 int sum = 0;
 
                 for (LocalDate d : localDates) {
-                    if (inputDates.contains(d))
+                    if (inputDates.contains(d)) {
                         sum++;
+                    }
                     if (sum >= size) {
                         listTaskIndex.add(index);
                         break;
@@ -133,8 +135,9 @@ public class ListCommand extends Command {
 
             for (int i = 0; i < taskList.getListSize(); i++) {
                 Task task = taskList.getTask(i);
-                if (!task.getCategory().equals((category)))
+                if (!task.getCategory().equals((category))) {
                     continue;
+                }
                 ArrayList<LocalTime> localTimes = task.getTime();
 
                 int sum = 0;
@@ -143,6 +146,7 @@ public class ListCommand extends Command {
                         if (localTimes.get(2 * j).equals(startTimes.get(k))
                                 && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
                             sum++;
+
                         }
                     }
                     if (sum >= size) {
@@ -181,10 +185,12 @@ public class ListCommand extends Command {
             for (int i = 0; i < taskList.getListSize(); i++) {
                 Task task = taskList.getTask(i);
 
-                if (!task.getCategory().equals((category)))
+                if (!task.getCategory().equals((category))) {
                     continue;
-                if (task.getCategory().equals("CLASS"))
+                }
+                if (task.getCategory().equals("CLASS")) {
                     continue;
+                }
                 ArrayList<LocalTime> localTimes = task.getTime();
                 ArrayList<LocalDate> localDates = task.getDate();
 
@@ -229,14 +235,16 @@ public class ListCommand extends Command {
             int size = inputDates.size();
             for (Task task : taskList.getList()) {
                 index++;
-                if (task.getCategory().equals("CLASS"))
+                if (task.getCategory().equals("CLASS")) {
                     continue;
+                }
                 ArrayList<LocalDate> localDates = task.getDate();
                 int sum = 0;
 
                 for (LocalDate d : localDates) {
-                    if (inputDates.contains(d))
+                    if (inputDates.contains(d)) {
                         sum++;
+                    }
                     if (sum >= size) {
                         listTaskIndex.add(index);
                         break;
@@ -311,8 +319,9 @@ public class ListCommand extends Command {
             for (int i = 0; i < taskList.getListSize(); i++) {
                 Task task = taskList.getTask(i);
                 String category = task.getCategory().trim();
-                if (category.equals("CLASS"))
+                if (category.equals("CLASS")) {
                     continue;
+                }
 
                 ArrayList<LocalTime> localTimes = task.getTime();
                 ArrayList<LocalDate> localDates = task.getDate();
@@ -379,9 +388,12 @@ public class ListCommand extends Command {
             throw new ProjException(TAB + "There is no " + category + " in current category.\n"
                     + Ui.DIVIDER);
         }
-
-        for (Integer taskIndex : taskList.getCategoryTask(category)) {
-            listTaskIndex.add(taskIndex);
+        int index = 0;
+        for (Task task : taskList.getList()) {
+            if (task.getCategory().equals(category)) {
+                listTaskIndex.add(index);
+            }
+            index++;
         }
     }
 

@@ -9,8 +9,6 @@ import java.time.format.DateTimeParseException;
 
 public class TaskNonclass extends Task {
 
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
     private boolean isDateSet = false; // let us set a default without printing if user didnt set
     private boolean isTimeSet = false;
 
@@ -48,6 +46,7 @@ public class TaskNonclass extends Task {
                 if (addedDate.compareTo(LocalDate.now()) < 0) {
                     throw new NumberFormatException("Please enter a date that is either today or in the future.");
                 }
+                this.date.add(addedDate);
                 isDateSet = true;
             }
         }

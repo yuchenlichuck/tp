@@ -14,9 +14,9 @@ import java.util.Calendar;
 public class CalendarParser {
 
     public static final int CALENDAR_OFFSET = 1;
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATE_FORMAT = "yyyy/MM/dd";
     private static final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     Calendar calendar = Calendar.getInstance();
 

@@ -10,11 +10,10 @@
   * [Having done a task](#36---done)
   * [Find a task](#37---find)
   * [Save tasks](#38---save)
-  * [Calendar](#39---calender)
+  * [Calendar](#39---calendar)
   * [Exit the program](#310---exit)
-* [Sample Usage](#4-sample-usage)
-* [FAQ](#5-faq)
-* [Command Summary](#6-command-summary)
+* [FAQ](#4-faq)
+* [Command Summary](#5-command-summary)
 
 ## 1. Introduction
 CAFS - va CLI calender-like task scheduler that supports task and 
@@ -58,15 +57,15 @@ Users add tasks using this command
      * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
        case-insensitive.  
      * When adding normal tasks:
-        * `<Date>` should be in format:`dd-mm-yyyy`
+        * `<Date>` should be in format:`yyyy-mm-dd`
         * Examples: 
-            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/01-01-2020 02-01-2020 l/NUS NTU c/meeting
-            * add n/2113 v2.1 t/23:00-24:00 d/16-04-2020 c/deadline
-            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/01-01-2020 02-01-2020 l/NUS NTU c/MEETING
+            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting
+            * add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline
+            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU c/MEETING
      * When adding class:
         * `<DATE>` should be which day in a week, represented by integer (e.g. `1 3` means Mon Wed). 
         * Examples: 
-            * add t/11:00-12:00 1:00-3:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
+            * add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
             * add n/3245 t/17:00-19:00 d/5 c/CLASS
     
 ### 3.3 - Edit
@@ -93,6 +92,7 @@ Lists tasks belong to a specific category
         * list c/TODO
         * list c/DEADLINE
         * Wrong command: `list TODO` which will has the same effects as the `list`
+        * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
       
 #### 3.4.3 - List Time
 Lists tasks by specific date/time
@@ -149,21 +149,17 @@ Will still display tasks from past months as long as not marked as complete.
 ### 3.10 - Exit
 Exits the program
 * **Usage**: `bye`
-
-## 4. Sample Usage
- 
-1. Search for specific keyword: `find class`
-    * Expected outcome: displays the above two tasks since they contain keyword "class" in description
     
-## 5. FAQ
+## 4. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
  
-## 6. Command Summary
+## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **List**: 
     * `list`
     * `list c/<category>` 

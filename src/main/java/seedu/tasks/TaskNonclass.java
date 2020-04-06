@@ -2,16 +2,9 @@ package seedu.tasks;
 
 import seedu.calendar.CalendarParser;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class TaskNonclass extends Task {
 
@@ -38,6 +31,9 @@ public class TaskNonclass extends Task {
         if (!date.isEmpty()) {
             setDate(date);
         }
+        if (!time.isEmpty()) {
+            setTime(time);
+        }
 
     }
 
@@ -53,7 +49,6 @@ public class TaskNonclass extends Task {
         }
     }
 
-
     /**
      * Format the string to be correct output form.
      *
@@ -62,8 +57,12 @@ public class TaskNonclass extends Task {
     public String toString() {
         String formattedTask = super.toString();
         for (int i = 0; i < date.size(); i++) {
-            formattedTask = formattedTask + String.format(" | %s : %s - %s",
-                    date.get(i),time.get(i * 2),time.get(i * 2 + 1));
+            if (time.size() != 0) {
+                formattedTask = formattedTask + String.format(" | %s : %s - %s",
+                        date.get(i), time.get(i * 2), time.get(i * 2 + 1));
+            } else {
+                formattedTask = formattedTask + String.format(" | %s", date.get(i));
+            }
             if (location.size() > i) {
                 formattedTask = formattedTask + String.format(" ( %s )",location.get(i));
             }

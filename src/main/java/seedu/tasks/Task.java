@@ -49,9 +49,6 @@ public abstract class Task {
         this.title = title;
         this.description = description;
         this.reminder = reminder;
-        if (!time.isEmpty()) {
-            setTime(time);
-        }
         if (!location.isEmpty()) {
             setLocation(location);
         }
@@ -93,6 +90,11 @@ public abstract class Task {
      */
     public void setTime(String time) throws DateTimeParseException {
         this.time.clear();
+        Boolean automaticAddDate = false;
+        // Populate the date with current date if date is not inputted
+        if (this.date.size() == 0) {
+            automaticAddDate = true;
+        }
         String[] timeInfo = time.split("\\s+");
         for (String atime : timeInfo) {
             String[] timeRange = atime.split("-");
@@ -100,6 +102,9 @@ public abstract class Task {
             this.time.add(startTime);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             this.time.add(endTime);
+            if (automaticAddDate) {
+                this.date.add(LocalDate.now());
+            }
         }
     }
 

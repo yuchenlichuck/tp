@@ -89,8 +89,9 @@ Lists all tasks
 Lists tasks belong to a specific category
 * **Usage**: `list c/<CATEGORY>`
     * Examples:
-        * list TODO
-        * list DEADLINE
+        * list c/TODO
+        * list c/DEADLINE
+        * Wrong command: `list TODO` which will has the same effects as the `list`
       
 #### 3.4.3 - List Time
 Lists tasks by specific date/time

@@ -16,7 +16,7 @@ public class DeleteCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        String input = "add n/task t/11:15-13:15 d/29-02-2024";
+        String input = "add n/task t/11:15-13:15 d/2021-12-31";
         Command command = new AddCommand(input);
 
         command.setCommandVariables(tasks, storage, ui);
@@ -27,7 +27,7 @@ public class DeleteCommandTest {
         }
 
         String input1 = "add n/homework i/cs2113_homework_team_project "
-                + "t/00:20-23:00 d/31-12-2021 l/com2 r/reminder";
+                + "t/00:20-23:00 d/2021-12-30 l/com2 r/reminder";
         command = new AddCommand(input1);
 
         command.setCommandVariables(tasks, storage, ui);
@@ -44,7 +44,7 @@ public class DeleteCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expected = "[TODO] Title: task | 2024-02-29 : 11:15 - 13:15";
+        String expected = "[TODO] Title: task | 2021-12-31 : 11:15 - 13:15";
         String output = tasks.getTask(0).toString();
         boolean isEqual = output.equals(expected);
         assertTrue(isEqual);

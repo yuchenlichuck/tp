@@ -18,9 +18,9 @@ class MainTest {
 
     @Test
     public void sampleTest() {
-        String input = "add n/research paper d/02-04-2020 i/essay for writing 101";
+        String input = "add n/research paper d/2020-06-06 i/essay for writing 101";
         String expected = "[TODO] Title: research paper | "
-                + "Description: essay for writing 101 | 2020-04-02";
+                + "Description: essay for writing 101 | 2020-06-06";
 
         AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);

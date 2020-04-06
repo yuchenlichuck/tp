@@ -17,7 +17,7 @@ public class AddCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        String input = "add n/task t/11:15-13:15 d/29-02-2024";
+        String input = "add n/task t/11:15-13:15 d/2024-02-29";
         String expected = "[TODO] Title: task | 2024-02-29 : 11:15 - 13:15";
 
         AddCommand command = new AddCommand(input);
@@ -64,7 +64,7 @@ public class AddCommandTest {
 
         String input;
         input = "add n/homework i/cs2113_home_work "
-                + "t/00:20-23:00 d/31-12-2021 l/com2 "
+                + "t/00:20-23:00 d/2021-12-31 l/com2 "
                 + "r/reminder";
 
         String expected;

@@ -167,6 +167,14 @@ public abstract class Task {
         if (hasInput(reminder)) {
             formattedTask = formattedTask + String.format(" | Reminder: %s", reminder);
         }
+        if (this.date.size() == 0 && this.time.size() == 0) {
+            if (this.location.size() != 0) {
+                formattedTask = formattedTask + String.format(" | Location: ");
+                for (String location : this.location) {
+                    formattedTask += location + " ";
+                }
+            }
+        }
         return formattedTask;
     }
 }

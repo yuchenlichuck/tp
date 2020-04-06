@@ -1,17 +1,17 @@
 package seedu.parser;
 
-import seedu.command.ListCommand;
-import seedu.command.CalendarCommand;
-import seedu.command.HelpCommand;
-import seedu.command.ClearCommand;
 import seedu.command.AddCommand;
+import seedu.command.CalendarCommand;
+import seedu.command.ClearCommand;
 import seedu.command.DeleteCommand;
+import seedu.command.DoneCommand;
 import seedu.command.EditCommand;
 import seedu.command.ExitCommand;
 import seedu.command.FindCommand;
+import seedu.command.FailedCommand;
+import seedu.command.HelpCommand;
+import seedu.command.ListCommand;
 import seedu.command.Command;
-
-import java.util.Calendar;
 
 public class Parser {
 
@@ -22,7 +22,6 @@ public class Parser {
      * @return  command based on user input
      */
     public static Command parseCommand(String userCommand) {
-
         String[] commandSections = userCommand.split(" ");
         String command = commandSections[0].toLowerCase().trim();
 
@@ -52,6 +51,12 @@ public class Parser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case DoneCommand.COMMAND_WORD:
+            if (commandSections.length != 2) {
+                return new FailedCommand("[Error][Done]: Wrong number of arguments");
+            }
+            return new DoneCommand(commandSections[1]);
+
         case CalendarCommand.COMMAND_WORD:
             if (commandSections.length == 2) {
                 return new CalendarCommand(commandSections[1]);
@@ -59,7 +64,7 @@ public class Parser {
             if (commandSections.length == 1) {
                 return new CalendarCommand(null);
             }
-            return new HelpCommand();
+            return new FailedCommand("[Error][Calendar]: Please input the right number of arguments");
 
         default:
             System.out.println("Command not recognised\n");

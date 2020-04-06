@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import static seedu.common.Constants.TAB;
 
 import seedu.tasks.TaskNonclass;
+import seedu.tasks.Class;
 import seedu.ui.Ui;
 import seedu.tasks.Task;
 
@@ -117,6 +118,10 @@ public class ListCommand extends Command {
             if (task instanceof TaskNonclass) {
                 feedback += TAB + TAB + (i + TASKLIST_OFFSET) + ". ";
                 feedback += "[" + ((TaskNonclass) task).getStatusIcon() + "] " + task + "\n";
+            }
+            if (task instanceof Class) {
+                feedback += TAB + TAB + (i + TASKLIST_OFFSET) + ". ";
+                feedback += task + "\n";
             }
         }
 

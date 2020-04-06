@@ -1,8 +1,14 @@
 package seedu.tasklist;
 
 import seedu.tasks.Task;
+import seedu.tasks.TaskNonclass;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+
+import static seedu.common.Constants.CLASS_CATEGORY;
 
 
 public class TaskList {
@@ -117,9 +123,13 @@ public class TaskList {
      */
     public Task deleteTask(int index) {
 
+        String category = taskList.get(index).getCategory();
+        categoryMap.get(category).remove(index);
+        if (categoryMap.get(category).size() == 0) {
+            categoryMap.remove(category);
+        }
         Task toRemove = taskList.get(index);
         taskList.remove(index);
-
         return toRemove;
     }
 
@@ -155,4 +165,58 @@ public class TaskList {
         return this.categoryMap.keySet().toArray(new String[this.categoryMap.size()]);
     }
 
+    /**
+     * Checks list of tasks with supplied date to see how many tasks for that date.
+     *
+     * @param checkDate date used to check against list
+     * @return number of tasks for that day
+     */
+    public static int categoryCounter(LocalDate checkDate) {
+        int totalTasksDay = 0;
+        // searching every task to see if date matches
+        for (Task task : taskList) {
+            int matchedTask;
+            if (task.getCategory() == CLASS_CATEGORY) {
+                continue;
+            }
+            ArrayList<LocalDate> taskDates = task.getDate();
+            for (LocalDate taskDate: taskDates) {
+                matchedTask = checkDate.compareTo(taskDate);
+                if (matchedTask == 0) {
+                    totalTasksDay++;
+                }
+            }
+        }
+        return totalTasksDay;
+    }
+
+    /**
+     * Retrieve the class tasks.
+     *
+     * @return List of class.
+     */
+    public static ArrayList<Task> getClassTask() {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.getCategory() != CLASS_CATEGORY) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Retrieve the tasks that are not class.
+     *
+     * @return List of non class tasks.
+     */
+    public static ArrayList<Task> getNonClassTask() {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task task : taskList) {
+            if (task.getCategory() == CLASS_CATEGORY) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }

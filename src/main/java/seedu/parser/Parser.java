@@ -1,14 +1,17 @@
 package seedu.parser;
 
-import seedu.command.Command;
-import seedu.command.AddCommand;
-import seedu.command.HelpCommand;
-import seedu.command.FindCommand;
-import seedu.command.ExitCommand;
-import seedu.command.DeleteCommand;
 import seedu.command.ListCommand;
-import seedu.command.EditCommand;
+import seedu.command.CalendarCommand;
+import seedu.command.HelpCommand;
 import seedu.command.ClearCommand;
+import seedu.command.AddCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.EditCommand;
+import seedu.command.ExitCommand;
+import seedu.command.FindCommand;
+import seedu.command.Command;
+
+import java.util.Calendar;
 
 public class Parser {
 
@@ -41,7 +44,7 @@ public class Parser {
             return new FindCommand(userCommand);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommand(commandSections[1], userCommand);
+            return new EditCommand(userCommand);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -49,10 +52,34 @@ public class Parser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case CalendarCommand.COMMAND_WORD:
+            if (commandSections.length == 2) {
+                return new CalendarCommand(commandSections[1]);
+            }
+            if (commandSections.length == 1) {
+                return new CalendarCommand(null);
+            }
+            return new HelpCommand();
+
         default:
             System.out.println("Command not recognised\n");
             return new HelpCommand();
         }
+    }
+
+
+    /**
+     * Check if String is a valid integer.
+     * @param value Input string for checking
+     * @return boolean if string is valid
+     */
+    public static boolean isInteger(String value) {
+        for (char c : value.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

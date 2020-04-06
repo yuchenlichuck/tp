@@ -17,7 +17,6 @@ public class ListCommand extends Command {
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;
     private static final int LIST_BY_DATE = 3;
-    private static final String CLASS_CATEGORY = "CLASS";
 
     public ListCommand(String userCommand) {
         this.userInput = userCommand;
@@ -43,10 +42,11 @@ public class ListCommand extends Command {
         case LIST_BY_CATEGORY:
             getListByCategory(listTaskIndex, category);
             break;
-
+        /*
         case LIST_BY_DATE:
             getListByDate(listTaskIndex, date, time);
             break;
+         */
 
         default:
             // Should not reach here
@@ -58,6 +58,8 @@ public class ListCommand extends Command {
         return new CommandResult(feedback);
     }
 
+    // Shouldn't be called dummy
+    /*
     private void getListByDate(ArrayList<Integer> listTaskIndex, String date, String time) {
         Task dummy = new Task(date, time);
 
@@ -93,6 +95,7 @@ public class ListCommand extends Command {
         }
 
     }
+     */
 
     private void getWholeList(ArrayList<Integer> listTaskIndex) {
         for (int i = 0; i < taskList.getListSize(); i++) {

@@ -44,7 +44,7 @@ public class Parser {
             return new FindCommand(userCommand);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommand(commandSections[1], userCommand);
+            return new EditCommand(userCommand);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

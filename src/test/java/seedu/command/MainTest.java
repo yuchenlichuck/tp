@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import seedu.command.AddCommand;
-import seedu.command.Command;
-import seedu.command.HelpCommand;
 import seedu.exception.ProjException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
@@ -22,8 +19,8 @@ class MainTest {
     @Test
     public void sampleTest() {
         String input = "add n/research paper d/02-04-2020 i/essay for writing 101";
-        String expected = "[TODO] Title: research paper | "+"" +
-                "Description: essay for writing 101 | 2020-04-02";
+        String expected = "[TODO] Title: research paper | "
+                + "Description: essay for writing 101 | 2020-04-02";
 
         AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
@@ -35,7 +32,7 @@ class MainTest {
         }
 
         String output = tasks.getTask(0).toString();
-        assertEquals(expected,output);
+        assertEquals(expected, output);
 
     }
 

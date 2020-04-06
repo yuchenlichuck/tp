@@ -38,22 +38,22 @@ public class ListCommand extends Command {
         int listCmdSubtype = getCmdSubtype(category, date);
 
         switch (listCmdSubtype) {
-            case LIST_ALL:
-                getWholeList(listTaskIndex);
-                break;
+        case LIST_ALL:
+            getWholeList(listTaskIndex);
+            break;
 
-            case LIST_BY_CATEGORY:
-                getListByCategory(listTaskIndex, category);
-                break;
+        case LIST_BY_CATEGORY:
+            getListByCategory(listTaskIndex, category);
+            break;
         /*
         case LIST_BY_DATE:
             getListByDate(listTaskIndex, date, time);
             break;
          */
 
-            default:
-                // Should not reach here
-                break;
+        default:
+            // Should not reach here
+            break;
         }
 
         feedback = getFormattedFeedback(listTaskIndex);
@@ -108,8 +108,7 @@ public class ListCommand extends Command {
 
     private String getFormattedFeedback(ArrayList<Integer> listTaskIndex) {
         String feedback;
-        if (listTaskIndex.size() == 0 ||
-                listTaskIndex.size() == 1) {
+        if (listTaskIndex.size() == 0 || listTaskIndex.size() == 1) {
             feedback = "There are " + listTaskIndex.size() + " task.\n";
         } else {
             feedback = "There are " + listTaskIndex.size() + " tasks.\n";

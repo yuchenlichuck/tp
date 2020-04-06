@@ -17,8 +17,6 @@ public class DeleteCommandTest {
         Storage storage = new Storage();
 
         String input = "add n/task t/11:15-13:15 d/29-02-2024";
-
-
         Command command = new AddCommand(input);
 
         command.setCommandVariables(tasks, storage, ui);
@@ -28,7 +26,8 @@ public class DeleteCommandTest {
             assertTrue(false);
         }
 
-        String input1 = "add n/homework i/cs2113_home_work t/00:20-23:00 d/31-12-2021 l/com2 r/reminder";
+        String input1 = "add n/homework i/cs2113_homework_team_project "
+                + "t/00:20-23:00 d/31-12-2021 l/com2 r/reminder";
         command = new AddCommand(input1);
 
         command.setCommandVariables(tasks, storage, ui);
@@ -37,7 +36,7 @@ public class DeleteCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String deleteInput="delete 2";
+        String deleteInput = "delete 2";
         command = new DeleteCommand(deleteInput);
         command.setCommandVariables(tasks, storage, ui);
         try {
@@ -50,12 +49,13 @@ public class DeleteCommandTest {
         boolean isEqual = output.equals(expected);
         assertTrue(isEqual);
     }
+
     @Test
     public void testDeleteZeroTask() {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        String deleteInput="delete 2";
+        String deleteInput = "delete 2";
         Command command = new DeleteCommand(deleteInput);
         command.setCommandVariables(tasks, storage, ui);
         try {

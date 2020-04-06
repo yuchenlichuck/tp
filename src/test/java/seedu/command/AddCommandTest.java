@@ -60,15 +60,15 @@ public class AddCommandTest {
         Storage storage = new Storage();
 
         String input;
-        input = "add n/homework i/cs2113_home_work " +
-                "t/00:20-23:00 d/31-12-2021 l/com2 " +
-                "r/reminder";
+        input = "add n/homework i/cs2113_home_work "
+                + "t/00:20-23:00 d/31-12-2021 l/com2 "
+                + "r/reminder";
 
         String expected;
-        expected = "[TODO] Title: homework " +
-                "| Description: cs2113_home_work  | " +
-                "Reminder: reminder | 2021-12-31 : " +
-                "00:20 - 23:00 ( com2 )";
+        expected = "[TODO] Title: homework "
+                + "| Description: cs2113_home_work  | "
+                + "Reminder: reminder | 2021-12-31 : "
+                + "00:20 - 23:00 ( com2 )";
 
         AddCommand command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);

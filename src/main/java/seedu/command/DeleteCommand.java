@@ -51,7 +51,6 @@ public class DeleteCommand extends Command {
         String description = TAB + removed.toString() + System.lineSeparator();
         description += String.format(TAB + Messages.MESSAGE_REMAINING_TASKS, taskList.getListSize());
         description += System.lineSeparator();
-
         feedback = String.format(Messages.MESSAGE_DELETE_SUCCESS, description);
 
         return feedback;

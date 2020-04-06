@@ -86,7 +86,7 @@ class ListCommandTest {
 
         command = new ListCommand("");
         command.setCommandVariables(tasks, storage, ui);
-        
+
         try {
             output = command.execute().getFeedback();
         } catch (ProjException e) {

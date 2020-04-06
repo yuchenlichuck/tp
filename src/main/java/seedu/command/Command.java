@@ -202,6 +202,41 @@ public abstract class Command {
     }
 
     /**
+     * Check format for date and time.
+     *
+     * @param date User input date.
+     * @param time User input time.
+     * @throws ProjException Prompt message to advice users how to input the correct format.
+     */
+    protected void checkDateTimeFormat(String date, String time) throws ProjException {
+        // First check: if time follows the format: hh:mm-hh:mm
+        if (time.length() != 0) {
+            String[] timeRanges = time.split("\\s+");
+            for (String timeRange : timeRanges) {
+                if (!timeRange.contains("-")) {
+                    throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+                }
+                Integer timePointCount = timeRange.split("-").length;
+                if (timePointCount != 2) {
+                    throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+                }
+            }
+        }
+
+        // Second check: both date and time are inputted
+        if (date.length() == 0 | time.length() == 0) {
+            return;
+        }
+
+        // Third check: if number of time range match with the number of date
+        Integer dateCount = date.split("\\s+").length;
+        Integer timeCount = time.split("\\s+").length;
+        if (dateCount != timeCount) {
+            throw new ProjException("The number of time range must match with the number of date(day of a week).");
+        }
+    }
+
+    /**
      * Executes user command processed by parser.
      */
     public abstract CommandResult execute() throws ProjException;

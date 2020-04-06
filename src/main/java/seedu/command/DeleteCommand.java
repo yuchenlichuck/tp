@@ -1,9 +1,9 @@
 package seedu.command;
 
 import seedu.common.Messages;
+import seedu.exception.CommandExceptions.EmptyTaskListException;
+import seedu.exception.CommandExceptions.TaskOutOfBoundsException;
 import seedu.tasks.Task;
-
-import java.util.IllegalFormatException;
 
 import static seedu.common.Constants.TAB;
 
@@ -22,29 +22,56 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
 
+        String feedback = "";
         String[] commandSections = userInput.split(" ");
 
         try {
+
+            checkForEmptyList();
+
             String strIndex = commandSections[1].trim();
             int index = Integer.parseInt(strIndex) - 1;
+            checkForValidIndex(index);
             assert index < taskList.getListSize() : "index > the size of taskList";
+
             Task removedTask = taskList.deleteTask(index);
 
             storage.overwriteFile(taskList.getList());
+
             assert removedTask != null : "Removed-task is null";
-            return new CommandResult(formatFeedback(removedTask));
+            feedback = formatSuccessFeedback(removedTask);
+
+        } catch (TaskOutOfBoundsException e) {
+            feedback = String.format(Messages.MESSAGE_OUT_OF_BOUNDS, commandSections[1].trim(), taskList.getListSize());
 
         } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(Messages.MESSAGE_MISSING_NUMBER);
+            feedback = Messages.MESSAGE_MISSING_NUMBER;
 
-        } catch (IllegalFormatException e) {
-            String feedback = String.format(Messages.MESSAGE_INVALID_INDEX, commandSections[1]);
+        } catch (NumberFormatException e) {
+            feedback = String.format(Messages.MESSAGE_INVALID_INDEX, commandSections[1]);
+
+        } catch (EmptyTaskListException e) {
+            feedback = String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD);
+
+        } finally {
             return new CommandResult(feedback);
-
         }
     }
 
-    private String formatFeedback(Task removed) {
+    private void checkForEmptyList() throws EmptyTaskListException {
+        if (taskList.getListSize() == 0) {
+            throw new EmptyTaskListException();
+        }
+    }
+
+    private void checkForValidIndex(int index) throws TaskOutOfBoundsException {
+
+        if (index < 0 || index >= taskList.getListSize()) {
+            throw new TaskOutOfBoundsException();
+        }
+    }
+
+    private String formatSuccessFeedback(Task removed) {
 
         String feedback = "";
 

@@ -2,14 +2,15 @@ package seedu.command;
 
 import seedu.exception.ProjException;
 
+import static seedu.common.Constants.CLASS_CATEGORY;
+
 public class EditCommand extends Command {
     private String taskEdited;
     private String userInput;
 
-    public static final String COMMAND_WORD = "EDIT";
+    public static final String COMMAND_WORD = "edit";
 
-    public EditCommand(String taskEdited,String userInput) {
-        this.taskEdited = taskEdited;
+    public EditCommand(String userInput) {
         this.userInput = userInput;
     }
 
@@ -50,8 +51,13 @@ public class EditCommand extends Command {
      */
     public CommandResult execute() throws ProjException {
         Boolean isEdit = false;
+        String[] commandSections = this.userInput.split(" ");
+        if (commandSections.length < 2) {
+            throw new ProjException("Please input a task index. E.g: edit 2 r/reminder");
+        }
+        this.taskEdited = commandSections[1];
         if (!isNumeric(taskEdited.trim())) {
-            throw new ProjException("Please input a task index.");
+            throw new ProjException("Please input a task index. E.g: edit 2 r/reminder");
         }
         Integer taskEdited = Integer.parseInt(this.taskEdited.trim()) - 1;
 
@@ -72,14 +78,27 @@ public class EditCommand extends Command {
             isEdit = true;
         }
 
+        //When both date and time are inputted, need to check the matching format.
         String date = getDate(userInput);
-        if (hasInput(date)) {
+        String time = getTime(userInput);
+        checkDateTimeFormat(date,time);
+        if (hasInput(date) & hasInput(time)) {
+            taskList.changeDate(taskEdited,date);
+            taskList.changeTime(taskEdited,time);
+            isEdit = true;
+        }
+        //When only either date/time is inputted, need to check if date&time match after modifying.
+        if (hasInput(date) & !hasInput(time)) {
+            if (date.split("\\s+").length != taskList.getTask(taskEdited).getTime().size() / 2) {
+                throw new ProjException("The number of time range must match with the number of date(day of a week).");
+            }
             taskList.changeDate(taskEdited,date);
             isEdit = true;
         }
-
-        String time = getTime(userInput);
-        if (hasInput(time)) {
+        if (hasInput(time) & !hasInput(date)) {
+            if (time.split("\\s+").length != taskList.getTask(taskEdited).getDate().size()) {
+                throw new ProjException("The number of time range must match with the number of date(day of a week).");
+            }
             taskList.changeTime(taskEdited,time);
             isEdit = true;
         }
@@ -93,9 +112,9 @@ public class EditCommand extends Command {
         String category = getCategory(userInput).trim().toUpperCase();
         if (hasInput(category)) {
             //If it is class, cannot change to task. If it is task, cannot change to class.
-            if (category.equals("CLASS")) {
+            if (category.equals(CLASS_CATEGORY)) {
                 throw new ProjException("Cannot cast a task to class.");
-            } else if (taskList.getTask(taskEdited).getCategory().equals("CLASS")) {
+            } else if (taskList.getTask(taskEdited).getCategory().equals(CLASS_CATEGORY)) {
                 throw new ProjException("Cannot cast a class to task.");
             }
             taskList.changeCategory(taskEdited,category);

@@ -29,6 +29,8 @@ public class ListCommand extends Command {
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;
     private static final int LIST_BY_DATE = 3;
+    private static final int LIST_BY_DATE_CATEGORY = 4;
+
 
     public ListCommand(String userCommand) {
         this.userInput = userCommand;
@@ -45,7 +47,7 @@ public class ListCommand extends Command {
         String time = getTime(userInput).trim();
 
         int listCmdSubtype = getCmdSubtype(category, date, time);
-
+        System.out.println(listCmdSubtype);
         switch (listCmdSubtype) {
             case LIST_ALL:
                 getWholeList(listTaskIndex);
@@ -59,7 +61,9 @@ public class ListCommand extends Command {
                 getListByDate(listTaskIndex, date, time);
                 break;
 
-
+            case LIST_BY_DATE_CATEGORY:
+                getListByDateCategory(listTaskIndex, date, time, category);
+                break;
             default:
                 // Should not reach here
                 feedback = "[Error][List] No such option to filter";
@@ -72,6 +76,139 @@ public class ListCommand extends Command {
     }
 
     // Shouldn't be called dummy
+
+    private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category) {
+
+        //only task can do it
+        if (time == null || time.isEmpty()) {
+            String[] dates = date.split("\\s+");
+            //dates input dates
+            HashSet<LocalDate> inputDates = new HashSet<>();
+            for (String d : dates) {
+                LocalDate addedDate = CalendarParser.convertToDate(d);
+                if (addedDate.compareTo(LocalDate.now()) < 0) {
+                    throw new NumberFormatException("Please enter a date that is either today or in the future.");
+                }
+                inputDates.add(addedDate);
+            }
+
+            int index = -1;
+            int size = inputDates.size();
+            for (Task task : taskList.getList()) {
+                index++;
+                if (!task.getCategory().equals((category)))
+                    continue;
+                if (task.getCategory().equals("CLASS"))
+                    continue;
+                ArrayList<LocalDate> localDates = task.getDate();
+                int sum = 0;
+
+                for (LocalDate d : localDates) {
+                    if (inputDates.contains(d))
+                        sum++;
+                    if (sum >= size) {
+                        listTaskIndex.add(index);
+                        break;
+                    }
+                }
+                // Populate the date with current date if date is not inputted
+            }
+            return;
+        }
+
+
+        if (date.isEmpty()) {
+            String[] times = time.split("\\s+");
+            ArrayList<LocalTime> startTimes = new ArrayList<>();
+            ArrayList<LocalTime> endTimes = new ArrayList<>();
+            for (String atime : times) {
+                String[] timeRange = atime.split("-");
+                LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
+                LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+                startTimes.add(startTime);
+                endTimes.add(endTime);
+            }
+
+            int size = startTimes.size();
+
+            for (int i = 0; i < taskList.getListSize(); i++) {
+                Task task = taskList.getTask(i);
+                if (!task.getCategory().equals((category)))
+                    continue;
+                ArrayList<LocalTime> localTimes = task.getTime();
+
+                int sum = 0;
+                for (int j = 0; j < localTimes.size() / 2; j++) {
+                    for (int k = 0; k < size; k++) {
+                        if (localTimes.get(2 * j).equals(startTimes.get(k))
+                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
+                            sum++;
+                        }
+                    }
+                    if (sum >= size) {
+                        listTaskIndex.add(i);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        //date and time
+        if (!date.isEmpty() && !time.isEmpty()) {
+            String[] dates = date.split("\\s+");
+            String[] times = time.split("\\s+");
+
+            ArrayList<LocalTime> startTimes = new ArrayList<>();
+            ArrayList<LocalTime> endTimes = new ArrayList<>();
+            ArrayList<LocalDate> dateList = new ArrayList<>();
+
+            for (String atime : times) {
+                String[] timeRange = atime.split("-");
+                LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
+                LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+                startTimes.add(startTime);
+                endTimes.add(endTime);
+            }
+
+            for (String adate : dates) {
+                dateList.add(LocalDate.parse(adate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            }
+
+            //dates input dates
+            int size = dates.length;
+
+            for (int i = 0; i < taskList.getListSize(); i++) {
+                Task task = taskList.getTask(i);
+
+                if (!task.getCategory().equals((category)))
+                    continue;
+                if (task.getCategory().equals("CLASS"))
+                    continue;
+                ArrayList<LocalTime> localTimes = task.getTime();
+                ArrayList<LocalDate> localDates = task.getDate();
+
+                int sum = 0;
+
+                for (int j = 0; j < localDates.size(); j++) {
+                    for (int k = 0; k < dateList.size(); k++) {
+                        if (localTimes.get(2 * j).equals(startTimes.get(k))
+                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))
+                                && localDates.get(j).equals(dateList.get(k))) {
+                            sum++;
+                        }
+                    }
+
+                    if (sum >= size) {
+                        listTaskIndex.add(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+
+    }
 
     private void getListByDate(ArrayList<Integer> listTaskIndex, String date, String time) {
 
@@ -131,7 +268,7 @@ public class ListCommand extends Command {
                 ArrayList<LocalTime> localTimes = task.getTime();
 
                 int sum = 0;
-                for (int j = 0; j < localTimes.size()/2; j++) {
+                for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
                         if (localTimes.get(2 * j).equals(startTimes.get(k))
                                 && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
@@ -151,6 +288,7 @@ public class ListCommand extends Command {
         if (!date.isEmpty() && !time.isEmpty()) {
             String[] dates = date.split("\\s+");
             String[] times = time.split("\\s+");
+
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             ArrayList<LocalDate> dateList = new ArrayList<>();
@@ -204,7 +342,6 @@ public class ListCommand extends Command {
 
     private void getWholeList(ArrayList<Integer> listTaskIndex) {
         for (int i = 0; i < taskList.getListSize(); i++) {
-            //System.out.println(taskList.getTask(i).toString());
             listTaskIndex.add(i);
         }
     }
@@ -256,6 +393,10 @@ public class ListCommand extends Command {
 
         if (!(date.isEmpty() && time.isEmpty()) && category.isEmpty()) {
             return LIST_BY_DATE;
+        }
+
+        if (!(date.isEmpty() && time.isEmpty()) && !category.isEmpty()) {
+            return LIST_BY_DATE_CATEGORY;
         }
 
         return LIST_ALL;

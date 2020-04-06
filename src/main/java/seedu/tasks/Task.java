@@ -136,6 +136,10 @@ public abstract class Task {
         return this.category;
     }
 
+    public String getReminder() {
+        return this.reminder;
+    }
+
     public ArrayList<LocalDate> getDate() {
         return this.date;
     }

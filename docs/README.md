@@ -52,8 +52,9 @@ Users add tasks using this command
        user only inputs time, then date of current day will be automatically added. 
      * Since a task/class may has multiple time zone in a week, student can just add list of time zone.
        However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
-       the number of `<LOCATION>` also match with the number of `<TIME>`.Use space to separate the time 
+       the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
        zone/date/location.
+     * If there is only one time slots for this task, then the `<LOCATION>` will not be separated by space.  
      * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
        case-insensitive.  
      * When adding normal tasks:
@@ -128,6 +129,7 @@ Searches all task descriptions for supplied keyword
 * **Usage**: `find <keyword>`
     * Keyword has to be a _**single word**_
     * Keyword is case _insensitive_
+    * Find command can search the keyword in title, description and location. 
 
 ### 3.8 - Save
 Exports my calendar as a text file	

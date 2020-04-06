@@ -79,8 +79,8 @@ public class TaskList {
      */
     private boolean hasPattern(Task task, String pattern) {
         pattern = pattern.toLowerCase();
-        Boolean hasKeywordInStringField = task.getTitle().toLowerCase().contains(pattern) ||
-                task.getDescription().toLowerCase().contains(pattern);
+        Boolean hasKeywordInStringField = task.getTitle().toLowerCase().contains(pattern)
+                || task.getDescription().toLowerCase().contains(pattern);
         for (String location : task.getLocation()) {
             hasKeywordInStringField = hasKeywordInStringField || location.toLowerCase().contains(pattern);
         }

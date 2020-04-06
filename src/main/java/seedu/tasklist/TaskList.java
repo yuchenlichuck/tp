@@ -78,7 +78,13 @@ public class TaskList {
      * @return true if task contains pattern
      */
     private boolean hasPattern(Task task, String pattern) {
-        return task.getTitle().contains(pattern) || task.getDescription().contains(pattern);
+        pattern = pattern.toLowerCase();
+        Boolean hasKeywordInStringField = task.getTitle().toLowerCase().contains(pattern)
+                || task.getDescription().toLowerCase().contains(pattern);
+        for (String location : task.getLocation()) {
+            hasKeywordInStringField = hasKeywordInStringField || location.toLowerCase().contains(pattern);
+        }
+        return hasKeywordInStringField;
     }
 
     private void updateCategoryMap(String category, Integer index) {
@@ -135,7 +141,7 @@ public class TaskList {
 
     /**
      * Finds the tasks that contain the given pattern in their
-     * title or description.
+     * title, description or location.
      *
      * @param pattern pattern to look for in the tasks
      * @return tasks that match the pattern

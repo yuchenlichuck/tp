@@ -1,8 +1,11 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
+
 import java.util.ArrayList;
+
 import static seedu.common.Constants.TAB;
+
 import seedu.ui.Ui;
 import seedu.tasks.Task;
 
@@ -35,22 +38,22 @@ public class ListCommand extends Command {
         int listCmdSubtype = getCmdSubtype(category, date);
 
         switch (listCmdSubtype) {
-        case LIST_ALL:
-            getWholeList(listTaskIndex);
-            break;
+            case LIST_ALL:
+                getWholeList(listTaskIndex);
+                break;
 
-        case LIST_BY_CATEGORY:
-            getListByCategory(listTaskIndex, category);
-            break;
+            case LIST_BY_CATEGORY:
+                getListByCategory(listTaskIndex, category);
+                break;
         /*
         case LIST_BY_DATE:
             getListByDate(listTaskIndex, date, time);
             break;
          */
 
-        default:
-            // Should not reach here
-            break;
+            default:
+                // Should not reach here
+                break;
         }
 
         feedback = getFormattedFeedback(listTaskIndex);
@@ -104,7 +107,13 @@ public class ListCommand extends Command {
     }
 
     private String getFormattedFeedback(ArrayList<Integer> listTaskIndex) {
-        String feedback = "There are " + listTaskIndex.size() + " tasks.\n";
+        String feedback;
+        if (listTaskIndex.size() == 0 ||
+                listTaskIndex.size() == 1) {
+            feedback = "There are " + listTaskIndex.size() + " task.\n";
+        } else {
+            feedback = "There are " + listTaskIndex.size() + " tasks.\n";
+        }
 
         for (int i = 0; i < listTaskIndex.size(); i++) {
             Integer taskIndex = listTaskIndex.get(i);

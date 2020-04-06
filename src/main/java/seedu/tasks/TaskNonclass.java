@@ -9,8 +9,12 @@ import java.time.format.DateTimeParseException;
 
 public class TaskNonclass extends Task {
 
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final char TICK = 'Y'; //Yes
+    public static final char CROSS = 'N'; //No
     private boolean isDateSet = false; // let us set a default without printing if user didnt set
     private boolean isTimeSet = false;
+    private boolean isDone = false;
 
     /**
      * Initializes Task.
@@ -30,10 +34,10 @@ public class TaskNonclass extends Task {
         if (!date.isEmpty()) {
             setDate(date);
         }
+
         if (!time.isEmpty()) {
             setTime(time);
         }
-
     }
 
     @Override
@@ -73,4 +77,17 @@ public class TaskNonclass extends Task {
         return formattedTask;
     }
 
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    /**
+     * Returns symbol for status of task.
+     *
+     * @return tick for done, cross for not done
+     */
+    public char getStatusIcon() {
+        return (isDone ? TICK : CROSS); //return tick or X symbols
+    }
 }

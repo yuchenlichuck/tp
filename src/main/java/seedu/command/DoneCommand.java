@@ -12,6 +12,7 @@ import static seedu.common.Constants.TASKLIST_OFFSET;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
+    public static final String ARGUMENT_COuNT = "1";
 
     private String indexCompleteTask;
 
@@ -26,12 +27,12 @@ public class DoneCommand extends Command {
             Boolean checkValidNumber = Parser.isInteger(indexCompleteTask);
 
             if (!checkValidNumber) {
-                feedback += "[Error][Done] Please insert a valid number";
+                feedback += "[Error][Done] Please insert a valid number\n";
                 return new CommandResult(feedback);
             }
 
             if (taskList.getListSize() == 0) {
-                feedback += "[Alert][Done]: There are no tasks to mark completed!";
+                feedback += "[Alert][Done]: There are no tasks to mark completed!\n";
                 return new CommandResult(feedback);
             }
 

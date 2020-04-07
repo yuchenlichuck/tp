@@ -2,13 +2,14 @@ package seedu.tasks;
 
 import seedu.calendar.CalendarParser;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
 public class TaskNonclass extends Task {
 
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final char TICK = 'Y'; //Yes
     public static final char CROSS = 'N'; //No
     private boolean isDateSet = false; // let us set a default without printing if user didnt set
@@ -45,7 +46,11 @@ public class TaskNonclass extends Task {
         if (!dateInput.isEmpty()) {
             String[] dates = dateInput.split("\\s+");
             for (String date : dates) {
-                this.date.add(CalendarParser.convertToDate(date));
+                LocalDate addedDate = CalendarParser.convertToDate(date);
+                if (addedDate.compareTo(LocalDate.now()) < 0) {
+                    throw new NumberFormatException("Please enter a date that is either today or in the future.");
+                }
+                this.date.add(addedDate);
                 isDateSet = true;
             }
         }

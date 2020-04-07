@@ -68,7 +68,7 @@ public class Main {
             } catch (ProjException e) {
                 ui.showError(e.getMessage());
             } catch (DateTimeParseException e) {
-                ui.showError("Please follow the format of date: dd-MM-yyyy; time: hh:mm");
+                ui.showError("Please follow the format of date: yyyy-mm-dd; time: hh:mm");
             } catch (NumberFormatException e) {
                 ui.showError(e.getMessage());
             }

@@ -1,8 +1,11 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
+
 import java.util.ArrayList;
+
 import static seedu.common.Constants.TAB;
+
 
 import seedu.tasks.TaskNonclass;
 import seedu.tasks.Class;
@@ -109,7 +112,12 @@ public class ListCommand extends Command {
     }
 
     private String getFormattedFeedback(ArrayList<Integer> listTaskIndex) {
-        String feedback = "There are " + listTaskIndex.size() + " tasks.\n";
+        String feedback;
+        if (listTaskIndex.size() == 0 || listTaskIndex.size() == 1) {
+            feedback = "There are " + listTaskIndex.size() + " task.\n";
+        } else {
+            feedback = "There are " + listTaskIndex.size() + " tasks.\n";
+        }
 
 
         for (int i = 0; i < listTaskIndex.size(); i++) {

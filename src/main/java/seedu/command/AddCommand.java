@@ -1,9 +1,12 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
+import seedu.storage.Storage;
 import seedu.tasks.Task;
 import seedu.tasks.TaskNonclass;
 import seedu.tasks.Class;
+
+import java.util.SortedMap;
 
 import static seedu.common.Constants.CLASS_CATEGORY;
 import static seedu.common.Constants.TAB;
@@ -47,6 +50,8 @@ public class AddCommand extends Command {
         } else {
             taskList.addTask(new TaskNonclass(title, description, date, time, location, reminder, category));
         }
+
+        Storage.overwriteFile(taskList.getList());
 
         String feedback = formatFeedback(taskList.getTask(taskList.getListSize() - 1));
 

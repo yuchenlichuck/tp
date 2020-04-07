@@ -33,17 +33,19 @@ public class Main {
         storage = new Storage();
         tasks = new TaskList();
 
-        /*
+
         // search for folder, create if not found
         storage.checkFolderPath();
+
 
         // populate if data file is found
         if (storage.checkFileExists()) {
             // log a message at INFO level
-            logger.log(Level.INFO, "Attempting to read from data file");
+            // TODO Redirect log messages to log file
+            // logger.log(Level.INFO, "Attempting to read from data file");
             storage.loadFromFile(tasks);
         }
-        */
+
     }
 
     public void run() {

@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
 
             String strIndex = commandSections[1].trim();
             int index = Integer.parseInt(strIndex) - 1;
+
             checkForValidIndex(index);
             assert index < taskList.getListSize() : "index > the size of taskList";
 
@@ -78,7 +79,6 @@ public class DeleteCommand extends Command {
         String description = TAB + removed.toString() + System.lineSeparator();
         description += String.format(TAB + Messages.MESSAGE_REMAINING_TASKS, taskList.getListSize());
         description += System.lineSeparator();
-
         feedback = String.format(Messages.MESSAGE_DELETE_SUCCESS, description);
 
         return feedback;

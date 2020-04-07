@@ -14,6 +14,7 @@ import static seedu.common.Constants.TAB;
 
 import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
+import seedu.tasks.Class;
 import seedu.ui.Ui;
 import seedu.tasks.Task;
 
@@ -375,7 +376,6 @@ public class ListCommand extends Command {
                 feedback += TAB + TAB + (i + TASKLIST_OFFSET) + ". ";
                 feedback += "[" + ((Class) task).getStatusIcon() + "] " + task + "\n";
             }
-
         }
 
         return feedback;

@@ -40,8 +40,11 @@ will be displayed.
 
 This is the Sequence Diagram for list by category. 
 ![Sequence Diagram for View](images/listCategorySequence.png)
+
 This is the UML design for list by category.
+
 ![UML for View](images/listCategory.png)
+
 ##### 3.1.1.2 Design Considerations
 Aspect: How to find certain category. 
 
@@ -140,8 +143,8 @@ It solves:
 |v2.1| No. 25 is a university student who want to check whether a designated time has classes | list events by time and category | I can easily find exactly the classes I need to see by time and category |
 |v2.1| No. 22 is a university student who has some emergency and want to cancel the events in a specific date | delete events by date | I can easily delete exactly the events I need to see by date |
 |v2.1| No. 26 is a male student who want to quit events in a designated time cause he has a remote date with his remote girlfriends in that time everday! | delete events by time | I can easily find exactly the events I need to see by time |
-|v2.1| No. 27 is a university student who want to delete its todo category's events cause it don't want to work hard anymore that day. | delete events by time and category | I can easily find exactly the events I need to see by date and category |
-|v2.0| No. 24 is a university student | list events by date | I can easily find exactly the events I need to see by date |
+|v2.1| No. 27 is a university student who want to delete its todo category's events cause it doesn't want to work hard anymore that day | delete events by time and category | I can easily find exactly the events I need to see by date and category |
+|v2.1| No. 28 is a university student who has a emergency in specfic time and date. He wants to delete that time's work | Delete events by date and time | I can easily find exactly the events I need to see by date and time |
 
 ## 6.4 Appendix D:Non-Functional Requirements
 

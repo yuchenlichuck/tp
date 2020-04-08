@@ -7,20 +7,22 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Class extends Task {
+    public static final char WEEK = 'W'; //Weekly
 
     /**
      * Constructor method for initialising new class object.
-     * @param title title of class
+     *
+     * @param title       title of class
      * @param description description of class
-     * @param date range of days the class will be on
-     * @param time range of time the class will be held
-     * @param location location of class
-     * @param reminder any additional reminder if any
-     * @param category categorise the class by grouping in needed
+     * @param date        range of days the class will be on
+     * @param time        range of time the class will be held
+     * @param location    location of class
+     * @param reminder    any additional reminder if any
+     * @param category    categorise the class by grouping in needed
      */
     public Class(String title, String description, String date, String time, String location,
-                        String reminder, String category) {
-        super(title,description,time,location,reminder,category);
+                 String reminder, String category) {
+        super(title, description, time, location, reminder, category);
         if (!date.isEmpty()) {
             setDate(date);
         }
@@ -58,14 +60,23 @@ public class Class extends Task {
         for (int i = 0; i < date.size(); i++) {
             if (time.size() != 0) {
                 formattedTask = formattedTask + String.format(" | %s : %s - %s",
-                        date.get(i).getDayOfWeek().name(), time.get(i * 2),time.get(i * 2 + 1));
+                        date.get(i).getDayOfWeek().name(), time.get(i * 2), time.get(i * 2 + 1));
             } else {
                 formattedTask = formattedTask + String.format(" | %s", date.get(i));
             }
             if (location.size() > i) {
-                formattedTask = formattedTask + String.format(" ( %s )",location.get(i));
+                formattedTask = formattedTask + String.format(" ( %s )", location.get(i));
             }
         }
         return formattedTask;
+    }
+
+    /**
+     * Returns symbol for status of task.
+     *
+     * @return tick for done, cross for not done
+     */
+    public char getStatusIcon() {
+        return WEEK; //return tick or X symbols
     }
 }

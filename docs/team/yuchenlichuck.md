@@ -21,7 +21,11 @@
   
 * [3. Contributions to the User Guide](#contribute-ug)
 
-* [4. Contributions to the Developer Guide](contribute-dg)
+* [4. Contributions to the Developer Guide](#contribute-dg)
+
+* [5. About me](#about-me)
+
+  
 
 <a name="introduction"></a>
 
@@ -61,13 +65,14 @@ You can view my code contribution for this project: [HERE](https://nus-cs2113-ay
 
 <a name="contribute-team"></a>
 
+
 #### Contributions beyond the project team:
 
 <a name="contribute-ug"></a>
 
 ### Contributions to the User Guide (Extracts)
 
-
+***
 
 ### List
 
@@ -165,14 +170,69 @@ List tasks by category and date and time.
       * delete d/2020-03-16 t/15:00 c/todo
       * delete d/2020-08-10 c/deadline
       * delete t/14:00 c/deadline
+***
+
+<a name="contribute-dg"></a>
+
+### Contributions to the Developer Guide
 
 
 
-### About Me
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a name="about-me"></a>
+
+### About Me - Li Yuchen
 
 **Educational experience**
 
-- Undergraduate
+- Junior
 
 - in the department of Computer Science and Engineering
 

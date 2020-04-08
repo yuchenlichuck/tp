@@ -152,7 +152,7 @@ Delete tasks by specific date/time
          * delete d/2020-03-16 t/15:00
          * delete d/2020-08-10
          * delete t/15:00
-      
+     
 
 
 #### 3.5.4 - Delete Category & Time And/Or Date

@@ -13,6 +13,7 @@ import static seedu.common.Constants.TASKLIST_OFFSET;
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String ARGUMENT_COuNT = "1";
+    private String feedback = "";
 
     private String indexCompleteTask;
 
@@ -22,7 +23,7 @@ public class DoneCommand extends Command {
 
     @Override
     public CommandResult execute() throws ProjException {
-        String feedback = "";
+
         try {
             Boolean checkValidNumber = Parser.isInteger(indexCompleteTask);
 
@@ -39,20 +40,30 @@ public class DoneCommand extends Command {
             Task task = taskList.getTask(Integer.parseInt(indexCompleteTask) - TASKLIST_OFFSET);
 
             if (task instanceof TaskNonclass) {
-                ((TaskNonclass) task).markAsDone();
-                feedback += "Task marked as done: " + NEW_LINE + TAB + TAB;
-                feedback += "[" + ((TaskNonclass) task).getStatusIcon() + "] " + task + "\n";
-                if (checkValidNumber) {
-                    Storage.overwriteFile(taskList.getList());
+                TaskNonclass taskNonClass = (TaskNonclass) task;
+                if (!taskNonClass.getDoneStatus()) {
+                    markAsDone(taskNonClass);
+                } else {
+                    feedback += "[Alert][Done]: Task is already done\n";
                 }
             }
 
         } catch (IndexOutOfBoundsException e) {
             System.out.println("[Error][Done]: Please input a task within the range of: 1 - "
-                    + taskList.getList().size() + "\n");
+                    + taskList.getList().size());
         } catch (NumberFormatException e) {
-            System.out.println("[Error][Done]: Please input task number as a number, instead of spelling it out\n");
+            System.out.println("[Error][Done]: Please input task number as a number, instead of spelling it out.");
         }
         return new CommandResult(feedback);
     }
+
+
+    private void markAsDone(TaskNonclass task) {
+        task.markAsDone();
+        feedback += "Task marked as done: " + NEW_LINE + TAB + TAB;
+        feedback += "[" + ((TaskNonclass) task).getStatusIcon() + "] " + task + "\n";
+        Storage.overwriteFile(taskList.getList());
+    }
+
+
 }

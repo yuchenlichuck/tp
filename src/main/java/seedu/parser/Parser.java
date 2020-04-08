@@ -48,6 +48,9 @@ public class Parser {
             return new EditCommand(userCommand);
 
         case ExitCommand.COMMAND_WORD:
+            if (commandSections.length != COMMAND_LENGTH) {
+                return new FailedCommand(ExitCommand.COMMAND_WORD,ExitCommand.ERROR_FEEDBACK);
+            }
             return new ExitCommand();
 
         case ClearCommand.COMMAND_WORD:
@@ -55,7 +58,7 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             if (commandSections.length < 2 || commandSections.length > 2) {
-                return new FailedCommand(DoneCommand.COMMAND_WORD, 2, DoneCommand.ARGUMENT_COuNT);
+                return new FailedCommand(DoneCommand.COMMAND_WORD, commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COuNT);
             }
             return new DoneCommand(commandSections[1]);
 

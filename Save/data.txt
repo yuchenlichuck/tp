@@ -1,5 +1,1 @@
-{"isDateSet":false,"isTimeSet":false,"isDone":false,"title":"name","description":"","reminder":"","category":"TODO","date":[],"time":[],"location":[]}
-{"title":"hola","description":"","reminder":"","category":"CLASS","date":[],"time":[],"location":[]}
-{"isDateSet":false,"isTimeSet":false,"isDone":true,"title":"you know","description":"","reminder":"","category":"TODO","date":[],"time":[],"location":[]}
-{"isDateSet":false,"isTimeSet":false,"isDone":true,"title":"i","description":"n ","reminder":"","category":"TODO","date":[],"time":[],"location":[]}
-{"isDateSet":false,"isTimeSet":false,"isDone":false,"title":"p","description":"","reminder":"","category":"TODO","date":[],"time":[],"location":[]}
+{"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"research paper ","description":"essay for writing 101","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":6}],"time":[],"location":[]}

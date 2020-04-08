@@ -58,7 +58,8 @@ public class Parser {
 
         case DoneCommand.COMMAND_WORD:
             if (commandSections.length < 2 || commandSections.length > 2) {
-                return new FailedCommand(DoneCommand.COMMAND_WORD, commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COuNT);
+                return new FailedCommand(DoneCommand.COMMAND_WORD,
+                        commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COuNT);
             }
             return new DoneCommand(commandSections[1]);
 
@@ -69,7 +70,8 @@ public class Parser {
             if (commandSections.length == 1) {
                 return new CalendarCommand(null);
             }
-            return new FailedCommand(CalendarCommand.COMMAND_WORD,commandSections.length - COMMAND_LENGTH, CalendarCommand.ARGUMENT_COuNT);
+            return new FailedCommand(CalendarCommand.COMMAND_WORD,
+                    commandSections.length - COMMAND_LENGTH, CalendarCommand.ARGUMENT_COuNT);
 
         default:
             System.out.println("Command not recognised\n");

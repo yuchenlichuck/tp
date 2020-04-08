@@ -22,12 +22,11 @@ public class CalendarCommand extends Command {
     String feedback = "";
     private int checkMonth;
     private int currentYear;
+    public static final String ARGUMENT_COuNT = "0 or 1";
 
     public CalendarCommand(String userInput) {
         this.userInput = userInput;
     }
-    public static final String ARGUMENT_COuNT = "0 or 1";
-
 
     @Override
     public CommandResult execute() throws ProjException {

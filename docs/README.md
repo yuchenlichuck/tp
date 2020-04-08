@@ -126,6 +126,8 @@ Delete a task from the list
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
     * index has to be a positive_integer_
+    * Examples:
+      * delete 2
 
 #### **3.5.2 - Delete Category**
 

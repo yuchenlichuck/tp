@@ -56,32 +56,6 @@ public class Storage {
         return gson.toJson(task);
     }
 
-
-    public static Task convertFromGson(String gsonTask) {
-        return null;
-    }
-
-
-    //    /**
-    //     * Over writes saved data file with latest task list.
-    //     *
-    //     * @param taskList current task list for saving
-    //     */
-    //
-    //    public static void overwriteFile(ArrayList<Task> taskList) {
-    //        String formattedTaskList = convertToGson(taskList);
-    //        try {
-    //            File file = new File(String.valueOf(FILE_PATH));
-    //            FileWriter myWriter = new FileWriter(file, false);
-    //            myWriter.write(formattedTaskList);
-    //            myWriter.close();
-    //            //System.out.println("Successfully updated data file!\n");
-    //        } catch (IOException e) {
-    //            System.out.println("[Error] File cannot be written!\n");
-    //        }
-    //    }
-
-
     /**
      * Over writes saved data file with latest task list.
      *
@@ -107,20 +81,6 @@ public class Storage {
         }
     }
 
-    /*
-    public static void saveTaskToFile(Task task) {
-        String formattedTask = convertToGson(task);
-        try {
-            File file = new File(String.valueOf(FILE_PATH));
-            FileWriter myWriter = new FileWriter(file, true);
-            myWriter.write(formattedTask);
-            myWriter.close();
-            //System.out.println("Successfully updated data file!\n");
-        } catch (IOException e) {
-            System.out.println("[Error] File cannot be written!\n");
-        }
-    }
-     */
 
     /**
      * Reading in data file and storing into tasklist.

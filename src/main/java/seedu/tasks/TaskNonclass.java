@@ -90,4 +90,12 @@ public class TaskNonclass extends Task {
     public char getStatusIcon() {
         return (isDone ? TICK : CROSS); //return tick or X symbols
     }
+
+    /**
+     * Returns done status of task.
+     * @return true or false whether completed
+     */
+    public boolean getDoneStatus() {
+        return isDone;
+    }
 }

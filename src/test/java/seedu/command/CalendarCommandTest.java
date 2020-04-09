@@ -18,7 +18,16 @@ public class CalendarCommandTest {
     @Test
     void checkNoInput() {
 
-        Command command = new CalendarCommand(null);
+        String input = "add n/i i/n d/2020-04-10";
+        Command command = new AddCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+        try {
+            command.execute().getFeedback();
+        } catch (Exception e) {
+            assertTrue(false);
+        }
+
+        command = new CalendarCommand(null);
         command.setCommandVariables(tasks, storage, ui);
         try {
             command.execute().getFeedback();
@@ -29,8 +38,16 @@ public class CalendarCommandTest {
 
     @Test
     void checkValidInput() {
+        String input = "add n/i i/n d/2020-05-01";
+        Command command = new AddCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+        try {
+            command.execute().getFeedback();
+        } catch (Exception e) {
+            assertTrue(false);
+        }
 
-        Command command = new CalendarCommand("2");
+        command = new CalendarCommand("5");
         command.setCommandVariables(tasks, storage, ui);
         try {
             String output = command.execute().getFeedback();
@@ -38,7 +55,18 @@ public class CalendarCommandTest {
         } catch (Exception e) {
             assertTrue(false);
         }
+    }
 
+    @Test
+    void checkExceededMonthInput() {
+        Command command = new CalendarCommand("13");
+        command.setCommandVariables(tasks, storage, ui);
+        try {
+            String output = command.execute().getFeedback();
+            assertNotNull(output);
+        } catch (Exception e) {
+            assertTrue(false);
+        }
     }
 
 }

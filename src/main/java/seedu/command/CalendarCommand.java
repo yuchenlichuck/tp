@@ -10,6 +10,9 @@ import java.util.Calendar;
 public class CalendarCommand extends Command {
 
     public static final String COMMAND_WORD = "calendar";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": prints a monthly representation of calendar";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " n/[OPTIONAL_MONTH]";
+
     private final String[] months = {"January", "February", "March", "April", "May",
         "June", "July", "August", "September", "October", "November", "December"};
     private final String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};

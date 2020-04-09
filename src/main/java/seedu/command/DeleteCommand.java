@@ -23,7 +23,14 @@ public class DeleteCommand extends Command {
     private String userInput;
 
     public static final String COMMAND_WORD = "delete";
-    public static final String COMMAND_USAGE = COMMAND_WORD + " [task number]";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": deletes tasks from the list"
+            + " (e.g all tasks or by category)";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[DD-MM-YYYY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
+
+
     private static final int LIST_ERROR = 0;
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;
@@ -39,20 +46,22 @@ public class DeleteCommand extends Command {
 
         String feedback = "";
         String[] commandSections = userInput.split(" ");
-        if (commandSections.length < 2) {
-            throw new ProjException("Please input correctly. E.g: delete 2\n");
-        }
-        int len = commandSections.length;
-        String category = getCategory(userInput).trim().toUpperCase();
-        String date = getDate(userInput).trim();
-        String time = getTime(userInput).trim();
-        int listCmdSubtype = getCmdSubtype(category, date, time, len);
+
         try {
+
+            int len = commandSections.length;
+            String category = getCategory(userInput).trim().toUpperCase();
+            String date = getDate(userInput).trim();
+            String time = getTime(userInput).trim();
+
+            int listCmdSubtype = getCmdSubtype(category, date, time, len);
+
             checkForEmptyList();
+            String strIndex = commandSections[1].trim();
 
             switch (listCmdSubtype) {
+
             case LIST_ALL:
-                String strIndex = commandSections[1].trim();
                 int index = Integer.parseInt(strIndex) - 1;
                 checkForValidIndex(index);
                 assert index < taskList.getListSize() : "index > the size of taskList";
@@ -66,25 +75,25 @@ public class DeleteCommand extends Command {
             case LIST_BY_DATE_CATEGORY:
                 feedback = getListByDateCategory(date, time, category);
                 break;
+
             default:
-                // Should not reach here
                 feedback = "[Error][List] No such option to filter";
                 break;
             }
 
         } catch (TaskOutOfBoundsException e) {
-            feedback = String.format(Messages.MESSAGE_OUT_OF_BOUNDS, commandSections[1].trim(), taskList.getListSize());
+            feedback = TAB + String.format(Messages.MESSAGE_OUT_OF_BOUNDS, COMMAND_WORD, commandSections[1].trim(),
+                    taskList.getListSize());
 
         } catch (IndexOutOfBoundsException e) {
-            feedback = Messages.MESSAGE_MISSING_NUMBER;
+            feedback = TAB + Messages.MESSAGE_MISSING_NUMBER;
         } catch (NumberFormatException e) {
-            feedback = String.format(Messages.MESSAGE_INVALID_INDEX, commandSections[1]);
+            feedback = TAB + String.format(Messages.MESSAGE_INVALID_INDEX, COMMAND_WORD, commandSections[1]);
 
         } catch (EmptyTaskListException e) {
-            feedback = String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD);
+            feedback = TAB + String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD, COMMAND_WORD);
 
         } finally {
-            System.out.println(feedback);
             return new CommandResult(feedback);
         }
     }
@@ -106,10 +115,10 @@ public class DeleteCommand extends Command {
 
         String feedback = "";
 
-        String description = TAB + removed.toString() + System.lineSeparator();
+        String description = TAB + TAB + removed.toString() + System.lineSeparator();
         description += String.format(TAB + Messages.MESSAGE_REMAINING_TASKS, taskList.getListSize());
         description += System.lineSeparator();
-        feedback = String.format(Messages.MESSAGE_DELETE_SUCCESS, description);
+        feedback = String.format(TAB + Messages.MESSAGE_DELETE_SUCCESS, description);
 
         return feedback;
     }

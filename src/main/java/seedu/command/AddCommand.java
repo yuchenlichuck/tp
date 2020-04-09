@@ -6,8 +6,6 @@ import seedu.tasks.Task;
 import seedu.tasks.TaskNonclass;
 import seedu.tasks.Class;
 
-import java.util.SortedMap;
-
 import static seedu.common.Constants.CLASS_CATEGORY;
 import static seedu.common.Constants.TAB;
 
@@ -16,11 +14,15 @@ public class AddCommand extends Command {
     private String userInput;
 
     public static final String COMMAND_WORD = "add";
-    public static final String COMMAND_USAGE = COMMAND_WORD + " n/[title] i/[description] t/[hh:mm-hh:mm] "
-           + "d/[dd-mm-yyyy] l/[LOCATION] r/[REMINDER] c/[CATEGORY]";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": adds tasks to the list";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " n/[TITLE] t/[HH:MM-HH:MM] l/[LOCATION] d/[DD-MM-YYYY]"
+            + "i/[INFORMATION] r/[REMINDER] c/[CATEGORY]";
 
     private static final String MESSAGE_SUCCESS = "Nice! Added the following task to the calendar:\n";
     private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task/tasks in your list";
+    private static final String MESSAGE_DELIMITER_ERROR = TAB + "[Error][Add] \"/\" is only used in delimiter"
+            + " (e.g. 04/16/2020 is not supported)\n";
+    private static final String MESSAGE_MISSING_TITLE = TAB + "[Error][Add] Please input a title for the task.\n";
 
 
     public AddCommand(String userInput) {
@@ -30,10 +32,15 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws ProjException {
 
-        String title = getTitle(userInput);
+        // Check if the user uses / for time/date format
+        if (hasWrongDelimiterPattern(userInput)) {
+            throw new ProjException(MESSAGE_DELIMITER_ERROR);
+        }
 
+        //Check if user enters title
+        String title = getTitle(userInput);
         if (title.length() == 0) {
-            throw new ProjException("Please input a title for the task.");
+            throw new ProjException(MESSAGE_MISSING_TITLE);
         }
 
         String date = getDate(userInput);
@@ -43,6 +50,7 @@ public class AddCommand extends Command {
         String location = getLocation(userInput);
         String category = getCategory(userInput).trim().toUpperCase();
 
+        //Check date/time format
         checkDateTimeFormat(date,time);
 
         if (category.equals(CLASS_CATEGORY)) {
@@ -61,8 +69,8 @@ public class AddCommand extends Command {
 
     private String formatFeedback(Task task) {
 
-        String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()
-                + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
+        String feedback = TAB + MESSAGE_SUCCESS + TAB + TAB + TAB + task.toString() + System.lineSeparator()
+                + TAB + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
                 + System.lineSeparator();
 
         return feedback;

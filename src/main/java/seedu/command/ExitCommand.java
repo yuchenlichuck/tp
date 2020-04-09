@@ -8,9 +8,10 @@ import seedu.common.Messages;
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": exits the program";
-    public static final String ERROR_FEEDBACK = "No arguments required";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": exits the program";
+    public static final String COMMAND_USAGE = COMMAND_WORD;
 
+    public static final String ERROR_FEEDBACK = "No arguments required";
 
     /**
      * Check if exit command is given.

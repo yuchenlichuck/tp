@@ -2,6 +2,7 @@ package seedu.command;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.common.Constants.TAB;
 
 import org.junit.jupiter.api.Test;
 import seedu.exception.ProjException;
@@ -24,7 +25,10 @@ class ListCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        assertEquals("There are 0 task.\n", output);
+
+        String expected = "  [Alert][list] List is empty";
+
+        assertEquals(expected, output);
     }
 
     @Test
@@ -53,7 +57,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = "There are 1 task.\n"
+        String expected = TAB + "There are 1 task.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n";
 
         assertEquals(expected, output);
@@ -95,7 +99,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = "There are 6 tasks.\n"
+        String expected = TAB + "There are 6 tasks.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    3. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
@@ -149,7 +153,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = "There are 2 tasks.\n"
+        String expected = TAB + "There are 2 tasks.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n";
 
@@ -211,7 +215,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = "There are 3 tasks.\n"
+        String expected = TAB + "There are 3 tasks.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    3. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n";
@@ -273,7 +277,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = "There are 3 tasks.\n"
+        String expected = TAB + "There are 3 tasks.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    3. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n";

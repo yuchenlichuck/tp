@@ -9,8 +9,8 @@
   * [Delete tasks](#35---delete)
   * [Having done a task](#36---done)
   * [Find a task](#37---find)
-  * [Save tasks](#38---save)
-  * [Calendar](#39---calendar)
+  * [Calendar](#38---calendar)
+  * [Clear Command](#39---clear)
   * [Exit the program](#310---exit)
 * [FAQ](#4-faq)
 * [Command Summary](#5-command-summary)
@@ -37,6 +37,13 @@ The `<>` symbol just for readability.
 * The command keyword (e.g. `add`) is case insensitive. However, the delimiter (e.g. `n/`)are case sensitive.
 * It is okay to switch the sequence when inputting the delimiters:
     * `add n/<NAME> l/<LOCATION>` has same effects as `add l/<LOCATION> n/<NAME> `
+* When inputting a time, the time format is always: `hh:mm`.
+  Most command accepts time range which is: `hh:mm-hh:mm`. No space is allowed around `-`.
+  Also, similar format like `1:00` will not be allowed. 
+* When inputting a date, the date format is always: `yyyy-mm-dd`.
+* Some recognized date/time error will be automatically parsed to accepted format.
+    * `24:00` will be parsed to `23:59` since 24:00 is next day. 
+    * `2021-02-30` will be parsed to `2021-02-28`
 
 ### 3.1 - Help
 Displays the set of commands supported
@@ -67,7 +74,7 @@ Users add tasks using this command
         * Examples: 
             * add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
             * add n/3245 t/17:00-19:00 d/5 c/CLASS
-    
+
 ### 3.3 - Edit
 Edit the inputted task/class. 
 * **Usage**:`edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
@@ -81,44 +88,93 @@ Edit the inputted task/class.
         * edit 2 c/todo  
     
 ### 3.4 - List
-#### 3.4.1 - List 
-Lists all tasks
+#### **3.4.1 - List** 
+List all tasks
 * **Usage**: `list`
 
-#### 3.4.2 - List Category
-Lists tasks belong to a specific category
+#### **3.4.2 - List Category**
+List tasks belong to a specific category
 * **Usage**: `list c/<CATEGORY>`
+    * Wrong command: `list TODO` which will has the same effects as the `list`
+    * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
     * Examples:
         * list c/TODO
         * list c/DEADLINE
+
         * Wrong command: `list TODO` which will has the same effects as the `list`
         * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
       
 #### 3.4.3 - List Time
-Lists tasks by specific date/time
-* **Usage**: `list d/<DATE> t/<TIME>`
-    * It is okay to only list event in a specific date. However, it is not okay to list event in a specific time
-        without inferring the specific date. 
-    * This will also display the classed whose time range overlaps that time.
-    * Also, current does not accept list class. 
-    * Examples: 
-        * list d/2020-03-16 t/15:00
-        * list d/2020-08-10
+Lists tasks and classes by specific time range. 
+* **Usage**: `list t/<TIME>`
+    * `task` and `class` with a specific time range can be listed by `list t/hh:mm-hh:mm`.
+    (Please specify if you will list tasks which is exactly at that time range or
+    has a overlap at that time range. ) 
+        * list t/15:00-16:00
 
-### 3.4.4 - List specific event
+#### 3.4.4 - List Date
+List tasks by specific date.
+* **Usage** : `list d/<DATE>`
+    * `task` with a specific date can be listed by `list d/yyyy-mm-dd`
+       `class` cannot be listed by date since class only adopts schedule
+    (Please specify if you support date range or only support one date) 
+        * `list d/2020-06-17`
+        
+#### 3.4.5 - list Date + Time        
+List tasks by specific date and time.
+* **Usage** : `list d/<DATE> t/<TIME>`
+    * `task` with a specific date and time can be listed by `list d/yyyy-mm-dd t/hh:mm-hh:mm`
+       `class` cannot be listed by date and time since class only adopts schedule. 
+        (Please specify ) 
+        * `list d/2020-06-17 t/12:00-13:00`
+        
+### 3.4.6 - List specific event
+
 List tasks by category and date and time. 
 * **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
 
+    * It is okay to list events in a specific date and specific time in a  specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific date in a specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific time in a specific category. All categories can be shown.
+    * Examples: 
+        * list d/2020-03-16 t/15:00 c/todo
+        * list d/2020-08-10 c/deadline
+        * list t/14:00 c/deadline
 
 ### 3.5 - Delete
 Deletes a task from the list
+#### 3.5.1 - Delete a task/class
 * **Usage**: `delete <task index>`
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
     * index has to be an _integer_
+      
+#### 3.5.2 - Delete Time
+Delete tasks and classes by specific time range. 
+* **Usage**: `delete t/<TIME>`
+    * `task` and `class` with a specific time range can be listed by `delete t/hh:mm-hh:mm`.
+    (Please specify if you will list tasks which is exactly at that time range or
+    has a overlap at that time range. ) 
+        * delete t/15:00-16:00
 
+#### 3.5.3 - Delete Date
+Delete tasks by specific date.
+* **Usage** : `delete d/<DATE>`
+    * `task` with a specific date can be listed by `delete d/yyyy-mm-dd`
+       `class` cannot be listed by date since class only adopts schedule
+    (Please specify if you support date range or only support one date) 
+        * `delete d/2020-06-17`
+        
+#### 3.5.4 - Delete Date + Time        
+Delete tasks by specific date and time.
+* **Usage** : `delete d/<DATE> t/<TIME>`
+    * `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`
+       `class` cannot be listed by date and time since class only adopts schedule. 
+        (Please specify ) 
+        * `delete d/2020-06-17 t/12:00-13:00`
+        
 ### 3.6 - Done
-Changes the status of a task to completed
+Change the status of a task to completed
 * **Usage**: `done <task index>`
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
@@ -131,8 +187,8 @@ Searches all task descriptions for supplied keyword
     * Keyword is case _insensitive_
     * Find command can search the keyword in title, description and location. 
 
-### 3.9 - Calendar
-Prints a monthy representation of a calendar. Shows the number of tasks a user has on a particular day.
+### 3.8 - Calendar
+Prints a monthly representation of a calendar. Shows the number of tasks a user has on a particular day.
 Users are able to specify which month to look up. Default is the current month. 
 
 Will still display tasks from past months as long as not marked as complete.
@@ -142,30 +198,40 @@ Will still display tasks from past months as long as not marked as complete.
     * Default set to current month
     * If number supplied is not within the month range, it will be set to current month
 
+### 3.9 - Clear
+Clear the Command
+* **Usage**:`clc`
+
 ### 3.10 - Exit
 Exits the program
 * **Usage**: `bye`
-    
+  
 ## 4. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
- 
+
 ## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **List**: 
     * `list`
     * `list c/<category>` 
+    * `list t/<TIME>`
+    * `list d/<DATE>`
     * `list d/<DATE> t/<TIME>`
-    * `list c/<category> d/<DATE> t/<TIME>`
+    * `list c/<CATEGORY> d/<DATE> t/<TIME>`
  * **Delete**:
     * `delete <task index>` 
+    * `delete t/<TIME>` 
+    * `delete d/<DATE>`
+    * `delete d/<DATE> t/<TIME>`
  * **Done**: `done <task index>` 
  * **Find**: `find <keyword>` 
  * **Save**: `save`
  * **Help**: `help`
  * **Calendar**: `calendar` or `calendar <month>`
+ * **Clear**:`clc`
  * **Exit**: `bye`

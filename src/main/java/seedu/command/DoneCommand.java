@@ -11,7 +11,12 @@ import static seedu.common.Constants.TASKLIST_OFFSET;
 
 
 public class DoneCommand extends Command {
+
     public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": changes the status of task to completed";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]";
+
+
     public static final String ARGUMENT_COuNT = "1";
     private String feedback = "";
 
@@ -28,12 +33,12 @@ public class DoneCommand extends Command {
             Boolean checkValidNumber = Parser.isInteger(indexCompleteTask);
 
             if (!checkValidNumber) {
-                feedback += "[Error][Done] Please insert a valid number\n";
+                feedback += TAB + "[Error][Done] Please insert a valid number\n";
                 return new CommandResult(feedback);
             }
 
             if (taskList.getListSize() == 0) {
-                feedback += "[Alert][Done]: There are no tasks to mark completed!\n";
+                feedback += TAB + "[Alert][Done]: There are no tasks to mark completed!\n";
                 return new CommandResult(feedback);
             }
 
@@ -44,15 +49,16 @@ public class DoneCommand extends Command {
                 if (!taskNonClass.getDoneStatus()) {
                     markAsDone(taskNonClass);
                 } else {
-                    feedback += "[Alert][Done]: Task is already done\n";
+                    feedback += TAB + "[Alert][Done]: Task is already done\n";
                 }
             }
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("[Error][Done]: Please input a task within the range of: 1 - "
+            System.out.println(TAB + "[Error][Done]: Please input a task within the range of: 1 - "
                     + taskList.getList().size());
         } catch (NumberFormatException e) {
-            System.out.println("[Error][Done]: Please input task number as a number, instead of spelling it out.");
+            System.out.println(TAB + "[Error][Done]: Please input task number as a number, instead "
+                    + "of spelling it out.");
         }
         return new CommandResult(feedback);
     }
@@ -60,7 +66,7 @@ public class DoneCommand extends Command {
 
     private void markAsDone(TaskNonclass task) {
         task.markAsDone();
-        feedback += "Task marked as done: " + NEW_LINE + TAB + TAB;
+        feedback += TAB + "Task marked as done: " + NEW_LINE + TAB + TAB;
         feedback += "[" + ((TaskNonclass) task).getStatusIcon() + "] " + task + "\n";
         Storage.overwriteFile(taskList.getList());
     }

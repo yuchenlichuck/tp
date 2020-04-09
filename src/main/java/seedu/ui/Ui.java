@@ -16,20 +16,11 @@ public class Ui {
                 + TAB + "\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
                 + TAB + " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
                 + TAB + "  \\/_____/   \\/_/\\/_/   \\/_/     \\/_____/\n";
+    private static final String MESSAGE_INTRO = NEW_LINE + TAB + "Welcome to CAFS! Type \"help\" at any time if "
+            + "you are lost";
 
     private Scanner input = new Scanner(System.in);
 
-
-    /**
-     * Returns true if the user input line should be ignored.
-     * Input should be ignored if it is only whitespace, or is empty. (add more conditions if needed)
-     *
-     * @param rawInputLine full raw user input line.
-     * @return true if the entire user input line should be ignored.
-     */
-    private boolean shouldIgnoreInput(String rawInputLine) {
-        return rawInputLine.trim().isEmpty();
-    }
 
 
     /**
@@ -46,11 +37,11 @@ public class Ui {
             System.out.print(message);
         }
 
-        System.out.println(DIVIDER);
+        System.out.println(NEW_LINE + DIVIDER + NEW_LINE);
     }
 
     public void showWelcome() {
-        showUserMessage(LOGO);
+        showUserMessage(LOGO + MESSAGE_INTRO);
     }
 
     /**
@@ -81,7 +72,11 @@ public class Ui {
         showUserMessage(result.getFeedback());
     }
 
+    /** Displays the error message to user.
+     *
+     * @param error the error message.
+     */
     public void showError(String error) {
-        System.out.println(error);
+        showUserMessage(error);
     }
 }

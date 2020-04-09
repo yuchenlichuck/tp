@@ -1,14 +1,11 @@
 package seedu.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.command.AddCommand;
-import seedu.command.Command;
-import seedu.command.ExitCommand;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.common.Constants.TAB;
 
 public class ExitCommandTest {
@@ -18,7 +15,7 @@ public class ExitCommandTest {
     Storage storage = new Storage();
 
     @Test
-    void CheckValidCommand() {
+    void checkValidCommand() {
 
         String input = "add n/i i/n d/2020-04-10";
         Command command = new AddCommand(input);

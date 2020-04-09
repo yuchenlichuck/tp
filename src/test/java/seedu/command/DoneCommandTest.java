@@ -91,8 +91,8 @@ class DoneCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expected = TAB + "Task marked as done: " + NEW_LINE + TAB + TAB +
-                "[Y] [TODO] Title: task1 | Description: desc1\n";
+        String expected = TAB + "Task marked as done: " + NEW_LINE + TAB + TAB
+                + "[Y] [TODO] Title: task1 | Description: desc1\n";
         assertEquals(expected, output);
     }
 

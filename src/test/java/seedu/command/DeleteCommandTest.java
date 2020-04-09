@@ -238,9 +238,8 @@ public class DeleteCommandTest {
         }
     }
 
-
     @Test
-    public void testDeleteByCategoryDate() {
+    public void testDeleteByCategoryDateTime() {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -248,7 +247,6 @@ public class DeleteCommandTest {
         String input1 = "add n/homework i/cs2106_project "
                 + "t/00:20-23:00 d/2021-12-31 l/com2 r/reminder c/deadline";
         Command command = new AddCommand(input1);
-
         command.setCommandVariables(tasks, storage, ui);
         try {
             command.execute();
@@ -271,7 +269,6 @@ public class DeleteCommandTest {
         }
 
         String deleteInput = "delete c/deadline t/00:20-23:00 d/2021-12-31";
-
         command = new DeleteCommand(deleteInput);
         command.setCommandVariables(tasks, storage, ui);
 
@@ -282,19 +279,15 @@ public class DeleteCommandTest {
             assertTrue(false);
         }
 
-
         String expected = "[TODO] Title: homework | Description:"
                 + " cs2113_homework_team_project  | Reminder: reminder"
                 + " | 2021-12-31 : 00:20 - 23:00 ( com2 )";
-
 
         for (Task task : tasks.getList()) {
             assertEquals(expected, task.toString());
         }
     }
 
-
-    //currently couldn't pass because of assertions.
     @Test
     public void testDeleteZeroTask() {
         TaskList tasks = new TaskList();
@@ -304,13 +297,13 @@ public class DeleteCommandTest {
         Command command = new DeleteCommand(deleteInput);
         command.setCommandVariables(tasks, storage, ui);
         String output = "";
+
         try {
             output = command.execute().getFeedback();
         } catch (ProjException e) {
             assertTrue(false);
         }
         String expected = "  [Alert][delete] There is nothing to delete, the list is empty\n";
-
         assertEquals(expected, output);
     }
 }

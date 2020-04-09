@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
                 return new CommandResult(feedback);
             }
 
-            assert indexComplete > 0:"[Error][Done] user input is less than 0, not valid";
+            assert indexComplete > 0 : "[Error][Done] user input is less than 0, not valid";
 
             if (taskList.getListSize() == 0) {
                 feedback += TAB + "[Alert][Done]: There are no tasks to mark completed!\n";

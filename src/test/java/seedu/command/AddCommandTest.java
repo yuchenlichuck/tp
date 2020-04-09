@@ -33,30 +33,6 @@ public class AddCommandTest {
         assertTrue(isEqual);
     }
 
-    //Currently Couldn't run successfully because the local date
-    //say the 30-02-2024 is 29-02-2024
-    //I haven't find where is the bug yet.
-    /*   @Test
-    public void testAddDeadlineCheckException() {
-        TaskList tasks = new TaskList();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-
-        String input = "add n/task t/12:15-14:15 d/30-02-2024";
-        String expected = "Please follow the format of date: dd-MM-yyyy; time: hh:mm";
-
-        AddCommand command = new AddCommand(input);
-        command.setCommandVariables(tasks, storage, ui);
-        try {
-            command.execute();
-        } catch (ProjException e) {
-            assertTrue(false);
-        }
-
-        String output = tasks.getTask(0).toString();
-        assertEquals(expected, output);
-    }*/
-
     @Test
     public void testAddDeadline() {
         TaskList tasks = new TaskList();

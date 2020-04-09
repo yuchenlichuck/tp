@@ -6,7 +6,8 @@ import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.common.Constants.TAB;
 
 public class CalendarCommandTest {

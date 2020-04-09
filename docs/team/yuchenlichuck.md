@@ -176,56 +176,6 @@ List tasks by category and date and time.
 
 ### Contributions to the Developer Guide
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <a name="about-me"></a>
 
 ### About Me - Li Yuchen

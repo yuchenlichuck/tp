@@ -30,8 +30,13 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() throws ProjException {
 
-        String title = getTitle(userInput);
+        // Check if the user uses / for time/date format
+        if (hasWrongDelimiterPattern(userInput)) {
+            throw new ProjException("Please note that / is only used in delimiter : Similar format like 2020/04/16 is not allowed.");
+        }
 
+        //Check if user enters title
+        String title = getTitle(userInput);
         if (title.length() == 0) {
             throw new ProjException("Please input a title for the task.");
         }
@@ -43,6 +48,7 @@ public class AddCommand extends Command {
         String location = getLocation(userInput);
         String category = getCategory(userInput).trim().toUpperCase();
 
+        //Check date/time format
         checkDateTimeFormat(date,time);
 
         if (category.equals(CLASS_CATEGORY)) {

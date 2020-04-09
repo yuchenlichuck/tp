@@ -134,6 +134,10 @@ Searches all task descriptions for supplied keyword
     * Keyword is case _insensitive_
     * Find command can search the keyword in title, description and location. 
 
+### 3.8 - Save
+Saves current list into somewhere.
+* **Usage**: `save`
+
 ### 3.9 - Calendar
 Prints a monthy representation of a calendar. Shows the number of tasks a user has on a particular day.
 Users are able to specify which month to look up. Default is the current month. 

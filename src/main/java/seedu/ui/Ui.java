@@ -9,8 +9,7 @@ public class Ui {
     /** A platform independent line separator. */
     private static final String NEW_LINE = System.lineSeparator();
     public static final String DIVIDER = "__________________________________________________________________________";
-    // private static final String PROMPT = "What is your command?" + NEW_LINE;
-    private static final String PROMPT = "> ";
+    private static final String PROMPT = "What is your command?" + NEW_LINE;
     private  static final  String LOGO =
                 TAB + " ______     ______     ______   ______\n"
                 + TAB + "/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"

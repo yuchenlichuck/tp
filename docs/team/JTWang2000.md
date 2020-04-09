@@ -15,7 +15,7 @@ application using a CLI. It is written in Java.
 * Tasks (Finalized version): Create two task types: taskNonClass and Class <br/>
 * List Command (Initial version of list by category): lists tasks by category <br/>
 
-### Enhancements implemented
+###  Enhancements implemented
 * Features update : Design the structure of features to benefit users
 * Find Command update : Enable case insensitive task finding
 

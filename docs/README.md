@@ -74,7 +74,7 @@ Users add tasks using this command
         * Examples: 
             * add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
             * add n/3245 t/17:00-19:00 d/5 c/CLASS
-    
+
 ### 3.3 - Edit
 Edit the inputted task/class. 
 * **Usage**:`edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
@@ -88,16 +88,19 @@ Edit the inputted task/class.
         * edit 2 c/todo  
     
 ### 3.4 - List
-#### 3.4.1 - List 
-Lists all tasks
+#### **3.4.1 - List** 
+List all tasks
 * **Usage**: `list`
 
-#### 3.4.2 - List Category
-Lists tasks belong to a specific category
+#### **3.4.2 - List Category**
+List tasks belong to a specific category
 * **Usage**: `list c/<CATEGORY>`
+    * Wrong command: `list TODO` which will has the same effects as the `list`
+    * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
     * Examples:
         * list c/TODO
         * list c/DEADLINE
+
         * Wrong command: `list TODO` which will has the same effects as the `list`
         * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
       
@@ -126,9 +129,17 @@ List tasks by specific date and time.
         * `list d/2020-06-17 t/12:00-13:00`
         
 ### 3.4.6 - List specific event
+
 List tasks by category and date and time. 
 * **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
 
+    * It is okay to list events in a specific date and specific time in a  specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific date in a specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific time in a specific category. All categories can be shown.
+    * Examples: 
+        * list d/2020-03-16 t/15:00 c/todo
+        * list d/2020-08-10 c/deadline
+        * list t/14:00 c/deadline
 
 ### 3.5 - Delete
 Deletes a task from the list
@@ -163,7 +174,7 @@ Delete tasks by specific date and time.
         * `delete d/2020-06-17 t/12:00-13:00`
         
 ### 3.6 - Done
-Changes the status of a task to completed
+Change the status of a task to completed
 * **Usage**: `done <task index>`
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
@@ -194,14 +205,14 @@ Clear the Command
 ### 3.10 - Exit
 Exits the program
 * **Usage**: `bye`
-    
+  
 ## 4. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
- 
+
 ## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
@@ -211,7 +222,7 @@ Exits the program
     * `list t/<TIME>`
     * `list d/<DATE>`
     * `list d/<DATE> t/<TIME>`
-    * `list c/<category> d/<DATE> t/<TIME>`
+    * `list c/<CATEGORY> d/<DATE> t/<TIME>`
  * **Delete**:
     * `delete <task index>` 
     * `delete t/<TIME>` 

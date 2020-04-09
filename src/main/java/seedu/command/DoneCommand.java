@@ -33,16 +33,25 @@ public class DoneCommand extends Command {
             Boolean checkValidNumber = Parser.isInteger(indexCompleteTask);
 
             if (!checkValidNumber) {
-                feedback += TAB + "[Error][Done] Please insert a valid number\n";
+                feedback += TAB + "[Error][Done] Please insert a valid positive number\n";
                 return new CommandResult(feedback);
             }
+
+            int indexComplete = Integer.parseInt(indexCompleteTask);
+
+            if (indexComplete == 0) {
+                feedback += TAB + "[Error][Done] List numbering starts from 1\n";
+                return new CommandResult(feedback);
+            }
+
+            assert indexComplete > 0: "[Error][Done] user input is less than 0, not valid";
 
             if (taskList.getListSize() == 0) {
                 feedback += TAB + "[Alert][Done]: There are no tasks to mark completed!\n";
                 return new CommandResult(feedback);
             }
 
-            Task task = taskList.getTask(Integer.parseInt(indexCompleteTask) - TASKLIST_OFFSET);
+            Task task = taskList.getTask( indexComplete- TASKLIST_OFFSET);
 
             if (task instanceof TaskNonclass) {
                 TaskNonclass taskNonClass = (TaskNonclass) task;
@@ -56,9 +65,6 @@ public class DoneCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             System.out.println(TAB + "[Error][Done]: Please input a task within the range of: 1 - "
                     + taskList.getList().size());
-        } catch (NumberFormatException e) {
-            System.out.println(TAB + "[Error][Done]: Please input task number as a number, instead "
-                    + "of spelling it out.");
         }
         return new CommandResult(feedback);
     }

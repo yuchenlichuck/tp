@@ -81,7 +81,13 @@ public class Ui {
         showUserMessage(result.getFeedback());
     }
 
+    /** Displays the error message to user.
+     *
+     * @param error the error message.
+     */
     public void showError(String error) {
+        System.out.println();
         System.out.println(error);
+        System.out.println(DIVIDER);
     }
 }

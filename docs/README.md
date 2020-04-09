@@ -166,7 +166,7 @@ Delete tasks and classes by specific time range.
 Delete tasks by specific date.
 * **Usage** : `delete d/<DATE>`
     * `task` with a specific date can be listed by `delete d/yyyy-mm-dd`. Or `tasks` have date/dates in the specific dates can be listed by  `delete d/yyyy-mm-dd yyyy-mm-dd ...` *(more dates)*.
-       `class` cannot be listed by date since class only adopts schedule
+       `class` cannot be listed by date since class only adopts schedule.
      * `delete d/2020-06-17`
        * *(Explanation: list the `tasks` which have date on `2020-06-17`  )*
        * `delete d/2020-06-17 d/2020-06-19`

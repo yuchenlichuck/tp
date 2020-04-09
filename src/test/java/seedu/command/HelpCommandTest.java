@@ -5,8 +5,11 @@ import seedu.exception.ProjException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.common.Constants.TAB;
+import static seedu.command.HelpCommand.HELP_LEGEND;
 
 class HelpCommandTest {
+
     @Test
     void execute() {
         Command command = new HelpCommand();
@@ -16,28 +19,44 @@ class HelpCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expected;
-        expected = "Legend:\n"
-                + "    [Y]: Task is completed\n"
-                + "    [N]: Task is not completed\n"
-                + "\n"
-                + "  Command List:\n"
-                + "\n"
-                + "    Exit: Exits program\n"
-                + "    Usage: bye\n"
-                + "\n"
-                + "    List: Lists all recorded tasks\n"
-                + "    Usage: list\n"
-                + "\n"
-                + "    Add: add task\n"
-                + "    Usage: add n/[title] i/[description] t/[hh:mm-hh:mm] d/[dd-mm-yyyy] "
-                + "l/[LOCATION] r/[REMINDER] c/[CATEGORY]\n"
-                + "\n"
-                + "    Delete: Deletes task from list\n"
-                + "    Usage: delete [task number]\n"
-                + "\n"
-                + "    Find: Search for task using keyword\n"
-                + "    Usage: find [pattern]\n\n";
+
+        String expected = HELP_LEGEND;
+
+        expected += TAB + "Command List:\n\n";
+
+        expected += TAB + TAB + AddCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + AddCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + EditCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + EditCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + ListCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + System.lineSeparator() + TAB + TAB + TAB
+                + ListCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + DeleteCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: "  + System.lineSeparator() + TAB + TAB + TAB
+                + DeleteCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + DoneCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + DoneCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + FindCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + FindCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + CalendarCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + CalendarCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + ExitCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + ExitCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
 
         for (int i = 0; i < output.length(); i++) {
             if (expected.charAt(i) != output.charAt(i)) {

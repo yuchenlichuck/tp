@@ -11,17 +11,18 @@ import static seedu.common.Constants.TAB;
  */
 public class Messages {
 
-    static final String HELP_COMMAND = TAB + "Command List:\n\n";
-    static final String HELP_EXIT = TAB + TAB + "Exit: Exits program\n" + TAB + TAB + "Usage: bye\n\n";
-    static final String HELP_LIST = TAB + TAB + "List: Lists all recorded tasks\n" + TAB + TAB + "Usage: list\n\n";
-    static final String HELP_ADD = TAB + TAB + "Add: add task\n" + TAB + TAB + "Usage: "
-            + AddCommand.COMMAND_USAGE + "\n\n";
-    static final String HELP_DELETE = TAB + TAB + "Delete: Deletes task from list\n" + TAB + TAB + "Usage: "
-            + DeleteCommand.COMMAND_USAGE + "\n\n";
-    static final String HELP_FIND = TAB + TAB + "Find: Search for task using keyword\n" + TAB + TAB + "Usage: "
-            + FindCommand.COMMAND_USAGE + "\n\n";
-    static final String HELP_LEGEND = "Legend:\n" + TAB + TAB + "[Y]: Task is completed\n"
-            + TAB + TAB +  "[N]: Task is not completed\n\n";
+
+    //    static final String HELP_COMMAND = TAB + "Command List:\n\n";
+    //    static final String HELP_EXIT = TAB + TAB + "Exit: Exits program\n" + TAB + TAB + "Usage: bye\n\n";
+    //    static final String HELP_LIST = TAB + TAB + "List: Lists all recorded tasks\n"
+    //    + TAB + TAB + "Usage: list\n\n";
+    //    static final String HELP_ADD = TAB + TAB + "Add: add task\n" + TAB + TAB + "Usage: "
+    //            + AddCommand.COMMAND_USAGE + "\n\n";
+    //    static final String HELP_DELETE = TAB + TAB + "Delete: Deletes task from list\n" + TAB + TAB + "Usage: "
+    //            + DeleteCommand.COMMAND_USAGE + "\n\n";
+    //    static final String HELP_FIND = TAB + TAB + "Find: Search for task using keyword\n" + TAB + TAB + "Usage: "
+    //            + FindCommand.COMMAND_USAGE + "\n\n";
+
 
     // Find Command
     public static final String MESSAGE_SUCCESS = "Found the followings tasks:\n%s";
@@ -62,25 +63,23 @@ public class Messages {
     public static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!\n";
 
 
+    //    /**
+    //     * Formats the list of available commands.
+    //     *
+    //     * @return list of supported commands
+    //     */
+    //    public static String getCommands() {
+    //        String fullCommand = HELP_COMMAND + HELP_EXIT + HELP_LIST
+    //                + HELP_ADD + HELP_DELETE + HELP_FIND;
+    //        return fullCommand;
+    //    }
 
-
-    /**
-     * Formats the list of available commands.
-     *
-     * @return list of supported commands
-     */
-    public static String getCommands() {
-        String fullCommand = HELP_COMMAND + HELP_EXIT + HELP_LIST
-                + HELP_ADD + HELP_DELETE + HELP_FIND;
-        return fullCommand;
-    }
-
-    /**
-     * Gets the legend information for the supported commands.
-     *
-     * @return legend information
-     */
-    public static String getLegend() {
-        return HELP_LEGEND;
-    }
+    //    /**
+    //     * Gets the legend information for the supported commands.
+    //     *
+    //     * @return legend information
+    //     */
+    //    public static String getLegend() {
+    //        return HELP_LEGEND;
+    //    }
 }

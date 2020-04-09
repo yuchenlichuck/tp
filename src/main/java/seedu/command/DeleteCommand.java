@@ -23,7 +23,14 @@ public class DeleteCommand extends Command {
     private String userInput;
 
     public static final String COMMAND_WORD = "delete";
-    public static final String COMMAND_USAGE = COMMAND_WORD + " [task number]";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": deletes tasks from the list"
+            + " (e.g all tasks or by category)";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[DD-MM-YYYY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
+
+
     private static final int LIST_ERROR = 0;
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;

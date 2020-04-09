@@ -12,6 +12,9 @@ public class EditCommand extends Command {
     private String userInput;
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": edits the specified task";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " TASK_INDEX t/[HH:MM-HH:MM] l/[LOCATION] "
+            + "d/[DD-MM-YYYY] i/[INFORMATION] r/[REMINDER] c/[CATEGORY]";
 
     public EditCommand(String userInput) {
         this.userInput = userInput;

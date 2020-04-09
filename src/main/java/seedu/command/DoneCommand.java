@@ -11,7 +11,12 @@ import static seedu.common.Constants.TASKLIST_OFFSET;
 
 
 public class DoneCommand extends Command {
+
     public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": changes the status of task to completed";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]";
+
+
     public static final String ARGUMENT_COuNT = "1";
     private String feedback = "";
 

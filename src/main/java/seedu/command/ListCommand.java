@@ -22,7 +22,11 @@ public class ListCommand extends Command {
 
 
     public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": lists the tasks in the calendar";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": lists tasks (e.g all tasks or by category)";
+    public static final String COMMAND_USAGE = COMMAND_WORD + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY] d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
 
     private static final String MESSAGE_EMPTY_LIST = "[Alert][list] List is empty";
 
@@ -87,7 +91,6 @@ public class ListCommand extends Command {
         return new CommandResult(feedback);
     }
 
-    // Shouldn't be called dummy
 
     private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category) {
 
@@ -106,6 +109,7 @@ public class ListCommand extends Command {
 
             int index = -1;
             int size = inputDates.size();
+
             for (Task task : taskList.getList()) {
                 index++;
                 if (!task.getCategory().equals((category))) {

@@ -238,7 +238,6 @@ public class DeleteCommandTest {
         }
     }
 
-
     @Test
     public void testDeleteByCategoryDateTime() {
         TaskList tasks = new TaskList();
@@ -280,7 +279,6 @@ public class DeleteCommandTest {
             assertTrue(false);
         }
 
-
         String expected = "[TODO] Title: homework | Description:"
                 + " cs2113_homework_team_project  | Reminder: reminder"
                 + " | 2021-12-31 : 00:20 - 23:00 ( com2 )";
@@ -289,7 +287,7 @@ public class DeleteCommandTest {
             assertEquals(expected, task.toString());
         }
     }
-    
+
     @Test
     public void testDeleteZeroTask() {
         TaskList tasks = new TaskList();
@@ -299,13 +297,13 @@ public class DeleteCommandTest {
         Command command = new DeleteCommand(deleteInput);
         command.setCommandVariables(tasks, storage, ui);
         String output = "";
+
         try {
             output = command.execute().getFeedback();
         } catch (ProjException e) {
             assertTrue(false);
         }
         String expected = "  [Alert][delete] There is nothing to delete, the list is empty\n";
-
         assertEquals(expected, output);
     }
 }

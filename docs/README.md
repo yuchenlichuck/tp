@@ -56,10 +56,9 @@ Users add tasks using this command
        There should be no space between this duration. 
      * Only name `<NAME>` is compulsory to include. Other fields are not compulsory to add. However, if
        user only inputs time, then date of current day will be automatically added. 
-     * Since a task/class may has multiple time zone in a week, student can just add list of time zone.
+     * Since a task/class may have multiple time ranges in a week, the student can just add list of time ranges.
        However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
-       the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
-       zone/date/location.
+       the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the *time range/date/location*.
      * If there is only one time slots for this task, then the `<LOCATION>` will not be separated by space.  
      * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
        case-insensitive.  
@@ -98,48 +97,54 @@ List tasks belong to a specific category
     * Wrong command: `list TODO` which will has the same effects as the `list`
     * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
     * Examples:
-        * list c/TODO
-        * list c/DEADLINE
+        * `list c/TODO`
+        * `list c/DEADLINE`
 
-        * Wrong command: `list TODO` which will has the same effects as the `list`
-        * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
-      
 #### 3.4.3 - List Time
 Lists tasks and classes by specific time range. 
 * **Usage**: `list t/<TIME>`
     * `task` and `class` with a specific time range can be listed by `list t/hh:mm-hh:mm`.
-    (Please specify if you will list tasks which is exactly at that time range or
-    has a overlap at that time range. ) 
-        * list t/15:00-16:00
+    List the `events` which are exactly at that time range or have a overlap at that time range.
+      * `list t/15:00-16:00`
+      * *(Explanation: list the `events` whose start time before `16:00` and end time after `15:00`)*
 
 #### 3.4.4 - List Date
 List tasks by specific date.
 * **Usage** : `list d/<DATE>`
-    * `task` with a specific date can be listed by `list d/yyyy-mm-dd`
-       `class` cannot be listed by date since class only adopts schedule
-    (Please specify if you support date range or only support one date) 
+  
+    * `task` with a specific date can be listed by `list d/yyyy-mm-dd`. Or `tasks` have date/dates in the specific dates can be listed by  `list d/yyyy-mm-dd yyyy-mm-dd ...` *(more dates)*.
+    * `class` cannot be listed by date since class only adopts schedule.
         * `list d/2020-06-17`
-        
+        * *(Explanation: list the `tasks` which have date on `2020-06-17`  )*
+        * `list d/2020-06-17 d/2020-06-19`
+        * *(Explanation: list the `tasks` which have date on `2020-06-17` or `2020-06-19` )*
+    
 #### 3.4.5 - list Date + Time        
 List tasks by specific date and time.
 * **Usage** : `list d/<DATE> t/<TIME>`
-    * `task` with a specific date and time can be listed by `list d/yyyy-mm-dd t/hh:mm-hh:mm`
-       `class` cannot be listed by date and time since class only adopts schedule. 
-        (Please specify ) 
+  
+    * `task` with a specific date and time range can be listed by `list d/yyyy-mm-dd t/hh:mm-hh:mm`
+      
+    * class` cannot be listed by date and time since class only adopts schedule. 
+      
+       List the `tasks` which are exactly at that time range or have a overlap at that time range.
+       
         * `list d/2020-06-17 t/12:00-13:00`
-        
-### 3.4.6 - List specific event
+        * *(Explanation: list the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00`)*
+       
+#### 3.4.6 - List specific event
 
 List tasks by category and date and time. 
 * **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
-
-    * It is okay to list events in a specific date and specific time in a  specific category. However, the class category cannot be shown, since these don't have date values.
-    * It is okay to list events just in a specific date in a specific category. However, the class category cannot be shown, since these don't have date values.
-    * It is okay to list events just in a specific time in a specific category. All categories can be shown.
-    * Examples: 
-        * list d/2020-03-16 t/15:00 c/todo
-        * list d/2020-08-10 c/deadline
-        * list t/14:00 c/deadline
+* It is okay to list `events` in a specific date and specific time range in a  specific category. However, the `class` category cannot be shown, since these don't have date values.
+    * It is okay to list `events` just in a specific date/dates in a specific category. However, the `class` category cannot be shown, since these don't have date values.
+    * It is okay to list `events` just in a specific time range in a specific category. All `categories` can be shown.
+        * `list d/2020-06-17 t/12:00-13:00 c/todo`
+        * *(Explanation: list the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00` and  category is `todo` )*
+        * `list d/2020-08-10 c/deadline`
+        * *(Explanation: list the `tasks` which have date on `2020-08-10` and whose `category` is `deadline`)*
+        * `list t/14:00-15:00 c/deadline`
+        * *(Explanation: list the `tasks` whose start time before `15:00` and end time after `14:00`and `category` is `deadline` )*
 
 ### 3.5 - Delete
 Deletes a task from the list
@@ -153,26 +158,29 @@ Deletes a task from the list
 Delete tasks and classes by specific time range. 
 * **Usage**: `delete t/<TIME>`
     * `task` and `class` with a specific time range can be listed by `delete t/hh:mm-hh:mm`.
-    (Please specify if you will list tasks which is exactly at that time range or
-    has a overlap at that time range. ) 
-        * delete t/15:00-16:00
+    Delete the `events` which are exactly at that time range or have a overlap at that time range. 
+      * `delete t/15:00-16:00`
+      * *(Explanation: delete the `events` whose start time before `16:00` and end time after `15:00`)*
 
 #### 3.5.3 - Delete Date
 Delete tasks by specific date.
 * **Usage** : `delete d/<DATE>`
-    * `task` with a specific date can be listed by `delete d/yyyy-mm-dd`
+    * `task` with a specific date can be listed by `delete d/yyyy-mm-dd`. Or `tasks` have date/dates in the specific dates can be listed by  `delete d/yyyy-mm-dd yyyy-mm-dd ...` *(more dates)*.
        `class` cannot be listed by date since class only adopts schedule
-    (Please specify if you support date range or only support one date) 
-        * `delete d/2020-06-17`
-        
+     * `delete d/2020-06-17`
+       * *(Explanation: list the `tasks` which have date on `2020-06-17`  )*
+       * `delete d/2020-06-17 d/2020-06-19`
+       * *(Explanation: list the `tasks` which have date on `2020-06-17` or `2020-06-19` )*
+       
 #### 3.5.4 - Delete Date + Time        
 Delete tasks by specific date and time.
 * **Usage** : `delete d/<DATE> t/<TIME>`
     * `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`
        `class` cannot be listed by date and time since class only adopts schedule. 
-        (Please specify ) 
+    * Delete the `tasks` which are exactly at that time range or have a overlap at that time range.
+    
         * `delete d/2020-06-17 t/12:00-13:00`
-        
+        * *(Explanation: delete the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00`)*
 ### 3.6 - Done
 Change the status of a task to completed
 * **Usage**: `done <task index>`
@@ -228,6 +236,7 @@ Exits the program
     * `delete t/<TIME>` 
     * `delete d/<DATE>`
     * `delete d/<DATE> t/<TIME>`
+    * `delete c/<CATEGORY> d/<DATE> t/<TIME>`
  * **Done**: `done <task index>` 
  * **Find**: `find <keyword>` 
  * **Save**: `save`

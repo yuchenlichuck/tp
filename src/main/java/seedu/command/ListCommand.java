@@ -94,7 +94,7 @@ public class ListCommand extends Command {
 
     private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category) {
 
-        //only task can do it
+        //only task can do it and date can do
         if (time == null || time.isEmpty()) {
             String[] dates = date.split("\\s+");
             //dates input dates
@@ -118,14 +118,11 @@ public class ListCommand extends Command {
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
+
                 ArrayList<LocalDate> localDates = task.getDate();
-                int sum = 0;
 
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
-                        sum++;
-                    }
-                    if (sum >= size) {
                         listTaskIndex.add(index);
                         break;
                     }
@@ -135,15 +132,18 @@ public class ListCommand extends Command {
             return;
         }
 
-
+        //time range
         if (date.isEmpty()) {
             String[] times = time.split("\\s+");
+
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+                //input time
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -156,19 +156,14 @@ public class ListCommand extends Command {
                     continue;
                 }
                 ArrayList<LocalTime> localTimes = task.getTime();
-
-                int sum = 0;
+                label:
                 for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
-                            sum++;
-
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))) {
+                            listTaskIndex.add(i);
+                            break label;
                         }
-                    }
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
                     }
                 }
             }
@@ -188,6 +183,7 @@ public class ListCommand extends Command {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -212,19 +208,16 @@ public class ListCommand extends Command {
                 ArrayList<LocalDate> localDates = task.getDate();
 
                 int sum = 0;
-
+                label:
                 for (int j = 0; j < localDates.size(); j++) {
                     for (int k = 0; k < dateList.size(); k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))
                                 && localDates.get(j).equals(dateList.get(k))) {
-                            sum++;
-                        }
-                    }
 
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
+                            listTaskIndex.add(i);
+                            break label;
+                        }
                     }
                 }
             }
@@ -249,22 +242,15 @@ public class ListCommand extends Command {
             }
 
             int index = -1;
-            int size = inputDates.size();
             for (Task task : taskList.getList()) {
                 index++;
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
                 ArrayList<LocalDate> localDates = task.getDate();
-                int sum = 0;
-
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
-                        sum++;
-                    }
-                    if (sum >= size) {
                         listTaskIndex.add(index);
-                        break;
                     }
                 }
                 // Populate the date with current date if date is not inputted
@@ -272,15 +258,16 @@ public class ListCommand extends Command {
             return;
         }
 
-
         if (date.isEmpty()) {
             String[] times = time.split("\\s+");
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -292,22 +279,19 @@ public class ListCommand extends Command {
 
                 ArrayList<LocalTime> localTimes = task.getTime();
 
-                int sum = 0;
+                label:
                 for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
-                            sum++;
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))) {
+                            listTaskIndex.add(i);
+                            break label;
                         }
-                    }
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
                     }
                 }
             }
-
         }
+
 
         //date and time
         if (!date.isEmpty() && !time.isEmpty()) {
@@ -324,6 +308,7 @@ public class ListCommand extends Command {
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
                 startTimes.add(startTime);
                 endTimes.add(endTime);
+
             }
 
             for (String adate : dates) {
@@ -334,29 +319,26 @@ public class ListCommand extends Command {
             int size = dates.length;
 
             for (int i = 0; i < taskList.getListSize(); i++) {
+
                 Task task = taskList.getTask(i);
-                String category = task.getCategory().trim();
-                if (category.equals("CLASS")) {
+
+                if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
 
-                ArrayList<LocalTime> localTimes = task.getTime();
                 ArrayList<LocalDate> localDates = task.getDate();
+                ArrayList<LocalTime> localTimes = task.getTime();
 
-                int sum = 0;
-
+                label:
                 for (int j = 0; j < localDates.size(); j++) {
                     for (int k = 0; k < dateList.size(); k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))
                                 && localDates.get(j).equals(dateList.get(k))) {
-                            sum++;
-                        }
-                    }
 
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
+                            listTaskIndex.add(i);
+                            break label;
+                        }
                     }
                 }
             }
@@ -414,7 +396,7 @@ public class ListCommand extends Command {
 
     private int getCmdSubtype(String category, String date, String time) {
 
-        if (date.isEmpty() && !category.isEmpty()) {
+        if (date.isEmpty() && time.isEmpty() && !category.isEmpty()) {
             return LIST_BY_CATEGORY;
         }
 

@@ -11,7 +11,7 @@ public class Ui {
     public static final String DIVIDER = "__________________________________________________________________________";
     private static final String PROMPT = "What is your command?" + NEW_LINE;
     private  static final  String LOGO =
-                " ______     ______     ______   ______\n"
+                TAB + " ______     ______     ______   ______\n"
                 + TAB + "/\\  ___\\   /\\  __ \\   /\\  ___\\ /\\  ___\\\n"
                 + TAB + "\\ \\ \\____  \\ \\  __ \\  \\ \\  __\\ \\ \\___  \\\n"
                 + TAB + " \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\    \\/\\_____\\\n"
@@ -43,7 +43,7 @@ public class Ui {
         System.out.println();
 
         for (String message : messages) {
-            System.out.print(TAB + message);
+            System.out.print(message);
         }
 
         System.out.println(DIVIDER);
@@ -81,7 +81,13 @@ public class Ui {
         showUserMessage(result.getFeedback());
     }
 
+    /** Displays the error message to user.
+     *
+     * @param error the error message.
+     */
     public void showError(String error) {
+        System.out.println();
         System.out.println(error);
+        System.out.println(DIVIDER);
     }
 }

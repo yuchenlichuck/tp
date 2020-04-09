@@ -10,11 +10,10 @@
   * [Having done a task](#36---done)
   * [Find a task](#37---find)
   * [Save tasks](#38---save)
-  * [Calendar](#39---calender)
+  * [Calendar](#39---calendar)
   * [Exit the program](#310---exit)
-* [Sample Usage](#4-sample-usage)
-* [FAQ](#5-faq)
-* [Command Summary](#6-command-summary)
+* [FAQ](#4-faq)
+* [Command Summary](#5-command-summary)
 
 ## 1. Introduction
 CAFS - va CLI calender-like task scheduler that supports task and 
@@ -38,6 +37,9 @@ The `<>` symbol just for readability.
 * The command keyword (e.g. `add`) is case insensitive. However, the delimiter (e.g. `n/`)are case sensitive.
 * It is okay to switch the sequence when inputting the delimiters:
     * `add n/<NAME> l/<LOCATION>` has same effects as `add l/<LOCATION> n/<NAME> `
+* Some recognized date/time error will be automatically parsed to accepted format.
+    * `24:00` will be parsed to `23:59` since 24:00 is next day. 
+    * `2021-02-30` will be parsed to `2021-02-28`
 
 ### 3.1 - Help
 Displays the set of commands supported
@@ -52,20 +54,21 @@ Users add tasks using this command
        user only inputs time, then date of current day will be automatically added. 
      * Since a task/class may has multiple time zone in a week, student can just add list of time zone.
        However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
-       the number of `<LOCATION>` also match with the number of `<TIME>`.Use space to separate the time 
+       the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
        zone/date/location.
+     * If there is only one time slots for this task, then the `<LOCATION>` will not be separated by space.  
      * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
        case-insensitive.  
      * When adding normal tasks:
-        * `<Date>` should be in format:`dd-mm-yyyy`
+        * `<Date>` should be in format:`yyyy-mm-dd`
         * Examples: 
-            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/01-01-2020 02-01-2020 l/NUS NTU c/meeting
-            * add n/2113 v2.1 t/23:00-24:00 d/16-04-2020 c/deadline
-            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/01-01-2020 02-01-2020 l/NUS NTU c/MEETING
+            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting
+            * add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline
+            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU c/MEETING
      * When adding class:
         * `<DATE>` should be which day in a week, represented by integer (e.g. `1 3` means Mon Wed). 
         * Examples: 
-            * add t/11:00-12:00 1:00-3:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
+            * add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
             * add n/3245 t/17:00-19:00 d/5 c/CLASS
     
 ### 3.3 - Edit
@@ -89,8 +92,10 @@ Lists all tasks
 Lists tasks belong to a specific category
 * **Usage**: `list c/<CATEGORY>`
     * Examples:
-        * list TODO
-        * list DEADLINE
+        * list c/TODO
+        * list c/DEADLINE
+        * Wrong command: `list TODO` which will has the same effects as the `list`
+        * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
       
 #### 3.4.3 - List Time
 Lists tasks by specific date/time
@@ -127,9 +132,10 @@ Searches all task descriptions for supplied keyword
 * **Usage**: `find <keyword>`
     * Keyword has to be a _**single word**_
     * Keyword is case _insensitive_
+    * Find command can search the keyword in title, description and location. 
 
 ### 3.8 - Save
-Exports my calendar as a text file	
+Saves current list into somewhere.
 * **Usage**: `save`
 
 ### 3.9 - Calendar
@@ -146,21 +152,17 @@ Will still display tasks from past months as long as not marked as complete.
 ### 3.10 - Exit
 Exits the program
 * **Usage**: `bye`
-
-## 4. Sample Usage
- 
-1. Search for specific keyword: `find class`
-    * Expected outcome: displays the above two tasks since they contain keyword "class" in description
     
-## 5. FAQ
+## 4. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
  
-## 6. Command Summary
+## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **List**: 
     * `list`
     * `list c/<category>` 

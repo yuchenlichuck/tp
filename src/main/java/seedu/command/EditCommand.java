@@ -1,6 +1,7 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
+import seedu.storage.Storage;
 
 import static seedu.common.Constants.CLASS_CATEGORY;
 
@@ -127,6 +128,9 @@ public class EditCommand extends Command {
         if (isEdit) {
             String feedback = "Task " + (taskEdited + 1) + " edited\n";
             feedback = feedback + taskList.getTask(taskEdited).toString() + "\n";
+
+            Storage.overwriteFile(taskList.getList());
+
             return new CommandResult(feedback);
         } else {
             throw new ProjException("You have not modified any task as no valid field input. ");

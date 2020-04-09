@@ -15,6 +15,8 @@ import seedu.command.Command;
 
 public class Parser {
 
+    public static final int COMMAND_LENGTH = 1;
+
     /**
      * Parses user input into command for execution.
      *
@@ -46,14 +48,18 @@ public class Parser {
             return new EditCommand(userCommand);
 
         case ExitCommand.COMMAND_WORD:
+            if (commandSections.length != COMMAND_LENGTH) {
+                return new FailedCommand(ExitCommand.COMMAND_WORD,ExitCommand.ERROR_FEEDBACK);
+            }
             return new ExitCommand();
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case DoneCommand.COMMAND_WORD:
-            if (commandSections.length != 2) {
-                return new FailedCommand("[Error][Done]: Wrong number of arguments");
+            if (commandSections.length < 2 || commandSections.length > 2) {
+                return new FailedCommand(DoneCommand.COMMAND_WORD,
+                        commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COuNT);
             }
             return new DoneCommand(commandSections[1]);
 
@@ -64,7 +70,8 @@ public class Parser {
             if (commandSections.length == 1) {
                 return new CalendarCommand(null);
             }
-            return new FailedCommand("[Error][Calendar]: Please input the right number of arguments");
+            return new FailedCommand(CalendarCommand.COMMAND_WORD,
+                    commandSections.length - COMMAND_LENGTH, CalendarCommand.ARGUMENT_COuNT);
 
         default:
             System.out.println("Command not recognised\n");

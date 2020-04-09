@@ -1,14 +1,14 @@
 package seedu.command;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.common.Constants.TAB;
-
 import org.junit.jupiter.api.Test;
 import seedu.exception.ProjException;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.common.Constants.TAB;
 
 class ListCommandTest {
 
@@ -20,6 +20,7 @@ class ListCommandTest {
         Command command = new ListCommand("");
         command.setCommandVariables(tasks, storage, ui);
         String output = "";
+
         try {
             output = command.execute().getFeedback();
         } catch (ProjException e) {
@@ -34,15 +35,14 @@ class ListCommandTest {
     @Test
     void checkListOne() {
         TaskList tasks = new TaskList();
-
         Ui ui = new Ui();
-
         Storage storage = new Storage();
 
         String output = "";
         String input = "add n/task t/11:15-13:15 d/2024-02-29";
         Command command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
         } catch (ProjException e) {
@@ -92,9 +92,7 @@ class ListCommandTest {
         command.setCommandVariables(tasks, storage, ui);
 
         try {
-
             output = command.execute().getFeedback();
-
         } catch (ProjException e) {
             assertTrue(false);
         }
@@ -113,6 +111,7 @@ class ListCommandTest {
 
     @Test
     void testListByTime() {
+
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -171,7 +170,7 @@ class ListCommandTest {
 
         Command command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
-
+        //first input
         try {
             command.execute();
 
@@ -180,9 +179,10 @@ class ListCommandTest {
         }
 
         input = "add n/task2 t/13:00-15:00 d/2028-02-15";
-
+        //second input
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
 
@@ -192,7 +192,7 @@ class ListCommandTest {
 
 
         input = "add n/task1 t/11:15-13:15 d/2024-02-27 c/deadline";
-
+        //third input
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
         try {
@@ -252,6 +252,7 @@ class ListCommandTest {
 
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
             command.execute();
@@ -358,7 +359,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = TAB+"There are 3 tasks.\n"
+        String expected = TAB + "There are 3 tasks.\n"
                 + "    1. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    3. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n";
@@ -390,6 +391,7 @@ class ListCommandTest {
 
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+        
         try {
             command.execute();
             command.execute();
@@ -402,13 +404,12 @@ class ListCommandTest {
         command.setCommandVariables(tasks, storage, ui);
 
         try {
-
             output = command.execute().getFeedback();
         } catch (ProjException e) {
             assertTrue(false);
         }
 
-        String expected = TAB+"There are 2 tasks.\n"
+        String expected = TAB + "There are 2 tasks.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n";
 
@@ -421,13 +422,11 @@ class ListCommandTest {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
-
         String output = "";
         String input = "add n/task  t/11:15-13:15 d/2024-02-29";
 
         Command command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
-
         try {
             command.execute();
             command.execute();
@@ -437,9 +436,9 @@ class ListCommandTest {
         }
 
         input = "add n/task t/13:00-15:00 d/2028-02-19";
-
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
             command.execute();
@@ -450,9 +449,9 @@ class ListCommandTest {
 
 
         input = "add n/task t/11:15-13:15 d/2024-02-29 c/deadline";
-
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
         } catch (ProjException e) {
@@ -479,12 +478,11 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = TAB+"There are 1 task.\n"
+        String expected = TAB + "There are 1 task.\n"
                 + "    1. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n";
 
         assertEquals(expected, output);
     }
-
 
 
     @Test
@@ -511,6 +509,7 @@ class ListCommandTest {
 
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
             command.execute();
@@ -522,6 +521,7 @@ class ListCommandTest {
 
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
+
         try {
             command.execute();
             command.execute();
@@ -540,7 +540,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        String expected = TAB +"There are 3 tasks.\n"
+        String expected = TAB + "There are 3 tasks.\n"
                 + "    1. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    3. [N] [TODO] Title: task | 2024-02-29 : 11:15 - 13:15\n";

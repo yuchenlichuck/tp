@@ -56,16 +56,25 @@ public class EditCommand extends Command {
      * @throws ProjException if input invalid task index.
      */
     public CommandResult execute() throws ProjException {
+
         Boolean isEdit = false;
+
         String[] commandSections = this.userInput.split(" ");
+
         if (commandSections.length < 2) {
             throw new ProjException(TAB + Messages.MESSAGE_EDIT_MISSING_INDEX);
         }
+
         this.taskEdited = commandSections[1];
         if (!isNumeric(taskEdited.trim())) {
             throw new ProjException(TAB + Messages.MESSAGE_EDIT_MISSING_INDEX);
         }
+
         Integer taskEdited = Integer.parseInt(this.taskEdited.trim()) - 1;
+        if (taskEdited < 0 || taskEdited >= taskList.getListSize()) {
+            throw new ProjException(TAB + String.format(Messages.MESSAGE_EDIT_OUT_OF_BOUNDS, (taskEdited + 1)));
+        }
+
 
         String title = getTitle(userInput);
         if (hasInput(title)) {

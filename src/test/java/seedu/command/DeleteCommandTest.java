@@ -248,7 +248,6 @@ public class DeleteCommandTest {
         String input1 = "add n/homework i/cs2106_project "
                 + "t/00:20-23:00 d/2021-12-31 l/com2 r/reminder c/deadline";
         Command command = new AddCommand(input1);
-
         command.setCommandVariables(tasks, storage, ui);
         try {
             command.execute();
@@ -271,7 +270,6 @@ public class DeleteCommandTest {
         }
 
         String deleteInput = "delete c/deadline t/00:20-23:00 d/2021-12-31";
-
         command = new DeleteCommand(deleteInput);
         command.setCommandVariables(tasks, storage, ui);
 
@@ -291,9 +289,7 @@ public class DeleteCommandTest {
             assertEquals(expected, task.toString());
         }
     }
-
-
-    //currently couldn't pass because of assertions.
+    
     @Test
     public void testDeleteZeroTask() {
         TaskList tasks = new TaskList();

@@ -391,7 +391,7 @@ class ListCommandTest {
 
         command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
-        
+
         try {
             command.execute();
             command.execute();

@@ -139,7 +139,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        command = new ListCommand("list t/11:15-13:15");
+        command = new ListCommand("list t/11:15-13:00");
         command.setCommandVariables(tasks, storage, ui);
 
         try {
@@ -201,7 +201,7 @@ class ListCommandTest {
             assertTrue(false);
         }
 
-        command = new ListCommand("list t/11:15-13:15 d/2024-02-29");
+        command = new ListCommand("list t/12:15-12:30 d/2024-02-29");
         command.setCommandVariables(tasks, storage, ui);
 
         try {

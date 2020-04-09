@@ -55,6 +55,8 @@ public class Messages {
             + " (No valid field input)";
     public static final String MESSAGE_DATE_TIME_MISMATCH = "[Alert][edit] The number of time range must match "
             + "with the number of date(day of a week).";
+    public static final String MESSAGE_EDIT_OUT_OF_BOUNDS = "[Error][edit] Task number \"%s\" doesn't exit";
+
 
 
     public static final String MESSAGE_DATETIME_ERROR = TAB + "[Error] Expected format for date/time:"

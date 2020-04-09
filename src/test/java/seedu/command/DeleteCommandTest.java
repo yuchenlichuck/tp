@@ -308,7 +308,7 @@ public class DeleteCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expected = "There is nothing to delete, the list is empty\n";
+        String expected = "  [Alert][delete] There is nothing to delete, the list is empty\n";
 
         assertEquals(expected, output);
     }

@@ -237,6 +237,17 @@ public abstract class Command {
     }
 
     /**
+     * Checks for invalid date/time format: E.g. 2020/02/04.
+     * / is used in delimiter.
+     *
+     * @param input userInput string.
+     * @return true if there exists "digit/" format.
+     */
+    protected boolean hasWrongDelimiterPattern(String input) {
+        return input.matches(".*[0-9]+/.*");
+    }
+
+    /**
      * Executes user command processed by parser.
      */
     public abstract CommandResult execute() throws ProjException;

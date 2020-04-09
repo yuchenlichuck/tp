@@ -40,8 +40,11 @@ will be displayed.
 
 This is the Sequence Diagram for list by category. 
 ![Sequence Diagram for View](images/listCategorySequence.png)
+
 This is the UML design for list by category.
+
 ![UML for View](images/listCategory.png)
+
 ##### 3.1.1.2 Design Considerations
 Aspect: How to find certain category. 
 
@@ -76,22 +79,22 @@ The following diagram summarises what happens when a user executes a new `calend
 
 ##### 3.1.2.2 Design Considerations
 1. Aspect: Obtaining information required for generating monthly view
-    
+  
     * Alternative 1: (current choice) Algorithm to deduce how many weeks in month, which day a date is, how many days in that month
         * Pros: Will use less memory, requiring only one starting date we are able to derive any other dates. No need to worry about changing template for the new year
         * Cons: New developers will take additional effort to understand how the algorithm works.
-   
+      
     * Alternative 2: Hardcoded information (constant variables to tell days in month/how many weeks)
         * Pros: Easy maintenance, tedious but easily calculated with web applications.
         * Cons: Tedious and not sustainable, constant updates have to be done to edit the fields for a new year
 
 1. Aspect: Which month to use
-   
+  
     * User might want to know schedule for other months, but might also want a quick view of current month
     * Solution is to set a default month (taken from computer) and also allow input for preferred month.
- 
+
 1. Aspect: generation of monthly details 
-    
+  
     * Calculation of details are shifted from the command to a separate class. 
     This is to enable easier maintenance for methods relating to calendar features.
     
@@ -127,15 +130,22 @@ It solves:
 |v1.0|                                          | add club, research, project, or other meetings | Be reminded of my activities |
 |v1.0|No 2. is a university student | delete specific events from my calendar | I don't get reminded about events that already happened |
 |v1.0|No 3. is a university student | can move events from one day to another | Will not need to  retype all the event details again |
-|v1.0|No 5. is a university student | add descriptions to events | to remind myself what the event was about | 
+|v1.0|No 5. is a university student | add descriptions to events | to remind myself what the event was about |
 |v2.0| No 4. is a university student | see multiple calendar views (day, week, month) | I can get different perspectives of what my schedule looks like |
 |v2.0| No 9. is a university student | export my calendar as a text file | I can print it to have a physical copy |
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
-|v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
-|v2.0| No. 24 is a university student | list events by date | I can easily find exactly the events I need to see |
+|v2.1| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
 |v2.1| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
 |v2.1| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
+|v2.1| No. 21 is a university student | list events by date | I can easily find exactly the events I need to see by date |
+|v2.1| No. 24 is a university student who want to check whether a designated time has events | list events by time | I can easily find exactly the events I need to see by time |
+|v2.1| No. 25 is a university student who want to check whether a designated time has classes | list events by time and category | I can easily find exactly the classes I need to see by time and category |
+|v2.1| No. 22 is a university student who has some emergency and want to cancel the events in a specific date | delete events by date | I can easily delete exactly the events I need to see by date |
+|v2.1| No. 26 is a male student who want to quit events in a designated time cause he has a remote date with his remote girlfriends in that time everday! | delete events by time | I can easily find exactly the events I need to see by time |
+|v2.1| No. 27 is a university student who want to delete its todo category's events cause it doesn't want to work hard anymore that day | delete events by time and category | I can easily find exactly the events I need to see by date and category |
+|v2.1| No. 28 is a university student who has a emergency in specfic time and date. He wants to delete that time's work | Delete events by date and time | I can easily find exactly the events I need to see by date and time |
+
 ## 6.4 Appendix D:Non-Functional Requirements
 
 1. Should work in an environment without internet access.

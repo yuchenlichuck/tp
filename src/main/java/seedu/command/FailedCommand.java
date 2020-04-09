@@ -7,7 +7,6 @@ public class FailedCommand extends Command {
 
     private String feedback = "";
 
-
     private static final String WRONG_ARGUMENT = "Wrong number of arguments";
 
     /**

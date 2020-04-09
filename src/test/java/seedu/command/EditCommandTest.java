@@ -71,7 +71,8 @@ public class EditCommandTest {
             secondCommand.execute();
 
         } catch (ProjException e) {
-            assertEquals("Not allowed to change title.", e.getMessage());
+            String expected = "  [Alert][edit] Not allowed to change title";
+            assertEquals(expected, e.getMessage());
         }
     }
 

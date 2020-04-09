@@ -70,7 +70,7 @@ Users add tasks using this command
         * Examples: 
             * add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
             * add n/3245 t/17:00-19:00 d/5 c/CLASS
-    
+
 ### 3.3 - Edit
 Edit the inputted task/class. 
 * **Usage**:`edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
@@ -84,44 +84,94 @@ Edit the inputted task/class.
         * edit 2 c/todo  
     
 ### 3.4 - List
-#### 3.4.1 - List 
-Lists all tasks
+#### **3.4.1 - List** 
+List all tasks
 * **Usage**: `list`
 
-#### 3.4.2 - List Category
-Lists tasks belong to a specific category
+#### **3.4.2 - List Category**
+List tasks belong to a specific category
 * **Usage**: `list c/<CATEGORY>`
+    * Wrong command: `list TODO` which will has the same effects as the `list`
+    * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
     * Examples:
         * list c/TODO
         * list c/DEADLINE
-        * Wrong command: `list TODO` which will has the same effects as the `list`
-        * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
-      
-#### 3.4.3 - List Time
-Lists tasks by specific date/time
+    
+#### **3.4.3 - List Time** And/Or Date
+List tasks by specific date/time
 * **Usage**: `list d/<DATE> t/<TIME>`
-    * It is okay to only list event in a specific date. However, it is not okay to list event in a specific time
-        without inferring the specific date. 
-    * This will also display the classed whose time range overlaps that time.
-    * Also, current does not accept list class. 
-    * Examples: 
-        * list d/2020-03-16 t/15:00
-        * list d/2020-08-10
+	* It is okay to list events in a specific date and specific time. However, the class category cannot be shown, since these don't have date values.
+	* It is okay to list events just in a specific date. However, the class category cannot be shown, since these don't have date values.
+	* It is okay to list events just in a specific time. All categories can be shown
+* Example:
+	- list d/2020-03-16 t/15:00
+   - list d/2020-08-10
+  - list t/15:00
 
-### 3.4.4 - List specific event
+#### 3.4.4 - List Category & Time And/Or Date
 List tasks by category and date and time. 
 * **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
 
+    * It is okay to list events in a specific date and specific time in a  specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific date in a specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific time in a specific category. All categories can be shown.
+    * Examples: 
+        * list d/2020-03-16 t/15:00 c/todo
+        * list d/2020-08-10 c/deadline
+        * list t/14:00 c/deadline
 
 ### 3.5 - Delete
-Deletes a task from the list
+#### **3.5.1 - Delete a task**
+
+Delete a task from the list
+
 * **Usage**: `delete <task index>`
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
-    * index has to be an _integer_
+    * index has to be a positive_integer_
+    * Examples:
+      * delete 2
+
+#### **3.5.2 - Delete Category**
+
+Delete tasks belong to a specific category
+
+* **Usage**: `delete c/<CATEGORY>`
+  * Wrong command: `delete TODO` which is a invalid input
+  * The `<CATEGOTY>` is case insensitive. That is, `delete c/TODO` and `dele c/todo` has same effect.
+  * Examples:
+    * delete c/todo
+    * delete c/deadline
+
+#### 3.5.3 - Delete Time And/Or Date
+
+Delete tasks by specific date/time
+
+* **Usage**: `delete d/<DATE> t/<TIME>`
+   *  It is okay to delete events in a specific date and specific time . However, the class category cannot be shown, since these don't have date values.
+   *  It is okay to delete events just in a specific date. However, the class category cannot be shown, since these don't have date values.
+   * It is okay to delete events just in a specific time. All categories can be shown
+   * Example:
+     *  delete d/2020-03-16 t/15:00
+     *  delete d/2020-08-10
+     *  delete t/15:00
+
+
+#### 3.5.4 - Delete Category & Time And/Or Date
+
+List tasks by category and date and time. 
+
+* **Usage**: `delete c/<CATEGORY> d/<DATE> t/<TIME>`
+   * It is okay to delete events in a specific date and specific time in a specific category. However, the `class` category cannot be shown, since these don't have date values.
+  * It is okay to delete events just in a specific date in a specific category. However, the `class` category cannot be shown, since these don't have date values.
+  * It is okay to delete events just in a specific time in a specific category. All categories can be shown.
+    * Examples: 
+      * delete d/2020-03-16 t/15:00 c/todo
+      * delete d/2020-08-10 c/deadline
+      * delete t/14:00 c/deadline
 
 ### 3.6 - Done
-Changes the status of a task to completed
+Change the status of a task to completed
 * **Usage**: `done <task index>`
     * The index refers to the index number shown in the displayed task list.
     * use `list` to derive task index
@@ -152,24 +202,27 @@ Will still display tasks from past months as long as not marked as complete.
 ### 3.10 - Exit
 Exits the program
 * **Usage**: `bye`
-    
+  
 ## 4. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
- 
+
 ## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **List**: 
     * `list`
-    * `list c/<category>` 
+    * `list c/<CATEGORY>` 
     * `list d/<DATE> t/<TIME>`
-    * `list c/<category> d/<DATE> t/<TIME>`
+    * `list c/<CATEGORY> d/<DATE> t/<TIME>`
  * **Delete**:
     * `delete <task index>` 
+    * `delete c/<CATEGORY>`
+    * `delete d/<DATE> t/<TIME>`
+    * `delete c/<CATEGORY> d/<DATE> t/<TIME>`
  * **Done**: `done <task index>` 
  * **Find**: `find <keyword>` 
  * **Save**: `save`

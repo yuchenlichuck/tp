@@ -240,7 +240,7 @@ public class DeleteCommandTest {
 
 
     @Test
-    public void testDeleteByCategoryDate() {
+    public void testDeleteByCategoryDateTime() {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -286,7 +286,6 @@ public class DeleteCommandTest {
         String expected = "[TODO] Title: homework | Description:"
                 + " cs2113_homework_team_project  | Reminder: reminder"
                 + " | 2021-12-31 : 00:20 - 23:00 ( com2 )";
-
 
         for (Task task : tasks.getList()) {
             assertEquals(expected, task.toString());

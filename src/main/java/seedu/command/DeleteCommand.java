@@ -84,7 +84,6 @@ public class DeleteCommand extends Command {
             feedback = String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD);
 
         } finally {
-            System.out.println(feedback);
             return new CommandResult(feedback);
         }
     }
@@ -149,10 +148,6 @@ public class DeleteCommand extends Command {
 
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
-                        sum++;
-                    }
-
-                    if (sum >= size) {
                         Task removedTask = taskList.deleteTask(m);
                         storage.overwriteFile(taskList.getList());
                         assert removedTask != null : "Removed-task is null";
@@ -160,7 +155,6 @@ public class DeleteCommand extends Command {
                         m--;
                         break;
                     }
-
                 }
             }
         }
@@ -178,7 +172,6 @@ public class DeleteCommand extends Command {
             }
 
             int size = startTimes.size();
-
             for (int i = 0; i < taskList.getListSize(); i++) {
                 Task task = taskList.getTask(i);
                 if (!category.isEmpty() && !task.getCategory().equals(category)) {
@@ -187,24 +180,20 @@ public class DeleteCommand extends Command {
                 ArrayList<LocalTime> localTimes = task.getTime();
 
                 int sum = 0;
+
+                label1:
                 for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
 
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
-                            sum++;
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))) {
+                            Task removedTask = taskList.deleteTask(i);
+                            storage.overwriteFile(taskList.getList());
+                            assert removedTask != null : "Removed-task is null";
+                            feedback += formatSuccessFeedback(removedTask) + "\n";
+                            i--;
+                            break label1;
                         }
-                    }
-
-                    if (sum >= size) {
-                        Task removedTask = taskList.deleteTask(i);
-
-                        storage.overwriteFile(taskList.getList());
-                        assert removedTask != null : "Removed-task is null";
-                        feedback += formatSuccessFeedback(removedTask) + "\n";
-                        i--;
-                        break;
-
                     }
                 }
             }
@@ -249,22 +238,20 @@ public class DeleteCommand extends Command {
 
                 int sum = 0;
 
+                la:
                 for (int j = 0; j < localDates.size(); j++) {
                     for (int k = 0; k < dateList.size(); k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))
                                 && localDates.get(j).equals(dateList.get(k))) {
-                            sum++;
+                            Task removedTask = taskList.deleteTask(i);
+                            storage.overwriteFile(taskList.getList());
+                            assert removedTask != null : "Removed-task is null";
+                            feedback += formatSuccessFeedback(removedTask) + "\n";
+                            i--;
+                            //break the double loop
+                            break la;
                         }
-                    }
-
-                    if (sum >= size) {
-                        Task removedTask = taskList.deleteTask(i);
-                        storage.overwriteFile(taskList.getList());
-                        assert removedTask != null : "Removed-task is null";
-                        feedback += formatSuccessFeedback(removedTask) + "\n";
-                        i--;
-                        break;
                     }
                 }
             }
@@ -303,7 +290,7 @@ public class DeleteCommand extends Command {
 
     private int getCmdSubtype(String category, String date, String time, int len) {
 
-        if (date.isEmpty() && !category.isEmpty()) {
+        if (date.isEmpty() && time.isEmpty() && !category.isEmpty()) {
             return LIST_BY_CATEGORY;
         }
 

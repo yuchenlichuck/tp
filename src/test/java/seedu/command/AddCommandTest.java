@@ -8,6 +8,7 @@ import seedu.ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.common.Constants.TAB;
 
 public class AddCommandTest {
 
@@ -99,7 +100,8 @@ public class AddCommandTest {
             firstCommand.execute();
 
         } catch (ProjException e) {
-            assertEquals("Please input a title for the task.", e.getMessage());
+            String expected = TAB + "[Error][Add] Please input a title for the task.\n";
+            assertEquals(expected, e.getMessage());
         }
     }
 

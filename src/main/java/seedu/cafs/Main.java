@@ -2,6 +2,7 @@ package seedu.cafs;
 
 import seedu.command.Command;
 import seedu.command.CommandResult;
+import seedu.common.Messages;
 import seedu.exception.ProjException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
@@ -62,16 +63,18 @@ public class Main {
             String userCommandText = ui.readCommand();
             command = new Parser().parseCommand(userCommandText);
             command.setCommandVariables(tasks, storage, ui);
+
             try {
                 CommandResult result = command.execute();
                 ui.showResultToUser(result);
             } catch (ProjException e) {
                 ui.showError(e.getMessage());
             } catch (DateTimeParseException e) {
-                ui.showError("Please follow the format of date: yyyy-mm-dd; time: hh:mm");
+                ui.showError(Messages.MESSAGE_DATETIME_ERROR);
             } catch (NumberFormatException e) {
                 ui.showError(e.getMessage());
             }
+
         } while (!command.isExit()); // will be solved when do is enabled
         logger.log(Level.INFO, "end of processing");
     }

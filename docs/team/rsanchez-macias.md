@@ -14,3 +14,11 @@ application using a CLI. It is written in Java.
 &nbsp; &nbsp; - Clear Command: clears output in terminal window <br/>
 &nbsp; &nbsp; - Task List (initial version): manages the tasks in the list <br/>
 &nbsp; &nbsp; - List Command (general and by category): lists current tasks in the list <br/>
+
+### Contribution to documentation:
+* Hyperlinks and structure enhancement
+* Major part in Features
+* Command summary
+
+### Contribution to the DG:
+* Formatting of the document

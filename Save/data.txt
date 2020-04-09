@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"date":{"year":2020,"month":4,"day":5},"isDateSet":false,"isTimeSet":false,"isDone":true,"title":"i ","description":"n","reminder":"","category":"TODO"}]
-=======
-[]
->>>>>>> aa13cf9ea124de7de1033133f5d19687888a04a1
+{"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"research paper ","description":"essay for writing 101","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":6}],"time":[],"location":[]}

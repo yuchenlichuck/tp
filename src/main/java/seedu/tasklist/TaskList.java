@@ -14,7 +14,7 @@ import static seedu.common.Constants.CLASS_CATEGORY;
 public class TaskList {
 
     private static ArrayList<Task> taskList;
-    private static HashMap<String,ArrayList<Integer>> categoryMap = new HashMap<>();
+    private static HashMap<String, ArrayList<Integer>> categoryMap = new HashMap<>();
 
     public TaskList() {
         taskList = new ArrayList<Task>();
@@ -58,14 +58,14 @@ public class TaskList {
     /**
      * Change category of a task and change the category mapping.
      *
-     * @param taskIndex Index of task that needs to be changed.
+     * @param taskIndex   Index of task that needs to be changed.
      * @param newCategory Newly category.
      */
     public void changeCategory(int taskIndex, String newCategory) {
         String oldCategory = taskList.get(taskIndex).getCategory();
         this.categoryMap.get(oldCategory).remove(taskIndex);
         taskList.get(taskIndex).setCategory(newCategory);
-        updateCategoryMap(newCategory,taskIndex);
+        updateCategoryMap(newCategory, taskIndex);
     }
 
     //Methods:
@@ -73,12 +73,18 @@ public class TaskList {
     /**
      * Checks if the given task contains the given pattern.
      *
-     * @param task task to inspect
+     * @param task    task to inspect
      * @param pattern pattern to look for in task
      * @return true if task contains pattern
      */
     private boolean hasPattern(Task task, String pattern) {
-        return task.getTitle().contains(pattern) || task.getDescription().contains(pattern);
+        pattern = pattern.toLowerCase();
+        Boolean hasKeywordInStringField = task.getTitle().toLowerCase().contains(pattern)
+                || task.getDescription().toLowerCase().contains(pattern);
+        for (String location : task.getLocation()) {
+            hasKeywordInStringField = hasKeywordInStringField || location.toLowerCase().contains(pattern);
+        }
+        return hasKeywordInStringField;
     }
 
     private void updateCategoryMap(String category, Integer index) {
@@ -97,7 +103,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         taskList.add(task);
-        updateCategoryMap(task.getCategory(),taskList.size() - 1);
+        updateCategoryMap(task.getCategory(), taskList.size() - 1);
     }
 
     /**
@@ -110,7 +116,7 @@ public class TaskList {
         Integer index = 0;
         categoryMap.clear();
         for (Task task : tasks) {
-            updateCategoryMap(task.getCategory(),index);
+            updateCategoryMap(task.getCategory(), index);
             index++;
         }
     }
@@ -124,7 +130,15 @@ public class TaskList {
     public Task deleteTask(int index) {
 
         String category = taskList.get(index).getCategory();
-        categoryMap.get(category).remove(index);
+        int j = 0;
+        for (int i : categoryMap.get(category)) {
+            if (i == index) {
+                categoryMap.remove(j);
+                break;
+            }
+            j++;
+        }
+
         if (categoryMap.get(category).size() == 0) {
             categoryMap.remove(category);
         }
@@ -135,7 +149,7 @@ public class TaskList {
 
     /**
      * Finds the tasks that contain the given pattern in their
-     * title or description.
+     * title, description or location.
      *
      * @param pattern pattern to look for in the tasks
      * @return tasks that match the pattern
@@ -180,7 +194,7 @@ public class TaskList {
                 continue;
             }
             ArrayList<LocalDate> taskDates = task.getDate();
-            for (LocalDate taskDate: taskDates) {
+            for (LocalDate taskDate : taskDates) {
                 matchedTask = checkDate.compareTo(taskDate);
                 if (matchedTask == 0) {
                     totalTasksDay++;

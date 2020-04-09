@@ -1,9 +1,12 @@
 package seedu.command;
 
 import seedu.exception.ProjException;
+import seedu.storage.Storage;
 import seedu.tasks.Task;
 import seedu.tasks.TaskNonclass;
 import seedu.tasks.Class;
+
+import java.util.SortedMap;
 
 import static seedu.common.Constants.CLASS_CATEGORY;
 import static seedu.common.Constants.TAB;
@@ -14,7 +17,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_USAGE = COMMAND_WORD + " n/[title] i/[description] t/[hh:mm-hh:mm] "
-           + "d/[dd-MM-yyyy] l/[LOCATION] r/[REMINDER] c/[CATEGORY]";
+           + "d/[dd-mm-yyyy] l/[LOCATION] r/[REMINDER] c/[CATEGORY]";
 
     private static final String MESSAGE_SUCCESS = "Nice! Added the following task to the calendar:\n";
     private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task/tasks in your list";
@@ -47,6 +50,8 @@ public class AddCommand extends Command {
         } else {
             taskList.addTask(new TaskNonclass(title, description, date, time, location, reminder, category));
         }
+
+        Storage.overwriteFile(taskList.getList());
 
         String feedback = formatFeedback(taskList.getTask(taskList.getListSize() - 1));
 

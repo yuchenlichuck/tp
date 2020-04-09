@@ -12,7 +12,8 @@ public class FindCommand extends Command {
     private String pattern;
 
     public static final String COMMAND_WORD = "find";
-    public static final String COMMAND_USAGE = COMMAND_WORD + " [pattern]";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": finds tasks with given pattern";
+    public static final String COMMAND_USAGE = COMMAND_WORD + " [PATTERN]";
 
     public FindCommand(String pattern) {
         this.pattern = pattern.trim().substring(4).trim();

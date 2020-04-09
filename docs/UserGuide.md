@@ -29,7 +29,6 @@ remember your tasks.
 
 1. Run the jar file using `java - jar caf.jar`
 
-1. Link to Developer guide [here](https://github.com/AY1920S2-CS2113-T14-3/tp/blob/master/docs/DeveloperGuide.md)
 
 ## 3. Features
 * `<NAME>` such format indicates user input variable. However, when inputting, there is no need to input `<>`symbol. 

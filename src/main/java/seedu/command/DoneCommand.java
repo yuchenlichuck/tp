@@ -44,14 +44,14 @@ public class DoneCommand extends Command {
                 return new CommandResult(feedback);
             }
 
-            assert indexComplete > 0: "[Error][Done] user input is less than 0, not valid";
+            assert indexComplete > 0:"[Error][Done] user input is less than 0, not valid";
 
             if (taskList.getListSize() == 0) {
                 feedback += TAB + "[Alert][Done]: There are no tasks to mark completed!\n";
                 return new CommandResult(feedback);
             }
 
-            Task task = taskList.getTask( indexComplete- TASKLIST_OFFSET);
+            Task task = taskList.getTask(indexComplete - TASKLIST_OFFSET);
 
             if (task instanceof TaskNonclass) {
                 TaskNonclass taskNonClass = (TaskNonclass) task;

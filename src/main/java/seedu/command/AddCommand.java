@@ -32,7 +32,8 @@ public class AddCommand extends Command {
 
         // Check if the user uses / for time/date format
         if (hasWrongDelimiterPattern(userInput)) {
-            throw new ProjException("Please note that / is only used in delimiter : Similar format like 2020/04/16 is not allowed.");
+            throw new ProjException("Please note that / is only used in delimiter : "
+                    + "Similar format like 2020/04/16 is not allowed.");
         }
 
         //Check if user enters title

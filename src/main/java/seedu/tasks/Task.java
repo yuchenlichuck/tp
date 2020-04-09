@@ -104,7 +104,8 @@ public abstract class Task {
             LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             if (startTime.isAfter(endTime)) {
-                throw new NumberFormatException("Please enter a valid time range: the end time should be after the start time");
+                throw new NumberFormatException("Please enter a valid time range: "
+                         + "the end time should be after the start time");
             }
             this.time.add(startTime);
             this.time.add(endTime);

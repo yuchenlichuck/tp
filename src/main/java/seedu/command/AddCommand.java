@@ -20,6 +20,9 @@ public class AddCommand extends Command {
 
     private static final String MESSAGE_SUCCESS = "Nice! Added the following task to the calendar:\n";
     private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task/tasks in your list";
+    private static final String MESSAGE_DELIMITER_ERROR = TAB + "[Error][Add] \"/\" is only used in delimiter"
+            + " (e.g. 04/16/2020 is not supported)\n";
+    private static final String MESSAGE_MISSING_TITLE = TAB + "[Error][Add] Please input a title for the task.\n";
 
 
     public AddCommand(String userInput) {
@@ -31,14 +34,13 @@ public class AddCommand extends Command {
 
         // Check if the user uses / for time/date format
         if (hasWrongDelimiterPattern(userInput)) {
-            throw new ProjException("Please note that / is only used in delimiter : "
-                    + "Similar format like 2020/04/16 is not allowed.");
+            throw new ProjException(MESSAGE_DELIMITER_ERROR);
         }
 
         //Check if user enters title
         String title = getTitle(userInput);
         if (title.length() == 0) {
-            throw new ProjException("Please input a title for the task.");
+            throw new ProjException(MESSAGE_MISSING_TITLE);
         }
 
         String date = getDate(userInput);
@@ -67,8 +69,8 @@ public class AddCommand extends Command {
 
     private String formatFeedback(Task task) {
 
-        String feedback = MESSAGE_SUCCESS + TAB + TAB + task.toString() + System.lineSeparator()
-                + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
+        String feedback = TAB + MESSAGE_SUCCESS + TAB + TAB + TAB + task.toString() + System.lineSeparator()
+                + TAB + String.format(MESSAGE_CURRENT_TASKS, taskList.getListSize())
                 + System.lineSeparator();
 
         return feedback;

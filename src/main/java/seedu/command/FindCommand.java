@@ -32,7 +32,7 @@ public class FindCommand extends Command {
             ArrayList<Task> tasks = taskList.findTasks(pattern);
 
             if (tasks.isEmpty()) {
-                feedback += String.format(Messages.MESSAGE_NO_FOUND, pattern);
+                feedback += TAB + String.format(Messages.MESSAGE_NO_FOUND, pattern);
 
             } else {
                 feedback = formatFeedback(tasks);
@@ -40,7 +40,7 @@ public class FindCommand extends Command {
             }
 
         } catch (FindEmptyPatternException e) {
-            feedback = Messages.MESSAGE_EMPTY_PATTERN;
+            feedback = TAB + Messages.MESSAGE_EMPTY_PATTERN;
 
         } finally {
             return new CommandResult(feedback);
@@ -49,13 +49,13 @@ public class FindCommand extends Command {
 
     private String formatFeedback(ArrayList<Task> tasks) {
         String list = "";
-        String feedback;
+        String feedback = TAB;
 
         for (int i = 0; i < tasks.size(); i++) {
             list += TAB + TAB + (i + 1) + ". " + tasks.get(i) + "\n";
         }
 
-        feedback = String.format(Messages.MESSAGE_SUCCESS, list);
+        feedback += String.format(Messages.MESSAGE_SUCCESS, list);
 
         return feedback;
     }

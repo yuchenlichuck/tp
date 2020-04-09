@@ -381,7 +381,7 @@ public class ListCommand extends Command {
 
     private int getCmdSubtype(String category, String date, String time) {
 
-        if (date.isEmpty() && !category.isEmpty()) {
+        if (date.isEmpty() && time.isEmpty() && !category.isEmpty()) {
             return LIST_BY_CATEGORY;
         }
 

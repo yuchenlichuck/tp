@@ -23,10 +23,14 @@ public class TaskListTest {
     public void addAndDeleteTask() {
         TaskList tasks = new TaskList();
         addTestTask(tasks);
+        String expectedTask = "[TEST] Title: testTitle | 2020-06-10 ( NUS )";
+        String expectedClass = "[CLASS] Title: testClass | MONDAY ( NTU ) | WEDNESDAY ( NUS )";
+        assertEquals(expectedTask,tasks.getTask(0).toString());
+        assertEquals(expectedClass,tasks.getTask(1).toString());
+
         Integer output = tasks.getListSize();
         Integer expected = 2;
         assertEquals(output,expected);
-
         tasks.deleteTask(1);
         Integer outputAfterDelete = tasks.getListSize();
         Integer expectedAfterDelete = 1;
@@ -66,6 +70,7 @@ public class TaskListTest {
 
         tasks.changeDate(1,"1 4");
         assertEquals(tasks.getTask(1).getDate().get(0).getDayOfWeek().name(),"MONDAY");
+
     }
 
     @Test

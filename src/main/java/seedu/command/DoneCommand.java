@@ -4,11 +4,12 @@ import seedu.exception.ProjException;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
 import seedu.tasks.Task;
+import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
 import static seedu.common.Constants.TAB;
 import static seedu.common.Constants.NEW_LINE;
 import static seedu.common.Constants.TASKLIST_OFFSET;
-
+import static seedu.common.Constants.CLASS_CATEGORY;
 
 public class DoneCommand extends Command {
 
@@ -53,6 +54,11 @@ public class DoneCommand extends Command {
 
             Task task = taskList.getTask(indexComplete - TASKLIST_OFFSET);
 
+            if (task instanceof Class) {
+                feedback += TAB + "[Alert][Done]: Done command does not operate on [CLASS] category.";
+            }
+
+            // only allow users to complete a non class task object
             if (task instanceof TaskNonclass) {
                 TaskNonclass taskNonClass = (TaskNonclass) task;
                 if (!taskNonClass.getDoneStatus()) {

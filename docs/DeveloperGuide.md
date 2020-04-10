@@ -5,7 +5,8 @@
     * [Description](#13-description)
 * [Design](#2-design)
     * [Architecture](#21-architecture)
-    * [Task Component](#22-task-component)
+    * [UI](#22-ui)
+    * [Task Component](#23-task-component)
     * []
 * [Implementation](#3-implementation)
   * [Undo features](#31-proposed-features)
@@ -88,7 +89,7 @@ Below, we will describe the essential components that CAFS uses:
 1. Task - Contains all the necessary information and implementations required to interact with the list of tasks
 1. Commons - Component represents a collection of classes used by multiple other components
 
-### 2.1. UI
+### 2.2. UI
 * The UI component is not navigable from Command because all results from commands are passed back to main, in the form of `CommandResult`
 * UI component then takes in the CommandResult object and displays the feedback from the inputted command
 
@@ -96,15 +97,33 @@ Here is a simplified class diagram to illustrate this interaction:
 
 ![Command Result UI](images/UiResult.jpg)
 
+Ideally, all messages or output meant to be displayed should use the UI class instead of calling a system print or any other method.
+
+At the moment, the only outliers are certain exception error handling messages which will be standardised to follow this principle in a later version.
+
 ### 2.3. Task Component
-The TaskList Component relies on 2 other components:
+
+The TaskList Component depends on 2 other components:
 1. Storage 
-2. Command 
-
-
-    1. Class - to contain information about a class / timetable schedule
-    1. TaskNonClass -  to contain information about all other tasks that user needs to complete or be reminded of
+    * The Storage component is responsible for loading in any saved data stored locally, as well as updating the saved file 
+    when changes to the task list have been made
     
+2. Command 
+    * The Command component executes the specific set of instructions required to fulfill a particular user command
+    based on user input.
+
+![Command Result UI](images/TaskDiagram.jpg)
+
+The abstract class Task comprises of two subclasses:
+* Class - to contain information about a class / timetable schedule
+* TaskNonClass -  to contain information about all other tasks that user needs to complete or be reminded of
+
+In total, Task component comprises of 4 classes:
+1. TaskList - Methods called by commands to operate on task list. Also contains the actual list which stores all tasks.
+1. Task - Abstract class to model a generic task
+1. Class - Specialised class to model a student's timetable
+1. Task - Specialised class to model an actionable task / todo
+
 ## 3. Implementation
 ### 3.1 [Proposed] Features
 #### 3.1.1 List By Category

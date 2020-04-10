@@ -82,6 +82,7 @@ public class Parser {
 
     /**
      * Check if String is a valid integer.
+     *
      * @param value Input string for checking
      * @return boolean if string is valid
      */

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 
 /**
- * Entry point of the CAFS
+ * Entry point of the CAFS app.
  * Initializes the application and starts the interaction with the user.
  */
 public class Main {
@@ -34,12 +34,8 @@ public class Main {
         storage = new Storage();
         tasks = new TaskList();
 
-
-        // search for folder, create if not found
         storage.checkFolderPath();
 
-
-        // populate if data file is found
         if (storage.checkFileExists()) {
             // log a message at INFO level
             // TODO Redirect log messages to log file
@@ -75,7 +71,7 @@ public class Main {
                 ui.showError(e.getMessage());
             }
 
-        } while (!command.isExit()); // will be solved when do is enabled
+        } while (!command.isExit());
         logger.log(Level.INFO, "end of processing");
     }
 

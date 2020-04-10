@@ -57,6 +57,10 @@ public class HelpCommand extends Command {
         feedback += TAB + TAB + "Usage: " + CalendarCommand.COMMAND_USAGE + System.lineSeparator();
         feedback += System.lineSeparator();
 
+        feedback += TAB + TAB + ClearCommand.COMMAND_INFO + System.lineSeparator();
+        feedback += TAB + TAB + "Usage: " + ClearCommand.COMMAND_USAGE + System.lineSeparator();
+        feedback += System.lineSeparator();
+
         feedback += TAB + TAB + ExitCommand.COMMAND_INFO + System.lineSeparator();
         feedback += TAB + TAB + "Usage: " + ExitCommand.COMMAND_USAGE + System.lineSeparator();
         feedback += System.lineSeparator();

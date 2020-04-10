@@ -1,9 +1,12 @@
 package seedu.command;
 
+import seedu.common.Messages;
 import seedu.exception.ProjException;
 import seedu.storage.Storage;
 import seedu.tasklist.TaskList;
 import seedu.ui.Ui;
+
+import static seedu.common.Constants.TAB;
 
 /**
  * Represents an executable command.
@@ -213,11 +216,11 @@ public abstract class Command {
             String[] timeRanges = time.split("\\s+");
             for (String timeRange : timeRanges) {
                 if (!timeRange.contains("-")) {
-                    throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+                    throw new ProjException(TAB + Messages.MESSAGE_INCORRECT_TIME_FORMAT);
                 }
                 Integer timePointCount = timeRange.split("-").length;
                 if (timePointCount != 2) {
-                    throw new ProjException("Please follow the format when input time: hh:mm-hh:mm");
+                    throw new ProjException(TAB + Messages.MESSAGE_INCORRECT_TIME_FORMAT);
                 }
             }
         }
@@ -231,7 +234,7 @@ public abstract class Command {
         Integer dateCount = date.split("\\s+").length;
         Integer timeCount = time.split("\\s+").length;
         if (dateCount != timeCount) {
-            throw new ProjException("The number of time range must match with the number of date(day of a week).");
+            throw new ProjException(TAB + Messages.MESSAGE_GENERAL_DATE_TIME_MISMATCH);
         }
     }
 

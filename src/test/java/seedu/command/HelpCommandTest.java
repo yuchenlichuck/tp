@@ -55,6 +55,10 @@ class HelpCommandTest {
         expected += TAB + TAB + "Usage: " + CalendarCommand.COMMAND_USAGE + System.lineSeparator();
         expected += System.lineSeparator();
 
+        expected += TAB + TAB + ClearCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + ClearCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
         expected += TAB + TAB + ExitCommand.COMMAND_INFO + System.lineSeparator();
         expected += TAB + TAB + "Usage: " + ExitCommand.COMMAND_USAGE + System.lineSeparator();
         expected += System.lineSeparator();

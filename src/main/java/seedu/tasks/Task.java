@@ -99,7 +99,7 @@ public abstract class Task {
             LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             if (startTime.isAfter(endTime)) {
-                throw new NumberFormatException(TAB + Messages.MESSAGE_GENERAL_DATE_TIME_MISMATCH);
+                throw new NumberFormatException(TAB + Messages.MESSAGE_END_BEFORE_START_TIME);
             }
             this.time.add(startTime);
             this.time.add(endTime);
@@ -147,6 +147,10 @@ public abstract class Task {
 
     public ArrayList<String> getLocation() {
         return this.location;
+    }
+
+    public String getReminder() {
+        return this.reminder;
     }
 
     /**

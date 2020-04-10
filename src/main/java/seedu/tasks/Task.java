@@ -148,6 +148,10 @@ public abstract class Task {
         return this.location;
     }
 
+    public String getReminder() {
+        return this.reminder;
+    }
+
     /**
      * Output correct string format when listing tasks.
      *

@@ -52,15 +52,17 @@ Displays the set of commands supported
 ### 3.2 - Add
 Users add tasks using this command
 * **Usage**: `add  n/<NAME> t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
-     * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `11:00-12:00`)
-       There should be no space between this duration. 
      * Only name `<NAME>` is compulsory to include. Other fields are not compulsory to add. However, if
        user only inputs time, then date of current day will be automatically added. 
+     * Space is okay in `<NAME>`,`<REMINDER>` and `<INFORMATION>`.  e.g.: `n/2113 deadline` is accepted. 
+        >Title: 2113 deadline                                                       
+     * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `11:00-12:00`)
+       There should be no space between this duration. 
      * Since a task/class may has multiple time zone in a week, student can just add list of time zone.
        However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
        the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
-       zone/date/location.
-     * If there is only one time slots for this task, then the `<LOCATION>` will not be separated by space.  
+       zone/date/location. e.g. `t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU`  
+       > 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )
      * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
        case-insensitive.  
      * When adding normal tasks:
@@ -68,7 +70,7 @@ Users add tasks using this command
         * Examples: 
             * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
             * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
-            * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU c/MEETING`
+            * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU`
      * When adding class:
         * `<DATE>` should be which day in a week, represented by integer (e.g. `1 3` means Mon Wed). 
         * Examples: 
@@ -84,8 +86,9 @@ Edit the inputted task/class.
     * When edit `<TIME>` and `<DATE>`, please be reminded that the number of `<TIME>`should match with the 
       number of `<DATE>` and the number of location `<LOCATION>`. 
     * Examples: 
-        * `edit 1 t/11:00-12:00`
+        * `edit 1 l/NUSCOM2`
         * `edit 2 c/todo`  
+        
 ### 3.4 - List
 #### **3.4.1 - List** 
 List all tasks

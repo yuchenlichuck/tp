@@ -41,32 +41,47 @@ Va CLI calender-like task scheduler that supports task and class schedule adding
 
 #### Code contribution
 
-You can view my code contribution for this project: [HERE](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#search=yuchenlichuck&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false)
-
-- Test Code: AddCommandTest, test if adding is right or out of boundary.
-- Refactor: Extract different method's constants into messages class.
-- Time and Date Format: Change the time and date format, so that the tool can recognise whether the date or time wrong or right (With Leap year).
+You can view my code contribution for this project: [RepoSense Dashboard](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#breakdown=true&search=yuchenlichuck&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos)
 
 <a name="enhancement-implemented"></a>
+
 #### Enhancements implemented
+
+- Major Enhancement: added the 
+
 
 
 <a name="contribute-documentation"></a>
+
 #### Contributions to documentations:
 
+- Documented the majority of the features.
+
 <a name="contribute-developerguide"></a>
+
 #### Contributions to the DG
 
+- Documented a few user stories.
+
+<a name ="#contribute-team"></a>
+
 #### Contributions to team-based tasks:
+
+- Refactor the code and create separate parsers and command classes.
+- Added user stories to DG.
+- Maintain the issue tracker for quite a long time and handle all issues / errors raised during the PE dry run.
 
 <a name="review-mentoring"></a>
 
 #### Review/Mentoring contributions: 
 
+- Reviewed the following PR's: [#130](https://github.com/AY1920S2-CS2113-T14-3/tp/pull/130), [#104](https://github.com/AY1920S2-CS2113-T14-3/tp/pull/104), 
+
 <a name="contribute-team"></a>
 
-
 #### Contributions beyond the project team:
+
+- Reported 6 bugs during the [PE Dry Run](https://github.com/yuchenlichuck/ped/issues).
 
 <a name="contribute-ug"></a>
 
@@ -87,24 +102,16 @@ List all tasks
 List tasks belong to a specific category
 
 * **Usage**: `list c/<CATEGORY>`
-  * Wrong command: `list TODO` which will has the same effects as the `list`
-  * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
-  * Examples:
-    * list c/TODO
-    * list c/DEADLINE
+  
+  
 
 #### **List Time** And/Or Date
 
 List tasks by specific date/time
 
 * **Usage**: `list d/<DATE> t/<TIME>`
-  * It is okay to list events in a specific date and specific time. However, the class category cannot be shown, since these don't have date values.
-  * It is okay to list events just in a specific date. However, the class category cannot be shown, since these don't have date values.
-  * It is okay to list events just in a specific time. All categories can be shown
-* Example:
-  - list d/2020-03-16 t/15:00
-   - list d/2020-08-10
-  - list t/15:00
+  
+  
 
 #### List Category & Time And/Or Date
 
@@ -112,13 +119,7 @@ List tasks by category and date and time.
 
 * **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
 
-  * It is okay to list events in a specific date and specific time in a  specific category. However, the class category cannot be shown, since these don't have date values.
-  * It is okay to list events just in a specific date in a specific category. However, the class category cannot be shown, since these don't have date values.
-  * It is okay to list events just in a specific time in a specific category. All categories can be shown.
-  * Examples: 
-    * list d/2020-03-16 t/15:00 c/todo
-    * list d/2020-08-10 c/deadline
-    * list t/14:00 c/deadline
+  
 
 ### Delete
 
@@ -127,35 +128,20 @@ List tasks by category and date and time.
 Delete a task from the list
 
 * **Usage**: `delete <task index>`
-  * The index refers to the index number shown in the displayed task list.
-  * use `list` to derive task index
-  * index has to be a positive_integer_
-  * Examples:
-    * delete 2
+  
+  
 
 #### **Delete Category**
 
 Delete tasks belong to a specific category
 
 * **Usage**: `delete c/<CATEGORY>`
-  * Wrong command: `delete TODO` which is a invalid input
-  * The `<CATEGOTY>` is case insensitive. That is, `delete c/TODO` and `dele c/todo` has same effect.
-  * Examples:
-    * delete c/todo
-    * delete c/deadline
 
 #### **Delete Time And/Or Date**
 
 Delete tasks by specific date/time
 
 * **Usage**: `delete d/<DATE> t/<TIME>`
-  *  It is okay to delete events in a specific date and specific time. However, the class category cannot be shown, since these don't have date values.
-  *  It is okay to delete events just in a specific date. However, the class category cannot be shown, since these don't have date values.
-  * It is okay to delete events just in a specific time. All categories can be shown
-  * Example:
-       * delete d/2020-03-16 t/15:00
-       * delete d/2020-08-10
-       * delete t/15:00
 
 
 #### **Delete Category & Time And/Or Date**
@@ -163,13 +149,6 @@ Delete tasks by specific date/time
 List tasks by category and date and time. 
 
 * **Usage**: `delete c/<CATEGORY> d/<DATE> t/<TIME>`
-  * It is okay to delete events in a specific date and specific time in a specific category. However, the `class` category cannot be shown, since these don't have date values.
-  * It is okay to delete events just in a specific date in a specific category. However, the `class` category cannot be shown, since these don't have date values.
-  * It is okay to delete events just in a specific time in a specific category. All categories can be shown.
-    * Examples: 
-      * delete d/2020-03-16 t/15:00 c/todo
-      * delete d/2020-08-10 c/deadline
-      * delete t/14:00 c/deadline
 ***
 
 <a name="contribute-dg"></a>

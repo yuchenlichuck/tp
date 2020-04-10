@@ -91,9 +91,11 @@ public abstract class Task {
         String[] timeInfo = time.split("\\s+");
         for (String atime : timeInfo) {
             String[] timeRange = atime.split("-");
+
             if (timeRange[1].equals("24:00")) {
                 timeRange[1] = "23:59";
             }
+
             LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             if (startTime.isAfter(endTime)) {
@@ -170,9 +172,8 @@ public abstract class Task {
         if (this.date.size() == 0 && this.time.size() == 0) {
             if (this.location.size() != 0) {
                 formattedTask = formattedTask + String.format(" | Location: ");
-                for (String location : this.location) {
-                    formattedTask += location + " ";
-                }
+                formattedTask += this.location.get(0);
+
             }
         }
         return formattedTask;

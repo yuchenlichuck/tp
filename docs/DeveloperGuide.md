@@ -196,4 +196,96 @@ It solves:
 
 ## 6.5 Appendix F:Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
+1.  Initial launch
+
+* Ensure you have Java 11 or above installed in your Computer
+* Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases)
+* Copy the file to the folder you want to use as the home folder.
+* Run the jar file using `java - jar caf.jar`
+
+> Expected: Shows a welcome message from CAFS
+
+2. Shutdown
+
+* Enter the command `bye` to exit the CAFS
+* Close the command terminal.
+
+> Expected: Data is stored in the `data.txt`
+
+### Add Task/Class
+1. Add a Task
+    * Test case 1: 
+        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
+        > Expected:\   
+        Nice! Added the following task to the calendar:\                                                                                            
+        [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )\
+        Now you have <NUM> task/tasks in your list
+
+    * Test case 2:
+        * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
+        > Expected:\   
+         Nice! Added the following task to the calendar:\                                                                                            
+          [DEADLINE] Title: 2113 v2.1 | 2020-05-16 : 23:00 - 23:59\
+         Now you have <NUM> task/tasks in your list
+2. Add a Class
+    * Test case 1:
+        * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
+        > Expected:\  
+        Nice! Added the following task to the calendar:\                                                                                            
+        [CLASS] Title: 2113 | WEDNESDAY : 11:00 - 12:00 ( COM2 ) | THURSDAY : 01:00 - 03:00 ( COM1 )\
+        Now you have <NUM> task/tasks in your list
+
+    * Test case 2:
+        * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
+        > Expected:\   
+         Nice! Added the following task to the calendar:\                                                                                            
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+         Now you have <NUM> task/tasks in your list
+
+### Edit Task/Class
+_Assumption: Valid index is provided._
+1. Edit a Task
+    * Test case :
+        * `edit 1 l/NUSCOM2`
+        > Expected:\ 
+         Task 1 edited\
+         [TODO] Title: task | 2024-02-29 : 11:15 - 13:15 ( NUSCOM2 )
+
+2. Edit a Class
+    * Test case:
+    * _Previous index 1 is a class.Also, previously this index 1 class has only one time slots_
+        * `edit 1 d/1`
+        > Expected:\ 
+        Task 1 edited\
+         [CLASS] Title: task | WEDNESDAY : 11:15 - 13:15
+
+### Done Task
+* _Assumption: Valid index is provided_
+    * Test case:
+        * `done 1`
+        > Expected:\   
+        Task marked as done: \
+        [Y] [TODO] Title: task
+
+### Delete Task
+* _Assumption: Valid index is provided._
+    * Test case: 
+        * `delete 1`
+        > Expected:\   
+         The following task has been removed:\                                                                                            
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+         Now you have <NUM> task/tasks in your calendar.
+
+### List Task
+*
+    * Test case:
+        * `list`
+        > Expected: all inputted valid tasks + class
+
+### Calendar
+*
+    * Test case:
+        * `calendar`
+        > Expected: current month calendar will be displayed.\
+        The tasks on that month will also be displayed.

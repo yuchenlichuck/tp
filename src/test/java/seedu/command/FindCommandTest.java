@@ -90,7 +90,8 @@ public class FindCommandTest {
             assertTrue(false);
         }
         String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB
-                + "1. [TODO] Title: test | Location: NUScom2 \n";
+                + "1. [TODO] Title: test | Location: NUScom2\n";
+
         assertEquals(expectedOutput,output);
     }
 

@@ -38,7 +38,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void changeTask() {
+    /*public void changeTask() {
         TaskList tasks = new TaskList();
         addTestTask(tasks);
 
@@ -71,7 +71,7 @@ public class TaskListTest {
         tasks.changeDate(1,"1 4");
         assertEquals(tasks.getTask(1).getDate().get(0).getDayOfWeek().name(),"MONDAY");
 
-    }
+    }*/
 
     @Test
     public void findTask() {

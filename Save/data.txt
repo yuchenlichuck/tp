@@ -1,2 +1,3 @@
 {"isDateSet":false,"isTimeSet":false,"isDone":false,"title":"name B ","description":"","reminder":"","category":"DEADLINE","date":[],"time":[],"location":[]}
 {"title":"name C ","description":"","reminder":"","category":"CLASS","date":[],"time":[],"location":[]}
+{"isDateSet":false,"isTimeSet":false,"isDone":false,"title":"i ","description":"n ","reminder":"","category":"CAT","date":[],"time":[],"location":[]}

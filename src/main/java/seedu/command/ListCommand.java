@@ -30,10 +30,10 @@ public class ListCommand extends Command {
     public static final String COMMAND_INFO = COMMAND_WORD + ": lists tasks (e.g all tasks or by category)";
     public static final String COMMAND_USAGE = COMMAND_WORD + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " d/[DD-MM-YYYY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[YYYY-MM-DD]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " c/[CATEGORY] d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
+            + COMMAND_WORD + " d/[YYYY-MM-DD] t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY] d/[YYYY-MM-DD] t/[HH:MM-HH:MM]";
 
     private static final String MESSAGE_EMPTY_LIST = "[Alert][list] List is empty";
 

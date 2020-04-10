@@ -62,25 +62,25 @@ public class ListCommand extends Command {
 
             switch (listCmdSubtype) {
 
-                case LIST_ALL:
-                    getWholeList(listTaskIndex);
-                    break;
+            case LIST_ALL:
+                getWholeList(listTaskIndex);
+                break;
 
-                case LIST_BY_CATEGORY:
-                    getListByCategory(listTaskIndex, category);
-                    break;
+            case LIST_BY_CATEGORY:
+                getListByCategory(listTaskIndex, category);
+                break;
 
-                case LIST_BY_DATE:
-                    getListByDate(listTaskIndex, date, time);
-                    break;
+            case LIST_BY_DATE:
+                getListByDate(listTaskIndex, date, time);
+                break;
 
-                case LIST_BY_DATE_CATEGORY:
-                    getListByDateCategory(listTaskIndex, date, time, category);
-                    break;
-                default:
-                    // Should not reach here
-                    feedback = "[Error][List] No such option to filter";
-                    break;
+            case LIST_BY_DATE_CATEGORY:
+                getListByDateCategory(listTaskIndex, date, time, category);
+                break;
+            default:
+                // Should not reach here
+                feedback = "[Error][List] No such option to filter";
+                break;
             }
 
             feedback = getFormattedFeedback(listTaskIndex);

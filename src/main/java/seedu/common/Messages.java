@@ -45,6 +45,7 @@ public class Messages {
             + "Please enter a valid task number\n";
     public static final String MESSAGE_DATETIME_ERROR = TAB + "[Error] Expected format for date/time:"
             + " yyyy-mm-dd; time: hh:mm";
+    public static final String MESSAGE_INVALID_COMMAND = "[Alert] Command \"%s\" not recognized\n";
 
 
     /** Farewell message. */

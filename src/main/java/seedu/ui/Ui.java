@@ -53,7 +53,7 @@ public class Ui {
         System.out.print(PROMPT);
         String userCommand = input.nextLine();
         assert userCommand.length() > 0 : "Command input should contain at least one word";
-        return userCommand;
+        return userCommand.trim();
     }
 
     /**

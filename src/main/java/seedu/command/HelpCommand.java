@@ -8,11 +8,22 @@ public class HelpCommand extends Command {
     public static final String HELP_LEGEND = TAB + "Legend:\n" + TAB + TAB + TAB + "[Y]: Task is completed\n"
             + TAB + TAB + TAB +  "[N]: Task is not completed\n\n";
 
+    private String feedback = "";
+
+    public HelpCommand() {
+        // default constructor
+    }
+
+    public HelpCommand(String feedback) {
+        this.feedback += TAB + feedback;
+    }
+
+
     @Override
     public CommandResult execute() {
 
 
-        String feedback = HELP_LEGEND;
+        feedback += HELP_LEGEND;
 
         feedback += TAB + "Command List:\n\n";
 

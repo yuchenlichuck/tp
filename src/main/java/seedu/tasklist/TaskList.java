@@ -55,19 +55,6 @@ public class TaskList {
         taskList.get(taskIndex).setReminder(newReminder);
     }
 
-    /**
-     * Change category of a task and change the category mapping.
-     *
-     * @param taskIndex   Index of task that needs to be changed.
-     * @param newCategory Newly category.
-     */
-    public void changeCategory(int taskIndex, String newCategory) {
-        String oldCategory = taskList.get(taskIndex).getCategory();
-        this.categoryMap.get(oldCategory).remove(taskIndex);
-        taskList.get(taskIndex).setCategory(newCategory);
-        updateCategoryMap(newCategory, taskIndex);
-    }
-
     //Methods:
 
     /**
@@ -87,8 +74,30 @@ public class TaskList {
         return hasKeywordInStringField;
     }
 
+    /**
+     * Change category of a task and change the category mapping.
+     *
+     * @param taskIndex   Index of task that needs to be changed.
+     * @param newCategory Newly category.
+     */
+    public void changeCategory(int taskIndex, String newCategory) {
+        String oldCategory = taskList.get(taskIndex).getCategory();
+        this.categoryMap.get(oldCategory).remove(taskIndex);
+        if (this.categoryMap.get(oldCategory).size() == 0) {
+            this.categoryMap.remove(oldCategory);
+        }
+        taskList.get(taskIndex).setCategory(newCategory);
+        updateCategoryMap(newCategory, taskIndex);
+    }
+
+    /**
+     * Add new category mapping.
+     * @param category input category.
+     * @param index input task.
+     */
     private void updateCategoryMap(String category, Integer index) {
         if (category.length() != 0) {
+            //add new category
             if (!categoryMap.containsKey(category)) {
                 this.categoryMap.put(category, new ArrayList<>());
             }
@@ -122,10 +131,10 @@ public class TaskList {
     }
 
     /**
-     * Removes a task and return a reference to that object.
+     * Remove a task from the taskList.
      *
-     * @param index Index of task to remove
-     * @return Removed task
+     * @param index Index of the task to be deleted.
+     * @return The task that is deleted.
      */
     public Task deleteTask(int index) {
 
@@ -151,8 +160,8 @@ public class TaskList {
      * Finds the tasks that contain the given pattern in their
      * title, description or location.
      *
-     * @param pattern pattern to look for in the tasks
-     * @return tasks that match the pattern
+     * @param pattern pattern to look for in the tasks.
+     * @return tasks that match the pattern.
      */
     public ArrayList<Task> findTasks(String pattern) {
 
@@ -179,11 +188,12 @@ public class TaskList {
         return this.categoryMap.keySet().toArray(new String[this.categoryMap.size()]);
     }
 
+
     /**
      * Checks list of tasks with supplied date to see how many tasks for that date.
      *
-     * @param checkDate date used to check against list
-     * @return number of tasks for that day
+     * @param checkDate date used to check against list.
+     * @return number of tasks for that day.
      */
     public static int categoryCounter(LocalDate checkDate) {
         int totalTasksDay = 0;
@@ -204,33 +214,4 @@ public class TaskList {
         return totalTasksDay;
     }
 
-    /**
-     * Retrieve the class tasks.
-     *
-     * @return List of class.
-     */
-    public static ArrayList<Task> getClassTask() {
-        ArrayList<Task> result = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getCategory() != CLASS_CATEGORY) {
-                result.add(task);
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Retrieve the tasks that are not class.
-     *
-     * @return List of non class tasks.
-     */
-    public static ArrayList<Task> getNonClassTask() {
-        ArrayList<Task> result = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getCategory() == CLASS_CATEGORY) {
-                result.add(task);
-            }
-        }
-        return result;
-    }
 }

@@ -74,7 +74,7 @@ public class Parser {
                     commandSections.length - COMMAND_LENGTH, CalendarCommand.ARGUMENT_COuNT);
 
         default:
-            System.out.println("Command not recognised\n");
+            System.out.println("\n  Command not recognised\n");
             return new HelpCommand();
         }
     }
@@ -82,6 +82,7 @@ public class Parser {
 
     /**
      * Check if String is a valid integer.
+     *
      * @param value Input string for checking
      * @return boolean if string is valid
      */

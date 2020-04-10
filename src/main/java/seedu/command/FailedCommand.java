@@ -11,10 +11,10 @@ public class FailedCommand extends Command {
 
     /**
      * Constructor method for custom error message.
+     *
      * @param commandName command name
      * @param feedback message to display
      */
-    // for error with unique feedback
     public FailedCommand(String commandName, String feedback) {
         feedback += String.format("[Error][%s]: ", commandName);
         this.feedback = feedback;
@@ -23,11 +23,11 @@ public class FailedCommand extends Command {
 
     /**
      * Constructor method for wrong argument count, used in parser class.
+     *
      * @param commandName command name
      * @param userArgumentCount arguments user arguments
      * @param expectedCount expected arguments for command
      */
-    // for error with arg error
     public FailedCommand(String commandName, int userArgumentCount, String expectedCount) {
         feedback += String.format("[Error][%s]: %s,\nReceived: %d Expected: %s\n",
                 commandName, WRONG_ARGUMENT, userArgumentCount, expectedCount);

@@ -14,7 +14,6 @@ public abstract class Command {
     protected Storage storage;
     protected Ui ui;
 
-    // add  n/<NAME> t/<Time> d/<DATE> i/<INFORMATION> l/<LOCATION> r/<REMINDER> c/<CATEGORY>
     protected static final String TITLE = "n/";
     protected static final String TIME = "t/";
     protected static final String DATE = "d/";

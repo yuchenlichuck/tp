@@ -61,12 +61,7 @@ class StorageTest {
         DeleteCommand command = new DeleteCommand(input);
         initCommand(command);
 
-        try {
-            command.execute();
-        } catch (ProjException e) {
-            assertTrue(false);
-        }
-
+        command.execute();
     }
 
 

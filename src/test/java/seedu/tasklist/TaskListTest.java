@@ -39,6 +39,7 @@ public class TaskListTest {
     public void changeTask() {
 
         TaskList tasks = new TaskList();
+        tasks.resetCategoryMap();
         addTestTask(tasks);
 
         String expectedLocation = "NUS COM2";

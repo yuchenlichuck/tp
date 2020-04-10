@@ -9,7 +9,6 @@ import seedu.tasks.Task;
 import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -55,6 +54,7 @@ public class Storage {
     public static String convertToGson(Task task) {
         return gson.toJson(task);
     }
+
 
     /**
      * Over writes saved data file with latest task list.

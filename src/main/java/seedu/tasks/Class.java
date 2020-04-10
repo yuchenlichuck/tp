@@ -1,13 +1,12 @@
 package seedu.tasks;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class Class extends Task {
-    public static final char WEEK = 'W'; //Weekly
+
+    /** Weekly task classification. */
+    public static final char WEEK = 'W';
 
     /**
      * Constructor method for initialising new class object.
@@ -62,7 +61,7 @@ public class Class extends Task {
                 formattedTask = formattedTask + String.format(" | %s : %s - %s",
                         date.get(i).getDayOfWeek().name(), time.get(i * 2), time.get(i * 2 + 1));
             } else {
-                formattedTask = formattedTask + String.format(" | %s", date.get(i));
+                formattedTask = formattedTask + String.format(" | %s", date.get(i).getDayOfWeek().name());
             }
             if (location.size() > i) {
                 formattedTask = formattedTask + String.format(" ( %s )", location.get(i));
@@ -77,6 +76,6 @@ public class Class extends Task {
      * @return tick for done, cross for not done
      */
     public char getStatusIcon() {
-        return WEEK; //return tick or X symbols
+        return WEEK;
     }
 }

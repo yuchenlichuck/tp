@@ -77,4 +77,35 @@ public class EditCommandTest {
     }
 
 
+    @Test
+    public void editCommand_IndexOutOfBounds_exceptionThrown() {
+
+        TaskList tasks = new TaskList();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+
+        try {
+
+            String firstInput = "add n/Sleep early";
+            AddCommand firstCommand = new AddCommand(firstInput);
+
+            firstCommand.setCommandVariables(tasks, storage, ui);
+            firstCommand.execute();
+
+            String secondInput = "edit 4 n/Sleep now";
+            EditCommand secondCommand = new EditCommand(secondInput);
+
+            secondCommand.setCommandVariables(tasks, storage, ui);
+            secondCommand.execute();
+
+        } catch (ProjException e) {
+            String expected = "  [Error][edit] Task number \"4\" doesn't exit";
+            assertEquals(expected, e.getMessage());
+        }
+
+
+    }
+
+
 }

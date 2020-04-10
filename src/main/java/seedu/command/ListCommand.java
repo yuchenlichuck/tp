@@ -96,6 +96,7 @@ public class ListCommand extends Command {
 
         //only task can do it and date can do
         if (time == null || time.isEmpty()) {
+
             String[] dates = date.split("\\s+");
             //dates input dates
             HashSet<LocalDate> inputDates = new HashSet<>();
@@ -193,8 +194,6 @@ public class ListCommand extends Command {
             }
 
             //dates input dates
-            int size = dates.length;
-
             for (int i = 0; i < taskList.getListSize(); i++) {
                 Task task = taskList.getTask(i);
 
@@ -207,7 +206,6 @@ public class ListCommand extends Command {
                 ArrayList<LocalTime> localTimes = task.getTime();
                 ArrayList<LocalDate> localDates = task.getDate();
 
-                int sum = 0;
                 label:
                 for (int j = 0; j < localDates.size(); j++) {
                     for (int k = 0; k < dateList.size(); k++) {

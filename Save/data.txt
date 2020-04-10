@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 {"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"research paper","description":"","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":7}],"time":[],"location":[]}
 {"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"todo","description":"","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":7},{"year":2020,"month":6,"day":6}],"time":[],"location":[]}
 {"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"todo","description":"","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":7},{"year":2020,"month":6,"day":6}],"time":[],"location":[]}
+=======
+{"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"research paper ","description":"essay for writing 101","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":6}],"time":[],"location":[]}
+>>>>>>> 2d2a805cc1bdefc1ba412aa262e5ccf0117af06f

@@ -30,7 +30,6 @@ public class GenerateCalendar {
 
     //private List<String[]> rows = new ArrayList<>();
 
-
     private int startingDay;
     private int totalDays;
     private int totalWeeks;
@@ -87,7 +86,9 @@ public class GenerateCalendar {
             currentLine += String.join("", Collections.nCopies(DEFAULT_WIDTH, HORIZONTAL_SEP));
         }
         currentLine += NEW_LINE;
-        return currentLine; //the last plus to end the table
+
+        //the last plus to end the table
+        return currentLine;
     }
 
 

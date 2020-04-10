@@ -210,7 +210,7 @@ Will still display tasks from past months as long as not marked as complete.
 Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed).
 
 * **Usage**: `done <task index>` 
-    * Obtain task index from `list` command
+    * Obtain task index from `list` command (without any filters)
     * task cannot be a from the category class
     * Index is a valid positive number
 

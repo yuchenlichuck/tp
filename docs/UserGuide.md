@@ -197,11 +197,19 @@ Will still display tasks from past months as long as not marked as complete.
     * Default set to current month
     * If number supplied is not within the month range, it will be set to current month
 
-### 3.9 - Clear
+### 3.9 - Done
+Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed).
+
+* **Usage**: `done <task index>` 
+    * Obtain task index from `list` command
+    * task cannot be a from the category class
+    * Index is a valid positive number
+
+### 3.10 - Clear
 Clear the Command
 * **Usage**:`clc`
 
-### 3.10 - Exit
+### 3.11 - Exit
 Exits the program
 * **Usage**: `bye`
   
@@ -229,7 +237,6 @@ Exits the program
     * `delete d/<DATE> t/<TIME>`
  * **Done**: `done <task index>` 
  * **Find**: `find <keyword>` 
- * **Save**: `save`
  * **Help**: `help`
  * **Calendar**: `calendar` or `calendar <month>`
  * **Clear**:`clc`

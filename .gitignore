@@ -15,6 +15,7 @@ bin/
 
 # data file for saved tasks
 /Save/data.txt
+/Save/
 
 /text-ui-test/ACTUAL.txt
 docs/~$UML Diagrams.pptx

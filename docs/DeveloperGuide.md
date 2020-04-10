@@ -1,5 +1,8 @@
 # Developer Guide
-* [Setting up](#1-setting-up)
+* [Introduction](#1-introduction)
+    * [Purpose](#11-purpose)
+    * [Target Audience](#12-target-audience)
+    * [Description](#13-description)
 * [Design](#2-design)
 * [Implementation](#3-implementation)
   * [Undo features](#31-proposed-features)
@@ -14,10 +17,13 @@
   * [Appendix D:Non-Functional Requirements](#64-appendix-dnon-functional-requirements)
   * [Appendix E:Glossary](#65-appendix-eglossary)
   * [Appendix F:Instructions for Manual Testing](#66-appendix-finstructions-for-manual-testing)
-## 1. Setting up
+
+## 1. Purpose
+This Developer's guide is meant to guide future developers of the project on how CAFS was developed. 
+It will include the design and implementations of CAFS to give a better understanding of how to start the development of the program
+
 ## 2. Design
 
-{Describe the design of the product. Use **Architecture Diagram** which has not been covered yet.}
 
 ## 3. Implementation
 ### 3.1 [Proposed] Features

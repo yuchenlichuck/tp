@@ -8,32 +8,34 @@ import seedu.exception.ProjException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 import static seedu.common.Constants.TAB;
+
 import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
 import seedu.tasks.Task;
 
 public class ListCommand extends Command {
-
     public static final int TASKLIST_OFFSET = 1;
-    private String userInput;
-
-
-    public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_INFO = COMMAND_WORD + ": lists tasks (e.g all tasks or by category)";
-    public static final String COMMAND_USAGE = COMMAND_WORD + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " d/[YYYY-MM-DD] t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " c/[CATEGORY] d/[YYYY-MM-DD] t/[HH:MM-HH:MM]";
-
-    private static final String MESSAGE_EMPTY_LIST = "[Alert][list] List is empty";
-
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;
     private static final int LIST_BY_DATE = 3;
     private static final int LIST_BY_DATE_CATEGORY = 4;
+
+    private String userInput;
+    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": lists tasks (e.g all tasks or by category)";
+    public static final String COMMAND_USAGE = COMMAND_WORD + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[YYYY-MM-DD]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[YYYY-MM-DD] t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY] d/[YYYY-MM-DD] t/[HH:MM-HH:MM]";
+
+    private static final String MESSAGE_EMPTY_LIST = "[Alert][list] List is empty";
 
 
     public ListCommand(String userCommand) {
@@ -92,7 +94,8 @@ public class ListCommand extends Command {
     }
 
 
-    private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category) {
+    private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category)
+            throws DateTimeParseException, NumberFormatException {
 
         //only task can do it and date can do
         if (time == null || time.isEmpty()) {
@@ -107,10 +110,7 @@ public class ListCommand extends Command {
                 }
                 inputDates.add(addedDate);
             }
-
             int index = -1;
-            int size = inputDates.size();
-
             for (Task task : taskList.getList()) {
                 index++;
                 if (!task.getCategory().equals((category))) {
@@ -143,6 +143,10 @@ public class ListCommand extends Command {
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
 
+                if (startTime.isAfter(endTime)) {
+                    throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                            + "the end time should be after the start time");
+                }
                 //input time
                 startTimes.add(startTime);
                 endTimes.add(endTime);
@@ -167,24 +171,26 @@ public class ListCommand extends Command {
                     }
                 }
             }
-
+            return;
         }
 
         //date and time
         if (!date.isEmpty() && !time.isEmpty()) {
+
             String[] dates = date.split("\\s+");
             String[] times = time.split("\\s+");
-
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             ArrayList<LocalDate> dateList = new ArrayList<>();
 
             for (String atime : times) {
-
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
-
+                if (startTime.isAfter(endTime)) {
+                    throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                            + "the end time should be after the start time");
+                }
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -212,7 +218,6 @@ public class ListCommand extends Command {
                         if (localTimes.get(2 * j).isBefore(endTimes.get(k))
                                 && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))
                                 && localDates.get(j).equals(dateList.get(k))) {
-
                             listTaskIndex.add(i);
                             break label;
                         }
@@ -224,7 +229,8 @@ public class ListCommand extends Command {
 
     }
 
-    private void getListByDate(ArrayList<Integer> listTaskIndex, String date, String time) {
+    private void getListByDate(ArrayList<Integer> listTaskIndex, String date, String time)
+            throws DateTimeParseException, NumberFormatException {
 
         //only task can do it
         if (time == null || time.isEmpty()) {
@@ -268,7 +274,10 @@ public class ListCommand extends Command {
 
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
-
+                if (startTime.isAfter(endTime)) {
+                    throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                            + "the end time should be after the start time");
+                }
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -296,6 +305,8 @@ public class ListCommand extends Command {
 
         //date and time
         if (!date.isEmpty() && !time.isEmpty()) {
+
+
             String[] dates = date.split("\\s+");
             String[] times = time.split("\\s+");
 
@@ -307,6 +318,10 @@ public class ListCommand extends Command {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+                if (startTime.isAfter(endTime)) {
+                    throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                            + "the end time should be after the start time");
+                }
                 startTimes.add(startTime);
                 endTimes.add(endTime);
 
@@ -363,7 +378,6 @@ public class ListCommand extends Command {
         } else {
             feedback = TAB + "There are " + listTaskIndex.size() + " tasks.\n";
         }
-
         for (int i = 0; i < listTaskIndex.size(); i++) {
             Integer taskIndex = listTaskIndex.get(i);
             Task task = taskList.getTask(taskIndex);
@@ -371,6 +385,7 @@ public class ListCommand extends Command {
                 feedback += TAB + TAB + (i + TASKLIST_OFFSET) + ". ";
                 feedback += "[" + ((TaskNonclass) task).getStatusIcon() + "] " + task + "\n";
             }
+
             if (task instanceof Class) {
                 feedback += TAB + TAB + (i + TASKLIST_OFFSET) + ". ";
                 feedback += "[" + ((Class) task).getStatusIcon() + "] " + task + "\n";

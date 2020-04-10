@@ -9,7 +9,6 @@ import seedu.tasks.TaskNonclass;
 import static seedu.common.Constants.TAB;
 import static seedu.common.Constants.NEW_LINE;
 import static seedu.common.Constants.TASKLIST_OFFSET;
-import static seedu.common.Constants.CLASS_CATEGORY;
 
 public class DoneCommand extends Command {
 

@@ -358,7 +358,6 @@ class ListCommandTest {
         command.setCommandVariables(tasks, storage, ui);
 
         try {
-
             output = command.execute().getFeedback();
         } catch (ProjException e) {
             assertTrue(false);
@@ -368,7 +367,6 @@ class ListCommandTest {
                 + "    1. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    2. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n"
                 + "    3. [N] [DEADLINE] Title: task | 2024-02-29 : 11:15 - 13:15\n";
-
         assertEquals(expected, output);
     }
 

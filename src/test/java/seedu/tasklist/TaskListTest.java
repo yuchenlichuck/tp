@@ -37,7 +37,7 @@ public class TaskListTest {
         assertEquals(outputAfterDelete,expectedAfterDelete);
     }
 
-    @Test
+    
     /*public void changeTask() {
         TaskList tasks = new TaskList();
         addTestTask(tasks);

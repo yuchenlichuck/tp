@@ -2,8 +2,9 @@
 * [Setting up](#1-setting-up)
 * [Design](#2-design)
 * [Implementation](#3-implementation)
-  * [Undo features](#31-proposed-undo-feature)
-    * [View By Category](#311-view-by-category)
+  * [Undo features](#31-proposed-features)
+    * [List By Category](#311-list-by-category)
+    * [Calendar](#312-proposed-view-month)
 * [Documentation](#4-documentation)
 * [Testing](#5-testing)
 * [Dev Ops](#6-dev-ops)
@@ -48,9 +49,10 @@ This is the UML design for list by category.
 ##### 3.1.1.2 Design Considerations
 Aspect: How to find certain category. 
 
-Alternative 1 (current choice): store HashMap to map category with the key. 
+Alternative 1 (previous choice): store HashMap to map category with the key. The map still exists which
+stores the needed categories. 
 
-Alternative 2 (easy to do): linear search when searching tasks. 
+Alternative 2 (current choice): linear search when searching tasks. 
 
 
 #### 3.1.2 [Proposed] View month

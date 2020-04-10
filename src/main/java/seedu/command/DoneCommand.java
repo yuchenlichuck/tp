@@ -63,9 +63,11 @@ public class DoneCommand extends Command {
             }
 
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(TAB + "[Error][Done]: Please input a task within the range of: 1 - "
-                    + taskList.getList().size());
+            feedback = TAB + "[Error][Done]: Please input a task within the range of: 1 - "
+                    + taskList.getList().size() + System.lineSeparator();
+            return  new CommandResult(feedback);
         }
+
         return new CommandResult(feedback);
     }
 

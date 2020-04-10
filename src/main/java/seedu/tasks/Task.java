@@ -1,20 +1,11 @@
 package seedu.tasks;
 
-
-import seedu.calendar.CalendarParser;
-import seedu.exception.ProjException;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static seedu.common.Constants.DEFAULT_CATEGORY;
 import static seedu.common.Constants.TAB;
@@ -45,6 +36,7 @@ public abstract class Task {
         } else {
             this.category = DEFAULT_CATEGORY;
         }
+
         // post condition check for existence of title
         assert (title.length() != 0) : title;
         this.title = title;
@@ -142,10 +134,6 @@ public abstract class Task {
 
     public String getCategory() {
         return this.category;
-    }
-
-    public String getReminder() {
-        return this.reminder;
     }
 
     public ArrayList<LocalDate> getDate() {

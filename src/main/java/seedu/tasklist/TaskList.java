@@ -1,11 +1,9 @@
 package seedu.tasklist;
 
 import seedu.tasks.Task;
-import seedu.tasks.TaskNonclass;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import static seedu.common.Constants.CLASS_CATEGORY;
@@ -17,7 +15,7 @@ public class TaskList {
     private static HashMap<String, ArrayList<Integer>> categoryMap = new HashMap<>();
 
     public TaskList() {
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
     }
 
     //Accessors:
@@ -54,9 +52,8 @@ public class TaskList {
     public void changeReminder(int taskIndex, String newReminder) {
         taskList.get(taskIndex).setReminder(newReminder);
     }
-
-    //Methods:
-
+  
+  //Other methods:
     /**
      * Checks if the given task contains the given pattern.
      *
@@ -115,23 +112,9 @@ public class TaskList {
         updateCategoryMap(task.getCategory(), taskList.size() - 1);
     }
 
-    /**
-     * When updating a task from the storage, also need to add category mapping.
-     *
-     * @param tasks tasks loaded.
-     */
-    public void updateTaskList(ArrayList<Task> tasks) {
-        taskList = tasks;
-        Integer index = 0;
-        categoryMap.clear();
-        for (Task task : tasks) {
-            updateCategoryMap(task.getCategory(), index);
-            index++;
-        }
-    }
 
     /**
-     * Remove a task from the taskList.
+     * Removes a task and return a reference to that object.
      *
      * @param index Index of the task to be deleted.
      * @return The task that is deleted.

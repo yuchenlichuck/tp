@@ -11,6 +11,7 @@ import seedu.ui.Ui;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -26,6 +27,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " d/[DD-MM-YYYY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
 
 
@@ -124,7 +126,8 @@ public class DeleteCommand extends Command {
         return feedback;
     }
 
-    private String deleteByDateCategory(String date, String time, String category) {
+    private String deleteByDateCategory(String date, String time, String category)
+            throws DateTimeParseException,NumberFormatException {
 
         //only task can do it just get by date
         String feedback = "";
@@ -176,6 +179,11 @@ public class DeleteCommand extends Command {
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
 
+                if (startTime.isAfter(endTime)) {
+                    throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                            + "the end time should be after the start time");
+                }
+
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -211,15 +219,18 @@ public class DeleteCommand extends Command {
             String[] times = time.split("\\s+");
             String[] dates = date.split("\\s+");
 
+            ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             ArrayList<LocalDate> dateList = new ArrayList<>();
-            ArrayList<LocalTime> startTimes = new ArrayList<>();
-
 
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+                if (startTime.isAfter(endTime)) {
+                    throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                            + "the end time should be after the start time");
+                }
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }

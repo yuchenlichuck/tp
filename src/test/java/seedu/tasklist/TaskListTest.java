@@ -1,8 +1,6 @@
 package seedu.tasklist;
 
 import org.junit.jupiter.api.Test;
-import seedu.command.AddCommand;
-import seedu.exception.ProjException;
 import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
 
@@ -38,8 +36,10 @@ public class TaskListTest {
     }
 
     @Test
-    /*public void changeTask() {
+    public void changeTask() {
         TaskList tasks = new TaskList();
+        tasks.resetCategoryMap();
+
         addTestTask(tasks);
 
         String expectedLocation = "NUS COM2";
@@ -66,12 +66,14 @@ public class TaskListTest {
         tasks.changeCategory(0,expectedCategory);
         assert (tasks.containsCategory(expectedCategory));
         assert (!tasks.containsCategory("TEST"));
-        assertEquals(tasks.getAllCategory().length,2);
+
+        int expectedLength = tasks.getAllCategory().length;
+        assertEquals(expectedLength,2);
 
         tasks.changeDate(1,"1 4");
         assertEquals(tasks.getTask(1).getDate().get(0).getDayOfWeek().name(),"MONDAY");
 
-    }*/
+    }
 
     @Test
     public void findTask() {

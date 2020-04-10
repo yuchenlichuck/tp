@@ -171,6 +171,9 @@ public class TaskList {
         return this.categoryMap.keySet().toArray(new String[this.categoryMap.size()]);
     }
 
+    public void resetCategoryMap() {
+        categoryMap.clear();
+    }
 
     /**
      * Checks list of tasks with supplied date to see how many tasks for that date.

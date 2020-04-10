@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import static seedu.common.Constants.DEFAULT_CATEGORY;
+import static seedu.common.Constants.TAB;
 
 public abstract class Task {
     protected String title;
@@ -96,7 +97,7 @@ public abstract class Task {
             LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             if (startTime.isAfter(endTime)) {
-                throw new NumberFormatException("Please enter a valid time range: "
+                throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                          + "the end time should be after the start time");
             }
             this.time.add(startTime);
@@ -145,6 +146,10 @@ public abstract class Task {
 
     public ArrayList<String> getLocation() {
         return this.location;
+    }
+
+    public String getReminder() {
+        return this.reminder;
     }
 
     /**

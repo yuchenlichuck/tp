@@ -121,7 +121,6 @@ public class ListCommand extends Command {
                 }
 
                 ArrayList<LocalDate> localDates = task.getDate();
-
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
                         listTaskIndex.add(index);
@@ -181,6 +180,7 @@ public class ListCommand extends Command {
             ArrayList<LocalDate> dateList = new ArrayList<>();
 
             for (String atime : times) {
+
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
@@ -242,13 +242,16 @@ public class ListCommand extends Command {
             int index = -1;
             for (Task task : taskList.getList()) {
                 index++;
+
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
                 ArrayList<LocalDate> localDates = task.getDate();
+
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
                         listTaskIndex.add(index);
+                        break;
                     }
                 }
                 // Populate the date with current date if date is not inputted

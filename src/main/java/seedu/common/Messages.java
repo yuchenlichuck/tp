@@ -31,11 +31,12 @@ public class Messages {
             + "description, or location\n";
 
     //Delete Command
-    public static final String MESSAGE_INVALID_INDEX = "[Error][%s] The entered index \"%s\" is invalid. "
+    public static final String MESSAGE_INVALID_INDEX = "[Error][%s] The entered input \"%s\" is invalid. "
             + "Please enter a valid task number\n";
     public static final String MESSAGE_MISSING_NUMBER = "[Error][delete] Missing task number to delete\n";
     public static final String MESSAGE_REMAINING_TASKS = "Now you have %d task/tasks in your calendar\n";
     public static final String MESSAGE_DELETE_SUCCESS = "The following task has been removed:\n %s";
+    public static final String MESSAGE_DELETE_NO_TASK_FOUND = "[Alert][delete] No task found to delete";
 
 
     public static final String MESSAGE_LIST_IS_EMPTY = "[Alert][%s] There is nothing to %s, the list is empty\n";

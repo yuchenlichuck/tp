@@ -35,24 +35,32 @@ public class TaskListTest {
         assertEquals(outputAfterDelete,expectedAfterDelete);
     }
 
- /*public void changeTask() {
+    @Test
+    public void changeTask() {
+
         TaskList tasks = new TaskList();
         addTestTask(tasks);
+
         String expectedLocation = "NUS COM2";
         tasks.changeLocation(0,expectedLocation);
         assertEquals(tasks.getTask(0).getLocation().get(0),"NUS");
+
         String expectedReminder = "testReminder";
         tasks.changeReminder(0,expectedReminder);
         assertEquals(tasks.getTask(0).getReminder(),expectedReminder);
+
         tasks.changeTime(0,"12:00-13:00");
         LocalTime expectedTime = LocalTime.parse("12:00");
         assertEquals(tasks.getTask(0).getTime().get(0),expectedTime);
+
         tasks.changeDate(0,"2021-04-20");
         LocalDate expectedDate = LocalDate.parse("2021-04-20");
         assertEquals(tasks.categoryCounter(expectedDate),1);
+
         String expectedDescription = "testDescription";
         tasks.changeDescription(0,expectedDescription);
         assertEquals(tasks.getTask(0).getDescription(),expectedDescription);
+
         String expectedCategory = "DEADLINE";
         tasks.changeCategory(0,expectedCategory);
         assert (tasks.containsCategory(expectedCategory));
@@ -60,7 +68,7 @@ public class TaskListTest {
         assertEquals(tasks.getAllCategory().length,2);
         tasks.changeDate(1,"1 4");
         assertEquals(tasks.getTask(1).getDate().get(0).getDayOfWeek().name(),"MONDAY");
-    }*/
+    }
 
     @Test
     public void findTask() {
@@ -81,8 +89,5 @@ public class TaskListTest {
             assertEquals(expected,e.getMessage());
         }
     }
-
-
-
 
 }

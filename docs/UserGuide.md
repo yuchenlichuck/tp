@@ -5,16 +5,16 @@ By: `AY1920S2-CS2113-T14-3`
 1. [Introduction](#1-introduction)
 1. [Quick Start](#2-quick-start)
 1. [Features](#3-features) <br/>
-  3.1 [Viewing help: `help`](#31---help) <br/>
-  3.2 [Adding tasks: `add`](#32---add) <br/>
-  3.3 [Editing tasks: `edit`](#33---edit) <br/>
-  3.4 [Listing tasks: `list`](#34---list) <br/>
-  3.5 [Deleting tasks: `delete`](#35---delete) <br/>
-  3.6 [Marking tasks as done: `done`](#36---done) <br/>
-  3.7 [Finding tasks: `find`](#37---find) <br/>
-  3.8 [Viewing calendar: `calendar`](#38---calendar) <br/>
-  3.9 [Clearing output: `clc`](#39---clear) <br/>
-  3.10 [Exiting program: `bye`](#310---exit)
+  3.1 [Viewing help: `help`](#31-viewing-help-help) <br/>
+  3.2 [Adding tasks: `add`](#32-adding-tasks-add) <br/>
+  3.3 [Editing tasks: `edit`](#33-editing-tasks-edit) <br/>
+  3.4 [Listing tasks: `list`](#34-listing-tasks-list) <br/>
+  3.5 [Deleting tasks: `delete`](#35-deleting-tasks-delete) <br/>
+  3.6 [Marking tasks as done: `done`](#36-marking-tasks-as-done-done) <br/>
+  3.7 [Finding tasks: `find`](#37-finding-tasks-find) <br/>
+  3.8 [Viewing calendar: `calendar`](#38-viewing-calendar-calendar) <br/>
+  3.9 [Clearing output: `clc`](#39-clearing-output-clc) <br/>
+  3.10 [Exiting program: `bye`](#310-exiting-program-bye)
 1. [FAQ](#4-faq)
 1. [Command Summary](#5-command-summary)
 

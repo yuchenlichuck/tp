@@ -137,9 +137,10 @@ It solves:
 |v2.0| No 9. is a university student | export my calendar as a text file | I can print it to have a physical copy |
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
-|v2.1| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
+|v2.0| No 12. is a university student | edit my student schedule | Edit the schedule which I may input wrongly |
+|v2.0| No 13. is a university student | edit my task | Edit the task which I may input wrongly |
+|v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
 |v2.1| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
-|v2.1| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 |v2.1| No. 21 is a university student | list events by date | I can easily find exactly the events I need to see by date |
 |v2.1| No. 24 is a university student who want to check whether a designated time has events | list events by time | I can easily find exactly the events I need to see by time |
 |v2.1| No. 25 is a university student who want to check whether a designated time has classes | list events by time and category | I can easily find exactly the classes I need to see by time and category |

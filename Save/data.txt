@@ -1,1 +1,2 @@
-{"isDateSet":true,"isTimeSet":false,"isDone":false,"title":"research paper ","description":"essay for writing 101","reminder":"","category":"TODO","date":[{"year":2020,"month":6,"day":6}],"time":[],"location":[]}
+{"isDateSet":false,"isTimeSet":false,"isDone":false,"title":"name B ","description":"","reminder":"","category":"DEADLINE","date":[],"time":[],"location":[]}
+{"title":"name C ","description":"","reminder":"","category":"CLASS","date":[],"time":[],"location":[]}

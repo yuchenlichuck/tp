@@ -53,7 +53,7 @@ public class TaskList {
         taskList.get(taskIndex).setReminder(newReminder);
     }
   
-  //Other methods:
+    //Other methods:
     /**
      * Checks if the given task contains the given pattern.
      *

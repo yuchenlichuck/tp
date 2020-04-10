@@ -25,8 +25,8 @@ public class DeleteCommand extends Command {
             + " (e.g all tasks or by category)";
     public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " d/[DD-MM-YYYY]" + System.lineSeparator() + TAB + TAB + TAB
-            + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
+            + COMMAND_WORD + " d/[YYYY-MM-DD]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[YYYY-MM-DD] t/[HH:MM-HH:MM]";
 
 
     private static final int DELETE_ERROR = 0;

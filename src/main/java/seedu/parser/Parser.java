@@ -74,7 +74,7 @@ public class Parser {
                     commandSections.length - COMMAND_LENGTH, CalendarCommand.ARGUMENT_COuNT);
 
         default:
-            System.out.println("Command not recognised\n");
+            System.out.println("\n  Command not recognised\n");
             return new HelpCommand();
         }
     }

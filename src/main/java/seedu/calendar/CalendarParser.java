@@ -3,7 +3,6 @@ package seedu.calendar;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Calendar;
@@ -88,13 +87,5 @@ public class CalendarParser {
         LocalDate localDate = LocalDate.parse(userInput, dateFormatter);
         return localDate;
     }
-
-    public static LocalTime convertToTime(String userInput) throws DateTimeParseException {
-        LocalTime localTime = LocalTime.parse(userInput, timeFormatter);
-        return localTime;
-    }
-
-
-
 
 }

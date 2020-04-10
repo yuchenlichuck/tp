@@ -1,11 +1,9 @@
 package seedu.tasklist;
 
 import seedu.tasks.Task;
-import seedu.tasks.TaskNonclass;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import static seedu.common.Constants.CLASS_CATEGORY;
@@ -17,7 +15,7 @@ public class TaskList {
     private static HashMap<String, ArrayList<Integer>> categoryMap = new HashMap<>();
 
     public TaskList() {
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
     }
 
     //Accessors:
@@ -68,7 +66,6 @@ public class TaskList {
         updateCategoryMap(newCategory, taskIndex);
     }
 
-    //Methods:
 
     /**
      * Checks if the given task contains the given pattern.
@@ -104,21 +101,6 @@ public class TaskList {
     public void addTask(Task task) {
         taskList.add(task);
         updateCategoryMap(task.getCategory(), taskList.size() - 1);
-    }
-
-    /**
-     * When updating a task from the storage, also need to add category mapping.
-     *
-     * @param tasks tasks loaded.
-     */
-    public void updateTaskList(ArrayList<Task> tasks) {
-        taskList = tasks;
-        Integer index = 0;
-        categoryMap.clear();
-        for (Task task : tasks) {
-            updateCategoryMap(task.getCategory(), index);
-            index++;
-        }
     }
 
     /**

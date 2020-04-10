@@ -33,8 +33,8 @@ public class FailedCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = "[Error][done]: Wrong number of arguments,\n" +
-                "Received: 0 Expected: 1\n";
+        String expectedOutput = "[Error][done]: Wrong number of arguments,\n"
+                + "Received: 0 Expected: 1\n";
         assertEquals(output,expectedOutput);
     }
 

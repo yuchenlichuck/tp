@@ -17,7 +17,7 @@ public class FindCommandTest {
     Storage storage = new Storage();
 
     @Test
-    public void findTaskInTitle() {
+    public void testFindTaskInTitle() {
 
         String input = "add n/testForfInd t/11:15-13:15 d/2024-02-29";
         Command command = new AddCommand(input);
@@ -37,13 +37,13 @@ public class FindCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB +
-                "1. [TODO] Title: testForfInd | 2024-02-29 : 11:15 - 13:15\n";
+        String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB
+                + "1. [TODO] Title: testForfInd | 2024-02-29 : 11:15 - 13:15\n";
         assertEquals(expectedOutput,output);
     }
 
     @Test
-    public void findTaskInDescription() {
+    public void testFindTaskInDescription() {
 
         String input = "add n/test i/FinDDes t/11:15-13:15 d/2024-02-29";
         Command command = new AddCommand(input);
@@ -63,13 +63,13 @@ public class FindCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB +
-                "1. [TODO] Title: test | Description: FinDDes  | 2024-02-29 : 11:15 - 13:15\n";
+        String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB
+                + "1. [TODO] Title: test | Description: FinDDes  | 2024-02-29 : 11:15 - 13:15\n";
         assertEquals(expectedOutput,output);
     }
 
     @Test
-    public void findTaskInLocation() {
+    public void testFindTaskInLocation() {
 
         String input = "add n/test l/NUScom2";
         Command command = new AddCommand(input);
@@ -89,8 +89,8 @@ public class FindCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB +
-                "1. [TODO] Title: test | Location: NUScom2 \n";
+        String expectedOutput = TAB + "Found the followings tasks:\n" + TAB + TAB
+                + "1. [TODO] Title: test | Location: NUScom2 \n";
         assertEquals(expectedOutput,output);
     }
 
@@ -140,8 +140,8 @@ public class FindCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = TAB + "[Alert][find] No tasks found with \"nothing\" in " +
-                "their title, description, or location\n";
+        String expectedOutput = TAB + "[Alert][find] No tasks found with \"nothing\" in "
+                + "their title, description, or location\n";
         assertEquals(output,expectedOutput);
     }
 

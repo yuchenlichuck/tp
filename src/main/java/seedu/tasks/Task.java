@@ -1,5 +1,7 @@
 package seedu.tasks;
 
+import seedu.common.Messages;
+
 import java.time.LocalDate;
 
 import java.time.LocalTime;
@@ -8,6 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import static seedu.common.Constants.DEFAULT_CATEGORY;
+import static seedu.common.Constants.TAB;
 
 public abstract class Task {
     protected String title;
@@ -96,8 +99,7 @@ public abstract class Task {
             LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             if (startTime.isAfter(endTime)) {
-                throw new NumberFormatException("Please enter a valid time range: "
-                         + "the end time should be after the start time");
+                throw new NumberFormatException(TAB + Messages.MESSAGE_GENERAL_DATE_TIME_MISMATCH);
             }
             this.time.add(startTime);
             this.time.add(endTime);

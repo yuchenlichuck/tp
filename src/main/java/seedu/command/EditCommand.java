@@ -105,16 +105,23 @@ public class EditCommand extends Command {
 
         //When only either date/time is inputted, need to check if date&time match after modifying.
         if (hasInput(date) & !hasInput(time)) {
-            if (date.split("\\s+").length != taskList.getTask(taskEdited).getTime().size() / 2) {
-                throw new ProjException(Messages.MESSAGE_DATE_TIME_MISMATCH);
+
+            if (taskList.getTask(taskEdited).getTime().size() == 0) {
+                taskList.changeDate(taskEdited, date);
+                isEdit = true;
             }
-            taskList.changeDate(taskEdited,date);
-            isEdit = true;
+
+            if (date.split("\\s+").length != taskList.getTask(taskEdited).getTime().size() / 2) {
+                throw new ProjException(TAB + Messages.MESSAGE_EDIT_DATE_TIME_MISMATCH);
+            } else {
+                taskList.changeDate(taskEdited, date);
+                isEdit = true;
+            }
         }
 
         if (hasInput(time) & !hasInput(date)) {
             if (time.split("\\s+").length != taskList.getTask(taskEdited).getDate().size()) {
-                throw new ProjException(Messages.MESSAGE_DATE_TIME_MISMATCH);
+                throw new ProjException(TAB + Messages.MESSAGE_EDIT_DATE_TIME_MISMATCH);
             }
             taskList.changeTime(taskEdited,time);
             isEdit = true;

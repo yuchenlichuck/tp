@@ -15,7 +15,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_INFO = COMMAND_WORD + ": adds tasks to the list";
-    public static final String COMMAND_USAGE = COMMAND_WORD + " n/[TITLE] t/[HH:MM-HH:MM] l/[LOCATION] d/[YYYY-MM-DD]"
+    public static final String COMMAND_USAGE = COMMAND_WORD + " n/[TITLE] t/[HH:MM-HH:MM] l/[LOCATION] d/[YYYY-MM-DD] "
             + "i/[INFORMATION] r/[REMINDER] c/[CATEGORY]";
 
     private static final String MESSAGE_SUCCESS = "Nice! Added the following task to the calendar:\n";

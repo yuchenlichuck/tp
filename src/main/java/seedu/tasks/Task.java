@@ -1,22 +1,14 @@
 package seedu.tasks;
 
-
-import seedu.calendar.CalendarParser;
-import seedu.exception.ProjException;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static seedu.common.Constants.DEFAULT_CATEGORY;
+import static seedu.common.Constants.TAB;
 
 public abstract class Task {
     protected String title;
@@ -44,6 +36,7 @@ public abstract class Task {
         } else {
             this.category = DEFAULT_CATEGORY;
         }
+
         // post condition check for existence of title
         assert (title.length() != 0) : title;
         this.title = title;
@@ -104,7 +97,7 @@ public abstract class Task {
             LocalTime startTime = LocalTime.parse(timeRange[0], timeFormatter);
             LocalTime endTime = LocalTime.parse(timeRange[1], timeFormatter);
             if (startTime.isAfter(endTime)) {
-                throw new NumberFormatException("Please enter a valid time range: "
+                throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                          + "the end time should be after the start time");
             }
             this.time.add(startTime);
@@ -143,10 +136,6 @@ public abstract class Task {
         return this.category;
     }
 
-    public String getReminder() {
-        return this.reminder;
-    }
-
     public ArrayList<LocalDate> getDate() {
         return this.date;
     }
@@ -157,6 +146,10 @@ public abstract class Task {
 
     public ArrayList<String> getLocation() {
         return this.location;
+    }
+
+    public String getReminder() {
+        return this.reminder;
     }
 
     /**

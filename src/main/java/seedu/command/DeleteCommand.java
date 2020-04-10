@@ -32,7 +32,6 @@ public class DeleteCommand extends Command {
     private static final int DELETE_ERROR = 0;
     private static final int DELETE_ALL = 1;
     private static final int DELETE_BY_CATEGORY = 2;
-    private static final int LIST_BY_DATE = 3;
     private static final int DELETE_BY_DATE_CATEGORY = 4;
 
     public DeleteCommand(String userInput) {
@@ -40,7 +39,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws ProjException {
+    public CommandResult execute() {
 
         String feedback = "";
         String[] commandSections = userInput.split(" ");
@@ -86,8 +85,18 @@ public class DeleteCommand extends Command {
             feedback = TAB + String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD, COMMAND_WORD);
 
         } finally {
+            feedback = checkForEmptyFeedback(feedback);
             return new CommandResult(feedback);
         }
+    }
+
+    private String checkForEmptyFeedback(String feedback) {
+
+        if (feedback.isEmpty()) {
+            return TAB + Messages.MESSAGE_DELETE_NO_TASK_FOUND;
+        }
+
+        return feedback;
     }
 
     private void checkForEmptyList() throws EmptyTaskListException {
@@ -140,8 +149,8 @@ public class DeleteCommand extends Command {
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
+
                 ArrayList<LocalDate> localDates = task.getDate();
-                int sum = 0;
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
 

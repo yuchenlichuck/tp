@@ -49,4 +49,5 @@ class MainTest {
         assertTrue(checkIfHelpCommand);
 
     }
+
 }

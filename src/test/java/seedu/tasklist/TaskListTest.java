@@ -60,8 +60,8 @@ public class TaskListTest {
 
         String expectedCategory = "DEADLINE";
         tasks.changeCategory(0,expectedCategory);
-        assert(tasks.containsCategory(expectedCategory));
-        assert(!tasks.containsCategory("TEST"));
+        assert (tasks.containsCategory(expectedCategory));
+        assert (!tasks.containsCategory("TEST"));
         assertEquals(tasks.getAllCategory().length,2);
 
         tasks.changeDate(1,"1 4");

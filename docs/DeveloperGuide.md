@@ -4,6 +4,9 @@
     * [Target Audience](#12-target-audience)
     * [Description](#13-description)
 * [Design](#2-design)
+    * [Architecture](#21-architecture)
+    * [Task Component](#22-task-component)
+    * []
 * [Implementation](#3-implementation)
   * [Undo features](#31-proposed-features)
     * [List By Category](#311-list-by-category)
@@ -18,13 +21,57 @@
   * [Appendix E:Glossary](#65-appendix-eglossary)
   * [Appendix F:Instructions for Manual Testing](#66-appendix-finstructions-for-manual-testing)
 
-## 1. Purpose
+## 1. Introduction
+
+### 1.1. Purpose
 This Developer's guide is meant to guide future developers of the project on how CAFS was developed. 
 It will include the design and implementations of CAFS to give a better understanding of how to start the development of the program
 
+### 1.2. Target Audience
+The target audience of this guide are:
+* Developers (Current / Future)
+* Testers
+* Users interested in the operations of the program
+
+### 1.3. Description
+CAFS - va CLI calender-like task scheduler that supports task and 
+class schedule adding. It is simple to use, and comes with an auto-save function to 
+remember your tasks.
+
 ## 2. Design
+### 2.1. Architecture
+
+![Architecture Design](images/Architecture_Diagram.jpg)
+
+Below, we will describe the essential components that CAFS uses:
+
+1. Main - Main component which controls the flow of execution.
+1. UI - Component used for user interactions, reading in input and displaying to console
+1. Parser - Component used to interpret user input and call the corresponding command
+1. Command - Contains all the required implementation for the different commands
+1. Storage - Reads data from, and writes date to, the hard disk
+1. Exceptions - Component contains custom error handling methods for the program used by multiple other components
+1. Calendar - Component containing methods to interact with date and generating a calendar
+1. Task - Contains all the necessary information and implementations required to interact with the list of tasks
+1. Commons - Component represents a collection of classes used by multiple other components
+
+### 2.1. UI
+* The UI component is not navigable from Command because all results from commands are passed back to main, in the form of `CommandResult`
+* UI component then takes in the CommandResult object and displays the feedback from the inputted command
+
+Here is a simplified class diagram to illustrate this interaction:
+
+![Command Result UI](images/UiResult.jpg)
+
+### 2.3. Task Component
+The TaskList Component relies on 2 other components:
+1. Storage 
+2. Command 
 
 
+    1. Class - to contain information about a class / timetable schedule
+    1. TaskNonClass -  to contain information about all other tasks that user needs to complete or be reminded of
+    
 ## 3. Implementation
 ### 3.1 [Proposed] Features
 #### 3.1.1 List By Category

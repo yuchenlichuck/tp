@@ -1,6 +1,8 @@
 package seedu.command;
 
 import seedu.calendar.CalendarParser;
+import seedu.common.Messages;
+import seedu.exception.CommandExceptions;
 import seedu.exception.ProjException;
 
 import java.time.LocalDate;
@@ -8,14 +10,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
-
 import static seedu.common.Constants.TAB;
-
-
 import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
-import seedu.tasks.Class;
-import seedu.ui.Ui;
 import seedu.tasks.Task;
 
 public class ListCommand extends Command {
@@ -25,7 +22,13 @@ public class ListCommand extends Command {
 
 
     public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_USAGE = COMMAND_WORD + ": lists the tasks in the calendar";
+    public static final String COMMAND_INFO = COMMAND_WORD + ": lists tasks (e.g all tasks or by category)";
+    public static final String COMMAND_USAGE = COMMAND_WORD + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " d/[DD-MM-YYYY] t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
+            + COMMAND_WORD + " c/[CATEGORY] d/[DD-MM-YYYY] t/[HH:MM-HH:MM]";
+
+    private static final String MESSAGE_EMPTY_LIST = "[Alert][list] List is empty";
 
     private static final int LIST_ALL = 1;
     private static final int LIST_BY_CATEGORY = 2;
@@ -47,39 +50,51 @@ public class ListCommand extends Command {
         String date = getDate(userInput).trim();
         String time = getTime(userInput).trim();
 
-        int listCmdSubtype = getCmdSubtype(category, date, time);
-        switch (listCmdSubtype) {
-        case LIST_ALL:
-            getWholeList(listTaskIndex);
-            break;
+        try {
 
-        case LIST_BY_CATEGORY:
-            getListByCategory(listTaskIndex, category);
-            break;
+            if (taskList.getListSize() == 0) {
+                throw new CommandExceptions.EmptyTaskListException();
+            }
 
-        case LIST_BY_DATE:
-            getListByDate(listTaskIndex, date, time);
-            break;
+            int listCmdSubtype = getCmdSubtype(category, date, time);
 
-        case LIST_BY_DATE_CATEGORY:
-            getListByDateCategory(listTaskIndex, date, time, category);
-            break;
-        default:
-            // Should not reach here
-            feedback = "[Error][List] No such option to filter";
-            break;
+            switch (listCmdSubtype) {
+
+            case LIST_ALL:
+                getWholeList(listTaskIndex);
+                break;
+
+            case LIST_BY_CATEGORY:
+                getListByCategory(listTaskIndex, category);
+                break;
+
+            case LIST_BY_DATE:
+                getListByDate(listTaskIndex, date, time);
+                break;
+
+            case LIST_BY_DATE_CATEGORY:
+                getListByDateCategory(listTaskIndex, date, time, category);
+                break;
+            default:
+                // Should not reach here
+                feedback = "[Error][List] No such option to filter";
+                break;
+            }
+
+            feedback = getFormattedFeedback(listTaskIndex);
+
+        } catch (CommandExceptions.EmptyTaskListException e) {
+            feedback = TAB + MESSAGE_EMPTY_LIST;
         }
 
-        feedback = getFormattedFeedback(listTaskIndex);
 
         return new CommandResult(feedback);
     }
 
-    // Shouldn't be called dummy
 
     private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category) {
 
-        //only task can do it
+        //only task can do it and date can do
         if (time == null || time.isEmpty()) {
             String[] dates = date.split("\\s+");
             //dates input dates
@@ -87,13 +102,14 @@ public class ListCommand extends Command {
             for (String d : dates) {
                 LocalDate addedDate = CalendarParser.convertToDate(d);
                 if (addedDate.compareTo(LocalDate.now()) < 0) {
-                    throw new NumberFormatException("Please enter a date that is either today or in the future.");
+                    throw new NumberFormatException(TAB + Messages.MESSAGE_PRESENT_OR_FUTURE_DATE);
                 }
                 inputDates.add(addedDate);
             }
 
             int index = -1;
             int size = inputDates.size();
+
             for (Task task : taskList.getList()) {
                 index++;
                 if (!task.getCategory().equals((category))) {
@@ -102,14 +118,11 @@ public class ListCommand extends Command {
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
+
                 ArrayList<LocalDate> localDates = task.getDate();
-                int sum = 0;
 
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
-                        sum++;
-                    }
-                    if (sum >= size) {
                         listTaskIndex.add(index);
                         break;
                     }
@@ -119,15 +132,18 @@ public class ListCommand extends Command {
             return;
         }
 
-
+        //time range
         if (date.isEmpty()) {
             String[] times = time.split("\\s+");
+
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+                //input time
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -140,19 +156,14 @@ public class ListCommand extends Command {
                     continue;
                 }
                 ArrayList<LocalTime> localTimes = task.getTime();
-
-                int sum = 0;
+                label:
                 for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
-                            sum++;
-
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))) {
+                            listTaskIndex.add(i);
+                            break label;
                         }
-                    }
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
                     }
                 }
             }
@@ -172,6 +183,7 @@ public class ListCommand extends Command {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -196,19 +208,16 @@ public class ListCommand extends Command {
                 ArrayList<LocalDate> localDates = task.getDate();
 
                 int sum = 0;
-
+                label:
                 for (int j = 0; j < localDates.size(); j++) {
                     for (int k = 0; k < dateList.size(); k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))
                                 && localDates.get(j).equals(dateList.get(k))) {
-                            sum++;
-                        }
-                    }
 
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
+                            listTaskIndex.add(i);
+                            break label;
+                        }
                     }
                 }
             }
@@ -227,28 +236,21 @@ public class ListCommand extends Command {
             for (String d : dates) {
                 LocalDate addedDate = CalendarParser.convertToDate(d);
                 if (addedDate.compareTo(LocalDate.now()) < 0) {
-                    throw new NumberFormatException("Please enter a date that is either today or in the future.");
+                    throw new NumberFormatException(TAB + Messages.MESSAGE_PRESENT_OR_FUTURE_DATE);
                 }
                 inputDates.add(addedDate);
             }
 
             int index = -1;
-            int size = inputDates.size();
             for (Task task : taskList.getList()) {
                 index++;
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
                 ArrayList<LocalDate> localDates = task.getDate();
-                int sum = 0;
-
                 for (LocalDate d : localDates) {
                     if (inputDates.contains(d)) {
-                        sum++;
-                    }
-                    if (sum >= size) {
                         listTaskIndex.add(index);
-                        break;
                     }
                 }
                 // Populate the date with current date if date is not inputted
@@ -256,15 +258,16 @@ public class ListCommand extends Command {
             return;
         }
 
-
         if (date.isEmpty()) {
             String[] times = time.split("\\s+");
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
                 startTimes.add(startTime);
                 endTimes.add(endTime);
             }
@@ -276,22 +279,19 @@ public class ListCommand extends Command {
 
                 ArrayList<LocalTime> localTimes = task.getTime();
 
-                int sum = 0;
+                label:
                 for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))) {
-                            sum++;
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))) {
+                            listTaskIndex.add(i);
+                            break label;
                         }
-                    }
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
                     }
                 }
             }
-
         }
+
 
         //date and time
         if (!date.isEmpty() && !time.isEmpty()) {
@@ -308,6 +308,7 @@ public class ListCommand extends Command {
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
                 startTimes.add(startTime);
                 endTimes.add(endTime);
+
             }
 
             for (String adate : dates) {
@@ -318,29 +319,26 @@ public class ListCommand extends Command {
             int size = dates.length;
 
             for (int i = 0; i < taskList.getListSize(); i++) {
+
                 Task task = taskList.getTask(i);
-                String category = task.getCategory().trim();
-                if (category.equals("CLASS")) {
+
+                if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
 
-                ArrayList<LocalTime> localTimes = task.getTime();
                 ArrayList<LocalDate> localDates = task.getDate();
+                ArrayList<LocalTime> localTimes = task.getTime();
 
-                int sum = 0;
-
+                label:
                 for (int j = 0; j < localDates.size(); j++) {
                     for (int k = 0; k < dateList.size(); k++) {
-                        if (localTimes.get(2 * j).equals(startTimes.get(k))
-                                && localTimes.get(2 * j + 1).equals(endTimes.get(k))
+                        if (localTimes.get(2 * j).isBefore(endTimes.get(k))
+                                && localTimes.get(2 * j + 1).isAfter(startTimes.get(k))
                                 && localDates.get(j).equals(dateList.get(k))) {
-                            sum++;
-                        }
-                    }
 
-                    if (sum >= size) {
-                        listTaskIndex.add(i);
-                        break;
+                            listTaskIndex.add(i);
+                            break label;
+                        }
                     }
                 }
             }
@@ -360,9 +358,9 @@ public class ListCommand extends Command {
 
         String feedback;
         if (listTaskIndex.size() == 0 || listTaskIndex.size() == 1) {
-            feedback = "There are " + listTaskIndex.size() + " task.\n";
+            feedback = TAB + "There are " + listTaskIndex.size() + " task.\n";
         } else {
-            feedback = "There are " + listTaskIndex.size() + " tasks.\n";
+            feedback = TAB + "There are " + listTaskIndex.size() + " tasks.\n";
         }
 
         for (int i = 0; i < listTaskIndex.size(); i++) {
@@ -385,8 +383,7 @@ public class ListCommand extends Command {
 
         if (!taskList.containsCategory(category)) {
             ui.showAllCategory(taskList.getAllCategory());
-            throw new ProjException(TAB + "There is no " + category + " in current category.\n"
-                    + Ui.DIVIDER);
+            throw new ProjException(TAB + "[Alert][list] There is no \"" + category + "\" in current category.\n");
         }
         int index = 0;
         for (Task task : taskList.getList()) {
@@ -399,7 +396,7 @@ public class ListCommand extends Command {
 
     private int getCmdSubtype(String category, String date, String time) {
 
-        if (date.isEmpty() && !category.isEmpty()) {
+        if (date.isEmpty() && time.isEmpty() && !category.isEmpty()) {
             return LIST_BY_CATEGORY;
         }
 

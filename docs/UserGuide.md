@@ -1,42 +1,236 @@
 # User Guide
+* [Introduction](#1-introduction)
+* [Quick Start](#2-quick-start)
+* [Features](#3-features)
+  * [Help command](#31---help)
+  * [Add tasks](#32---add)
+  * [Edit tasks](#33---edit)
+  * [List tasks](#34---list)
+  * [Delete tasks](#35---delete)
+  * [Having done a task](#36---done)
+  * [Find a task](#37---find)
+  * [Calendar](#38---calendar)
+  * [Clear Command](#39---clear)
+  * [Exit the program](#310---exit)
+* [FAQ](#4-faq)
+* [Command Summary](#5-command-summary)
 
-## Introduction
+## 1. Introduction
+CAFS - va CLI calender-like task scheduler that supports task and 
+class schedule adding. It is simple to use, and comes with a save function to 
+remember your tasks.
 
-{Give a product intro}
+## 2. Quick Start
+1. Ensure you have Java 11 or above installed in your Computer
 
-## Quick Start
+1. Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases)
 
-{Give steps to get started quickly}
+1. Copy the file to the folder you want to use as the home folder.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Run the jar file using `java - jar caf.jar`
 
-## Features 
 
-{Give detailed description of each feature}
+## 3. Features
+* `<NAME>` such format indicates user input variable. However, when inputting, there is no need to input `<>`symbol. 
+The `<>` symbol just for readability. 
+* The command keyword (e.g. `add`) is case insensitive. However, the delimiter (e.g. `n/`)are case sensitive.
+* It is okay to switch the sequence when inputting the delimiters:
+    * `add n/<NAME> l/<LOCATION>` has same effects as `add l/<LOCATION> n/<NAME> `
+* When inputting a time, the time format is always: `hh:mm`.
+  Most command accepts time range which is: `hh:mm-hh:mm`. No space is allowed around `-`.
+  Also, similar format like `1:00` will not be allowed. 
+* When inputting a date, the date format is always: `yyyy-mm-dd`.
+* Some recognized date/time error will be automatically parsed to accepted format.
+    * `24:00` will be parsed to `23:59` since 24:00 is next day. 
+    * `2021-02-30` will be parsed to `2021-02-28`
 
-### Adding a to-do: `todo`
-Adds a to-do item to the list of to-dos.
+### 3.1 - Help
+Displays the set of commands supported
+* **Usage**: `help`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### 3.2 - Add
+Users add tasks using this command
+* **Usage**: `add  n/<NAME> t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+     * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `11:00-12:00`)
+       There should be no space between this duration. 
+     * Only name `<NAME>` is compulsory to include. Other fields are not compulsory to add. However, if
+       user only inputs time, then date of current day will be automatically added. 
+     * Since a task/class may has multiple time zone in a week, student can just add list of time zone.
+       However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
+       the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
+       zone/date/location.
+     * If there is only one time slots for this task, then the `<LOCATION>` will not be separated by space.  
+     * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
+       case-insensitive.  
+     * When adding normal tasks:
+        * `<Date>` should be in format:`yyyy-mm-dd`
+        * Examples: 
+            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting
+            * add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline
+            * add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU c/MEETING
+     * When adding class:
+        * `<DATE>` should be which day in a week, represented by integer (e.g. `1 3` means Mon Wed). 
+        * Examples: 
+            * add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1
+            * add n/3245 t/17:00-19:00 d/5 c/CLASS
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+### 3.3 - Edit
+Edit the inputted task/class. 
+* **Usage**:`edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+    * It is not allowed to edit the `<NAME>`.
+    * It is okay to edit the `<CATEGORY>`. However, it is not allowed to cast from class category to other 
+      category. Also, it is not allowed to cast from other category to class. 
+    * When edit `<TIME>` and `<DATE>`, please be reminded that the number of `<TIME>`should match with the 
+      number of `<DATE>` and the number of location `<LOCATION>`. 
+    * Examples: 
+        * edit 1 t/11:00-12:00
+        * edit 2 c/todo  
+    
+### 3.4 - List
+#### **3.4.1 - List** 
+List all tasks
+* **Usage**: `list`
 
-Example of usage: 
+#### **3.4.2 - List Category**
+List tasks belong to a specific category
+* **Usage**: `list c/<CATEGORY>`
+    * Wrong command: `list TODO` which will has the same effects as the `list`
+    * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
+    * Examples:
+        * list c/TODO
+        * list c/DEADLINE
 
-`todo n/Write the rest of the User Guide d/next week`
+        * Wrong command: `list TODO` which will has the same effects as the `list`
+        * The `<CATEGOTY>` is case insensitive. That is, `list c/TODO` and `list c/todo` has same effect.
+      
+#### 3.4.3 - List Time
+Lists tasks and classes by specific time range. 
+* **Usage**: `list t/<TIME>`
+    * `task` and `class` with a specific time range can be listed by `list t/hh:mm-hh:mm`.
+    (Please specify if you will list tasks which is exactly at that time range or
+    has a overlap at that time range. ) 
+        * list t/15:00-16:00
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+#### 3.4.4 - List Date
+List tasks by specific date.
+* **Usage** : `list d/<DATE>`
+    * `task` with a specific date can be listed by `list d/yyyy-mm-dd`
+       `class` cannot be listed by date since class only adopts schedule
+    (Please specify if you support date range or only support one date) 
+        * `list d/2020-06-17`
+        
+#### 3.4.5 - list Date + Time        
+List tasks by specific date and time.
+* **Usage** : `list d/<DATE> t/<TIME>`
+    * `task` with a specific date and time can be listed by `list d/yyyy-mm-dd t/hh:mm-hh:mm`
+       `class` cannot be listed by date and time since class only adopts schedule. 
+        (Please specify ) 
+        * `list d/2020-06-17 t/12:00-13:00`
+        
+### 3.4.6 - List specific event
 
-## FAQ
+List tasks by category and date and time. 
+* **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
 
-**Q**: How do I transfer my data to another computer? 
+    * It is okay to list events in a specific date and specific time in a  specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific date in a specific category. However, the class category cannot be shown, since these don't have date values.
+    * It is okay to list events just in a specific time in a specific category. All categories can be shown.
+    * Examples: 
+        * list d/2020-03-16 t/15:00 c/todo
+        * list d/2020-08-10 c/deadline
+        * list t/14:00 c/deadline
 
-**A**: Well, write the User Guide in active voice anyway.
+### 3.5 - Delete
+Deletes a task from the list
+#### 3.5.1 - Delete a task/class
+* **Usage**: `delete <task index>`
+    * The index refers to the index number shown in the displayed task list.
+    * use `list` to derive task index
+    * index has to be an _integer_
+      
+#### 3.5.2 - Delete Time
+Delete tasks and classes by specific time range. 
+* **Usage**: `delete t/<TIME>`
+    * `task` and `class` with a specific time range can be listed by `delete t/hh:mm-hh:mm`.
+    (Please specify if you will list tasks which is exactly at that time range or
+    has a overlap at that time range. ) 
+        * delete t/15:00-16:00
 
-## Command Summary
+#### 3.5.3 - Delete Date
+Delete tasks by specific date.
+* **Usage** : `delete d/<DATE>`
+    * `task` with a specific date can be listed by `delete d/yyyy-mm-dd`
+       `class` cannot be listed by date since class only adopts schedule
+    (Please specify if you support date range or only support one date) 
+        * `delete d/2020-06-17`
+        
+#### 3.5.4 - Delete Date + Time        
+Delete tasks by specific date and time.
+* **Usage** : `delete d/<DATE> t/<TIME>`
+    * `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`
+       `class` cannot be listed by date and time since class only adopts schedule. 
+        (Please specify ) 
+        * `delete d/2020-06-17 t/12:00-13:00`
+        
+### 3.6 - Done
+Change the status of a task to completed
+* **Usage**: `done <task index>`
+    * The index refers to the index number shown in the displayed task list.
+    * use `list` to derive task index
+    * index has to be an _integer_
 
-{Give a 'cheat sheet' of commands here}
+### 3.7 - Find
+Searches all task descriptions for supplied keyword
+* **Usage**: `find <keyword>`
+    * Keyword has to be a _**single word**_
+    * Keyword is case _insensitive_
+    * Find command can search the keyword in title, description and location. 
 
-* Add to-do `todo n/TODO_NAME d/DEADLINE`
+### 3.8 - Calendar
+Prints a monthly representation of a calendar. Shows the number of tasks a user has on a particular day.
+Users are able to specify which month to look up. Default is the current month. 
+
+Will still display tasks from past months as long as not marked as complete.
+* **Usage**: `calendar <optional month>` 
+    * Month is in integer representation
+    * Where 1 is January and 12 is December
+    * Default set to current month
+    * If number supplied is not within the month range, it will be set to current month
+
+### 3.9 - Clear
+Clear the Command
+* **Usage**:`clc`
+
+### 3.10 - Exit
+Exits the program
+* **Usage**: `bye`
+  
+## 4. FAQ
+ * How do I save my tasks?
+    * Tasks are saved automatically and loaded upon start up of application
+    * If unable to load, check the directory and file name
+        * Default folder (windows): `C:\Users\<computer name>\Save`
+        * Default file name: `data.txt`
+
+## 5. Command Summary
+ * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **List**: 
+    * `list`
+    * `list c/<category>` 
+    * `list t/<TIME>`
+    * `list d/<DATE>`
+    * `list d/<DATE> t/<TIME>`
+    * `list c/<CATEGORY> d/<DATE> t/<TIME>`
+ * **Delete**:
+    * `delete <task index>` 
+    * `delete t/<TIME>` 
+    * `delete d/<DATE>`
+    * `delete d/<DATE> t/<TIME>`
+ * **Done**: `done <task index>` 
+ * **Find**: `find <keyword>` 
+ * **Save**: `save`
+ * **Help**: `help`
+ * **Calendar**: `calendar` or `calendar <month>`
+ * **Clear**:`clc`
+ * **Exit**: `bye`

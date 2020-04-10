@@ -44,7 +44,6 @@ class MainTest {
         command.setCommandVariables(tasks, storage, ui);
         boolean checkIfHelpCommand = command instanceof HelpCommand;
         assertTrue(checkIfHelpCommand);
-
     }
 
 

@@ -85,8 +85,18 @@ public class DeleteCommand extends Command {
             feedback = TAB + String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD, COMMAND_WORD);
 
         } finally {
+            feedback = checkForEmptyFeedback(feedback);
             return new CommandResult(feedback);
         }
+    }
+
+    private String checkForEmptyFeedback(String feedback) {
+
+        if (feedback.isEmpty()) {
+            return TAB + Messages.MESSAGE_DELETE_NO_TASK_FOUND;
+        }
+
+        return feedback;
     }
 
     private void checkForEmptyList() throws EmptyTaskListException {

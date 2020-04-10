@@ -16,6 +16,7 @@ public class Messages {
     /** Messages for delete command. */
     public static final String MESSAGE_MISSING_NUMBER = "[Error][delete] Missing task number to delete\n";
     public static final String MESSAGE_DELETE_SUCCESS = "The following task has been removed:\n %s";
+    public static final String MESSAGE_DELETE_NO_TASK_FOUND = "[Alert][delete] No task found to delete";
 
     /** Messages for list command. */
     public static final String MESSAGE_LIST_IS_EMPTY = "[Alert][%s] There is nothing to %s, the list is empty\n";

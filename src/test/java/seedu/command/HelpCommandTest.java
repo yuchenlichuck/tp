@@ -21,6 +21,7 @@ class HelpCommandTest {
         }
 
         String expected = HELP_LEGEND;
+
         expected += TAB + "Command List:\n\n";
 
         expected += TAB + TAB + AddCommand.COMMAND_INFO + System.lineSeparator();

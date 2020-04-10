@@ -2,8 +2,11 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 
+
+
 import seedu.command.AddCommand;
 import seedu.command.CalendarCommand;
+import seedu.command.ClearCommand;
 import seedu.command.DeleteCommand;
 import seedu.command.DoneCommand;
 import seedu.command.EditCommand;
@@ -11,7 +14,6 @@ import seedu.command.ExitCommand;
 import seedu.command.FindCommand;
 import seedu.command.ListCommand;
 import seedu.command.Command;
-
 import seedu.common.Constants;
 import seedu.common.Messages;
 import seedu.exception.ProjException;
@@ -159,6 +161,10 @@ class ParserTest {
 
         expected += TAB + TAB + CalendarCommand.COMMAND_INFO + System.lineSeparator();
         expected += TAB + TAB + "Usage: " + CalendarCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + ClearCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + ClearCommand.COMMAND_USAGE + System.lineSeparator();
         expected += System.lineSeparator();
 
         expected += TAB + TAB + ExitCommand.COMMAND_INFO + System.lineSeparator();

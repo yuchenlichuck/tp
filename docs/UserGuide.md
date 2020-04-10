@@ -124,13 +124,13 @@ List tasks by specific date and time.
   
     * `task` with a specific date and time range can be listed by `list d/yyyy-mm-dd t/hh:mm-hh:mm`
       
-    * class` cannot be listed by date and time since class only adopts schedule. 
+      `class` cannot be listed by date and time since class only adopts schedule. 
       
-       List the `tasks` which are exactly at that time range or have a overlap at that time range.
-       
-        * `list d/2020-06-17 t/12:00-13:00`
-        * *(Explanation: list the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00`)*
-       
+      List the `tasks` which are exactly at that time range or have a overlap at that time range.
+      
+       * `list d/2020-06-17 t/12:00-13:00`
+       * *(Explanation: list the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00`)*
+      
 #### 3.4.6 - List specific event
 
 List tasks by category and date and time. 

@@ -18,8 +18,7 @@ public class CalendarCommandTest {
 
     @Test
     void checkNoInput() {
-
-        String input = "add n/i i/n d/2020-04-10";
+        String input = "add n/i i/n d/2020-05-30";
         Command command = new AddCommand(input);
         command.setCommandVariables(tasks, storage, ui);
         try {

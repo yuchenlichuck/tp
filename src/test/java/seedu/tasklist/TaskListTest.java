@@ -1,6 +1,7 @@
 package seedu.tasklist;
 
 import org.junit.jupiter.api.Test;
+import seedu.common.Messages;
 import seedu.tasks.Class;
 import seedu.tasks.TaskNonclass;
 
@@ -85,8 +86,7 @@ public class TaskListTest {
         try {
             tasks.addTask(new TaskNonclass("testTitle", "", "", "11:00-10:00", "NUS", "", "Test"));
         } catch (NumberFormatException e) {
-            String expected = TAB + "[Error][Add/Edit]: Please enter a valid time range: "
-                    + "the end time should be after the start time";
+            String expected = TAB + Messages.MESSAGE_END_BEFORE_START_TIME;
             assertEquals(expected,e.getMessage());
         }
     }

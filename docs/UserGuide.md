@@ -18,7 +18,7 @@
 
 ## 1. Introduction
 CAFS - va CLI calender-like task scheduler that supports task and 
-class schedule adding. It is simple to use, and comes with a save function to 
+class schedule adding. It is simple to use, and comes with an auto save function to 
 remember your tasks.
 
 ## 2. Quick Start

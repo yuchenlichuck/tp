@@ -10,8 +10,9 @@
   * [Having done a task](#36---done)
   * [Find a task](#37---find)
   * [Calendar](#38---calendar)
-  * [Clear Command](#39---clear)
-  * [Exit the program](#310---exit)
+  * [Done](#39---done)
+  * [Clear Command](#310---clear)
+  * [Exit the program](#311---exit)
 * [FAQ](#4-faq)
 * [Command Summary](#5-command-summary)
 

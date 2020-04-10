@@ -61,7 +61,7 @@ public class Class extends Task {
                 formattedTask = formattedTask + String.format(" | %s : %s - %s",
                         date.get(i).getDayOfWeek().name(), time.get(i * 2), time.get(i * 2 + 1));
             } else {
-                formattedTask = formattedTask + String.format(" | %s", date.get(i));
+                formattedTask = formattedTask + String.format(" | %s", date.get(i).getDayOfWeek().name());
             }
             if (location.size() > i) {
                 formattedTask = formattedTask + String.format(" ( %s )", location.get(i));

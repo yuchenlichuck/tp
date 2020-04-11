@@ -7,7 +7,7 @@
     * [Architecture](#21-architecture)
     * [UI](#22-ui)
     * [Task Component](#23-task-component)
-    * []
+    * [calendar Component](#24-calendar-component)
 * [Implementation](#3-implementation)
     * [List By Category](#31-list-by-category)
     * [Calendar](#32-proposed-view-month)

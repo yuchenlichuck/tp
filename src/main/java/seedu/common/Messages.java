@@ -49,13 +49,13 @@ public class Messages {
             + "Please enter a valid task number\n";
     public static final String MESSAGE_DATETIME_ERROR = TAB + "[Error] Expected format for date/time:"
             + " yyyy-mm-dd; time: hh:mm";
+    public static final String MESSAGE_INVALID_COMMAND = "[Alert] Command \"%s\" not recognized\n";
     public static final String MESSAGE_GENERAL_DATE_TIME_MISMATCH = "[Alert] The number of time range must match "
             + "with the number of date(day of a week).\n";
     public static final String MESSAGE_INCORRECT_TIME_FORMAT = "[Alert] Please follow the format when input "
             + "time: hh:mm-hh:mm\n";
     public static final String MESSAGE_END_BEFORE_START_TIME = "[Error][Add/Edit]: Please enter a valid time range: "
             + "the end time should be after the start time\n";
-
 
     /** Farewell message. */
     public static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!\n";

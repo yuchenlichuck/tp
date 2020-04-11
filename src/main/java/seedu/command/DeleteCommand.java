@@ -29,9 +29,14 @@ public class DeleteCommand extends Command {
             + COMMAND_WORD + " t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " d/[YYYY-MM-DD] t/[HH:MM-HH:MM]";
 
+    private static final int INVALID_TIME_RANGE = 1;
+    private static final int INVALID_DATE_RANGE = 2;
+    private static final int INVALID_NUMBER = 0;
+    private int invalidNumber;
+
 
     private static final int DELETE_ERROR = 0;
-    private static final int DELETE_ALL = 1;
+    private static final int DELETE_TASK = 1;
     private static final int DELETE_BY_CATEGORY = 2;
     private static final int DELETE_BY_DATE_CATEGORY = 4;
 
@@ -51,27 +56,28 @@ public class DeleteCommand extends Command {
             String date = getDate(userInput).trim();
             String time = getTime(userInput).trim();
             int listCmdSubtype = getCmdSubtype(category, date, time, len);
-
+            //initial the invalid number
+            invalidNumber = 0;
             checkForEmptyList();
             String strIndex = commandSections[1].trim();
 
             switch (listCmdSubtype) {
 
-            case DELETE_ALL:
-                feedback = deleteAll(strIndex);
-                break;
+                case DELETE_TASK:
+                    feedback = deleteAll(strIndex);
+                    break;
 
-            case DELETE_BY_CATEGORY:
-                feedback = deleteByCategory(category);
-                break;
+                case DELETE_BY_CATEGORY:
+                    feedback = deleteByCategory(category);
+                    break;
 
-            case DELETE_BY_DATE_CATEGORY:
-                feedback = deleteByDateCategory(date, time, category);
-                break;
+                case DELETE_BY_DATE_CATEGORY:
+                    feedback = deleteByDateCategory(date, time, category);
+                    break;
 
-            default:
-                feedback = "[Error][List] No such option to filter";
-                break;
+                default:
+                    feedback = "[Error][List] No such option to filter";
+                    break;
             }
 
         } catch (TaskOutOfBoundsException e) {
@@ -80,7 +86,16 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             feedback = TAB + Messages.MESSAGE_MISSING_NUMBER;
         } catch (NumberFormatException e) {
-            feedback = TAB + String.format(Messages.MESSAGE_INVALID_INDEX, COMMAND_WORD, commandSections[1]);
+
+            if (invalidNumber == INVALID_NUMBER) {
+                feedback = TAB + String.format(Messages.MESSAGE_INVALID_INDEX, COMMAND_WORD, commandSections[1]);
+            } else if (invalidNumber == INVALID_TIME_RANGE) {
+                feedback = TAB + "[Error][Add/Edit]: Please enter a valid time range: "
+                        + "the end time should be after the start time";
+            } else {
+                feedback = TAB + Messages.MESSAGE_PRESENT_OR_FUTURE_DATE;
+
+            }
 
         } catch (EmptyTaskListException e) {
             feedback = TAB + String.format(Messages.MESSAGE_LIST_IS_EMPTY, COMMAND_WORD, COMMAND_WORD);
@@ -126,9 +141,9 @@ public class DeleteCommand extends Command {
     }
 
     private String deleteByDateCategory(String date, String time, String category)
-            throws DateTimeParseException,NumberFormatException {
+            throws DateTimeParseException {
 
-        //only task can do it just get by date
+        //only task can do it just get by date.
         String feedback = "";
         if (time == null || time.isEmpty()) {
             String[] dates = date.split("\\s+");
@@ -137,9 +152,12 @@ public class DeleteCommand extends Command {
             HashSet<LocalDate> inputDates = new HashSet<>();
             for (String d : dates) {
                 LocalDate addedDate = CalendarParser.convertToDate(d);
+
                 if (addedDate.compareTo(LocalDate.now()) < 0) {
-                    throw new NumberFormatException("Please enter a date that is either today or in the future.");
+                    invalidNumber = INVALID_DATE_RANGE;
+                    throw new NumberFormatException(TAB + Messages.MESSAGE_PRESENT_OR_FUTURE_DATE);
                 }
+
                 inputDates.add(addedDate);
             }
 
@@ -179,6 +197,7 @@ public class DeleteCommand extends Command {
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
 
                 if (startTime.isAfter(endTime)) {
+                    invalidNumber = INVALID_TIME_RANGE;
                     throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                             + "the end time should be after the start time");
                 }
@@ -226,7 +245,9 @@ public class DeleteCommand extends Command {
                 String[] timeRange = atime.split("-");
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
                 if (startTime.isAfter(endTime)) {
+                    invalidNumber = INVALID_TIME_RANGE;
                     throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                             + "the end time should be after the start time");
                 }
@@ -235,7 +256,9 @@ public class DeleteCommand extends Command {
             }
 
             for (String adate : dates) {
+
                 dateList.add(LocalDate.parse(adate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
             }
 
             for (int i = 0; i < taskList.getListSize(); i++) {
@@ -313,7 +336,8 @@ public class DeleteCommand extends Command {
         }
 
         if (len == 2 && (date.isEmpty() && time.isEmpty() && category.isEmpty())) {
-            return DELETE_ALL;
+            System.out.println(len);
+            return DELETE_TASK;
         }
 
         return DELETE_ERROR;

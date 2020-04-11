@@ -68,7 +68,7 @@ Displays the set of supported commands <br/>
 Users add tasks using this command. <br/>
 **Usage**: `add  n/<NAME> t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>` <br/>
   * Only name `<NAME>` is compulsory to include. However, if user only inputs time, 
-  then date of current day will be automatically added. 
+  then date of current day will be added automatically. 
   * Space is okay in `<NAME>`,`<REMINDER>` and `<INFORMATION>`.  e.g.: `n/2113 deadline` is accepted.                                                       
   * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `14:00-16:00`).
    There should be no space between this duration. 
@@ -83,17 +83,25 @@ Users add tasks using this command. <br/>
    to that task. 
   * The default category is TODO. To add a class, just indicate the category is `CLASS`. The category is
    case-insensitive.  
-  * When adding normal tasks:
-    * `<Date>` should be in format:`yyyy-mm-dd`
-    * Examples: 
-        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
-        * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
-        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 l/NUS NTU i/important`
-  * When adding class:
-    * `<DATE>` should be the day of the week, represented by an integer (e.g. `1 3` means Mon Wed). 
-    * Examples: 
-        * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
-        * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
+   
+#### 3.2.1 Adding Task:
+* `<Date>` should be in format:`yyyy-mm-dd`
+
+Examples: <br/>
+* `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`<br/>
+Adds a meeting: Project Meeting on two time slots: 12:00-13:00 on 2020-07-01(NUS) and 15:00-16:00 on 2020-09-01(NTU)
+* `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`<br/>
+Adds a deadline: 2113 v2.1 on a specific date with a time range for the deadline. 
+* `add n/Project Meeting t/12:00-13:00 15:00-16:00 l/NUS NTU i/important`<br/>
+Adds a task  with two time slots on two locations with a description important.
+
+#### 3.2.2 Adding Class:
+* `<DATE>` should be the day of the week, represented by an integer (e.g. `1 3` means Mon Wed). 
+
+Examples:<br/>
+* `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1` <br/>
+Adds a class with two time frames, two days (Wednesday and Thursday), and two locations
+
 
 ### 3.3. Editing tasks: `edit`
 Edit the inputted task/class. <br/>
@@ -108,13 +116,19 @@ Edit the inputted task/class. <br/>
     _number matching of TIME and DATE_ since there is only field in that task. 
     * If you have added both `<TIME>` and `<DATE>` for a task _1_:<br/>
     For example:  Previously the task _1_ is:`[TODO] Title: Project Meeting | 2020-09-10 : 11:00 - 12:00`<br/>
-    When editing, can either input `<TIME>` with same number of `<DATE>` in current task _1_ : e.g. `edit 1 t/01:00-02:00`<br/>
-                or input `<DATE>` with same number of `<TIME>` in current task _1_ : e.g. `edit 1 d/2020-11-12`<br/>
-                or input both `<TIME>` and `<DATE>` with same number : e.g. `edit 1 d/2020-09-10 2020-09-11 t/11:00-12:00 13:00-14:00`
+    When editing, can either input `<TIME>` with same number of `<DATE>` in current task _1_ : 
+                <br/>e.g. `edit 1 t/01:00-02:00`<br/>
+                or input `<DATE>` with same number of `<TIME>` in current task _1_ : 
+                <br/>e.g. `edit 1 d/2020-11-12`<br/>
+                or input both `<TIME>` and `<DATE>` with same number : 
+                <br/>e.g. `edit 1 d/2020-09-10 2020-09-11 t/11:00-12:00 13:00-14:00`
   
 Examples: <br/>
-* `edit 1 l/NUSCOM2`
-* `edit 2 c/todo`  
+* `edit 2 l/NUSCOM2`<br/>
+Edit the location of task 2 to be NUSCOM2
+* `edit 2 c/todo`  <br/>
+Edit the category of task 2 to be TODO
+
         
 ### 3.4. Listing tasks: `list`
 #### 3.4.1. List
@@ -150,10 +164,10 @@ List tasks by specific date. <br/>
 * `class` cannot be listed by date since class only adopts schedule.
 
 Examples: <br/>
-* `list d/2020-06-17` <br/>
-Lists the `tasks` that fall on the date `2020-06-17` 
-* `list d/2020-06-17 d/2020-06-19` <br/>
-Lists the `tasks` that fall on either `2020-06-17` or `2020-06-19`
+* `list d/2020-07-01` <br/>
+Lists the `tasks` that fall on the date `2020-07-01` 
+* `list d/2020-07-01 d/2020-09-01` <br/>
+Lists the `tasks` that fall on either `2020-07-01` or `2020-09-01`
     
 #### 3.4.5. List by Date & Time        
 Lists tasks by specific date and time. <br/>
@@ -164,8 +178,8 @@ Lists tasks by specific date and time. <br/>
 * List the `tasks` which are exactly at that time range or have a overlap at that time range.
   
 Example:
-* `list d/2020-06-17 t/12:00-13:00` <br/>
-Lists the `tasks` that fall on the given date (`2020-06-17`) and within the given time frame (`12:00-13:00`)
+* `list d/2020-07-01 t/12:00-13:00` <br/>
+Lists the `tasks` that fall on the given date (`2020-07-01`) and within the given time frame (`12:00-13:00`)
       
 #### 3.4.6. List by Category, Date & Time
 
@@ -176,12 +190,12 @@ List tasks by category and date and time.
 * `tasks` and `classes`  just in a specific time range in a specific category. All `categories` can be shown.
 
 Examples: <br/>
-* `list d/2020-06-17 t/12:00-13:00 c/todo` <br/>
-Lists the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00` and  category is `todo`
-* `list d/2020-08-10 c/deadline` <br/>
-Lists the `tasks` which have date on `2020-08-10` and whose `category` is `deadline`
-* `list t/14:00-15:00 c/deadline`
-Lists the `tasks` whose start time before `15:00` and end time after `14:00`and `category` is `deadline`
+* `list d/2020-07-01 t/12:00-13:00 c/meeting` <br/>
+Lists the `tasks` whose start time before `2020-07-01 13:00` and end time after `2020-07-01 12:00` and  category is `meeting`
+* `list d/2020-05-16 c/deadline` <br/>
+Lists the `tasks` which have date on `2020-05-16` and whose `category` is `deadline`
+* `list t/23:00-23:30 c/deadline`<br/>
+Lists the `tasks` whose start time before `23:00` and end time after `23:30`and `category` is `deadline`
 
 ### 3.5. Deleting tasks: `delete`
 #### 3.5.1. Delete a task/class
@@ -212,21 +226,20 @@ Delete tasks by specific date. <br/>
 * `class` cannot be deleted by date since classes adopt to a schedule (Monday to Sunday)
 
 Examples:
-   * `delete d/2020-06-17` <br/>
-   Deletes the `tasks` that fall on `2020-06-17`
-   * `delete d/2020-06-17 d/2020-06-19` <br/>
-   Deletes the `tasks` that fall on either `2020-06-17` or `2020-06-19`
+   * `delete d/2020-07-01` <br/>
+   Deletes the `tasks` that fall on `2020-07-01`
+   * `delete d/2020-07-01 d/2020-09-01` <br/>
+   Deletes the `tasks` that fall on either `2020-07-01` or `2020-09-01`
    
 #### 3.5.4 - Delete by Date & Time        
 Delete tasks by specific date and time. <br/>
-* **Usage** : `delete d/<DATE> t/<TIME>`
-    * `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`.
-       `class` cannot be listed by date and time since class only adopts schedule. 
-       
-       Delete the `tasks` which are exactly at that time range or have a overlap at that time range.
+**Usage** : `delete d/<DATE> t/<TIME>`
+* `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`.
+*  `class` cannot be listed by date and time since class only adopts schedule. 
+* Delete the `tasks` which are exactly at that time range or have a overlap at that time range.
   
  Example: <br>
-   * `delete d/2020-06-17 t/12:00-13:00`
+   * `delete d/2020-07-01 t/12:00-13:00` <br/>
    Deletes the `tasks` that fall on the given date and within the given time frame.
     
 ### 3.6. Marking tasks as done: `done`
@@ -241,10 +254,10 @@ Example:
 Marks the fourth task as completed
 
 ### 3.7. Finding tasks: `find`
-Searches all task descriptions for supplied pattern <br/>
+Searches all task titles, descriptions, and locations for supplied pattern <br/>
 **Usage**: `find <PATTERN>`
 * Keyword is case _insensitive_
-* Find command can search the pattern in title, description and location. 
+* Can search the pattern in title, description and location. 
 
 Examples:
 * `find project meeting` <br/>

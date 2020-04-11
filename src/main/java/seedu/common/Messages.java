@@ -18,15 +18,17 @@ public class Messages {
     public static final String MESSAGE_DELETE_SUCCESS = "The following task has been removed:\n %s";
     public static final String MESSAGE_DELETE_NO_TASK_FOUND = "[Alert][delete] No task found to delete";
 
-    /** Messages for edit command. */
-    // public static final String MESSAGE_DATE_TIME_MISMATCH = "[Alert] The number of time range must match "
-    //       + "with the number of date(day of a week).\n";
-
     /** Messages for list command. */
     public static final String MESSAGE_LIST_IS_EMPTY = "[Alert][%s] There is nothing to %s, the list is empty\n";
     public static final String MESSAGE_OUT_OF_BOUNDS = "[Error][%s] Task number \"%s\" doesn't exit. There are %s"
             + " task/tasks in the list\n";
     public static final String MESSAGE_PRESENT_OR_FUTURE_DATE = "[Alert][list] Please enter a present or future date";
+
+    /** Messages for add command. */
+    public static final String MESSAGE_PAST_DATE_Error = "[Alert][add] Not allowed to add task "
+            + "in the past";
+    public static final String MESSAGE_DAY_OR_WEEK = "[Error][add] Integer that represents day"
+            + " of week must within 1 to 7";
 
     /** Messages for edit command. */
     public static final String MESSAGE_EDIT_MISSING_INDEX = "[Error][edit] Missing task number to edit "
@@ -56,6 +58,7 @@ public class Messages {
             + "time: hh:mm-hh:mm\n";
     public static final String MESSAGE_END_BEFORE_START_TIME = "[Error][Add/Edit]: Please enter a valid time range: "
             + "the end time should be after the start time\n";
+    public static final String MESSAGE_GENERAL_ERROR_MESSAGE = "[Error] Unexpected input for parameter\n";
 
     /** Farewell message. */
     public static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!\n";

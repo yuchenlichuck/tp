@@ -239,7 +239,7 @@ public abstract class Command {
     }
 
     /**
-     * Checks for invalid date/time format: E.g. 2020/02/04.
+     * Checks for invalid date/time format: E.g. 2020/07/04.
      * / is used in delimiter.
      *
      * @param input userInput string.

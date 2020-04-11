@@ -254,10 +254,10 @@ Example:
 Marks the fourth task as completed
 
 ### 3.7. Finding tasks: `find`
-Searches all task descriptions for supplied pattern <br/>
+Searches all task titles, descriptions, and locations for supplied pattern <br/>
 **Usage**: `find <PATTERN>`
 * Keyword is case _insensitive_
-* Find command can search the pattern in title, description and location. 
+* Can search the pattern in title, description and location. 
 
 Examples:
 * `find project meeting` <br/>

@@ -7,6 +7,7 @@
     * [Architecture](#21-architecture)
     * [UI](#22-ui)
     * [Task Component](#23-task-component)
+    * [Storage Component](#24-storage-component)
 * [Implementation](#3-implementation)
     * [List By Category](#31-list-by-category)
     * [Calendar](#32-proposed-view-month)
@@ -266,38 +267,38 @@ The following diagram summarises what happens when a user executes a new `calend
 2. Enable repetition of `task`: e.g. Once a week, twice a week. 
 
 ### 3.4. Storage
-#### 3.4.1 Proposed Implementation
-The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
-are loaded from the `Main` class and saved from the  `done`, `edit`, `add`, and `delete` commands.
-
-The interaction is similar for all the commands. Below is a sequence diagram showing the interactions between classes when a task is added to the list:
-![Storage_Sequence_Diagram](images/Storage_Sequence_Diagram.png)
-
-1. The user inputs the `add` command. After being parsed, the command is executed.
-1. The `add` command adds a `Task` instance to the `taskList`.
-1. After successful addition of the task, the `add` command calls the Storage#overwriteFile() to 
-overwrite all the current tasks from the `taskList` to the external `data.txt` file.
-
-#### 3.4.2 Design Considerations
-1. Aspect: Saving tasks
-* Alternative 1:(current choice) Overwrite all tasks in the `taskList` to the `data.txt` file when a task is edited, added, done, or deleted.  
-  * Pros: Less code and easier to maintain and implement
-  * Cons: Redoing work that has been done before, thus wasting resources
-* Alternative 2: Save only the specific tasks that is being edited, added, done, or deleted.
-  * Pros: Saves resources since it only changes one task
-  * Cons: Difficult and tedious to implement since Json strings are being kept in a text file. For example, it would be hard
-  to know which specific class was edited or deleted from the text file.
+  #### 3.4.1 Proposed Implementation
+  The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
+  are loaded from the `Main` class and saved from the  `done`, `edit`, `add`, and `delete` commands.
   
-3. Aspect: How to save tasks
-* Alternative 1:(current choice) Save tasks individually as Json strings in the text file. Json strings
-are separated by new lines in the file. When loading tasks, check whether they are instances of 
-`TaskNonClass` or `Class`.
-  * Pros: Avoid overflow of a single Java String since we can have many tasks in the list at a given time
-  * Cons: Tedious to keep track of in the external text file
-* Alternative 2: Save the whole `taskList` as a Json string in the external text file.
-  * Pros: Easy to implement both overwriting and loadings tasks from the text file.
-  * Cons: May overflow a Java String faster if there are many tasks in the list at a given time.
+  The interaction is similar for all the commands. Below is a sequence diagram showing the interactions between classes when a task is added to the list:
+  ![Storage_Sequence_Diagram](images/Storage_Sequence_Diagram.png)
   
+  1. The user inputs the `add` command. After being parsed, the command is executed.
+  1. The `add` command adds a `Task` instance to the `taskList`.
+  1. After successful addition of the task, the `add` command calls the Storage#overwriteFile() to 
+  overwrite all the current tasks from the `taskList` to the external `data.txt` file.
+  
+  #### 3.4.2 Design Considerations
+  1. Aspect: Saving tasks
+  * Alternative 1:(current choice) Overwrite all tasks in the `taskList` to the `data.txt` file when a task is edited, added, done, or deleted.  
+    * Pros: Less code and easier to maintain and implement
+    * Cons: Redoing work that has been done before, thus wasting resources
+  * Alternative 2: Save only the specific tasks that is being edited, added, done, or deleted.
+    * Pros: Saves resources since it only changes one task
+    * Cons: Difficult and tedious to implement since Json strings are being kept in a text file. For example, it would be hard
+    to know which specific class was edited or deleted from the text file.
+    
+  3. Aspect: How to save tasks
+  * Alternative 1:(current choice) Save tasks individually as Json strings in the text file. Json strings
+  are separated by new lines in the file. When loading tasks, check whether they are instances of 
+  `TaskNonClass` or `Class`.
+    * Pros: Avoid overflow of a single Java String since we can have many tasks in the list at a given time
+    * Cons: Tedious to keep track of in the external text file
+  * Alternative 2: Save the whole `taskList` as a Json string in the external text file.
+    * Pros: Easy to implement both overwriting and loadings tasks from the text file.
+    * Cons: May overflow a Java String faster if there are many tasks in the list at a given time.
+    
 
 ## 4. Documentation
 

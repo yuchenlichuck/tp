@@ -9,9 +9,9 @@
     * [Task Component](#23-task-component)
     * []
 * [Implementation](#3-implementation)
-  * [Undo features](#31-proposed-features)
-    * [List By Category](#311-list-by-category)
-    * [Calendar](#312-proposed-view-month)
+    * [List By Category](#31-list-by-category)
+    * [Calendar](#32-proposed-view-month)
+    * [Add](#33-proposed-add-task--class)
 * [Documentation](#4-documentation)
 * [Testing](#5-testing)
 * [Dev Ops](#6-dev-ops)
@@ -125,9 +125,8 @@ In total, Task component comprises of 4 classes:
 1. Task - Specialised class to model an actionable task / todo
 
 ## 3. Implementation
-### 3.1 [Proposed] Features
-#### 3.1.1 List By Category
-##### 3.1.1.1 Proposed Implementation
+#### 3.1 List By Category
+##### 3.1.1 Proposed Implementation
 The list by category mechanism is facilitated by ListCommand which extends Command.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
@@ -151,7 +150,7 @@ This is the UML design for list by category.
 
 ![UML for View](images/listCategory.png)
 
-##### 3.1.1.2 Design Considerations
+##### 3.1.2 Design Considerations
 Aspect: How to find certain category. 
 
 Alternative 1 (previous choice): store HashMap to map category with the key. The map still exists which
@@ -160,8 +159,8 @@ stores the needed categories.
 Alternative 2 (current choice): linear search when searching tasks. 
 
 
-#### 3.1.2 [Proposed] View month
-##### 3.1.2.1 Proposed Implementation
+#### 3.2 [Proposed] View month
+##### 3.2.1 Proposed Implementation
 The view month mechanism is facilitated by CalendarCommand which extends Command.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
@@ -184,7 +183,7 @@ The following diagram summarises what happens when a user executes a new `calend
 ![Sequence diagram for CalendarCommand](images/CalendarCommand_sequence.jpg)
 
 
-##### 3.1.2.2 Design Considerations
+##### 3.2.2 Design Considerations
 1. Aspect: Obtaining information required for generating monthly view
   
     * Alternative 1: (current choice) Algorithm to deduce how many weeks in month, which day a date is, how many days in that month
@@ -205,6 +204,56 @@ The following diagram summarises what happens when a user executes a new `calend
     * Calculation of details are shifted from the command to a separate class. 
     This is to enable easier maintenance for methods relating to calendar features.
     
+### 3.3 [Proposed] Add Task / Class
+##### 3.3.1 Proposed Implementation
+The add `task/class` mechanism is facilitated by AddCommand which extends Command.
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+1. The user inputs a correct command format:  `add n/title`.\
+   Upon which, the instance of parser will return a AddCommand for execution. 
+   
+1. The base Command initialises with the following variables
+    * taskList - manages the tasks
+    * storage - updates the storage
+    * ui - enable ui communication (which is not used in this command)
+    
+1. During the execution procedure:
+    * It calls the functions in the Command which can get the fields of all the input.
+    * It will then check the date/time format to see if input matches format standard.
+    * If the inputs are in correct format: will add a task/class by calling the `addTask` of the _taskList_
+    * Then it will call the `getList` and pass current List into storage for update
+    * The newly added tasks and current taskList information will be stored in a string and pass to CommandResult. 
+
+The class diagram below shows the relationships between the different classes required by the `calendar` feature.
+![Class diagram for CalendarCommand](images/AddCommand_class.png)
+
+The following diagram summarises what happens when a user executes a new `calendar` command:
+![Sequence diagram for CalendarCommand](images/AddCommand_sequence.png)
+
+##### 3.3.2 Design Considerations
+1. Distinguish between `class` and `task`
+    * By checking the input category information:
+     If the category is `class`, then will add a **Class**, else will add a **Task**
+
+1. Processing of Date,Time Format
+    * Alternative 1(current): The AddCommand will check only check the basic format of input(e.g. time should be
+    a range and date should not contain `/`), and then the Task class do the processing
+        * Pros: The **Task** will only focus on the DataTimeFormat error and some small time range errors.
+        The passing of variables is also convenient. 
+        * Cons: **Task** May also need to deal with error handling. This may not be very easy to deal with. 
+    
+    * Alternative 2: The AddCommand will not only check the format but also check if the input is in correct
+    DateTimeFormat.
+        * Pros: It ensures the correctness of adding tasks, so no more error handling in **Task**.
+        * Cons: May need to adjust the passing variables, and the AddCommand is dealing with 
+        too much things which violates the design idea of OOP. 
+    
+##### 3.3.3 Future Enhancement
+1. Enable `class` to store semester information so that date of class can be displayed in date format.
+2. Enable repetition of `task`: e.g. Once a week, twice a week. 
+
+ 
 ## 4. Documentation
 
 ## 5. Testing

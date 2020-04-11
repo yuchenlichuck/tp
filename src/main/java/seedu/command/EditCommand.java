@@ -107,11 +107,10 @@ public class EditCommand extends Command {
         if (hasInput(date) & !hasInput(time)) {
 
             if (taskList.getTask(taskEdited).getTime().size() == 0) {
+                // When previously no time is set by user so it is okay to edit the number of date
                 taskList.changeDate(taskEdited, date);
                 isEdit = true;
-            }
-
-            if (date.split("\\s+").length != taskList.getTask(taskEdited).getTime().size() / 2) {
+            } else if (date.split("\\s+").length != taskList.getTask(taskEdited).getTime().size() / 2) {
                 throw new ProjException(TAB + Messages.MESSAGE_EDIT_DATE_TIME_MISMATCH);
             } else {
                 taskList.changeDate(taskEdited, date);
@@ -120,11 +119,16 @@ public class EditCommand extends Command {
         }
 
         if (hasInput(time) & !hasInput(date)) {
-            if (time.split("\\s+").length != taskList.getTask(taskEdited).getDate().size()) {
+            if (!taskList.getTask(taskEdited).isDateSetByUser()) {
+                // When previously no date is set by user so it is okay to edit the number of time
+                taskList.changeTime(taskEdited,time);
+                isEdit = true;
+            } else if (time.split("\\s+").length != taskList.getTask(taskEdited).getDate().size()) {
                 throw new ProjException(TAB + Messages.MESSAGE_EDIT_DATE_TIME_MISMATCH);
+            } else {
+                taskList.changeTime(taskEdited,time);
+                isEdit = true;
             }
-            taskList.changeTime(taskEdited,time);
-            isEdit = true;
         }
 
         String location = getLocation(userInput);

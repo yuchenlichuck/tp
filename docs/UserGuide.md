@@ -51,9 +51,8 @@ The `< >` symbol just for readability.
 * Command keyword (e.g. `add`) is case insensitive. However, the delimiters (e.g. `n/`) are case sensitive.
 * It is okay to switch the sequence when inputting the delimiters:
     * `add n/<NAME> l/<LOCATION>` has same effects as `add l/<LOCATION> n/<NAME> `
-* When inputting a time, the time format is always: `hh:mm`.
-  Most command accepts time range which is: `hh:mm-hh:mm`. No space is allowed around `-`. 
-  Also, similar format like `1:00` will not be allowed. 
+* When inputting a time, the format is always:`hh:mm-hh:mm`. No space is allowed around `-`. 
+  Also, input like `1:00-2:00` will not be allowed. 
 * When inputting a date, the format is always: `yyyy-mm-dd`.
 * Some recognized date/time error will be automatically parsed to accepted format.
     * `24:00` will be parsed to `23:59` since 24:00 is next day. 
@@ -80,6 +79,8 @@ Users add tasks using this command. <br/>
      * Example
        * `add n/CS2113 t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU`  
        Adds a task with two time zones, dates, and locations.
+  * If no `<DATE>` is inputted by `<TIME>` is inputted, the system will automatically add today's date
+   to that task. 
   * The default category is TODO. To add a class, just indicate the category is `CLASS`. The category is
    case-insensitive.  
   * When adding normal tasks:
@@ -87,7 +88,7 @@ Users add tasks using this command. <br/>
     * Examples: 
         * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
         * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
-        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU`
+        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 l/NUS NTU i/important`
   * When adding class:
     * `<DATE>` should be the day of the week, represented by an integer (e.g. `1 3` means Mon Wed). 
     * Examples: 
@@ -101,8 +102,15 @@ Edit the inputted task/class. <br/>
 * It is not allowed to edit the `<NAME>`.
 * It is okay to edit the `<CATEGORY>`. However, it is not allowed to change from class category to other 
   categories. It is also not allowed to change from other categories to class category. 
-* When edit `<TIME>` and `<DATE>`, please be reminded that the number of `<TIME>`should match with the 
-  number of `<DATE>` and the number of location `<LOCATION>`. 
+* When edit `<TIME>` and `<DATE>`, please be reminded that the number of `<TIME>` should match with the 
+  number of `<DATE>`. It is suggested that number of location `<LOCATION>` also matches. 
+    * If you only have added one of the `<TIME>` and `<DATE>` for that task, no need to follow the 
+    _number matching of TIME and DATE_ since there is only field in that task. 
+    * If you have added both `<TIME>` and `<DATE>` for a task _1_:<br/>
+    For example:  Previously the task _1_ is:`[TODO] Title: Project Meeting | 2020-09-10 : 11:00 - 12:00`<br/>
+    When editing, can either input `<TIME>` with same number of `<DATE>` in current task _1_ : e.g. `edit 1 t/01:00-02:00`<br/>
+                or input `<DATE>` with same number of `<TIME>` in current task _1_ : e.g. `edit 1 d/2020-11-12`<br/>
+                or input both `<TIME>` and `<DATE>` with same number : e.g. `edit 1 d/2020-09-10 2020-09-11 t/11:00-12:00 13:00-14:00`
   
 Examples: <br/>
 * `edit 1 l/NUSCOM2`

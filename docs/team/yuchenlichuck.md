@@ -47,7 +47,7 @@ You can view my code contribution for this project: [RepoSense Dashboard](https:
 
 #### Enhancements implemented
 
-- Major Enhancement: added the 
+- Major Enhancement: added the ability to scedule the task based on the user's requirement
 
 
 

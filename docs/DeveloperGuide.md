@@ -446,7 +446,7 @@ _Assumption: Valid index is provided. This test output is based on previous adde
 
 
 
-### 6.5.5 List Task
+#### 6.5.5 List Task
 * _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
     * Test case 1:
         * `list`
@@ -490,6 +490,8 @@ _Assumption: Valid index is provided. This test output is based on previous adde
            The following task has been removed:                                                                                           
            [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )<br/>
            Now you have <NUM> task/tasks in your calendar.
+                                                          >
+                                                          >
 #### 6.5.7 Find
 * _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass) 
     * Test case:
@@ -500,19 +502,18 @@ _Assumption: Valid index is provided. This test output is based on previous adde
         
 
 #### 6.5.8 Calendar
-*
-    * Test case:
-        * `calendar`
-        > Expected: current month calendar will be displayed.<br/>
-        The tasks on that month will also be displayed.
+* Test case:
+     * `calendar`
+     > Expected: current month calendar will be displayed.<br/>
+     The tasks on that month will also be displayed.
+
 #### 6.5.9 Clear
-*
-    * Test case:
-        * `clc`
-        > Expected: Clears the output window.
+* Test case:
+     * `clc`
+     > Expected: Clears the output window.
+        
 #### 6.5.10 Help
-*
-    * Test case:
-        * `help`
-        > Expected: The usage of command will be displayed. 
+* Test case:
+    * `help`
+    > Expected: The usage of command will be displayed. 
  

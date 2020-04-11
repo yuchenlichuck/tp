@@ -194,7 +194,7 @@ Examples: <br/>
 Lists the `tasks` whose start time before `2020-07-01 13:00` and end time after `2020-07-01 12:00` and  category is `meeting`
 * `list d/2020-05-16 c/deadline` <br/>
 Lists the `tasks` which have date on `2020-05-16` and whose `category` is `deadline`
-* `list t/23:00-23:30 c/deadline`
+* `list t/23:00-23:30 c/deadline`<br/>
 Lists the `tasks` whose start time before `23:00` and end time after `23:30`and `category` is `deadline`
 
 ### 3.5. Deleting tasks: `delete`

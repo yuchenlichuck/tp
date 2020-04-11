@@ -63,21 +63,21 @@ public class DeleteCommand extends Command {
 
             switch (listCmdSubtype) {
 
-                case DELETE_TASK:
-                    feedback = deleteAll(strIndex);
-                    break;
+            case DELETE_TASK:
+                feedback = deleteAll(strIndex);
+                break;
 
-                case DELETE_BY_CATEGORY:
-                    feedback = deleteByCategory(category);
-                    break;
+            case DELETE_BY_CATEGORY:
+                feedback = deleteByCategory(category);
+                break;
 
-                case DELETE_BY_DATE_CATEGORY:
-                    feedback = deleteByDateCategory(date, time, category);
-                    break;
+            case DELETE_BY_DATE_CATEGORY:
+                feedback = deleteByDateCategory(date, time, category);
+                break;
 
-                default:
-                    feedback = "[Error][List] No such option to filter";
-                    break;
+            default:
+                feedback = "[Error][List] No such option to filter";
+                break;
             }
 
         } catch (TaskOutOfBoundsException e) {

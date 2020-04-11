@@ -96,7 +96,7 @@ Users add tasks using this command. <br/>
 
 ### 3.3. Editing tasks: `edit`
 Edit the inputted task/class. <br/>
-**Usage**:`edit TASKINDEX t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+**Usage**:`edit TASK_INDEX t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
 
 * It is not allowed to edit the `<NAME>`.
 * It is okay to edit the `<CATEGORY>`. However, it is not allowed to change from class category to other 
@@ -178,7 +178,7 @@ Lists the `tasks` whose start time before `15:00` and end time after `14:00`and 
 ### 3.5. Deleting tasks: `delete`
 #### 3.5.1. Delete a task/class
 Deletes a task from the list <br/>
-**Usage**: `delete <task index>`
+**Usage**: `delete <TASK_INDEX>`
 * The index refers to the index number shown in the displayed task list.
 * Use `list` to derive task index
 * Index has to be an _integer_
@@ -223,7 +223,7 @@ Delete tasks by specific date and time. <br/>
     
 ### 3.6. Marking tasks as done: `done`
 Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed). <br>
-**Usage**: `done <task index>` 
+**Usage**: `done <TASK_INDEX>` 
 * Obtain task index from `list` command (without any filters)
 * task cannot be a from the category class
 * Index is a valid positive number
@@ -234,7 +234,7 @@ Marks the fourth task as completed
 
 ### 3.7. Finding tasks: `find`
 Searches all task descriptions for supplied pattern <br/>
-**Usage**: `find <pattern>`
+**Usage**: `find <PATTERN>`
 * Keyword is case _insensitive_
 * Find command can search the pattern in title, description and location. 
 
@@ -276,23 +276,23 @@ Exits the program. <br/>
 
 ---
 ## 5. Command Summary
- * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
- * **Edit**: `edit TASKINDEX t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **Add**: `add n/<NAME> t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **Edit**: `edit TASK_INDEX t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **List**: 
     * `list`
-    * `list c/<category>` 
+    * `list c/<CATEGORY>` 
     * `list t/<TIME>`
     * `list d/<DATE>`
     * `list d/<DATE> t/<TIME>`
     * `list c/<CATEGORY> d/<DATE> t/<TIME>`
  * **Delete**:
-    * `delete <task index>` 
+    * `delete <TASK_INDEX>` 
     * `delete t/<TIME>` 
     * `delete d/<DATE>`
     * `delete d/<DATE> t/<TIME>`
- * **Done**: `done <task index>` 
- * **Find**: `find <keyword>` 
+ * **Done**: `done <TASK_INDEX>` 
+ * **Find**: `find <PATTERN>` 
  * **Help**: `help`
- * **Calendar**: `calendar` or `calendar <month>`
+ * **Calendar**: `calendar` or `calendar <MONTH>`
  * **Clear**:`clc`
  * **Exit**: `bye`

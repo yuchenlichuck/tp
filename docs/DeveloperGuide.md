@@ -124,6 +124,20 @@ In total, Task component comprises of 4 classes:
 1. Class - Specialised class to model a student's timetable
 1. TaskNonClass - Specialised class to model an actionable task / todo
 
+### 2.4. Calendar Component
+
+![Command Result UI](images/CalendarDiagram.jpg)
+
+The Calendar component consists of 2 classes:
+1. CalendarParser - returns back all the necessary information about the requested month (eg. starting day, how many days/weeks in month)
+1. GenerateCalendar - formats the requested month and daily data into a monthy calendar
+
+The Calendar component depends on one other component:
+
+1. Task - Calendar component queries the Task component to determine how many tasks there are for each day of the selected month
+
+For future development, any code that requires the parsing of LocalDate can use the CalendarParser class to retrieve information of that date.
+
 ## 3. Implementation
 #### 3.1 List By Category
 ##### 3.1.1 Proposed Implementation

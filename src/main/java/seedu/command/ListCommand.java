@@ -97,13 +97,15 @@ public class ListCommand extends Command {
     }
 
     /**
+     * list the tasks by date and/or time
+     * in the specific category.
      *
      * @author : yuchenlichuck
      * @date : 11/4/20 7:04 PM
      * @param listTaskIndex :
- * @param date :
- * @param time :
- * @param category :
+     * @param date :
+     * @param time :
+     * @param category :
      * @return : void
      */
     private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category)
@@ -250,10 +252,12 @@ public class ListCommand extends Command {
                 }
             }
         }
-
-
     }
+
+
     /**
+     * list the tasks by date and/or time
+     * in all categories.
      *
      * @author : yuchenlichuck
      * @date : 11/4/20 7:03 PM
@@ -285,6 +289,7 @@ public class ListCommand extends Command {
                 if (task.getCategory().equals("CLASS")) {
                     continue;
                 }
+
                 ArrayList<LocalDate> localDates = task.getDate();
 
                 for (LocalDate d : localDates) {
@@ -415,6 +420,8 @@ public class ListCommand extends Command {
     }
 
     /**
+     * list the tasks by the sequence
+     * in the whole tasklists.
      *
      * @author : yuchenlichuck
      * @date : 11/4/20 7:03 PM
@@ -453,22 +460,24 @@ public class ListCommand extends Command {
     }
 
     /**
+     * get the list of the
+     * task list by
+     * the specific category.
      *
-     * @param listTaskIndex
-     * @param category
      * @param listTaskIndex :
-     * @param category : * @return  * @return : void
+     * @param category :
+     * @return : void
      * @author yuchenlichuck
      * @creed: Talk is cheap,show me the code
      * @date 11/4/20 6:59 PM
      */
-
     private void getListByCategory(ArrayList<Integer> listTaskIndex, String category) throws ProjException {
 
         if (!taskList.containsCategory(category)) {
             ui.showAllCategory(taskList.getAllCategory());
             throw new ProjException(TAB + "[Alert][list] There is no \"" + category + "\" in current category.\n");
         }
+
         int index = 0;
         for (Task task : taskList.getList()) {
             if (task.getCategory().equals(category)) {
@@ -476,7 +485,9 @@ public class ListCommand extends Command {
             }
             index++;
         }
+
     }
+
 
     private int getCmdSubtype(String category, String date, String time) {
 

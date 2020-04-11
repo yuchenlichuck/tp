@@ -514,8 +514,7 @@ _Assumption: Valid index is provided. This test output is based on previous adde
            The following task has been removed:                                                                                           
            [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )<br/>
            Now you have <NUM> task/tasks in your calendar.
-                                                          >
-                                                          >
+                                  
 #### 6.5.7 Find
 * _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass) 
     * Test case:

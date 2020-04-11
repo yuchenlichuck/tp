@@ -69,7 +69,7 @@ Displays the set of supported commands <br/>
 Users add tasks using this command. <br/>
 **Usage**: `add  n/<NAME> t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>` <br/>
   * Only name `<NAME>` is compulsory to include. However, if user only inputs time, 
-  then date of current day will be automatically added. 
+  then date of current day will be added automatically. 
   * Space is okay in `<NAME>`,`<REMINDER>` and `<INFORMATION>`.  e.g.: `n/2113 deadline` is accepted.                                                       
   * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `14:00-16:00`).
    There should be no space between this duration. 
@@ -77,22 +77,19 @@ Users add tasks using this command. <br/>
    However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
    the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
    zone/date/location. 
-     * Example
-       * `add n/CS2113 t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU`  
-       Adds a task with two time zones, dates, and locations.
   * The default category is TODO. To add a class, just indicate the category is `CLASS`. The category is
    case-insensitive.  
   * When adding normal tasks:
     * `<Date>` should be in format:`yyyy-mm-dd`
-    * Examples: 
-        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
-        * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
-        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU`
   * When adding class:
     * `<DATE>` should be the day of the week, represented by an integer (e.g. `1 3` means Mon Wed). 
-    * Examples: 
-        * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
-        * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
+
+ 
+Examples:
+* `add n/CS2113 t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU` <br/>
+  Adds a task with two time frames, dates, and locations.
+* `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1` <br/>
+Adds a class with two time frames, two days (Wednesday and Thursday), and two locations
 
 ### 3.3. Editing tasks: `edit`
 Edit the inputted task/class. <br/>
@@ -211,14 +208,13 @@ Examples:
    
 #### 3.5.4 - Delete by Date & Time        
 Delete tasks by specific date and time. <br/>
-* **Usage** : `delete d/<DATE> t/<TIME>`
-    * `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`.
-       `class` cannot be listed by date and time since class only adopts schedule. 
-       
-       Delete the `tasks` which are exactly at that time range or have a overlap at that time range.
+**Usage** : `delete d/<DATE> t/<TIME>`
+* `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`.
+*  `class` cannot be listed by date and time since class only adopts schedule. 
+* Delete the `tasks` which are exactly at that time range or have a overlap at that time range.
   
  Example: <br>
-   * `delete d/2020-06-17 t/12:00-13:00`
+   * `delete d/2020-06-17 t/12:00-13:00` <br/>
    Deletes the `tasks` that fall on the given date and within the given time frame.
     
 ### 3.6. Marking tasks as done: `done`

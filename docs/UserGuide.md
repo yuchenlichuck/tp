@@ -22,35 +22,41 @@ By: `AY1920S2-CS2113-T14-3`
 
 ## 1. Introduction
 
-<span style="font-family: 'Times New Roman'">
 CAFS is a CLI calender-like task scheduler that supports task and 
 class schedule adding. It is simple to use, and comes with an auto save function to 
 remember your tasks.
-</span>
+
+<br/>
 
 ---
 
 ## 2. Quick Start
-1. Ensure you have Java 11 or above installed in your Computer
 
-1. Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases)
+1. Ensure you have Java 11 or above installed in your computer.
 
-1. Copy the file to the folder you want to use as the home folder
+1. Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases).
 
-1. Run the jar file using `java - jar caf.jar` from your terminal window
+1. Copy the file to the folder you want to use as the home folder.
+
+1. Run the jar file using `java - jar caf.jar` from your terminal window.
+
+<br/>
 
 ---
 ## 3. Features
 
-* `<NAME>` such format indicates user input variable. However, when inputting, there is no need to input `<>`symbol. 
-The `<>` symbol just for readability. 
-* The command keyword (e.g. `add`) is case insensitive. However, the delimiter (e.g. `n/`)are case sensitive.
+Command Format:
+
+<br/>
+* The <UPPER_CASE> format indicates user input. However, when inputting, there is no need to input `<>`symbol. 
+The `< >` symbol just for readability. 
+* Command keyword (e.g. `add`) is case insensitive. However, the delimiters (e.g. `n/`) are case sensitive.
 * It is okay to switch the sequence when inputting the delimiters:
     * `add n/<NAME> l/<LOCATION>` has same effects as `add l/<LOCATION> n/<NAME> `
 * When inputting a time, the time format is always: `hh:mm`.
-  Most command accepts time range which is: `hh:mm-hh:mm`. No space is allowed around `-`.
+  Most command accepts time range which is: `hh:mm-hh:mm`. No space is allowed around `-`. 
   Also, similar format like `1:00` will not be allowed. 
-* When inputting a date, the date format is always: `yyyy-mm-dd`.
+* When inputting a date, the format is always: `yyyy-mm-dd`.
 * Some recognized date/time error will be automatically parsed to accepted format.
     * `24:00` will be parsed to `23:59` since 24:00 is next day. 
     * `2021-02-30` will be parsed to `2021-02-28`
@@ -58,8 +64,8 @@ The `<>` symbol just for readability.
 
 ---
 ### 3.1. Viewing help: `help`
-Displays the set of commands supported
-* **Usage**: `help`
+Displays the set of supported commands <br/>
+**Usage**: `help`
 
 ### 3.2. Adding tasks: `add`
 Users add tasks using this command
@@ -231,6 +237,8 @@ Clears the output window
 Exits the program
 * **Usage**: `bye`
   
+<br/>  
+
 ---
 ## 4. FAQ
  * How do I save my tasks?
@@ -238,6 +246,8 @@ Exits the program
     * If unable to load, check the directory and file name
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
+
+<br/>
 
 ---
 ## 5. Command Summary

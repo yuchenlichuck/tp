@@ -20,16 +20,25 @@ application using a CLI. It is written in Java.
 
 ### Contribution to documentation:
 * Hyperlinks and structure enhancement
-* Major part in Features
+* Minor part in Features
 * Command summary
+* Dev Ops
+    * Appendix C: User Stories
+    I Appendix D: Non-Functional Requirements
 
 ### Contribution to the DG:
 * Formatting of the document
 * Description of [proposed] calendar implementation 
+* Architecture of program
 
 
 ### Contributions to team-based tasks:
+* Active participation during tutorials and answers questions online and offline about new concepts
 
 #### Review/mentoring contributions:
+* Reviews on github
+* Responsiveness on github issue discussion
 
 #### Contributions beyond the project team
+* PE Dry Run Discover bugs
+* Discover UML errors in other team during online tutorial

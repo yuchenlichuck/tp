@@ -99,7 +99,7 @@ Here is a simplified class diagram to illustrate this interaction:
 
 Ideally, all messages or output meant to be displayed should use the UI class instead of calling a system print or any other method.
 
-At the moment, the only outliers are certain exception error handling messages which will be standardised to follow this principle in a later version.
+* At the moment, the only outliers are certain exception error handling messages which will be standardised to follow this principle in a later version.
 
 ### 2.3. Task Component
 
@@ -122,7 +122,7 @@ In total, Task component comprises of 4 classes:
 1. TaskList - Methods called by commands to operate on task list. Also contains the actual list which stores all tasks.
 1. Task - Abstract class to model a generic task
 1. Class - Specialised class to model a student's timetable
-1. Task - Specialised class to model an actionable task / todo
+1. TaskNonClass - Specialised class to model an actionable task / todo
 
 ## 3. Implementation
 #### 3.1 List By Category

@@ -1,2 +1,0 @@
-{"isDone":false,"title":"name B ","description":"","reminder":"","category":"DEADLINE","date":[],"time":[],"location":[],"isDateSetByUser":false}
-{"title":"name C ","description":"","reminder":"","category":"CLASS","date":[],"time":[],"location":[],"isDateSetByUser":false}

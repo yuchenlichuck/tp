@@ -109,12 +109,12 @@ Examples: <br/>
 * `edit 2 c/todo`  
         
 ### 3.4. Listing tasks: `list`
-#### **3.4.1 - List** 
+#### 3.4.1. List
 Displays all the current tasks in the list. <br/> 
 **Usage**: `list`
 * Note that other list sub-commands (see below) will default to just `list` when input is wrongly formatted
 
-#### **3.4.2 - List By Category**
+#### 3.4.2. List by Category
 List tasks that belong to a specific category. <br/>
 **Usage**: `list c/<CATEGORY>`
 * Wrong command: `list TODO` will have the same effects as just `list`
@@ -124,7 +124,7 @@ Examples: <br/>
 * `list c/TODO`
 * `list c/DEADLINE`
 
-#### 3.4.3 - List By Time
+#### 3.4.3. List by Time
 Lists tasks and classes by specific time range. <br/>
 **Usage**: `list t/<TIME>`
 * `task` and `class` with a specific time range can be listed by `list t/hh:mm-hh:mm`.
@@ -134,7 +134,7 @@ Example: <br/>
 * `list t/15:00-16:00`<br/>
  Lists the `tasks` that fall within the given time frame 
 
-#### 3.4.4 - List By Date
+#### 3.4.4. List by Date
 List tasks by specific date. <br/>
 **Usage** : `list d/<DATE>`
 
@@ -147,7 +147,7 @@ Lists the `tasks` that fall on the date `2020-06-17`
 * `list d/2020-06-17 d/2020-06-19` <br/>
 Lists the `tasks` that fall on either `2020-06-17` or `2020-06-19`
     
-#### 3.4.5 - List By Date & Time        
+#### 3.4.5. List by Date & Time        
 Lists tasks by specific date and time. <br/>
 **Usage** : `list d/<DATE> t/<TIME>`
   
@@ -159,13 +159,13 @@ Example:
 * `list d/2020-06-17 t/12:00-13:00` <br/>
 Lists the `tasks` that fall on the given date (`2020-06-17`) and within the given time frame (`12:00-13:00`)
       
-#### 3.4.6 - List By Category, Date & Time
+#### 3.4.6. List by Category, Date & Time
 
 List tasks by category and date and time. 
 **Usage**: `list c/<CATEGORY> d/<DATE> t/<TIME>`
-* It is okay to list `tasks` in a specific date and specific time range in a  specific category. However, the `class` category cannot be shown, since these don't have date values.
-* It is okay to list `tasks`  just in a specific date/dates in a specific category. However, the `class` category cannot be shown, since these don't have date values.
-* It is okay to list `tasks` and `classes`  just in a specific time range in a specific category. All `categories` can be shown.
+* `tasks` in a specific date and specific time range in a  specific category. However, the `class` category cannot be shown, since these don't have date values.
+* `tasks`  just in a specific date/dates in a specific category. However, the `class` category cannot be shown, since these don't have date values.
+* `tasks` and `classes`  just in a specific time range in a specific category. All `categories` can be shown.
 
 Examples: <br/>
 * `list d/2020-06-17 t/12:00-13:00 c/todo` <br/>
@@ -176,83 +176,100 @@ Lists the `tasks` which have date on `2020-08-10` and whose `category` is `deadl
 Lists the `tasks` whose start time before `15:00` and end time after `14:00`and `category` is `deadline`
 
 ### 3.5. Deleting tasks: `delete`
-Deletes a task from the list
-#### 3.5.1 - Delete a task/class
-* **Usage**: `delete <task index>`
-    * The index refers to the index number shown in the displayed task list.
-    * use `list` to derive task index
-    * index has to be an _integer_
-      
-#### 3.5.2 - Delete Time
-Delete tasks and classes by specific time range. 
-* **Usage**: `delete t/<TIME>`
-    * `task` and `class` with a specific time range can be listed by `delete t/hh:mm-hh:mm`.
-    Delete the `tasks` and `classes`  which are exactly at that time range or have a overlap at that time range. 
-      * `delete t/15:00-16:00`
-      * *(Explanation: delete the `events` whose start time before `16:00` and end time after `15:00`)*
+#### 3.5.1. Delete a task/class
+Deletes a task from the list <br/>
+**Usage**: `delete <task index>`
+* The index refers to the index number shown in the displayed task list.
+* Use `list` to derive task index
+* Index has to be an _integer_
 
-#### 3.5.3 - Delete Date
-Delete tasks by specific date.
-* **Usage** : `delete d/<DATE>`
-    * `task` with a specific date can be listed by `delete d/yyyy-mm-dd`. Or `tasks` have date/dates in the specific dates can be listed by  `delete d/yyyy-mm-dd yyyy-mm-dd ...` *(more dates)*.
-       `class` cannot be listed by date since class only adopts schedule.
-       * `delete d/2020-06-17`
-       * *(Explanation: list the `tasks` which have date on `2020-06-17`  )*
-       * `delete d/2020-06-17 d/2020-06-19`
-       * *(Explanation: list the `tasks` which have date on `2020-06-17` or `2020-06-19` )*
-#### 3.5.4 - Delete Date + Time        
-Delete tasks by specific date and time.
+Example:
+* `delete 2` <br/>
+Deletes the second task from the list.
+
+#### 3.5.2 - Delete by Time
+Delete tasks and classes by specific time range. <br/>
+**Usage**: `delete t/<TIME>`
+* `task` and `class` with a specific time range can be deleted by `delete t/hh:mm-hh:mm`.
+* Delete the `tasks` and `classes`  which are exactly at that time range or have a overlap at that time range. 
+  
+Example: 
+* `delete t/15:00-16:00` <br/>
+Deletes the `tasks` that fall within the given time frame `15:00-16:00`
+
+#### 3.5.3 - Delete by Date
+Delete tasks by specific date. <br/>
+**Usage** : `delete d/<DATE>`
+* `task` with a specific date can be listed by `delete d/yyyy-mm-dd`. 
+* `class` cannot be deleted by date since classes adopt to a schedule (Monday to Sunday)
+
+Examples:
+   * `delete d/2020-06-17` <br/>
+   Deletes the `tasks` that fall on `2020-06-17`
+   * `delete d/2020-06-17 d/2020-06-19` <br/>
+   Deletes the `tasks` that fall on either `2020-06-17` or `2020-06-19`
+   
+#### 3.5.4 - Delete by Date & Time        
+Delete tasks by specific date and time. <br/>
 * **Usage** : `delete d/<DATE> t/<TIME>`
     * `task` with a specific date and time can be listed by `delete d/yyyy-mm-dd t/hh:mm-hh:mm`.
        `class` cannot be listed by date and time since class only adopts schedule. 
        
        Delete the `tasks` which are exactly at that time range or have a overlap at that time range.
-       
-       * `delete d/2020-06-17 t/12:00-13:00`
-       * *(Explanation: delete the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00`)*
+  
+ Example: <br>
+   * `delete d/2020-06-17 t/12:00-13:00`
+   Deletes the `tasks` that fall on the given date and within the given time frame.
     
 ### 3.6. Marking tasks as done: `done`
-Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed).
+Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed). <br>
+**Usage**: `done <task index>` 
+* Obtain task index from `list` command (without any filters)
+* task cannot be a from the category class
+* Index is a valid positive number
 
-* **Usage**: `done <task index>` 
-    * Obtain task index from `list` command (without any filters)
-    * task cannot be a from the category class
-    * Index is a valid positive number
+Example:
+* `done 4` <br/>
+Marks the fourth task as completed
 
 ### 3.7. Finding tasks: `find`
-Searches all task descriptions for supplied keyword
-* **Usage**: `find <keyword>`
-    * Keyword has to be a _**single word**_
-    * Keyword is case _insensitive_
-    * Find command can search the keyword in title, description and location. 
+Searches all task descriptions for supplied pattern <br/>
+**Usage**: `find <pattern>`
+* Keyword is case _insensitive_
+* Find command can search the pattern in title, description and location. 
+
+Examples:
+* `find project meeting` <br/>
+Lists the tasks with the given pattern (`project meeting`) if found in their title, description, or location
 
 ### 3.8. Viewing calendar: `calendar`
 Prints a monthly representation of a calendar. Shows the number of tasks a user has on a particular day.
 Users are able to specify which month to look up. Default is the current month. 
 
-Will still display tasks from past months as long as not marked as complete.
-* **Usage**: `calendar <optional month>` 
-    * Month is in integer representation
-    * Where 1 is January and 12 is December
-    * Default set to current month
-    * If number supplied is not within the month range, it will be set to current month
+Will still display tasks from past months as long as not marked as complete. <br/>
+
+**Usage**: `calendar <optional month>` 
+* Month is in integer representation
+* Where 1 is January and 12 is December
+* Default set to current month
+* If number supplied is not within the month range, it will be set to current month
 
 ### 3.9. Clearing output: `clc`
-Clears the output window
-* **Usage**:`clc`
+Clears the output window. <br/>
+**Usage**:`clc`
 
 ### 3.10. Exiting program: `bye`
-Exits the program
-* **Usage**: `bye`
+Exits the program. <br/>
+**Usage**: `bye`
   
 <br/>  
 
 ---
 ## 4. FAQ
- * How do I save my tasks?
-    * Tasks are saved automatically and loaded upon start up of application
-    * If unable to load, check the directory and file name
-        * Default folder (windows): `C:\Users\<computer name>\Save`
+ * **Q:** How do I save my tasks? <br/>
+ **A:** Tasks are saved automatically and loaded upon start up of application
+    * If unable to load, check the directory and file name:
+        * Default folder from application folder: `/Save/`
         * Default file name: `data.txt`
 
 <br/>
@@ -260,7 +277,7 @@ Exits the program
 ---
 ## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
- * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
+ * **Edit**: `edit TASKINDEX t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **List**: 
     * `list`
     * `list c/<category>` 

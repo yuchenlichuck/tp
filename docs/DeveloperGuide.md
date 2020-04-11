@@ -7,6 +7,7 @@
     * [Architecture](#21-architecture)
     * [UI](#22-ui)
     * [Task Component](#23-task-component)
+    * [Storage Component](#24-storage-component)
 * [Implementation](#3-implementation)
     * [List By Category](#31-list-by-category)
     * [Calendar](#32-proposed-view-month)
@@ -265,6 +266,7 @@ The following diagram summarises what happens when a user executes a new `calend
 1. Enable `class` to store semester information so that date of class can be displayed in date format.
 2. Enable repetition of `task`: e.g. Once a week, twice a week. 
 
+
 #### 3.4. Storage
 ##### 3.4.1 Proposed Implementation
 The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
@@ -287,17 +289,17 @@ overwrite all the current tasks from the `taskList` to the external `data.txt` f
   * Pros: Saves resources since it only changes one task
   * Cons: Difficult and tedious to implement since Json strings are being kept in a text file. For example, it would be hard
   to know which specific class was edited or deleted from the text file.
-  
-3. Aspect: How to save tasks
-* Alternative 1:(current choice) Save tasks individually as Json strings in the text file. Json strings
-are separated by new lines in the file. When loading tasks, check whether they are instances of 
-`TaskNonClass` or `Class`.
-  * Pros: Avoid overflow of a single Java String since we can have many tasks in the list at a given time
-  * Cons: Tedious to keep track of in the external text file
-* Alternative 2: Save the whole `taskList` as a Json string in the external text file.
-  * Pros: Easy to implement both overwriting and loadings tasks from the text file.
-  * Cons: May overflow a Java String faster if there are many tasks in the list at a given time.
-  
+    
+1. Aspect: How to save tasks
+  * Alternative 1:(current choice) Save tasks individually as Json strings in the text file. Json strings
+  are separated by new lines in the file. When loading tasks, check whether they are instances of 
+  `TaskNonClass` or `Class`.
+    * Pros: Avoid overflow of a single Java String since we can have many tasks in the list at a given time
+    * Cons: Tedious to keep track of in the external text file
+  * Alternative 2: Save the whole `taskList` as a Json string in the external text file.
+    * Pros: Easy to implement both overwriting and loadings tasks from the text file.
+    * Cons: May overflow a Java String faster if there are many tasks in the list at a given time.
+    
 
 ## 4. Documentation
 

@@ -51,6 +51,7 @@ application using a CLI. It is written in Java.
 * Reviews on github:[Check PR review](https://github.com/AY1920S2-CS2113-T14-3/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3A%40me)
 * Responsiveness on github issue discussion
 * Find bugs/enhancement of team project: [Check the issues created by JT](https://github.com/AY1920S2-CS2113-T14-3/tp/issues?q=is%3Aissue+author%3AJTWang2000+is%3Aclosed)
+
 #### Contributions beyond the project team
 * PE Dry Run Discover bugs
 * Discover UML errors in other team during online tutorial

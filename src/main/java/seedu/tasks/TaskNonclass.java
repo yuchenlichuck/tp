@@ -1,6 +1,7 @@
 package seedu.tasks;
 
 import seedu.calendar.CalendarParser;
+import seedu.common.Messages;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -47,7 +48,7 @@ public class TaskNonclass extends Task {
             for (String date : dates) {
                 LocalDate addedDate = CalendarParser.convertToDate(date);
                 if (addedDate.compareTo(LocalDate.now()) < 0) {
-                    throw new NumberFormatException("Please enter a date that is either today or in the future.");
+                    throw new NumberFormatException(Messages.MESSAGE_PAST_DATE_Error);
                 }
                 this.date.add(addedDate);
                 isDateSetByUser = true;

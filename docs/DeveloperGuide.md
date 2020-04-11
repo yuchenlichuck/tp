@@ -20,7 +20,7 @@
   * [Appendix B:Value proposition](#62-appendix-bvalue-proposition)
   * [Appendix C:User Stories](#63-appendix-cuser-stories)
   * [Appendix D:Non-Functional Requirements](#64-appendix-dnon-functional-requirements)
-  * [Appendix E:Instructions for Manual Testing](#65-appendix-finstructions-for-manual-testing)
+  * [Appendix E:Instructions for Manual Testing](#65-appendix-einstructions-for-manual-testing)
   
 ## 1. Introduction
 
@@ -217,7 +217,7 @@ The following diagram summarises what happens when a user executes a new `calend
     * Calculation of details are shifted from the command to a separate class. 
     This is to enable easier maintenance for methods relating to calendar features.
     
-### 3.3 [Proposed] Add Task / Class
+#### 3.3 [Proposed] Add Task / Class
 ##### 3.3.1 Proposed Implementation
 The add `task/class` mechanism is facilitated by AddCommand which extends Command.
 
@@ -266,30 +266,31 @@ The following diagram summarises what happens when a user executes a new `calend
 1. Enable `class` to store semester information so that date of class can be displayed in date format.
 2. Enable repetition of `task`: e.g. Once a week, twice a week. 
 
-### 3.4. Storage
-  #### 3.4.1 Proposed Implementation
-  The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
-  are loaded from the `Main` class and saved from the  `done`, `edit`, `add`, and `delete` commands.
-  
-  The interaction is similar for all the commands. Below is a sequence diagram showing the interactions between classes when a task is added to the list:
-  ![Storage_Sequence_Diagram](images/Storage_Sequence_Diagram.png)
-  
-  1. The user inputs the `add` command. After being parsed, the command is executed.
-  1. The `add` command adds a `Task` instance to the `taskList`.
-  1. After successful addition of the task, the `add` command calls the Storage#overwriteFile() to 
-  overwrite all the current tasks from the `taskList` to the external `data.txt` file.
-  
-  #### 3.4.2 Design Considerations
-  1. Aspect: Saving tasks
-  * Alternative 1:(current choice) Overwrite all tasks in the `taskList` to the `data.txt` file when a task is edited, added, done, or deleted.  
-    * Pros: Less code and easier to maintain and implement
-    * Cons: Redoing work that has been done before, thus wasting resources
-  * Alternative 2: Save only the specific tasks that is being edited, added, done, or deleted.
-    * Pros: Saves resources since it only changes one task
-    * Cons: Difficult and tedious to implement since Json strings are being kept in a text file. For example, it would be hard
-    to know which specific class was edited or deleted from the text file.
+
+#### 3.4. Storage
+##### 3.4.1 Proposed Implementation
+The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
+are loaded from the `Main` class and saved from the  `done`, `edit`, `add`, and `delete` commands.
+
+The interaction is similar for all the commands. Below is a sequence diagram showing the interactions between classes when a task is added to the list:
+![Storage_Sequence_Diagram](images/Storage_Sequence_Diagram.png)
+
+1. The user inputs the `add` command. After being parsed, the command is executed.
+1. The `add` command adds a `Task` instance to the `taskList`.
+1. After successful addition of the task, the `add` command calls the Storage#overwriteFile() to 
+overwrite all the current tasks from the `taskList` to the external `data.txt` file.
+
+##### 3.4.2 Design Considerations
+1. Aspect: Saving tasks
+* Alternative 1:(current choice) Overwrite all tasks in the `taskList` to the `data.txt` file when a task is edited, added, done, or deleted.  
+  * Pros: Less code and easier to maintain and implement
+  * Cons: Redoing work that has been done before, thus wasting resources
+* Alternative 2: Save only the specific tasks that is being edited, added, done, or deleted.
+  * Pros: Saves resources since it only changes one task
+  * Cons: Difficult and tedious to implement since Json strings are being kept in a text file. For example, it would be hard
+  to know which specific class was edited or deleted from the text file.
     
-  3. Aspect: How to save tasks
+1. Aspect: How to save tasks
   * Alternative 1:(current choice) Save tasks individually as Json strings in the text file. Json strings
   are separated by new lines in the file. When loading tasks, check whether they are instances of 
   `TaskNonClass` or `Class`.
@@ -330,7 +331,7 @@ It solves:
 2. Class schedule arrangement
 3. Event alert
 
-## 6.3 Appendix C:User Stories
+### 6.3 Appendix C:User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -356,16 +357,16 @@ It solves:
 |v2.1| No. 27 is a university student who want to delete its todo category's events cause it does not want to work hard anymore that day | delete events by time and category | I can easily find exactly the events I need to see by date and category |
 |v2.1| No. 28 is a university student who has a emergency in specific time and date. He wants to delete that time's work | Delete events by date and time | I can easily find exactly the events I need to see by date and time |
 
-## 6.4 Appendix D:Non-Functional Requirements
+### 6.4 Appendix D:Non-Functional Requirements
 
 1. Should work in an environment without internet access.
 1. Should offer easy / experienced user input modes to accommodate to different proficiencies
 1. Data should be persistent across different start-ups
 1. Not too restrictive on user to avoid frustrations (user friendly)
 
-## 6.5 Appendix F:Instructions for Manual Testing
+### 6.5 Appendix E:Instructions for Manual Testing
 
-###6.5.1 Launch and Shutdown
+#### 6.5.1 Launch and Shutdown
 1.  Initial launch
 
 * Ensure you have Java 11 or above installed in your Computer
@@ -382,7 +383,7 @@ It solves:
 
 > Expected: Data is stored in the `data.txt`
 
-###6.5.2 Add Task/Class
+#### 6.5.2 Add Task/Class
 1. Add a Task
     * Test case 1: 
         * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
@@ -412,7 +413,7 @@ It solves:
          [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00<br/>
          Now you have <NUM> task/tasks in your list
 
-###6.5.3 Edit Task/Class
+#### 6.5.3 Edit Task/Class
 _Assumption: Valid index is provided. This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
 1. Edit a Task
     * Test case 1:
@@ -435,7 +436,7 @@ _Assumption: Valid index is provided. This test output is based on previous adde
         Task 1 edited<br/>
         [CLASS] Title: 3245 | MONDAY : 17:00 - 19:00
 
-###6.5.4 Done Task
+#### 6.5.4 Done Task
 * _Assumption: Valid index is provided. This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
     * Test case:
         * `done 1`
@@ -445,7 +446,7 @@ _Assumption: Valid index is provided. This test output is based on previous adde
 
 
 
-###6.5.5 List Task
+### 6.5.5 List Task
 * _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
     * Test case 1:
         * `list`
@@ -467,7 +468,7 @@ _Assumption: Valid index is provided. This test output is based on previous adde
         * `list d/2020-05-16 t/23:00-23:59 c/deadline`
         > Expected: Lists the tasks that fall on 2020-05-16 and within the time range 23:00-23:59 and whose category is DEADLINE
 
-###6.5.6 Delete Task
+#### 6.5.6 Delete Task
 * _Assumption: Valid index is provided. This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
     * Test case 1: 
         * `delete 3`
@@ -489,7 +490,7 @@ _Assumption: Valid index is provided. This test output is based on previous adde
            The following task has been removed:                                                                                           
            [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )<br/>
            Now you have <NUM> task/tasks in your calendar.
-###6.5.7 Find
+#### 6.5.7 Find
 * _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass) 
     * Test case:
         * `find nus`
@@ -498,18 +499,18 @@ _Assumption: Valid index is provided. This test output is based on previous adde
         1.[MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )
         
 
-###6.5.8 Calendar
+#### 6.5.8 Calendar
 *
     * Test case:
         * `calendar`
         > Expected: current month calendar will be displayed.<br/>
         The tasks on that month will also be displayed.
-###6.5.9 Clear
+#### 6.5.9 Clear
 *
     * Test case:
         * `clc`
         > Expected: Clears the output window.
-###6.5.10 Help
+#### 6.5.10 Help
 *
     * Test case:
         * `help`

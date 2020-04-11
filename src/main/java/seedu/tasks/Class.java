@@ -1,5 +1,7 @@
 package seedu.tasks;
 
+import seedu.common.Messages;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -39,7 +41,7 @@ public class Class extends Task {
             // Get day of week
             Integer dayOfWeekInt = Integer.parseInt(day);
             if (dayOfWeekInt > 7 | dayOfWeekInt < 1) {
-                throw new NumberFormatException();
+                throw new NumberFormatException(Messages.MESSAGE_DAY_OR_WEEK);
             }
             Integer inputDayOfWeek = Integer.parseInt(day);
             //Transfer day of week to local date format

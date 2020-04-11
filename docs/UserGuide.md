@@ -51,9 +51,8 @@ The `< >` symbol just for readability.
 * Command keyword (e.g. `add`) is case insensitive. However, the delimiters (e.g. `n/`) are case sensitive.
 * It is okay to switch the sequence when inputting the delimiters:
     * `add n/<NAME> l/<LOCATION>` has same effects as `add l/<LOCATION> n/<NAME> `
-* When inputting a time, the time format is always: `hh:mm`.
-  Most command accepts time range which is: `hh:mm-hh:mm`. No space is allowed around `-`. 
-  Also, similar format like `1:00` will not be allowed. 
+* When inputting a time, the format is always:`hh:mm-hh:mm`. No space is allowed around `-`. 
+  Also, input like `1:00-2:00` will not be allowed. 
 * When inputting a date, the format is always: `yyyy-mm-dd`.
 * Some recognized date/time error will be automatically parsed to accepted format.
     * `24:00` will be parsed to `23:59` since 24:00 is next day. 

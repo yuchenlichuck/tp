@@ -12,6 +12,7 @@
     * [List By Category](#31-list-by-category)
     * [Calendar](#32-proposed-view-month)
     * [Add](#33-proposed-add-task--class)
+    * [Storage](#34-storage)
 * [Documentation](#4-documentation)
 * [Testing](#5-testing)
 * [Dev Ops](#6-dev-ops)
@@ -123,6 +124,18 @@ In total, Task component comprises of 4 classes:
 1. Task - Abstract class to model a generic task
 1. Class - Specialised class to model a student's timetable
 1. Task - Specialised class to model an actionable task / todo
+
+### 2.4. Storage Component 
+
+The Storage component consists of a single class that parses `Task` instances to Json strings using an external library, Gson by Google. <br/>
+This component,
+* can load from a text file Json strings and parse them to `Task` instances 
+* can parse `Task` instances to Json strings and save them in a text file
+
+Below is a class diagram showing the interactions of this component with other classes.
+
+![Storage_Class_Diagram](images/Storage_Class_Diagram.png)
+
 
 ## 3. Implementation
 #### 3.1 List By Category
@@ -253,7 +266,40 @@ The following diagram summarises what happens when a user executes a new `calend
 1. Enable `class` to store semester information so that date of class can be displayed in date format.
 2. Enable repetition of `task`: e.g. Once a week, twice a week. 
 
- 
+### 3.4. Storage
+#### 3.4.1 Proposed Implementation
+The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
+are loaded from the `Main` class and saved from the  `done`, `edit`, `add`, and `delete` commands.
+
+The interaction is similar for all the commands. Below is a sequence diagram showing the interactions between classes when a task is added to the list:
+![Storage_Sequence_Diagram](images/Storage_Sequence_Diagram.png)
+
+1. The user inputs the `add` command. After being parsed, the command is executed.
+1. The `add` command adds a `Task` instance to the `taskList`.
+1. After successful addition of the task, the `add` command calls the Storage#overwriteFile() to 
+overwrite all the current tasks from the `taskList` to the external `data.txt` file.
+
+#### 3.4.2 Design Considerations
+1. Aspect: Saving tasks
+* Alternative 1:(current choice) Overwrite all tasks in the `taskList` to the `data.txt` file when a task is edited, added, done, or deleted.  
+  * Pros: Less code and easier to maintain and implement
+  * Cons: Redoing work that has been done before, thus wasting resources
+* Alternative 2: Save only the specific tasks that is being edited, added, done, or deleted.
+  * Pros: Saves resources since it only changes one task
+  * Cons: Difficult and tedious to implement since Json strings are being kept in a text file. For example, it would be hard
+  to know which specific class was edited or deleted from the text file.
+  
+3. Aspect: How to save tasks
+* Alternative 1:(current choice) Save tasks individually as Json strings in the text file. Json strings
+are separated by new lines in the file. When loading tasks, check whether they are instances of 
+`TaskNonClass` or `Class`.
+  * Pros: Avoid overflow of a single Java String since we can have many tasks in the list at a given time
+  * Cons: Tedious to keep track of in the external text file
+* Alternative 2: Save the whole `taskList` as a Json string in the external text file.
+  * Pros: Easy to implement both overwriting and loadings tasks from the text file.
+  * Cons: May overflow a Java String faster if there are many tasks in the list at a given time.
+  
+
 ## 4. Documentation
 
 ## 5. Testing
@@ -319,7 +365,7 @@ It solves:
 
 ## 6.5 Appendix F:Instructions for Manual Testing
 
-### Launch and Shutdown
+###6.5.1 Launch and Shutdown
 1.  Initial launch
 
 * Ensure you have Java 11 or above installed in your Computer
@@ -336,79 +382,136 @@ It solves:
 
 > Expected: Data is stored in the `data.txt`
 
-### Add Task/Class
+###6.5.2 Add Task/Class
 1. Add a Task
     * Test case 1: 
         * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
-        > Expected:\   
-        Nice! Added the following task to the calendar:\                                                                                            
-        [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )\
+        > Expected:<br/> 
+        Nice! Added the following task to the calendar:                                                                                            
+        [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )<br/>
         Now you have <NUM> task/tasks in your list
 
     * Test case 2:
         * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
-        > Expected:\   
-         Nice! Added the following task to the calendar:\                                                                                            
-          [DEADLINE] Title: 2113 v2.1 | 2020-05-16 : 23:00 - 23:59\
+        > Expected:<br/>
+         Nice! Added the following task to the calendar:                                                                                            
+          [DEADLINE] Title: 2113 v2.1 | 2020-05-16 : 23:00 - 23:59<br/>
          Now you have <NUM> task/tasks in your list
 2. Add a Class
     * Test case 1:
         * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
-        > Expected:\  
-        Nice! Added the following task to the calendar:\                                                                                            
-        [CLASS] Title: 2113 | WEDNESDAY : 11:00 - 12:00 ( COM2 ) | THURSDAY : 01:00 - 03:00 ( COM1 )\
+        > Expected:<br/> 
+        Nice! Added the following task to the calendar:                                                                                            
+        [CLASS] Title: 2113 | WEDNESDAY : 11:00 - 12:00 ( COM2 ) | THURSDAY : 01:00 - 03:00 ( COM1 )<br/>
         Now you have <NUM> task/tasks in your list
 
     * Test case 2:
         * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
-        > Expected:\   
-         Nice! Added the following task to the calendar:\                                                                                            
-         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+        > Expected:<br/>
+         Nice! Added the following task to the calendar:                                                                                        
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00<br/>
          Now you have <NUM> task/tasks in your list
 
-### Edit Task/Class
-_Assumption: Valid index is provided._
+###6.5.3 Edit Task/Class
+_Assumption: Valid index is provided. This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
 1. Edit a Task
-    * Test case :
-        * `edit 1 l/NUSCOM2`
-        > Expected:\ 
-         Task 1 edited\
-         [TODO] Title: task | 2024-02-29 : 11:15 - 13:15 ( NUSCOM2 )
+    * Test case 1:
+        * `edit 2 l/NUSCOM2 r/Finish soon`
+        > Expected:<br/>
+         Task 2 edited<br/>
+         [DEADLINE] Title: 2113 v2.1 | Reminder: Finish soon | 2020-05-16 : 23:00 - 23:59 ( NUSCOM2 )
+    
+    * Test case 2:
+        * `edit 1 d/2020-09-10 t/12:00-13:00 l/NUS`
+        > Expected:<br/>
+         Task 2 edited<br/>
+         [MEETING] Title: Project Meeting | 2020-09-10 : 12:00 - 13:00 ( NUS )
 
 2. Edit a Class
     * Test case:
-    * _Previous index 1 is a class.Also, previously this index 1 class has only one time slots_
-        * `edit 1 d/1`
-        > Expected:\ 
-        Task 1 edited\
-         [CLASS] Title: task | WEDNESDAY : 11:15 - 13:15
+    * _Previous index 4 is a class.Also, previously this index 4 class has only one time slots_
+        * `edit 4 d/1`
+        > Expected:<br/> 
+        Task 1 edited<br/>
+        [CLASS] Title: 3245 | MONDAY : 17:00 - 19:00
 
-### Done Task
-* _Assumption: Valid index is provided_
+###6.5.4 Done Task
+* _Assumption: Valid index is provided. This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
     * Test case:
         * `done 1`
-        > Expected:\   
-        Task marked as done: \
-        [Y] [TODO] Title: task
+        > Expected:<br/>
+        Task marked as done:<br/> 
+        [Y] [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )
 
-### Delete Task
-* _Assumption: Valid index is provided._
-    * Test case: 
-        * `delete 1`
-        > Expected:\   
-         The following task has been removed:\                                                                                            
-         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
-         Now you have <NUM> task/tasks in your calendar.
 
-### List Task
-*
-    * Test case:
+
+###6.5.5 List Task
+* _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
+    * Test case 1:
         * `list`
         > Expected: all inputted valid tasks + class
+    
+    * Test case 2:
+        * `list c/class`
+        > Expected: list all tasks whose category is CLASS
 
-### Calendar
+    * Test case 3:
+        * `list d/2020-05-16` 
+        > Expected: Lists the tasks that fall on 2020-05-16
+
+    * Test case 4:
+        * `list d/2020-05-16 t/23:00-23:59`
+        > Expected: Lists the tasks that fall on 2020-05-16 and within the time range 23:00-23:59
+
+    * Test case 5:
+        * `list d/2020-05-16 t/23:00-23:59 c/deadline`
+        > Expected: Lists the tasks that fall on 2020-05-16 and within the time range 23:00-23:59 and whose category is DEADLINE
+
+###6.5.6 Delete Task
+* _Assumption: Valid index is provided. This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass)
+    * Test case 1: 
+        * `delete 3`
+        > Expected:<br/>
+         The following task has been removed:                                                                                           
+         [CLASS] Title: 2113 | WEDNESDAY : 11:00 - 12:00 ( COM2 ) | THURSDAY : 01:00 - 03:00 ( COM1 )<br/>
+         Now you have <NUM> task/tasks in your calendar.
+
+    * Test case 2: 
+         * `delete d/2020-05-16`
+         > Expected:<br/>
+           The following task has been removed:                                                                                           
+           [DEADLINE] Title: 2113 v2.1 | 2020-05-16 : 23:00 - 23:59<br/>
+           Now you have <NUM> task/tasks in your calendar.
+
+    * Test case 3: 
+         * `delete t/14:00-16:00`
+         > Expected:<br/>
+           The following task has been removed:                                                                                           
+           [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )<br/>
+           Now you have <NUM> task/tasks in your calendar.
+###6.5.7 Find
+* _Assumption: This test output is based on previous added task in the_ [Add Task/Class](#652-add-taskclass) 
+    * Test case:
+        * `find nus`
+        > Expected:<br/>
+        Found the followings tasks:<br/>
+        1.[MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )
+        
+
+###6.5.8 Calendar
 *
     * Test case:
         * `calendar`
-        > Expected: current month calendar will be displayed.\
+        > Expected: current month calendar will be displayed.<br/>
         The tasks on that month will also be displayed.
+###6.5.9 Clear
+*
+    * Test case:
+        * `clc`
+        > Expected: Clears the output window.
+###6.5.10 Help
+*
+    * Test case:
+        * `help`
+        > Expected: The usage of command will be displayed. 
+ 

@@ -13,6 +13,8 @@ import java.time.format.DateTimeParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.common.Constants.TAB;
+
 
 /**
  * Entry point of the CAFS app.
@@ -68,7 +70,7 @@ public class Main {
             } catch (DateTimeParseException e) {
                 ui.showError(Messages.MESSAGE_DATETIME_ERROR);
             } catch (NumberFormatException e) {
-                ui.showError(e.getMessage());
+                ui.showError(TAB + Messages.MESSAGE_GENERAL_ERROR_MESSAGE);
             }
 
         } while (!command.isExit());

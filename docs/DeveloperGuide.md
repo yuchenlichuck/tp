@@ -1,6 +1,13 @@
 # Developer Guide
-* [Setting up](#1-setting-up)
+* [Introduction](#1-introduction)
+    * [Purpose](#11-purpose)
+    * [Target Audience](#12-target-audience)
+    * [Description](#13-description)
 * [Design](#2-design)
+    * [Architecture](#21-architecture)
+    * [UI](#22-ui)
+    * [Task Component](#23-task-component)
+    * []
 * [Implementation](#3-implementation)
   * [Undo features](#31-proposed-features)
     * [List By Category](#311-list-by-category)
@@ -13,16 +20,34 @@
   * [Appendix C:User Stories](#63-appendix-cuser-stories)
   * [Appendix D:Non-Functional Requirements](#64-appendix-dnon-functional-requirements)
   * [Appendix E:Instructions for Manual Testing](#65-appendix-finstructions-for-manual-testing)
-## 1. Setting up
+  
+## 1. Introduction
 
-### 1.1 Prerequisites
+### 1.1. Purpose
+This Developer's guide is meant to guide future developers of the project on how CAFS was developed. 
+It will include the design and implementations of CAFS to give a better understanding of how to start the development of the program
+
+### 1.2. Target Audience
+The target audience of this guide are:
+* Developers (Current / Future)
+* Testers
+* Users interested in the operations of the program
+
+### 1.3. Description
+CAFS - va CLI calender-like task scheduler that supports task and 
+class schedule adding. It is simple to use, and comes with an auto-save function to 
+remember your tasks.
+
+### 1.4. Setting up
+ 
+#### 1.4.1. Prerequisites
 1. Ensure you have Java 11 or above installed in your Computer
 
 1. IntelliJ IDE
 >IntelliJ by default has Gradle plugins installed.
 >Do not disable them. If you have disabled them, go to File > Settings > Plugins to re-enable them.
 
-### 1.2 Setting up the project in your computer
+#### 1.4.2. Setting up the project in your computer
 1. Fork this repo, and clone the fork to you computer
 
 1. Open `IntelliJ` (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -41,14 +66,63 @@
 
 1. Click `OK` to accept the default setting. 
 
-### 1.3 Verifying the setup
+#### 1.4.3. Verifying the setup
 1. Run the `seedu.cafs.Main ` and try a few commands.
 
 1. [Run the tests](#5-testing) to ensure they are all set up.
+ 
 
 ## 2. Design
+### 2.1. Architecture
 
-{Describe the design of the product. Use **Architecture Diagram** which has not been covered yet.}
+![Architecture Design](images/Architecture_Diagram.jpg)
+
+Below, we will describe the essential components that CAFS uses:
+
+1. Main - Main component which controls the flow of execution.
+1. UI - Component used for user interactions, reading in input and displaying to console
+1. Parser - Component used to interpret user input and call the corresponding command
+1. Command - Contains all the required implementation for the different commands
+1. Storage - Reads data from, and writes date to, the hard disk
+1. Exceptions - Component contains custom error handling methods for the program used by multiple other components
+1. Calendar - Component containing methods to interact with date and generating a calendar
+1. Task - Contains all the necessary information and implementations required to interact with the list of tasks
+1. Commons - Component represents a collection of classes used by multiple other components
+
+### 2.2. UI
+* The UI component is not navigable from Command because all results from commands are passed back to main, in the form of `CommandResult`
+* UI component then takes in the CommandResult object and displays the feedback from the inputted command
+
+Here is a simplified class diagram to illustrate this interaction:
+
+![Command Result UI](images/UiResult.jpg)
+
+Ideally, all messages or output meant to be displayed should use the UI class instead of calling a system print or any other method.
+
+At the moment, the only outliers are certain exception error handling messages which will be standardised to follow this principle in a later version.
+
+### 2.3. Task Component
+
+The TaskList Component depends on 2 other components:
+1. Storage 
+    * The Storage component is responsible for loading in any saved data stored locally, as well as updating the saved file 
+    when changes to the task list have been made
+    
+2. Command 
+    * The Command component executes the specific set of instructions required to fulfill a particular user command
+    based on user input.
+
+![Command Result UI](images/TaskDiagram.jpg)
+
+The abstract class Task comprises of two subclasses:
+* Class - to contain information about a class / timetable schedule
+* TaskNonClass -  to contain information about all other tasks that user needs to complete or be reminded of
+
+In total, Task component comprises of 4 classes:
+1. TaskList - Methods called by commands to operate on task list. Also contains the actual list which stores all tasks.
+1. Task - Abstract class to model a generic task
+1. Class - Specialised class to model a student's timetable
+1. Task - Specialised class to model an actionable task / todo
 
 ## 3. Implementation
 ### 3.1 [Proposed] Features
@@ -196,4 +270,96 @@ It solves:
 
 ## 6.5 Appendix F:Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
+1.  Initial launch
+
+* Ensure you have Java 11 or above installed in your Computer
+* Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases)
+* Copy the file to the folder you want to use as the home folder.
+* Run the jar file using `java - jar caf.jar`
+
+> Expected: Shows a welcome message from CAFS
+
+2. Shutdown
+
+* Enter the command `bye` to exit the CAFS
+* Close the command terminal.
+
+> Expected: Data is stored in the `data.txt`
+
+### Add Task/Class
+1. Add a Task
+    * Test case 1: 
+        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
+        > Expected:\   
+        Nice! Added the following task to the calendar:\                                                                                            
+        [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )\
+        Now you have <NUM> task/tasks in your list
+
+    * Test case 2:
+        * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
+        > Expected:\   
+         Nice! Added the following task to the calendar:\                                                                                            
+          [DEADLINE] Title: 2113 v2.1 | 2020-05-16 : 23:00 - 23:59\
+         Now you have <NUM> task/tasks in your list
+2. Add a Class
+    * Test case 1:
+        * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
+        > Expected:\  
+        Nice! Added the following task to the calendar:\                                                                                            
+        [CLASS] Title: 2113 | WEDNESDAY : 11:00 - 12:00 ( COM2 ) | THURSDAY : 01:00 - 03:00 ( COM1 )\
+        Now you have <NUM> task/tasks in your list
+
+    * Test case 2:
+        * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
+        > Expected:\   
+         Nice! Added the following task to the calendar:\                                                                                            
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+         Now you have <NUM> task/tasks in your list
+
+### Edit Task/Class
+_Assumption: Valid index is provided._
+1. Edit a Task
+    * Test case :
+        * `edit 1 l/NUSCOM2`
+        > Expected:\ 
+         Task 1 edited\
+         [TODO] Title: task | 2024-02-29 : 11:15 - 13:15 ( NUSCOM2 )
+
+2. Edit a Class
+    * Test case:
+    * _Previous index 1 is a class.Also, previously this index 1 class has only one time slots_
+        * `edit 1 d/1`
+        > Expected:\ 
+        Task 1 edited\
+         [CLASS] Title: task | WEDNESDAY : 11:15 - 13:15
+
+### Done Task
+* _Assumption: Valid index is provided_
+    * Test case:
+        * `done 1`
+        > Expected:\   
+        Task marked as done: \
+        [Y] [TODO] Title: task
+
+### Delete Task
+* _Assumption: Valid index is provided._
+    * Test case: 
+        * `delete 1`
+        > Expected:\   
+         The following task has been removed:\                                                                                            
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+         Now you have <NUM> task/tasks in your calendar.
+
+### List Task
+*
+    * Test case:
+        * `list`
+        > Expected: all inputted valid tasks + class
+
+### Calendar
+*
+    * Test case:
+        * `calendar`
+        > Expected: current month calendar will be displayed.\
+        The tasks on that month will also be displayed.

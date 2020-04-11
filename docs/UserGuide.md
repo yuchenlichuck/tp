@@ -1,24 +1,26 @@
-# User Guide
-* [Introduction](#1-introduction)
-* [Quick Start](#2-quick-start)
-* [Features](#3-features)
-  * [Help command](#31---help)
-  * [Add tasks](#32---add)
-  * [Edit tasks](#33---edit)
-  * [List tasks](#34---list)
-  * [Delete tasks](#35---delete)
-  * [Having done a task](#36---done)
-  * [Find a task](#37---find)
-  * [Calendar](#38---calendar)
-  * [Done](#39---done)
-  * [Clear Command](#310---clear)
-  * [Exit the program](#311---exit)
-* [FAQ](#4-faq)
-* [Command Summary](#5-command-summary)
+# CAFS - User Guide
+
+By: `AY1920S2-CS2113-T14-3`
+
+1. [Introduction](#1-introduction)
+1. [Quick Start](#2-quick-start)
+1. [Features](#3-features) <br/>
+  3.1 [Viewing help: `help`](#31-viewing-help-help) <br/>
+  3.2 [Adding tasks: `add`](#32-adding-tasks-add) <br/>
+  3.3 [Editing tasks: `edit`](#33-editing-tasks-edit) <br/>
+  3.4 [Listing tasks: `list`](#34-listing-tasks-list) <br/>
+  3.5 [Deleting tasks: `delete`](#35-deleting-tasks-delete) <br/>
+  3.6 [Marking tasks as done: `done`](#36-marking-tasks-as-done-done) <br/>
+  3.7 [Finding tasks: `find`](#37-finding-tasks-find) <br/>
+  3.8 [Viewing calendar: `calendar`](#38-viewing-calendar-calendar) <br/>
+  3.9 [Clearing output: `clc`](#39-clearing-output-clc) <br/>
+  3.10 [Exiting program: `bye`](#310-exiting-program-bye)
+1. [FAQ](#4-faq)
+1. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
-CAFS - va CLI calender-like task scheduler that supports task and 
-class schedule adding. It is simple to use, and comes with a save function to 
+CAFS is a CLI calender-like task scheduler that supports task and 
+class schedule adding. It is simple to use, and comes with an auto save function to 
 remember your tasks.
 
 ## 2. Quick Start
@@ -45,22 +47,24 @@ The `<>` symbol just for readability.
     * `24:00` will be parsed to `23:59` since 24:00 is next day. 
     * `2021-02-30` will be parsed to `2021-02-28`
 
-### 3.1 - Help
+### 3.1. Viewing help: `help`
 Displays the set of commands supported
 * **Usage**: `help`
 
-### 3.2 - Add
+### 3.2. Adding tasks: `add`
 Users add tasks using this command
 * **Usage**: `add  n/<NAME> t/<TIME> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
-     * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `11:00-12:00`)
-       There should be no space between this duration. 
      * Only name `<NAME>` is compulsory to include. Other fields are not compulsory to add. However, if
        user only inputs time, then date of current day will be automatically added. 
+     * Space is okay in `<NAME>`,`<REMINDER>` and `<INFORMATION>`.  e.g.: `n/2113 deadline` is accepted. 
+        >Title: 2113 deadline                                                       
+     * The `<TIME>` should be in time duration format: `hh:mm-hh:mm` (e.g. `11:00-12:00`)
+       There should be no space between this duration. 
      * Since a task/class may has multiple time zone in a week, student can just add list of time zone.
        However, the number of `<TIME>`should match with the number of `<DATE>`. It is suggested that 
        the number of `<LOCATION>` also match with the number of `<TIME>`. Use space to separate the time 
-       zone/date/location.
-     * If there is only one time slots for this task, then the `<LOCATION>` will not be separated by space.  
+       zone/date/location. e.g. `t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU`  
+       > 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )
      * The default category is TODO. When adding class, just indicate category is `CLASS`. The category is
        case-insensitive.  
      * When adding normal tasks:
@@ -68,14 +72,14 @@ Users add tasks using this command
         * Examples: 
             * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
             * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
-            * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU c/MEETING`
+            * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-10-01 2020-10-04 l/NUS NTU`
      * When adding class:
         * `<DATE>` should be which day in a week, represented by integer (e.g. `1 3` means Mon Wed). 
         * Examples: 
             * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
             * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
 
-### 3.3 - Edit
+### 3.3. Editing tasks: `edit`
 Edit the inputted task/class. 
 * **Usage**:`edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
     * It is not allowed to edit the `<NAME>`.
@@ -84,9 +88,10 @@ Edit the inputted task/class.
     * When edit `<TIME>` and `<DATE>`, please be reminded that the number of `<TIME>`should match with the 
       number of `<DATE>` and the number of location `<LOCATION>`. 
     * Examples: 
-        * `edit 1 t/11:00-12:00`
+        * `edit 1 l/NUSCOM2`
         * `edit 2 c/todo`  
-### 3.4 - List
+        
+### 3.4. Listing tasks: `list`
 #### **3.4.1 - List** 
 List all tasks
 * **Usage**: `list`
@@ -146,7 +151,7 @@ List tasks by category and date and time.
         * `list t/14:00-15:00 c/deadline`
         * *(Explanation: list the `tasks` whose start time before `15:00` and end time after `14:00`and `category` is `deadline` )*
 
-### 3.5 - Delete
+### 3.5. Deleting tasks: `delete`
 Deletes a task from the list
 #### 3.5.1 - Delete a task/class
 * **Usage**: `delete <task index>`
@@ -182,21 +187,22 @@ Delete tasks by specific date and time.
        * `delete d/2020-06-17 t/12:00-13:00`
        * *(Explanation: delete the `tasks` whose start time before `2020-06-17 13:00` and end time after `2020-06-17 12:00`)*
     
-### 3.6 - Done
-Change the status of a task to completed
-* **Usage**: `done <task index>`
-    * The index refers to the index number shown in the displayed task list.
-    * use `list` to derive task index
-    * index has to be an _integer_
+### 3.6. Marking tasks as done: `done`
+Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed).
 
-### 3.7 - Find
+* **Usage**: `done <task index>` 
+    * Obtain task index from `list` command (without any filters)
+    * task cannot be a from the category class
+    * Index is a valid positive number
+
+### 3.7. Finding tasks: `find`
 Searches all task descriptions for supplied keyword
 * **Usage**: `find <keyword>`
     * Keyword has to be a _**single word**_
     * Keyword is case _insensitive_
     * Find command can search the keyword in title, description and location. 
 
-### 3.8 - Calendar
+### 3.8. Viewing calendar: `calendar`
 Prints a monthly representation of a calendar. Shows the number of tasks a user has on a particular day.
 Users are able to specify which month to look up. Default is the current month. 
 
@@ -207,19 +213,11 @@ Will still display tasks from past months as long as not marked as complete.
     * Default set to current month
     * If number supplied is not within the month range, it will be set to current month
 
-### 3.9 - Done
-Marks a task as complete, changing the notification from 'N' (not completed) to 'Y' (completed).
-
-* **Usage**: `done <task index>` 
-    * Obtain task index from `list` command (without any filters)
-    * task cannot be a from the category class
-    * Index is a valid positive number
-
-### 3.10 - Clear
-Clear the Command
+### 3.9. Clearing output: `clc`
+Clears the output window
 * **Usage**:`clc`
 
-### 3.11 - Exit
+### 3.10. Exiting program: `bye`
 Exits the program
 * **Usage**: `bye`
   

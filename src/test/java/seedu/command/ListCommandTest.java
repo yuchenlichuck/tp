@@ -419,6 +419,54 @@ class ListCommandTest {
         assertEquals(expected, output);
     }
 
+    @Test
+    void testListByCategoryTime2400() {
+        //task the time 2400
+        TaskList tasks = new TaskList();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+
+        String output = "";
+        String input = "add n/task t/21:15-23:15 d/2024-02-29";
+
+        Command command = new AddCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+
+        try {
+            command.execute();
+
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
+
+        input = "add n/task t/13:00-15:00 d/2028-02-19";
+
+        command = new AddCommand(input);
+        command.setCommandVariables(tasks, storage, ui);
+
+        try {
+            command.execute();
+            command.execute();
+            command.execute();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
+
+        command = new ListCommand("list t/23:00-24:00 c/todo");
+        command.setCommandVariables(tasks, storage, ui);
+
+        try {
+            output = command.execute().getFeedback();
+        } catch (ProjException e) {
+            assertTrue(false);
+        }
+
+        String expected = TAB + "There are 1 task.\n"
+                + "    1. [N] [TODO] Title: task | 2024-02-29 : 21:15 - 23:15\n";
+
+        assertEquals(expected, output);
+    }
+
 
     @Test
     void testListByCategoryDate() {

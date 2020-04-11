@@ -52,6 +52,9 @@ public class ListCommand extends Command {
         String date = getDate(userInput).trim();
         String time = getTime(userInput).trim();
 
+        checkDateTimeFormat(date,time);
+
+
         try {
 
             if (taskList.getListSize() == 0) {
@@ -93,7 +96,16 @@ public class ListCommand extends Command {
         return new CommandResult(feedback);
     }
 
-
+    /**
+     *
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:04 PM
+     * @param listTaskIndex :
+ * @param date :
+ * @param time :
+ * @param category :
+     * @return : void
+     */
     private void getListByDateCategory(ArrayList<Integer> listTaskIndex, String date, String time, String category)
             throws DateTimeParseException, NumberFormatException {
 
@@ -140,13 +152,20 @@ public class ListCommand extends Command {
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
+
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
 
                 if (startTime.isAfter(endTime)) {
                     throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                             + "the end time should be after the start time");
                 }
+
                 //input time
                 startTimes.add(startTime);
                 endTimes.add(endTime);
@@ -160,6 +179,7 @@ public class ListCommand extends Command {
                     continue;
                 }
                 ArrayList<LocalTime> localTimes = task.getTime();
+
                 label:
                 for (int j = 0; j < localTimes.size() / 2; j++) {
                     for (int k = 0; k < size; k++) {
@@ -185,6 +205,11 @@ public class ListCommand extends Command {
 
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
+
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
                 if (startTime.isAfter(endTime)) {
@@ -228,7 +253,15 @@ public class ListCommand extends Command {
 
 
     }
-
+    /**
+     *
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:03 PM
+     * @param listTaskIndex :
+     * @param date :
+     * @param time :
+     * @return : void
+     */
     private void getListByDate(ArrayList<Integer> listTaskIndex, String date, String time)
             throws DateTimeParseException, NumberFormatException {
 
@@ -269,11 +302,21 @@ public class ListCommand extends Command {
             String[] times = time.split("\\s+");
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
+
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
 
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
+
                 if (startTime.isAfter(endTime)) {
                     throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                             + "the end time should be after the start time");
@@ -316,8 +359,16 @@ public class ListCommand extends Command {
 
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
+
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+
+
                 if (startTime.isAfter(endTime)) {
                     throw new NumberFormatException(TAB + "[Error][Add/Edit]: Please enter a valid time range: "
                             + "the end time should be after the start time");
@@ -363,7 +414,13 @@ public class ListCommand extends Command {
 
     }
 
-
+    /**
+     *
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:03 PM
+     * @param listTaskIndex :
+     * @return : void
+     */
     private void getWholeList(ArrayList<Integer> listTaskIndex) {
         for (int i = 0; i < taskList.getListSize(); i++) {
             listTaskIndex.add(i);
@@ -394,6 +451,17 @@ public class ListCommand extends Command {
 
         return feedback;
     }
+
+    /**
+     *
+     * @param listTaskIndex
+     * @param category
+     * @param listTaskIndex :
+     * @param category : * @return  * @return : void
+     * @author yuchenlichuck
+     * @creed: Talk is cheap,show me the code
+     * @date 11/4/20 6:59 PM
+     */
 
     private void getListByCategory(ArrayList<Integer> listTaskIndex, String category) throws ProjException {
 

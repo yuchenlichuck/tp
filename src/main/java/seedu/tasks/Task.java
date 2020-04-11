@@ -92,6 +92,7 @@ public abstract class Task {
         if (automaticAddDate) {
             this.date.clear();
         }
+
         // Populate the date with current date if date is not inputted
         String[] timeInfo = time.split("\\s+");
         for (String atime : timeInfo) {

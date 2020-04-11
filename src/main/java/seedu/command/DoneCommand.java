@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     public static final String COMMAND_USAGE = COMMAND_WORD + " [TASK_INDEX]";
 
 
-    public static final String ARGUMENT_COuNT = "1";
+    public static final String ARGUMENT_COUNT = "1";
     private String feedback = "";
 
     private String indexCompleteTask;

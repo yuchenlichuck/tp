@@ -11,7 +11,8 @@ import static seedu.command.HelpCommand.HELP_LEGEND;
 class HelpCommandTest {
 
     @Test
-    void execute() {
+    void execute_HelpCommand_returnFeedback() {
+
         Command command = new HelpCommand();
         String output = null;
         try {
@@ -52,6 +53,10 @@ class HelpCommandTest {
 
         expected += TAB + TAB + CalendarCommand.COMMAND_INFO + System.lineSeparator();
         expected += TAB + TAB + "Usage: " + CalendarCommand.COMMAND_USAGE + System.lineSeparator();
+        expected += System.lineSeparator();
+
+        expected += TAB + TAB + ClearCommand.COMMAND_INFO + System.lineSeparator();
+        expected += TAB + TAB + "Usage: " + ClearCommand.COMMAND_USAGE + System.lineSeparator();
         expected += System.lineSeparator();
 
         expected += TAB + TAB + ExitCommand.COMMAND_INFO + System.lineSeparator();

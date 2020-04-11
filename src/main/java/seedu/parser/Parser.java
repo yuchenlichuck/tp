@@ -12,6 +12,8 @@ import seedu.command.FailedCommand;
 import seedu.command.HelpCommand;
 import seedu.command.ListCommand;
 import seedu.command.Command;
+import seedu.common.Constants;
+import seedu.common.Messages;
 
 public class Parser {
 
@@ -25,7 +27,7 @@ public class Parser {
      */
     public static Command parseCommand(String userCommand) {
         String[] commandSections = userCommand.split(" ");
-        String command = commandSections[0].toLowerCase().trim();
+        String command = commandSections[0].trim().toLowerCase();
 
         switch (command) {
 
@@ -59,7 +61,7 @@ public class Parser {
         case DoneCommand.COMMAND_WORD:
             if (commandSections.length < 2 || commandSections.length > 2) {
                 return new FailedCommand(DoneCommand.COMMAND_WORD,
-                        commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COuNT);
+                        commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COUNT);
             }
             return new DoneCommand(commandSections[1]);
 
@@ -74,8 +76,7 @@ public class Parser {
                     commandSections.length - COMMAND_LENGTH, CalendarCommand.ARGUMENT_COuNT);
 
         default:
-            System.out.println("\n  Command not recognised\n");
-            return new HelpCommand();
+            return new HelpCommand(String.format(Messages.MESSAGE_INVALID_COMMAND + Constants.NEW_LINE, command));
         }
     }
 

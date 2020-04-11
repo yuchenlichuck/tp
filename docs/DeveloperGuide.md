@@ -1,10 +1,17 @@
 # Developer Guide
-* [Setting up](#1-setting-up)
+* [Introduction](#1-introduction)
+    * [Purpose](#11-purpose)
+    * [Target Audience](#12-target-audience)
+    * [Description](#13-description)
 * [Design](#2-design)
+    * [Architecture](#21-architecture)
+    * [UI](#22-ui)
+    * [Task Component](#23-task-component)
+    * []
 * [Implementation](#3-implementation)
-  * [Undo features](#31-proposed-features)
-    * [List By Category](#311-list-by-category)
-    * [Calendar](#312-proposed-view-month)
+    * [List By Category](#31-list-by-category)
+    * [Calendar](#32-proposed-view-month)
+    * [Add](#33-proposed-add-task--class)
 * [Documentation](#4-documentation)
 * [Testing](#5-testing)
 * [Dev Ops](#6-dev-ops)
@@ -12,17 +19,114 @@
   * [Appendix B:Value proposition](#62-appendix-bvalue-proposition)
   * [Appendix C:User Stories](#63-appendix-cuser-stories)
   * [Appendix D:Non-Functional Requirements](#64-appendix-dnon-functional-requirements)
-  * [Appendix E:Glossary](#65-appendix-eglossary)
-  * [Appendix F:Instructions for Manual Testing](#66-appendix-finstructions-for-manual-testing)
-## 1. Setting up
-## 2. Design
+  * [Appendix E:Instructions for Manual Testing](#65-appendix-finstructions-for-manual-testing)
+  
+## 1. Introduction
 
-{Describe the design of the product. Use **Architecture Diagram** which has not been covered yet.}
+### 1.1. Purpose
+This Developer's guide is meant to guide future developers of the project on how CAFS was developed. 
+It will include the design and implementations of CAFS to give a better understanding of how to start the development of the program
+
+### 1.2. Target Audience
+The target audience of this guide are:
+* Developers (Current / Future)
+* Testers
+* Users interested in the operations of the program
+
+### 1.3. Description
+CAFS - va CLI calender-like task scheduler that supports task and 
+class schedule adding. It is simple to use, and comes with an auto-save function to 
+remember your tasks.
+
+### 1.4. Setting up
+ 
+#### 1.4.1. Prerequisites
+1. Ensure you have Java 11 or above installed in your Computer
+
+1. IntelliJ IDE
+>IntelliJ by default has Gradle plugins installed.
+>Do not disable them. If you have disabled them, go to File > Settings > Plugins to re-enable them.
+
+#### 1.4.2. Setting up the project in your computer
+1. Fork this repo, and clone the fork to you computer
+
+1. Open `IntelliJ` (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+
+1. Set up the correct JDK version for Gradle
+
+    * Click `Configure` > `Project Defaults` > `Project Structure`
+
+    * Click `New…`​ and find the directory of the JDK
+
+1. Click `ImportProject`
+
+1. Locate the `build.gradle` file and select it. Click OK
+
+1. Click `Open as Project`
+
+1. Click `OK` to accept the default setting. 
+
+#### 1.4.3. Verifying the setup
+1. Run the `seedu.cafs.Main ` and try a few commands.
+
+1. [Run the tests](#5-testing) to ensure they are all set up.
+ 
+
+## 2. Design
+### 2.1. Architecture
+
+![Architecture Design](images/Architecture_Diagram.jpg)
+
+Below, we will describe the essential components that CAFS uses:
+
+1. Main - Main component which controls the flow of execution.
+1. UI - Component used for user interactions, reading in input and displaying to console
+1. Parser - Component used to interpret user input and call the corresponding command
+1. Command - Contains all the required implementation for the different commands
+1. Storage - Reads data from, and writes date to, the hard disk
+1. Exceptions - Component contains custom error handling methods for the program used by multiple other components
+1. Calendar - Component containing methods to interact with date and generating a calendar
+1. Task - Contains all the necessary information and implementations required to interact with the list of tasks
+1. Commons - Component represents a collection of classes used by multiple other components
+
+### 2.2. UI
+* The UI component is not navigable from Command because all results from commands are passed back to main, in the form of `CommandResult`
+* UI component then takes in the CommandResult object and displays the feedback from the inputted command
+
+Here is a simplified class diagram to illustrate this interaction:
+
+![Command Result UI](images/UiResult.jpg)
+
+Ideally, all messages or output meant to be displayed should use the UI class instead of calling a system print or any other method.
+
+At the moment, the only outliers are certain exception error handling messages which will be standardised to follow this principle in a later version.
+
+### 2.3. Task Component
+
+The TaskList Component depends on 2 other components:
+1. Storage 
+    * The Storage component is responsible for loading in any saved data stored locally, as well as updating the saved file 
+    when changes to the task list have been made
+    
+2. Command 
+    * The Command component executes the specific set of instructions required to fulfill a particular user command
+    based on user input.
+
+![Command Result UI](images/TaskDiagram.jpg)
+
+The abstract class Task comprises of two subclasses:
+* Class - to contain information about a class / timetable schedule
+* TaskNonClass -  to contain information about all other tasks that user needs to complete or be reminded of
+
+In total, Task component comprises of 4 classes:
+1. TaskList - Methods called by commands to operate on task list. Also contains the actual list which stores all tasks.
+1. Task - Abstract class to model a generic task
+1. Class - Specialised class to model a student's timetable
+1. Task - Specialised class to model an actionable task / todo
 
 ## 3. Implementation
-### 3.1 [Proposed] Features
-#### 3.1.1 List By Category
-##### 3.1.1.1 Proposed Implementation
+#### 3.1 List By Category
+##### 3.1.1 Proposed Implementation
 The list by category mechanism is facilitated by ListCommand which extends Command.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
@@ -46,7 +150,7 @@ This is the UML design for list by category.
 
 ![UML for View](images/listCategory.png)
 
-##### 3.1.1.2 Design Considerations
+##### 3.1.2 Design Considerations
 Aspect: How to find certain category. 
 
 Alternative 1 (previous choice): store HashMap to map category with the key. The map still exists which
@@ -55,8 +159,8 @@ stores the needed categories.
 Alternative 2 (current choice): linear search when searching tasks. 
 
 
-#### 3.1.2 [Proposed] View month
-##### 3.1.2.1 Proposed Implementation
+#### 3.2 [Proposed] View month
+##### 3.2.1 Proposed Implementation
 The view month mechanism is facilitated by CalendarCommand which extends Command.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
@@ -79,7 +183,7 @@ The following diagram summarises what happens when a user executes a new `calend
 ![Sequence diagram for CalendarCommand](images/CalendarCommand_sequence.jpg)
 
 
-##### 3.1.2.2 Design Considerations
+##### 3.2.2 Design Considerations
 1. Aspect: Obtaining information required for generating monthly view
   
     * Alternative 1: (current choice) Algorithm to deduce how many weeks in month, which day a date is, how many days in that month
@@ -100,16 +204,73 @@ The following diagram summarises what happens when a user executes a new `calend
     * Calculation of details are shifted from the command to a separate class. 
     This is to enable easier maintenance for methods relating to calendar features.
     
+### 3.3 [Proposed] Add Task / Class
+##### 3.3.1 Proposed Implementation
+The add `task/class` mechanism is facilitated by AddCommand which extends Command.
+
+Given below is an example usage scenario and how the mechanism behaves at each step.
+
+1. The user inputs a correct command format:  `add n/title`.\
+   Upon which, the instance of parser will return a AddCommand for execution. 
+   
+1. The base Command initialises with the following variables
+    * taskList - manages the tasks
+    * storage - updates the storage
+    * ui - enable ui communication (which is not used in this command)
+    
+1. During the execution procedure:
+    * It calls the functions in the Command which can get the fields of all the input.
+    * It will then check the date/time format to see if input matches format standard.
+    * If the inputs are in correct format: will add a task/class by calling the `addTask` of the _taskList_
+    * Then it will call the `getList` and pass current List into storage for update
+    * The newly added tasks and current taskList information will be stored in a string and pass to CommandResult. 
+
+The class diagram below shows the relationships between the different classes required by the `calendar` feature.
+![Class diagram for CalendarCommand](images/AddCommand_class.png)
+
+The following diagram summarises what happens when a user executes a new `calendar` command:
+![Sequence diagram for CalendarCommand](images/AddCommand_sequence.png)
+
+##### 3.3.2 Design Considerations
+1. Distinguish between `class` and `task`
+    * By checking the input category information:
+     If the category is `class`, then will add a **Class**, else will add a **Task**
+
+1. Processing of Date,Time Format
+    * Alternative 1(current): The AddCommand will check only check the basic format of input(e.g. time should be
+    a range and date should not contain `/`), and then the Task class do the processing
+        * Pros: The **Task** will only focus on the DataTimeFormat error and some small time range errors.
+        The passing of variables is also convenient. 
+        * Cons: **Task** May also need to deal with error handling. This may not be very easy to deal with. 
+    
+    * Alternative 2: The AddCommand will not only check the format but also check if the input is in correct
+    DateTimeFormat.
+        * Pros: It ensures the correctness of adding tasks, so no more error handling in **Task**.
+        * Cons: May need to adjust the passing variables, and the AddCommand is dealing with 
+        too much things which violates the design idea of OOP. 
+    
+##### 3.3.3 Future Enhancement
+1. Enable `class` to store semester information so that date of class can be displayed in date format.
+2. Enable repetition of `task`: e.g. Once a week, twice a week. 
+
+ 
 ## 4. Documentation
 
 ## 5. Testing
-There are two ways to do the test.
-Method 1: Using IntelliJ JUnit test runner
-To run all tests, right-click on the src/test/java folder and choose Run `All Tests`
-To run a subset of tests, you can right-click on a test package, test class, or a test and choose Run  `ABC`
+### 5.1 Running Tests
+We adopt the JUnit test: Using IntelliJ JUnit test runner
+To run all tests, right-click on the src/test/java folder and choose Run `Tests in <foldername>.test`
+To run a subset of tests, you can right-click on a test package, test class, or a test and choose Run  `TestName`
 
-Method 2: Using Gradle
-Open a console and run the command gradlew clean test (Mac/Linux: ./gradlew clean test)
+### Types of Tests
+We have two types of tests:
+1. Unit tests targeting the lowest level methods/classes:
+e.g. `seedu.tasklist.TaskListTest`
+
+2. Integration tests that are checking the integration of multiple code units (those code units 
+are assumed to be working).
+e.g. `seedu.command.AddCommandTest`
+
 ## 6. Dev Ops
 ### 6.1 Appendix A:Product Scope
 Target User profile:
@@ -137,16 +298,17 @@ It solves:
 |v2.0| No 9. is a university student | export my calendar as a text file | I can print it to have a physical copy |
 |v2.0| No 10. is a university student | remove all the events that happened in a specific date range | it's easy to delete unnecessary details from my calendar |
 |v2.0| No 11. is a university student | add my student schedule | quickly reference it when I forget my next class |
-|v2.1| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
+|v2.0| No 12. is a university student | edit my student schedule | Edit the schedule which I may input wrongly |
+|v2.0| No 13. is a university student | edit my task | Edit the task which I may input wrongly |
+|v2.0| No. 23 is a university student | list events by category | I can easily find exactly the events I need to see |
 |v2.1| No. 6 is a student who cares about friendship | add tokens to specific days in my calendar | I can remember special occasions such as birthdays, religious events, etc. |
-|v2.1| No. 20 is a university student who has frequent project meetings in school | compare my schedule with team mates easily | we can quickly find a common time to work |
 |v2.1| No. 21 is a university student | list events by date | I can easily find exactly the events I need to see by date |
 |v2.1| No. 24 is a university student who want to check whether a designated time has events | list events by time | I can easily find exactly the events I need to see by time |
 |v2.1| No. 25 is a university student who want to check whether a designated time has classes | list events by time and category | I can easily find exactly the classes I need to see by time and category |
 |v2.1| No. 22 is a university student who has some emergency and want to cancel the events in a specific date | delete events by date | I can easily delete exactly the events I need to see by date |
 |v2.1| No. 26 is a male student who want to quit events in a designated time cause he has a remote date with his remote girlfriends in that time everday! | delete events by time | I can easily find exactly the events I need to see by time |
-|v2.1| No. 27 is a university student who want to delete its todo category's events cause it doesn't want to work hard anymore that day | delete events by time and category | I can easily find exactly the events I need to see by date and category |
-|v2.1| No. 28 is a university student who has a emergency in specfic time and date. He wants to delete that time's work | Delete events by date and time | I can easily find exactly the events I need to see by date and time |
+|v2.1| No. 27 is a university student who want to delete its todo category's events cause it does not want to work hard anymore that day | delete events by time and category | I can easily find exactly the events I need to see by date and category |
+|v2.1| No. 28 is a university student who has a emergency in specific time and date. He wants to delete that time's work | Delete events by date and time | I can easily find exactly the events I need to see by date and time |
 
 ## 6.4 Appendix D:Non-Functional Requirements
 
@@ -155,10 +317,98 @@ It solves:
 1. Data should be persistent across different start-ups
 1. Not too restrictive on user to avoid frustrations (user friendly)
 
-## 6.5 Appendix E:Glossary
+## 6.5 Appendix F:Instructions for Manual Testing
 
-* *glossary item* - Definition
+### Launch and Shutdown
+1.  Initial launch
 
-## 6.6 Appendix F:Instructions for Manual Testing
+* Ensure you have Java 11 or above installed in your Computer
+* Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases)
+* Copy the file to the folder you want to use as the home folder.
+* Run the jar file using `java - jar caf.jar`
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+> Expected: Shows a welcome message from CAFS
+
+2. Shutdown
+
+* Enter the command `bye` to exit the CAFS
+* Close the command terminal.
+
+> Expected: Data is stored in the `data.txt`
+
+### Add Task/Class
+1. Add a Task
+    * Test case 1: 
+        * `add n/Project Meeting t/12:00-13:00 15:00-16:00 d/2020-07-01 2020-09-01 l/NUS NTU c/meeting`
+        > Expected:\   
+        Nice! Added the following task to the calendar:\                                                                                            
+        [MEETING] Title: Project Meeting | 2020-07-01 : 12:00 - 13:00 ( NUS ) | 2020-09-01 : 15:00 - 16:00 ( NTU )\
+        Now you have <NUM> task/tasks in your list
+
+    * Test case 2:
+        * `add n/2113 v2.1 t/23:00-24:00 d/2020-05-16 c/deadline`
+        > Expected:\   
+         Nice! Added the following task to the calendar:\                                                                                            
+          [DEADLINE] Title: 2113 v2.1 | 2020-05-16 : 23:00 - 23:59\
+         Now you have <NUM> task/tasks in your list
+2. Add a Class
+    * Test case 1:
+        * `add t/11:00-12:00 01:00-03:00 n/2113 d/3 4 c/CLASS l/COM2 COM1`
+        > Expected:\  
+        Nice! Added the following task to the calendar:\                                                                                            
+        [CLASS] Title: 2113 | WEDNESDAY : 11:00 - 12:00 ( COM2 ) | THURSDAY : 01:00 - 03:00 ( COM1 )\
+        Now you have <NUM> task/tasks in your list
+
+    * Test case 2:
+        * `add n/3245 t/17:00-19:00 d/5 c/CLASS`
+        > Expected:\   
+         Nice! Added the following task to the calendar:\                                                                                            
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+         Now you have <NUM> task/tasks in your list
+
+### Edit Task/Class
+_Assumption: Valid index is provided._
+1. Edit a Task
+    * Test case :
+        * `edit 1 l/NUSCOM2`
+        > Expected:\ 
+         Task 1 edited\
+         [TODO] Title: task | 2024-02-29 : 11:15 - 13:15 ( NUSCOM2 )
+
+2. Edit a Class
+    * Test case:
+    * _Previous index 1 is a class.Also, previously this index 1 class has only one time slots_
+        * `edit 1 d/1`
+        > Expected:\ 
+        Task 1 edited\
+         [CLASS] Title: task | WEDNESDAY : 11:15 - 13:15
+
+### Done Task
+* _Assumption: Valid index is provided_
+    * Test case:
+        * `done 1`
+        > Expected:\   
+        Task marked as done: \
+        [Y] [TODO] Title: task
+
+### Delete Task
+* _Assumption: Valid index is provided._
+    * Test case: 
+        * `delete 1`
+        > Expected:\   
+         The following task has been removed:\                                                                                            
+         [CLASS] Title: 3245 | FRIDAY : 17:00 - 19:00\
+         Now you have <NUM> task/tasks in your calendar.
+
+### List Task
+*
+    * Test case:
+        * `list`
+        > Expected: all inputted valid tasks + class
+
+### Calendar
+*
+    * Test case:
+        * `calendar`
+        > Expected: current month calendar will be displayed.\
+        The tasks on that month will also be displayed.

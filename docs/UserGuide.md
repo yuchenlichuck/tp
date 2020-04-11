@@ -2,6 +2,7 @@
 
 By: `AY1920S2-CS2113-T14-3`
 
+
 1. [Introduction](#1-introduction)
 1. [Quick Start](#2-quick-start)
 1. [Features](#3-features) <br/>
@@ -18,22 +19,29 @@ By: `AY1920S2-CS2113-T14-3`
 1. [FAQ](#4-faq)
 1. [Command Summary](#5-command-summary)
 
+
 ## 1. Introduction
+
+<span style="font-family: 'Times New Roman'">
 CAFS is a CLI calender-like task scheduler that supports task and 
 class schedule adding. It is simple to use, and comes with an auto save function to 
 remember your tasks.
+</span>
+
+---
 
 ## 2. Quick Start
 1. Ensure you have Java 11 or above installed in your Computer
 
 1. Download the latest cafs.jar [here](https://github.com/AY1920S2-CS2113-T14-3/tp/releases)
 
-1. Copy the file to the folder you want to use as the home folder.
+1. Copy the file to the folder you want to use as the home folder
 
-1. Run the jar file using `java - jar caf.jar`
+1. Run the jar file using `java - jar caf.jar` from your terminal window
 
-
+---
 ## 3. Features
+
 * `<NAME>` such format indicates user input variable. However, when inputting, there is no need to input `<>`symbol. 
 The `<>` symbol just for readability. 
 * The command keyword (e.g. `add`) is case insensitive. However, the delimiter (e.g. `n/`)are case sensitive.
@@ -47,6 +55,8 @@ The `<>` symbol just for readability.
     * `24:00` will be parsed to `23:59` since 24:00 is next day. 
     * `2021-02-30` will be parsed to `2021-02-28`
 
+
+---
 ### 3.1. Viewing help: `help`
 Displays the set of commands supported
 * **Usage**: `help`
@@ -221,6 +231,7 @@ Clears the output window
 Exits the program
 * **Usage**: `bye`
   
+---
 ## 4. FAQ
  * How do I save my tasks?
     * Tasks are saved automatically and loaded upon start up of application
@@ -228,6 +239,7 @@ Exits the program
         * Default folder (windows): `C:\Users\<computer name>\Save`
         * Default file name: `data.txt`
 
+---
 ## 5. Command Summary
  * **Add**: `add n/<NAME> t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`
  * **Edit**: `edit TASKINDEX t/<Time> l/<LOCATION> d/<DATE> i/<INFORMATION> r/<REMINDER> c/<CATEGORY>`

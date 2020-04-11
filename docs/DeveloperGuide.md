@@ -12,7 +12,7 @@
     * [List By Category](#31-list-by-category)
     * [Calendar](#32-proposed-view-month)
     * [Add](#33-proposed-add-task--class)
-    * [Storage](#34-Storage)
+    * [Storage](#34-storage)
 * [Documentation](#4-documentation)
 * [Testing](#5-testing)
 * [Dev Ops](#6-dev-ops)
@@ -266,7 +266,7 @@ The following diagram summarises what happens when a user executes a new `calend
 1. Enable `class` to store semester information so that date of class can be displayed in date format.
 2. Enable repetition of `task`: e.g. Once a week, twice a week. 
 
-###3.4 Storage
+### 3.4. Storage
 #### 3.4.1 Proposed Implementation
 The Storage mechanism is facilitated through the Gson library implemented by Google. Tasks
 are loaded from the `Main` class and saved from the  `done`, `edit`, `add`, and `delete` commands.

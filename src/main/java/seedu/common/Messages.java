@@ -18,10 +18,6 @@ public class Messages {
     public static final String MESSAGE_DELETE_SUCCESS = "The following task has been removed:\n %s";
     public static final String MESSAGE_DELETE_NO_TASK_FOUND = "[Alert][delete] No task found to delete";
 
-    /** Messages for edit command. */
-    // public static final String MESSAGE_DATE_TIME_MISMATCH = "[Alert] The number of time range must match "
-    //       + "with the number of date(day of a week).\n";
-
     /** Messages for list command. */
     public static final String MESSAGE_LIST_IS_EMPTY = "[Alert][%s] There is nothing to %s, the list is empty\n";
     public static final String MESSAGE_OUT_OF_BOUNDS = "[Error][%s] Task number \"%s\" doesn't exit. There are %s"
@@ -56,6 +52,7 @@ public class Messages {
             + "time: hh:mm-hh:mm\n";
     public static final String MESSAGE_END_BEFORE_START_TIME = "[Error][Add/Edit]: Please enter a valid time range: "
             + "the end time should be after the start time\n";
+    public static final String MESSAGE_GENERAL_ERROR_MESSAGE = "[Error] Unexpected input for parameter\n";
 
     /** Farewell message. */
     public static final String BYE_MESSAGE = "CAFS: Bye, hope to see you again!\n";

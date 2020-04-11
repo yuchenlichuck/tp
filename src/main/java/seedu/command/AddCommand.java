@@ -54,7 +54,7 @@ public class AddCommand extends Command {
         checkDateTimeFormat(date,time);
 
         if (category.equals(CLASS_CATEGORY)) {
-            taskList.addTask(new Class(title, description, date, time, location, reminder, "CLASS"));
+            taskList.addTask(new Class(title, description, date.trim(), time, location, reminder, "CLASS"));
         } else {
             taskList.addTask(new TaskNonclass(title, description, date, time, location, reminder, category));
         }

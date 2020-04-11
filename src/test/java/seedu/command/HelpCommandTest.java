@@ -11,7 +11,8 @@ import static seedu.command.HelpCommand.HELP_LEGEND;
 class HelpCommandTest {
 
     @Test
-    void execute() {
+    void execute_HelpCommand_returnFeedback() {
+
         Command command = new HelpCommand();
         String output = null;
         try {

@@ -95,7 +95,7 @@ Adds a deadline: 2113 v2.1 on a specific date with a time range for the deadline
 * `add n/Project Meeting t/12:00-13:00 15:00-16:00 l/NUS NTU i/important`<br/>
 Adds a task  with two time slots on two locations with a description important.
 
-#### 3.2.1 Adding Class:
+#### 3.2.2 Adding Class:
 * `<DATE>` should be the day of the week, represented by an integer (e.g. `1 3` means Mon Wed). 
 
 Examples:<br/>
@@ -116,15 +116,19 @@ Edit the inputted task/class. <br/>
     _number matching of TIME and DATE_ since there is only field in that task. 
     * If you have added both `<TIME>` and `<DATE>` for a task _1_:<br/>
     For example:  Previously the task _1_ is:`[TODO] Title: Project Meeting | 2020-09-10 : 11:00 - 12:00`<br/>
-    When editing, can either input `<TIME>` with same number of `<DATE>` in current task _1_ : e.g. `edit 1 t/01:00-02:00`<br/>
-                or input `<DATE>` with same number of `<TIME>` in current task _1_ : e.g. `edit 1 d/2020-11-12`<br/>
-                or input both `<TIME>` and `<DATE>` with same number : e.g. `edit 1 d/2020-09-10 2020-09-11 t/11:00-12:00 13:00-14:00`
+    When editing, can either input `<TIME>` with same number of `<DATE>` in current task _1_ : 
+                <br/>e.g. `edit 1 t/01:00-02:00`<br/>
+                or input `<DATE>` with same number of `<TIME>` in current task _1_ : 
+                <br/>e.g. `edit 1 d/2020-11-12`<br/>
+                or input both `<TIME>` and `<DATE>` with same number : 
+                <br/>e.g. `edit 1 d/2020-09-10 2020-09-11 t/11:00-12:00 13:00-14:00`
   
 Examples: <br/>
-* `edit 2 l/NUSCOM2`
+* `edit 2 l/NUSCOM2`<br/>
 Edit the location of task 2 to be NUSCOM2
-* `edit 2 c/todo`  
+* `edit 2 c/todo`  <br/>
 Edit the category of task 2 to be TODO
+
         
 ### 3.4. Listing tasks: `list`
 #### 3.4.1. List

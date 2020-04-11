@@ -10,9 +10,11 @@ application using a CLI. It is written in Java.
 ### Code contribution
 * Code Contributed: [Functional Code](https://nus-cs2113-ay1920s2.github.io/tp-dashboard/#search=bencotti&sort=groupTitle&sortWithin=title&since=2020-03-01&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false)
 * Basic skeleton code <br/>
-* Storage class: saves task to JSON file and rebuild list when needed <br/>
-* Calendar class: prints calendar view and tasks for day of month <br/>
-* Done command : Create two task types: taskNonClass and Class <br/>
+* Storage class: saves task to JSON file and rebuild list when needed
+* Calendar class: prints calendar view and tasks for day of month
+* Calendar Component: CalendarParser, GenerateCalendar
+* Done command : Create two task types: taskNonClass and Class
+* JUnit Tests: added tests for Calendar, Done, Exit commands
 
 ### Enhancements implemented
 * LocalDate, LocalTime update : Update code to work with proper date object, and helper methods
@@ -24,11 +26,11 @@ application using a CLI. It is written in Java.
 * Command summary
 * Dev Ops
     * Appendix C: User Stories
-    I Appendix D: Non-Functional Requirements
+    * Appendix D: Non-Functional Requirements
 
 ### Contribution to the DG:
 * Formatting of the document
-* Description of [proposed] calendar implementation 
+* Calendar implementation 
 * Architecture of program
 
 

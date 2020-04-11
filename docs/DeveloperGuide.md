@@ -202,27 +202,31 @@ The class diagram below shows the relationships between the different classes re
 The following diagram summarises what happens when a user executes a new `calendar` command:
 ![Sequence diagram for CalendarCommand](images/CalendarCommand_sequence.jpg)
 
+![Sequence diagram for CalendarCommand](images/sd_Parser.jpg)
+
+![Sequence diagram for CalendarCommand](images/sd_Month.jpg)
+
 
 ##### 3.2.2 Design Considerations
 1. Aspect: Obtaining information required for generating monthly view
   
-    * Alternative 1: (current choice) Algorithm to deduce how many weeks in month, which day a date is, how many days in that month
+    * Alternative 1: Algorithm to deduce how many weeks in month, which day a date is, how many days in that month
         * Pros: Will use less memory, requiring only one starting date we are able to derive any other dates. No need to worry about changing template for the new year
         * Cons: New developers will take additional effort to understand how the algorithm works.
       
     * Alternative 2: Hardcoded information (constant variables to tell days in month/how many weeks)
         * Pros: Easy maintenance, tedious but easily calculated with web applications.
         * Cons: Tedious and not sustainable, constant updates have to be done to edit the fields for a new year
+    
+    * Alternative 3 (current): Make use of Java inbuilt features to parse date by using Calendar and LocalDate.
+        * Pros: Easy maintenance, errors handled internally. A lot of methods to manipulate data.
+        * Cons: Might be hard to understand how to use at first
+     
 
 1. Aspect: Which month to use
   
     * User might want to know schedule for other months, but might also want a quick view of current month
     * Solution is to set a default month (taken from computer) and also allow input for preferred month.
-
-1. Aspect: generation of monthly details 
-  
-    * Calculation of details are shifted from the command to a separate class. 
-    This is to enable easier maintenance for methods relating to calendar features.
     
 ### 3.3 [Proposed] Add Task / Class
 ##### 3.3.1 Proposed Implementation

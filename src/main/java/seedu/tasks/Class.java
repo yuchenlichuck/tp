@@ -33,6 +33,7 @@ public class Class extends Task {
     @Override
     public void setDate(String dateInput) throws DateTimeParseException, NumberFormatException {
         this.date.clear();
+        isDateSetByUser = true;
         String[] days = dateInput.split("\\s+");
         for (String day : days) {
             // Get day of week

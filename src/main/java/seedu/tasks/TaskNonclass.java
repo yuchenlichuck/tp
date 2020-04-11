@@ -12,8 +12,6 @@ public class TaskNonclass extends Task {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final char TICK = 'Y'; //Yes
     public static final char CROSS = 'N'; //No
-    private boolean isDateSet = false; // let us set a default without printing if user didnt set
-    private boolean isTimeSet = false;
     private boolean isDone = false;
 
     /**
@@ -43,6 +41,7 @@ public class TaskNonclass extends Task {
     @Override
     public void setDate(String dateInput) throws DateTimeParseException, NumberFormatException {
         this.date.clear();
+        isDateSetByUser = true;
         if (!dateInput.isEmpty()) {
             String[] dates = dateInput.split("\\s+");
             for (String date : dates) {
@@ -51,7 +50,7 @@ public class TaskNonclass extends Task {
                     throw new NumberFormatException("Please enter a date that is either today or in the future.");
                 }
                 this.date.add(addedDate);
-                isDateSet = true;
+                isDateSetByUser = true;
             }
         }
     }

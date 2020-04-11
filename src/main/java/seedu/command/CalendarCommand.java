@@ -51,5 +51,5 @@ public class CalendarCommand extends Command {
         feedback += gc.print();
         return new CommandResult(feedback);
     }
-
+    
 }

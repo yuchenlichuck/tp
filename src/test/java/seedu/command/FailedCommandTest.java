@@ -25,7 +25,7 @@ public class FailedCommandTest {
         String[] commandSections = userCommand.split(" ");
 
         Command command = new FailedCommand(DoneCommand.COMMAND_WORD,
-                commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COuNT);
+                commandSections.length - COMMAND_LENGTH, DoneCommand.ARGUMENT_COUNT);
         command.setCommandVariables(tasks, storage, ui);
         String output = "";
         try {
@@ -33,8 +33,8 @@ public class FailedCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = "[Error][done]: Wrong number of arguments,\n"
-                + "Received: 0 Expected: 1\n";
+        String expectedOutput = "  [Error][done]: Wrong number of arguments,\n"
+                + "  Received: 0 Expected: 1\n";
         assertEquals(output,expectedOutput);
     }
 
@@ -44,7 +44,7 @@ public class FailedCommandTest {
         String userCommand = "bye 1 ";
         String[] commandSections = userCommand.split(" ");
 
-        Command command = new FailedCommand(ExitCommand.COMMAND_WORD,ExitCommand.ERROR_FEEDBACK);
+        Command command = new FailedCommand(ExitCommand.COMMAND_WORD, ExitCommand.ERROR_FEEDBACK);
         command.setCommandVariables(tasks, storage, ui);
         String output = "";
         try {
@@ -52,7 +52,7 @@ public class FailedCommandTest {
         } catch (ProjException e) {
             assertTrue(false);
         }
-        String expectedOutput = "No arguments required[Error][bye]: " + Constants.NEW_LINE;
+        String expectedOutput = "  [Error][bye]: No arguments required" + Constants.NEW_LINE;
         assertEquals(output,expectedOutput);
     }
 

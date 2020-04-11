@@ -20,6 +20,9 @@ public abstract class Task {
     protected ArrayList<LocalDate> date = new ArrayList<LocalDate>();
     protected ArrayList<LocalTime> time = new ArrayList<LocalTime>();
     protected ArrayList<String> location = new ArrayList<String>();
+
+    protected boolean isDateSetByUser = false;//check if need to automatically populate data
+
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
 
@@ -85,11 +88,11 @@ public abstract class Task {
      */
     public void setTime(String time) throws DateTimeParseException, NumberFormatException {
         this.time.clear();
-        Boolean automaticAddDate = false;
-        // Populate the date with current date if date is not inputted
-        if (this.date.size() == 0) {
-            automaticAddDate = true;
+        Boolean automaticAddDate = !isDateSetByUser;
+        if (automaticAddDate) {
+            this.date.clear();
         }
+        // Populate the date with current date if date is not inputted
         String[] timeInfo = time.split("\\s+");
         for (String atime : timeInfo) {
             String[] timeRange = atime.split("-");
@@ -109,6 +112,10 @@ public abstract class Task {
                 this.date.add(LocalDate.now());
             }
         }
+    }
+
+    public Boolean isDateSetByUser() {
+        return this.isDateSetByUser;
     }
 
     /**

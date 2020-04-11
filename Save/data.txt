@@ -1,2 +1,4 @@
-{"isDateSet":false,"isTimeSet":false,"isDone":false,"title":"name B ","description":"","reminder":"","category":"DEADLINE","date":[],"time":[],"location":[]}
-{"title":"name C ","description":"","reminder":"","category":"CLASS","date":[],"time":[],"location":[]}
+{"isDone":false,"title":"name B ","description":"","reminder":"","category":"DEADLINE","date":[],"time":[],"location":[],"isDateSetByUser":false}
+{"title":"name C ","description":"","reminder":"","category":"CLASS","date":[],"time":[],"location":[],"isDateSetByUser":false}
+{"isDone":false,"title":"1 ","description":"1 ","reminder":"","category":"TODO","date":[{"year":2020,"month":4,"day":11}],"time":[],"location":[],"isDateSetByUser":true}
+{"title":"i ","description":"n ","reminder":"","category":"CLASS","date":[],"time":[],"location":[],"isDateSetByUser":false}

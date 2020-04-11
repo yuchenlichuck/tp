@@ -173,21 +173,27 @@ stores the needed categories.
 Alternative 2 (current choice): linear search when searching tasks. 
 
 
-#### 3.2 [Proposed] View month
-##### 3.2.1 Proposed Implementation
-The view month mechanism is facilitated by CalendarCommand which extends Command.
+#### 3.2 Calendar Command
+##### 3.2.1 Implementation
+The monthy view mechanism is facilitated by CalendarCommand which extends Command.
 
 Given below is an example usage scenario and how the mechanism behaves at each step.
 
 1. The user inputs the command word `calendar`. Upon which, the instance of parser will return a CalendarCommand for execution
-1. CalendarCommand initialises with the following variables, with the help from a calendar class containing the necessary methods related to day/date.
-    * month - if user does not input month, it uses computer's current month
+    * There is an optional argument that the user can input to select which month to display
+    * All invalid months will be redirected to display current month
+        * This is a design choice, and can be changed to display an error if users find it misleading
+    
+1. CalendarCommand initialises with the following variables, with the help from CalendarParser class containing the necessary methods related to day/date.
+    * checkMonth - if user does not input month, it uses computer's current month
     * startingDay - which day of the week the first day of the months begins on (0-6, where 0 is Monday)
     * totalDays - how many days in that month
     * totalWeeks - number of weeks of the month
-  
-1. The `calendar` command calls on TaskList#findTaskDate() for each day of the month to generate the task listing for a particular day. Only the task event and description is added to calendar view. 
-1. The calendar generated is then stored in a string and UI#showUserMesssage() is called to display the calendar. 
+    * currentYear - the current year. The application currently does not support different years.
+    
+1. CalendarCommand creates a new class GenerateCalendar with the information initialised above to generate an output of the selected month. 
+1. The GenerateCalendar calls on TaskList#categoryCounter() for each day of the month to generate the task listing for a particular day.
+1. The calendar generated is then returned to CalendarCommand as a string and stored in CommandResult where it is displayed Main.
 
 The class diagram below shows the relationships between the different classes required by the `calendar` feature.
 ![Sequence diagram for CalendarCommand](images/CalendarCommand_class.jpg)

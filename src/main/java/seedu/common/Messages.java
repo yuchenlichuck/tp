@@ -24,6 +24,12 @@ public class Messages {
             + " task/tasks in the list\n";
     public static final String MESSAGE_PRESENT_OR_FUTURE_DATE = "[Alert][list] Please enter a present or future date";
 
+    /** Messages for add command. */
+    public static final String MESSAGE_PAST_DATE_Error = "[Alert][add] Not allowed to add task "
+            + "in the past";
+    public static final String MESSAGE_DAY_OR_WEEK = "[Error][add] Integer that represents day"
+            + " of week must within 1 to 7";
+
     /** Messages for edit command. */
     public static final String MESSAGE_EDIT_MISSING_INDEX = "[Error][edit] Missing task number to edit "
             + "(e.g: edit 2 r/reminder)";

@@ -29,11 +29,10 @@ public class DeleteCommand extends Command {
             + COMMAND_WORD + " t/[HH:MM-HH:MM]" + System.lineSeparator() + TAB + TAB + TAB
             + COMMAND_WORD + " d/[YYYY-MM-DD] t/[HH:MM-HH:MM]";
 
+    private int invalidNumber;
     private static final int INVALID_TIME_RANGE = 1;
     private static final int INVALID_DATE_RANGE = 2;
     private static final int INVALID_NUMBER = 0;
-    private int invalidNumber;
-
 
     private static final int DELETE_ERROR = 0;
     private static final int DELETE_TASK = 1;
@@ -45,7 +44,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws ProjException {
 
         String feedback = "";
         String[] commandSections = userInput.split(" ");
@@ -55,6 +54,9 @@ public class DeleteCommand extends Command {
             String category = getCategory(userInput).trim().toUpperCase();
             String date = getDate(userInput).trim();
             String time = getTime(userInput).trim();
+
+            checkDateTimeFormat(date, time);
+
             int listCmdSubtype = getCmdSubtype(category, date, time, len);
             //initial the invalid number
             invalidNumber = 0;
@@ -62,9 +64,8 @@ public class DeleteCommand extends Command {
             String strIndex = commandSections[1].trim();
 
             switch (listCmdSubtype) {
-
             case DELETE_TASK:
-                feedback = deleteAll(strIndex);
+                feedback = deleteTask(strIndex);
                 break;
 
             case DELETE_BY_CATEGORY:
@@ -140,6 +141,18 @@ public class DeleteCommand extends Command {
         return feedback;
     }
 
+
+    /**
+     * delete the tasks by date and/or time
+     * in the specific category.
+     *
+     * @param date     :
+     * @param time     :
+     * @param category :
+     * @return : java.lang.String
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:06 PM
+     */
     private String deleteByDateCategory(String date, String time, String category)
             throws DateTimeParseException {
 
@@ -191,10 +204,16 @@ public class DeleteCommand extends Command {
             ArrayList<LocalTime> startTimes = new ArrayList<>();
             ArrayList<LocalTime> endTimes = new ArrayList<>();
             for (String atime : times) {
+
                 String[] timeRange = atime.split("-");
+
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
 
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
 
                 if (startTime.isAfter(endTime)) {
                     invalidNumber = INVALID_TIME_RANGE;
@@ -243,8 +262,14 @@ public class DeleteCommand extends Command {
 
             for (String atime : times) {
                 String[] timeRange = atime.split("-");
+
+                if (timeRange[1].equals("24:00")) {
+                    timeRange[1] = "23:59";
+                }
+
                 LocalTime startTime = LocalTime.parse(timeRange[0], DateTimeFormatter.ofPattern("HH:mm"));
                 LocalTime endTime = LocalTime.parse(timeRange[1], DateTimeFormatter.ofPattern("HH:mm"));
+
 
                 if (startTime.isAfter(endTime)) {
                     invalidNumber = INVALID_TIME_RANGE;
@@ -256,7 +281,6 @@ public class DeleteCommand extends Command {
             }
 
             for (String adate : dates) {
-
                 dateList.add(LocalDate.parse(adate, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
             }
@@ -294,14 +318,24 @@ public class DeleteCommand extends Command {
         return feedback;
     }
 
-
+    /**
+     *delete the tasks by category
+     *with the specific category.
+     *
+     * @return : java.lang.String
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:06 PM
+     */
     private String deleteByCategory(String category) throws ProjException {
+
         if (!taskList.containsCategory(category)) {
             ui.showAllCategory(taskList.getAllCategory());
             throw new ProjException(TAB + "There is no " + category + " in current category.\n"
                     + Ui.DIVIDER);
         }
+
         String feedback = "";
+
         for (int i = 0; i < taskList.getListSize(); i++) {
             if (taskList.getTask(i).getCategory().equals(category)) {
                 Task removedTask = taskList.deleteTask(i);
@@ -314,7 +348,15 @@ public class DeleteCommand extends Command {
         return feedback;
     }
 
-    private String deleteAll(String strIndex) throws TaskOutOfBoundsException {
+    /**
+     * Delete task by the strIndex.
+     *
+     * @param strIndex :
+     * @return : java.lang.String
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:07 PM
+     */
+    private String deleteTask(String strIndex) throws TaskOutOfBoundsException {
 
         int index = Integer.parseInt(strIndex) - 1;
         checkForValidIndex(index);
@@ -325,6 +367,18 @@ public class DeleteCommand extends Command {
 
     }
 
+    /**
+     * get cmd sub type.
+     *
+     *
+     * @param category :
+     * @param date     :
+     * @param time     :
+     * @param len      :
+     * @return : int
+     * @author : yuchenlichuck
+     * @date : 11/4/20 7:04 PM
+     */
     private int getCmdSubtype(String category, String date, String time, int len) {
 
         if (date.isEmpty() && time.isEmpty() && !category.isEmpty()) {
